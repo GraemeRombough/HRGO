@@ -19,6 +19,31 @@ button{
     text-align: center;
     background-color: #FFF;
 }
+.Home_NavIcon{
+    font-family: "icomoon"; 
+    font-size: 60pt;
+    background-color: #FFF;
+}
+.Home_Utility_Icon{
+    font-family: "icomoon"; 
+    font-size: 40pt;
+    background-color: #FFF;
+    text-align: center;
+}
+.Home_Utility_Label{
+    margin:5px;
+    width:33%;
+    color: #444;
+    white-space: normal;
+    text-align: center;
+    background-color: #FFF;
+    size: 30pt;
+}
+.Home_Utility_Row{
+    height: 42pt;
+    border-bottom-width: 1px;
+    border-bottom-color: #284162;
+}
 .HeaderLabel{
     /*border-bottom-width: 1px;
     border-bottom-color: #003399;*/
@@ -50,11 +75,7 @@ button{
     margin-left: 35px;
 
 }
-.Home_NavIcon{
-    font-family: "icomoon"; 
-    font-size: 60pt;
-    background-color: #FFF;
-}
+
 .FooterNav{
     border-top-width: 1px;
     border-top-color: #284162;
