@@ -18,7 +18,7 @@
               <Span class="Home_Utility_Icon" text="&#xe93b;"/>
             </FormattedString>
           </Button>
-          <Button class="Home_Utility_Icon" text="Pay" col="1"/>
+          <Button class="Home_Utility_Label" text="Pay" col="1"/>
         </GridLayout>
       </StackLayout>
     </StackLayout>

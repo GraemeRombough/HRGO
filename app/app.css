@@ -29,15 +29,15 @@ button{
     font-size: 40pt;
     background-color: #FFF;
     text-align: center;
+    color: #284162;
 }
 .Home_Utility_Label{
     margin:5px;
-    width:33%;
     color: #444;
     white-space: normal;
     text-align: center;
     background-color: #FFF;
-    size: 30pt;
+    font-size: 30pt;
 }
 .Home_Utility_Row{
     height: 42pt;
