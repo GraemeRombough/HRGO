@@ -1,0 +1,35 @@
+<Page loaded="pageLoaded">
+  <ActionBar title="Overtime" class="action-bar"></ActionBar>
+  <GridLayout rows="40,*,40,60">
+  <label class="HeaderLabel" row="0" text="Training Article"/> 
+  <StackLayout row="1" orientation="vertical" width="100%">   
+  <!-- STEP CONTENT  -->
+    <ScrollView>
+      <StackLayout>  
+        <Label class="Article_H1" text="Step 1"/>
+        <Image src="~/images/1_1.jpg" stretch="aspectFill" class="Walkthrough_Image" ></Image>
+        <Label textWrap="true" class="Article_Body" text="You can use your myKEY or PKI card to log into Compensation Web Applications"/>       
+      </StackLayout> 
+    </ScrollView>
+  </StackLayout>
+
+  <!-- BOTTOM SLIDER CONTROL -->
+  <GridLayout columns="40,*,40" row="2">
+    <Button text="<" tap="previousSlide" col="0"/>
+    <label text="Step 1" col="1" style="text-align:center;"/>
+    <Button text=">" tap="nextSlide" col="2"/>
+  </GridLayout>
+
+  <!-- FOOTER NAV -->
+  <StackLayout row="3" class="FooterNav" orientation="horizontal">
+    <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+    <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
+    <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
+    <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
+    <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+  </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+</Page>

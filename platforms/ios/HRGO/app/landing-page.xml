@@ -1,0 +1,35 @@
+<Page loaded="pageLoaded">
+  <ActionBar title="Compensation" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <StackLayout row="0" orientation="vertical" width="100%">
+    <label class="HeaderLabel" text="Home > Compensation"/>
+
+    <StackLayout orientation="vertical">
+      <Button class="Landing_Nav" text="Your Pay Information" tap="navToggle" value="YourPayInformation"/>
+        <Button class="Landing_SubNav_Compensation" id="2" text="Acting Pay" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Landing_SubNav_Compensation" id="1" text="Overtime" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Landing_SubNav_Compensation" id="3" text="Part-time Employment" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Landing_SubNav_Compensation" id="7" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+      <Button class="Landing_Nav" text="Problems With Your Pay" tap="navToggle" value="ProblemsWithYourPay"/>
+        <Button class="Landing_SubNav_Compensation" id="4" text="Emergency Salary Advance" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
+        <Button class="Landing_SubNav_Compensation" id="5" text="Report Your Pay Issue" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
+        <Button class="Landing_SubNav_Compensation" id="6" text="Priority Payment on Non-Basic Pay" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
+    
+    
+    </StackLayout>
+  </StackLayout>
+      
+    
+    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+      </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>
