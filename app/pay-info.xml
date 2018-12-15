@@ -1,18 +1,43 @@
 <Page loaded="pageLoaded" navigatingTo="onNavigatingTo">
   <ActionBar title="Pay Info" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
+  <ScrollView>
   <StackLayout row="0" orientation="vertical" width="100%">
-    <StackLayout visibility="{{ infoVisible }}">
+    
+    <StackLayout visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
       <Label text="Classification" class="Article_H2"/>
       <ListPicker items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
 
       <Label text="Step" class="Article_H2"/>
-      <ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker"/>
+      <!--<ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker"/>-->
+      <TextField class="DayCalc_TextField" keyboardType="number" text="{{ stepNumber }}" />
+      <Button class="DayCalc_SubmitButton" text="Get Salary Info" tap="getSalaryInfo"/>
+    <!-- SALARY INFO SECTION-->
+      <StackLayout orientation="vertical">
+        <Label text="Annual Gross Salary"/>
+        <Label text="{{ Annual }}"/>
+        <TextField class="DayCalc_TextField" keyboardType="number" text="{{ annualNumber }}" />
+        <Label text="BiWeekly Pay Rate"/>
+        <Label text="{{ Biweekly }}"/>
+        <TextField class="DayCalc_TextField" keyboardType="number" text="{{ biweeklyNumber }}" />
+        <Label text="Daily Pay Rate"/>
+        <Label text="{{ Daily }}"/>
+        <TextField class="DayCalc_TextField" keyboardType="number" text="{{ dailyNumber }}" />
+        <Label text="Hourly Gross Salary"/>
+        <Label text="{{ Hourly }}"/>
+        <TextField class="DayCalc_TextField" keyboardType="number" text="{{ hourlyNumber }}" />
+        <Label text="Overtime Hourly Gross Salary (x1.5)"/>
+        <Label text="{{ Overtime1 }}"/>
+        <TextField class="DayCalc_TextField" keyboardType="number" text="{{ overtime1Number }}" />
+
+        <Button class="DayCalc_SubmitButton" text="Calculate Totals" tap="getSalaryInfo"/>
+      </StackLayout>
       
 
     </StackLayout>
-  </StackLayout>
 
+  </StackLayout>
+  </ScrollView>
     <StackLayout row="1" class="FooterNav" orientation="horizontal">
         <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
         <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>

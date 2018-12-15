@@ -15,14 +15,18 @@ exports.onNavigatingTo = function(args){
         classItems: classifications,
         classIndex: 1,
         stepItems: steps,
-        stepIndex:1
+        stepIndex:1,
+        infoVisible: true
     }); 
     page.bindingContext = vm;
+    
 }
 exports.pageLoaded = function(args) {
     //pageData.set(subNavTitle, true);
     //args.object.bindingContext = pageData;
-    
+    //pageData.set("infoVisible", true);
+    console.log(pageData.get("infoVisible"));
+    //args.object.bindingContext = pageData;
 };
 exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
@@ -44,6 +48,11 @@ exports.onStepListPickerLoaded = function(args){
         loadSteps(listPicker.selectedValue,args);
     });
 }
+exports.getSalaryInfo = function(args){
+    pageData.set("showInfo", true);
+    //args.object.bindingContext = pageData;
+
+};
 var loadSteps = function(selectedClass,inputArg){
     console.log('loadSteps');
     var numOfSteps;
