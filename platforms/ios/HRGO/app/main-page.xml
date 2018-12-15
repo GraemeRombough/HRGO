@@ -48,7 +48,7 @@
         <Button class="Footer_NavIcon" text="&#xe904;"  width="20%" tap="goToTest"/>
         <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
         <Button class="Footer_NavIcon" text="&#xe945;"  width="20%" tap="footer4"/>
-        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%" tap ="footer5"/>
       </StackLayout>
 
     </GridLayout>

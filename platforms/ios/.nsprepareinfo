@@ -1,8 +1,8 @@
 {
 	"nativePlatformStatus": "3",
 	"appFilesHashes": {
-		"/Users/graemerombough/HRGO/app/.DS_Store": "e45786d326e1953981ebd362515be76e9fdaf529",
 		"/Users/graemerombough/HRGO/app/CODE_OF_CONDUCT.md": "3d921a467f0dc791385eb1d5db82d88e11d620e0",
+		"/Users/graemerombough/HRGO/app/.DS_Store": "e45786d326e1953981ebd362515be76e9fdaf529",
 		"/Users/graemerombough/HRGO/app/LICENSE": "335b9d849600792946ffbd01f3617100fbd6e107",
 		"/Users/graemerombough/HRGO/app/POC-page.js": "da39be1fa8df4b058698289d13c2e7d3439f1b2d",
 		"/Users/graemerombough/HRGO/app/POC-page.xml": "f343587d0aba22410ef3caf3ac1d32f60b1c407a",
@@ -28,11 +28,13 @@
 		"/Users/graemerombough/HRGO/app/images/walkthroughs/.DS_Store": "092f3ac5d5be574b3b90aa25790bb2994977690a",
 		"/Users/graemerombough/HRGO/app/landing-page.js": "eed32f3669eaaf68d381cf343bd073592f0ef7c1",
 		"/Users/graemerombough/HRGO/app/landing-page.xml": "0f0aa2290734efb36cdd8e819cc738a7ff22e445",
-		"/Users/graemerombough/HRGO/app/main-page.js": "83ef637f1555fecf6468b3c00c8098cbc6b13abb",
-		"/Users/graemerombough/HRGO/app/main-page.xml": "8e6669424bf9c38b23812934a50ec378197784bf",
+		"/Users/graemerombough/HRGO/app/main-page.js": "5e91bc90157d4d5ed3c620f0e5547d963583a3d9",
+		"/Users/graemerombough/HRGO/app/main-page.xml": "34dffd01750271eea42b9062aeb1d9580de8135a",
 		"/Users/graemerombough/HRGO/app/main-page_arch.js": "83ef637f1555fecf6468b3c00c8098cbc6b13abb",
 		"/Users/graemerombough/HRGO/app/main-page_arch.xml": "d4cb5a2b72e55cb1794b72f62115693dc8e8c76e",
 		"/Users/graemerombough/HRGO/app/package.json": "2a048b675a0372201b4d6cac2522162030730dcb",
+		"/Users/graemerombough/HRGO/app/pay-info.js": "6b373ab35971fe332021059b2a6b1166c1009278",
+		"/Users/graemerombough/HRGO/app/pay-info.xml": "24454528b4ddb845444af5d44b8a36d0bc5d79e6",
 		"/Users/graemerombough/HRGO/app/references.d.ts": "c83a3304d98c2586359871f5d8ac10c8aa8af848",
 		"/Users/graemerombough/HRGO/app/search-page.js": "57f1624a841cc7701a8a563b571a3bb792f2f7c8",
 		"/Users/graemerombough/HRGO/app/search-page.xml": "7b13760a5aa3fe00327d2b71c107ae37a0b96807",
@@ -60,7 +62,7 @@
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": false,
-	"time": "Mon Dec 10 2018 22:10:07 GMT-0500 (EST)",
+	"time": "Fri Dec 14 2018 21:35:48 GMT-0500 (EST)",
 	"changesRequireBuildTime": "Sun Dec 09 2018 20:16:25 GMT-0500 (EST)",
 	"projectFileHash": "d843b28031daf917585d429daa3673d5f85df6882070b307abacea8e3f4793dd"
 }
