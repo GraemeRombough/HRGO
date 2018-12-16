@@ -79,19 +79,38 @@ exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
-var returnSalary = function(){
+var returnSalary = function(selectedClass){
     var databaseReturn = [];
     var databaseLine = {};
     databaseLine = {classCode:"STDNT", step:"1", hourly:13.47, daily:101.025, biweekly:1010.25, annually:26266.5};
-    databaseLine = {classCode:"STDNT", step:"2", hourly:14.43, daily:108.225, biweekly:1082.25, annually:28138.5};
-    databaseLine = {classCode:"STDNT", step:"3", hourly:15.42, daily:115.65, biweekly:1156.5, annually:30069};
-    databaseLine = {classCode:"STDNT", step:"4", hourly:16.49, daily:123.675, biweekly:1236.75, annually:32155.5};
-    databaseLine = {classCode:"STDNT", step:"5", hourly:17.64, daily:132.3, biweekly:1323, annually:34398};
-    databaseLine = {classCode:"STDNT", step:"6", hourly:18.91, daily:141.825, biweekly:1418.25, annually:36874.5};
-    databaseLine = {classCode:"STDNT", step:"7", hourly:20.19, daily:151.425, biweekly:1514.25, annually:39370.5};
-    databaseLine = {classCode:"STDNT", step:"1", hourly:21.64, daily:162.3, biweekly:1623, annually:42198};
     databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"STDNT", step:"2", hourly:14.43, daily:108.225, biweekly:1082.25, annually:28138.5};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"STDNT", step:"3", hourly:15.42, daily:115.65, biweekly:1156.5, annually:30069};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"STDNT", step:"4", hourly:16.49, daily:123.675, biweekly:1236.75, annually:32155.5};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"STDNT", step:"5", hourly:17.64, daily:132.3, biweekly:1323, annually:34398};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"STDNT", step:"6", hourly:18.91, daily:141.825, biweekly:1418.25, annually:36874.5};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"STDNT", step:"7", hourly:20.19, daily:151.425, biweekly:1514.25, annually:39370.5};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"STDNT", step:"8", hourly:21.64, daily:162.3, biweekly:1623, annually:42198};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"AS   01", step:"1", hourly:26.4297435897436, daily:198.223076923077, biweekly:1982.23076923077, annually:51538};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"AS   01", step:"2", hourly:27.4348717948718, daily:205.761538461538, biweekly:2057.61538461538, annually:53498};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"AS   01", step:"3", hourly:28.4769230769231, daily:213.576923076923, biweekly:2135.76923076923, annually:55530};
+    databaseReturn.push(databaseLine);
+    databaseLine = {classCode:"AS   01", step:"4", hourly:29.5605128205128, daily:221.703846153846, biweekly:2217.03846153846, annually:57643};
 
-
+    for(i=0; i < databaseReturn.length; i++){
+        if(databaseReturn[i].classCode = selectedClass){
+            return databaseReturn[i];
+            break;
+        }
+    }
 };
 
