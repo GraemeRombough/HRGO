@@ -6,7 +6,7 @@
     
     <StackLayout visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
       <Label text="Classification" class="Article_H2"/>
-      <ListPicker items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
+      <ListPicker id="classPicker" items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
 
       <Label text="Step" class="Article_H2"/>
       <!--<ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker"/>-->
@@ -14,25 +14,26 @@
       <Button class="DayCalc_SubmitButton" text="Get Salary Info" tap="getSalaryInfo"/>
       </StackLayout>
     <!-- SALARY INFO SECTION-->
-      <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
+      <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
         <Label col="0" row="0" colSpan="2" text="Salary Info" class="Article_H2"/>
         <Label col="0" row="1" colSpan="2" text="Annual Gross Salary" class="Article_H3"/>
-        <Label col="0" row="2" text="{{ annualRate }}"/>
+        <Label col="0" row="2" class="Article_Body" text="{{ annualRate }}"/>
         <TextField col="1" row="2" class="DayCalc_TextField" keyboardType="number" text="{{ annualNumber }}" />
         <Label col="0" row="3" text="BiWeekly Pay Rate" class="Article_H3"/>
         <Label col="0" row="4" class="Article_Body" text="{{ biweeklyRate}}"/>
         <TextField col="1" row="4" class="DayCalc_TextField" keyboardType="number" text="{{ biweeklyNumber }}" />
         <Label col="0" row="5" text="Daily Pay Rate" class="Article_H3"/>
-        <Label col="0" row="6" text="{{ dailyRate }}"/>
+        <Label col="0" row="6" class="Article_Body" text="{{ dailyRate }}"/>
         <TextField col="1" row="6" class="DayCalc_TextField" keyboardType="number" text="{{ dailyNumber }}" />
         <Label col="0" row="7" text="Hourly Gross Salary" class="Article_H3"/>
-        <Label col="0" row="8" text="{{ hourlyRate }}"/>
+        <Label col="0" row="8" class="Article_Body" text="{{ hourlyRate }}"/>
         <TextField col="1" row="8" class="DayCalc_TextField" keyboardType="number" text="{{ hourlyNumber }}" />
         <Label col="0" row="9" colSpan="2" text="Overtime Hourly Gross Salary (x1.5)" class="Article_H3"/>
-        <Label col="0" row="10" text="{{ overtime1Rate }}"/>
+        <Label col="0" row="10" class="Article_Body" text="{{ overtime1Rate }}"/>
         <TextField col="1" row="10" class="DayCalc_TextField" keyboardType="number" text="{{ overtime1Number }}" />
 
-        <Button col="0" row="11" colSpan="3" class="DayCalc_SubmitButton" text="Calculate Totals" tap="getSalaryInfo"/>
+        <Button col="0" row="11" colSpan="3" class="DayCalc_SubmitButton" text="Calculate Totals" tap="getCalculatedInfo"/>
+        <Label col="0" row="12" colSpan="3" class="Article_Body" text="{{ calculatedMoney }}"/>
       </GridLayout>
       
 

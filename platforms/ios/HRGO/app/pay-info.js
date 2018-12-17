@@ -52,9 +52,17 @@ exports.getSalaryInfo = function(args){
     //pageData.set("showInfo", true);
     //args.object.bindingContext = pageData;
     console.log("getSalaryInfo");
-    pageData.set("annualRate", "100,000");
+    
     pageData.set("infoVisible", false);
+    var salaryData = returnSalary("AS   01", "3");
+    pageData.set("annualRate", "$" + Math.round(salaryData.annually * 100 + Number.EPSILON ) / 100);
+    pageData.set("biweeklyRate", "$" + Math.round(salaryData.biweekly * 100 + Number.EPSILON ) / 100);
+    pageData.set("dailyRate", "$" + Math.round(salaryData.daily * 100 + Number.EPSILON ) / 100);
+    pageData.set("hourlyRate", "$" + Math.round(salaryData.hourly * 100 + Number.EPSILON ) / 100);
+    pageData.set("overtime1Rate", "$" + Math.round((salaryData.hourly * 1.5) * 100 + Number.EPSILON ) / 100);
+
     pageData.set("salaryVisible", true);
+
 };
 var loadSteps = function(selectedClass,inputArg){
     console.log('loadSteps');
@@ -75,11 +83,34 @@ var loadSteps = function(selectedClass,inputArg){
     
 
 };
+exports.getCalculatedInfo = function(){
+    var overtimeCalc, hourlyCalc, biweeklyCalc, annuallyCalc;
+    var totalValue = 0;
+    var salaryData = returnSalary("AS   01", "3");
+    if(pageData.get("overtime1Number")){
+        overtimeCalc = pageData.get("overtime1Number");
+        totalValue += overtimeCalc * salaryData.hourly * 1.5;
+    };
+    if(pageData.get("hourlyNumber")){
+        hourlyCalc = pageData.get("hourlyNumber");
+        totalValue += hourlyCalc * salaryData.hourly;
+    };
+    if(pageData.get("biweeklyNumber")){
+        biweeklyCalc = pageData.get("biweeklyNumber");
+        totalValue += biweeklyCalc * salaryData.biweekly;
+    };
+    if(pageData.get("annuallyNumber")){
+        anuallyCalc = pageData.get("annuallyNumber");
+        totalValue += annuallyCalc * salaryData.annually;
+    };
+
+    pageData.set("calculatedMoney", "Gross Salary Calculation: $" + Math.round(totalValue * 100 + Number.EPSILON ) / 100);
+};
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
-var returnSalary = function(selectedClass){
+var returnSalary = function(selectedClass, selectedStep){
     var databaseReturn = [];
     var databaseLine = {};
     databaseLine = {classCode:"STDNT", step:"1", hourly:13.47, daily:101.025, biweekly:1010.25, annually:26266.5};
@@ -107,7 +138,7 @@ var returnSalary = function(selectedClass){
     databaseLine = {classCode:"AS   01", step:"4", hourly:29.5605128205128, daily:221.703846153846, biweekly:2217.03846153846, annually:57643};
 
     for(i=0; i < databaseReturn.length; i++){
-        if(databaseReturn[i].classCode = selectedClass){
+        if(databaseReturn[i].classCode == selectedClass && databaseReturn[i].step == selectedStep){
             return databaseReturn[i];
             break;
         }
