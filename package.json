@@ -13,6 +13,7 @@
   "repository": "<fill-your-repository-here>",
   "dependencies": {
     "moment": "2.22.2",
+    "nativescript-email": "1.5.3",
     "nativescript-theme-core": "~1.0.4",
     "tns-core-modules": "~5.0.2"
   },

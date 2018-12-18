@@ -13,7 +13,7 @@ exports.goToLanding = function(){
 }
 exports.goToTest = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("dynamic-walkthrough-page");
+    topmost.navigate("my-team");
     
 }
 exports.footer3 = function(){
@@ -25,6 +25,10 @@ exports.footer4 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
     
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("pay-info");
 }
 exports.searchLanding = function(){
     var searchField = page.getViewById("SearchBox").text;

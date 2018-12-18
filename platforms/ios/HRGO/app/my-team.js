@@ -6,6 +6,7 @@ var pageObject;
 var applicationSettings = require("application-settings");
 const Label = require("tns-core-modules/ui/label/").Label;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
+const email = require("nativescript-email");
 
 
 exports.onNavigatingTo = function(args){
@@ -33,6 +34,15 @@ exports.addEmployee = function(args){
     tempTeam.push(newEmployee);
     saveTeamMembers(tempTeam);
     displayTeamMembers(tempTeam);
+};
+exports.sendEmail = function(args){
+    console.log("Send Email");
+    email.available().then(function(avail){
+        console.log("Email available? " + avail);
+    });
+    var subject = pageData.get("emailSubject");
+    var body = pageData.get("emailBody");
+    
 
 };
 var getTeamMembers = function(){

@@ -3,13 +3,25 @@
   <GridLayout rows="*,60">
   <ScrollView>
   <StackLayout row="0" orientation="vertical" width="100%">
-    <Label text="Add New Employee"/>
-    <Label text="Name"/>
-    <TextField text="{{ employeeName }}" />
-    <Label text="Email"/>
-    <TextField text="{{ employeeEmail }}" keyboardtype="email" />
-    <Button text="Add Employee" tap="addEmployee"/>
+    <Label text="Add New Employee" class="Article_H1"/>
+    <Label text="Name" class="Article_H3"/>
+    <TextField text="{{ employeeName }}" class="DayCalc_TextField"/>
+    <Label text="Email" class="Article_H3"/>
+    <TextField text="{{ employeeEmail }}" keyboardtype="email" class="DayCalc_TextField"/>
+    <Button text="Add Employee" tap="addEmployee" class="DayCalc_SubmitButton"/>
+    <!-- TEAM LIST -->
+    <Label text="My Team Members" class="Article_H1"/>
     <StackLayout id="teamListStack">
+    </StackLayout>
+
+    <!-- COMPOSE EMAIL -->
+    <StackLayout>
+      <Label text="Compose Email to Team" class="Article_H1"/>
+      <Label text="Email Subject" class="Article_H3"/>
+      <TextField text="{{ emailSubject }}" class="DayCalc_TextField"/>
+      <Label text="Email Body" class="Article_H3"/>
+      <TextView text="{{ emailBody }}" class="DayCalc_TextField"/>
+      <Button text="Send Email to Team" class="DayCalc_SubmitButton" tap="sendEmail"/>
     </StackLayout>
   </StackLayout>  
   </ScrollView>

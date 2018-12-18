@@ -11,12 +11,18 @@
       </Button>
       <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
     </StackLayout>
-      <StackLayout width="100%" orientation="horizontal">
-        <Button class="Home_NavButton" tap="goToLanding">
-          <FormattedString>
-            <Span class="Home_NavIcon" text="&#xe93b;"/>
-          </FormattedString>
-        </Button>
+      <StackLayout width="100%" orientation="vertical">
+        <GridLayout columns="60,*" class="Home_Utility_Row">
+          <Button class="Home_Utility_Button" tap="goToLanding" col="0">
+            <FormattedString>
+              <Span class="Home_Utility_Icon" text="&#xe93b;"/>
+            </FormattedString>
+          </Button>
+          <Button class="Home_Utility_Label" text="Pay" col="1"/>
+        </GridLayout>
+      </StackLayout>
+    </StackLayout>
+        <!--
         <Button class="Home_NavButton">
           <FormattedString>
             <Span class="Home_NavIcon" text="&#xe972;"/>
@@ -30,19 +36,19 @@
       </StackLayout>
 
       <StackLayout width="100%" orientation="horizontal">
-        <Button class="Home_NavLabel" text="Pay" />
+        
         <Button class="Home_NavLabel" text="Talent Acquisition" />
         <Button class="Home_NavLabel" text="Position Management" />
 
       </StackLayout>
     </StackLayout>
-
+-->
     <StackLayout row="1" class="FooterNav" orientation="horizontal">
         <Button class="Footer_NavIcon" text="&#xe902;" width="20%"/>
         <Button class="Footer_NavIcon" text="&#xe904;"  width="20%" tap="goToTest"/>
         <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
         <Button class="Footer_NavIcon" text="&#xe945;"  width="20%" tap="footer4"/>
-        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%" tap ="footer5"/>
       </StackLayout>
 
     </GridLayout>
