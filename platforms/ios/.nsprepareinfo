@@ -32,7 +32,7 @@
 		"/Users/graemerombough/HRGO/app/main-page.xml": "34dffd01750271eea42b9062aeb1d9580de8135a",
 		"/Users/graemerombough/HRGO/app/main-page_arch.js": "83ef637f1555fecf6468b3c00c8098cbc6b13abb",
 		"/Users/graemerombough/HRGO/app/main-page_arch.xml": "d4cb5a2b72e55cb1794b72f62115693dc8e8c76e",
-		"/Users/graemerombough/HRGO/app/my-team.js": "d446d224baf655034c69190ff5a9fbc273c8a783",
+		"/Users/graemerombough/HRGO/app/my-team.js": "b39363fb7ee72393df31a9b2783d9225a4635b9a",
 		"/Users/graemerombough/HRGO/app/my-team.xml": "b33e38f726c4feae4857e10e3a4625244e54febc",
 		"/Users/graemerombough/HRGO/app/package.json": "2a048b675a0372201b4d6cac2522162030730dcb",
 		"/Users/graemerombough/HRGO/app/pay-info.js": "d8e656ef8d5ac32567c56fcea12535fd72ab31d4",
@@ -64,7 +64,7 @@
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": false,
-	"time": "Mon Dec 17 2018 21:01:43 GMT-0500 (EST)",
+	"time": "Mon Dec 17 2018 21:22:46 GMT-0500 (EST)",
 	"changesRequireBuildTime": "Sun Dec 09 2018 20:16:25 GMT-0500 (EST)",
 	"projectFileHash": "d843b28031daf917585d429daa3673d5f85df6882070b307abacea8e3f4793dd"
 }
