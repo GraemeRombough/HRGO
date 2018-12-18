@@ -84,7 +84,7 @@ var loadSteps = function(selectedClass,inputArg){
 
 };
 exports.getCalculatedInfo = function(){
-    var overtimeCalc, hourlyCalc, biweeklyCalc, annuallyCalc;
+    var overtimeCalc, hourlyCalc, dailyCalc, biweeklyCalc, annuallyCalc;
     var totalValue = 0;
     var salaryData = returnSalary("AS   01", "3");
     if(pageData.get("overtime1Number")){
@@ -94,6 +94,10 @@ exports.getCalculatedInfo = function(){
     if(pageData.get("hourlyNumber")){
         hourlyCalc = pageData.get("hourlyNumber");
         totalValue += hourlyCalc * salaryData.hourly;
+    };
+    if(pageData.get("dailyNumber")){
+        hourlyCalc = pageData.get("dailyNumber");
+        totalValue += dailyCalc * salaryData.daily;
     };
     if(pageData.get("biweeklyNumber")){
         biweeklyCalc = pageData.get("biweeklyNumber");
