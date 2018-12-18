@@ -40,10 +40,28 @@ exports.sendEmail = function(args){
     email.available().then(function(avail){
         console.log("Email available? " + avail);
     });
-    var subject = pageData.get("emailSubject");
-    var body = pageData.get("emailBody");
-    
+    var eSubject = pageData.get("emailSubject");
+    var eBody = pageData.get("emailBody");
+    var toAddress = [];
+    var team = getTeamMembers();
+    for(i=0; i<team.length; i++){
+        toAddress.push(team[i].empEmail);
+    };
 
+    if(eSubject){
+        if (email.available()){
+            email.compose({
+                subject: eSubject,
+                body: eBody,
+                to: toAddress
+            });
+        } else {
+            console.log("Email Not Available");
+        }
+    } else {
+        console.log("Subject field blank");
+    }
+    console.log(toAddress);
 };
 var getTeamMembers = function(){
     var teamMemberPull;
@@ -54,9 +72,8 @@ var getTeamMembers = function(){
         else {
             //Only to add testing value, otherwise set null
             var teamMembers = [];
-            teamMembers[0] = {empName: "Person 1", empEmail: "Email 1"};
-            teamMembers[1] = {empName: "Person 2", empEmail: "Email 2"};
-            teamMembers[2] = {empName: "Person 3", empEmail: "Email 3"};
+            teamMembers[0] = {empName: "Graeme Rombough", empEmail: "graeme_rombough@hotmail.com"};
+            teamMembers[1] = {empName: "Graeme Rombough 2", empEmail: "graeme.rombough@forces.gc.ca"};
             teamMemberPull = JSON.stringify(teamMembers);
         };
     var teamMemberReturn = JSON.parse(teamMemberPull);

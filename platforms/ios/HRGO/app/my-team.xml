@@ -18,9 +18,9 @@
     <StackLayout>
       <Label text="Compose Email to Team" class="Article_H1"/>
       <Label text="Email Subject" class="Article_H3"/>
-      <TextField text="{{ emailSubject }}" class="DayCalc_TextField"/>
+      <TextField text="{{ emailSubject }}" class="DayCalc_TextField" style="width:100%; font-size: 16px; height:28;"/>
       <Label text="Email Body" class="Article_H3"/>
-      <TextView text="{{ emailBody }}" class="DayCalc_TextField"/>
+      <TextView text="{{ emailBody }}" class="DayCalc_TextField" style="width:100%; font-size: 16px; height:80;"/>
       <Button text="Send Email to Team" class="DayCalc_SubmitButton" tap="sendEmail"/>
     </StackLayout>
   </StackLayout>  
