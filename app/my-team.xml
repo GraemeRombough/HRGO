@@ -9,6 +9,8 @@
     <Label text="Email"/>
     <TextField text="{{ employeeEmail }}" keyboardtype="email" />
     <Button text="Add Employee" tap="addEmployee"/>
+    <StackLayout id="teamListStack">
+    </StackLayout>
   </StackLayout>  
   </ScrollView>
   <StackLayout row="1" class="FooterNav" orientation="horizontal">
@@ -18,6 +20,7 @@
         <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
         <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
   </StackLayout>
+  
 
     </GridLayout>
 
