@@ -8,9 +8,15 @@ exports.pageLoaded = function(args) {
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("landing-page");
-
-
 }
+exports.goToRefCalc = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("calculators-landing-page");
+};
+exports.goToConnect = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("connect-landing-page");
+};
 exports.goToTest = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("my-team");

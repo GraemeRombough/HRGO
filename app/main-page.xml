@@ -23,7 +23,7 @@
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="goToConnect" col="0">
             <FormattedString>
-              <Span class="Home_Utility_Icon" text="&#xe93b;"/>
+              <Span class="Home_Utility_Icon" text="&#xe972;"/>
             </FormattedString>
           </Button>
           <Button class="Home_Utility_Label" text="Connect" tap="goToConnect" col="1"/>
