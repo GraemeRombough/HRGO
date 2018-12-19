@@ -2,9 +2,11 @@
 button{
     background-color: #FFF;
     border-color: transparent;
-    border-width: 1;
+    border-width: 1px;
     box-shadow: none;
     margin: 0px;
+    padding: 0px;
+    height:auto;
 }
 .Home_NavButton{
     margin:5px;

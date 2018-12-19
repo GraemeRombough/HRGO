@@ -2,9 +2,15 @@
 button{
     background-color: #FFF;
     border-color: transparent;
-    border-width: 1;
+    border-width: 1px;
     box-shadow: none;
     margin: 0px;
+    padding: 0px;
+    height:auto;
+    vertical-align: middle;
+}
+.action-bar{
+    text-align: center;
 }
 .Home_NavButton{
     margin:5px;
@@ -40,9 +46,9 @@ button{
     font-size: 26px;
 }
 .Home_Utility_Row{
-    height: 42pt;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    height: auto;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-bottom-width: 1px;
     border-bottom-color: #284162;
 }
