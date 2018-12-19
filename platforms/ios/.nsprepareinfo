@@ -15,10 +15,10 @@
 		"/Users/graemerombough/HRGO/app/calculators-landing-page.js": "a951bf246c3bd4f9c3bc778118d40f06b95b68d1",
 		"/Users/graemerombough/HRGO/app/calculators-landing-page.xml": "e7afe0de9617f64737ec8effb2b7d08c5c2f25bc",
 		"/Users/graemerombough/HRGO/app/code/navComponents.js": "c3c633688115fd0c6ed322c6154286997478a0e1",
-		"/Users/graemerombough/HRGO/app/connect-landing-page.js": "a951bf246c3bd4f9c3bc778118d40f06b95b68d1",
-		"/Users/graemerombough/HRGO/app/connect-landing-page.xml": "e7afe0de9617f64737ec8effb2b7d08c5c2f25bc",
-		"/Users/graemerombough/HRGO/app/dynamic-article-page.js": "6d797914dd5d789e433c5674c7e4fa0e21384a9b",
+		"/Users/graemerombough/HRGO/app/connect-landing-page.js": "f4f46ab3fc77e002a6aa9949454e84fdfacd219b",
+		"/Users/graemerombough/HRGO/app/connect-landing-page.xml": "9823c8a883a1ca9ecefd73f06beb1fbea280aa4b",
 		"/Users/graemerombough/HRGO/app/dynamic-article-page.xml": "817247a401655f3f3e46eb68772ef433a037a20c",
+		"/Users/graemerombough/HRGO/app/dynamic-article-page.js": "6d797914dd5d789e433c5674c7e4fa0e21384a9b",
 		"/Users/graemerombough/HRGO/app/dynamic-walkthrough-page.js": "26fd9987a4a8e8f37111f723b184c87bca2634eb",
 		"/Users/graemerombough/HRGO/app/dynamic-walkthrough-page.xml": "57f3a2a5aed0fed099cd043483bc3bef59fb6788",
 		"/Users/graemerombough/HRGO/app/fonts/.DS_Store": "e2ef4c82d5b98f47c01cdc874721288005ea7e9f",
@@ -68,7 +68,7 @@
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": false,
-	"time": "Tue Dec 18 2018 21:20:12 GMT-0500 (EST)",
+	"time": "Tue Dec 18 2018 21:24:02 GMT-0500 (EST)",
 	"changesRequireBuildTime": "Mon Dec 17 2018 21:52:25 GMT-0500 (EST)",
 	"projectFileHash": "88d78aa100d41725dabf67d5d563c2ff9cd8cade1b1d869f3555a285766dff33"
 }

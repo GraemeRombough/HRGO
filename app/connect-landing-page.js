@@ -11,9 +11,9 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
 
 };
-exports.goToWorkingDay = function(args){
+exports.goToMyTeam= function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("workdays-utility-page");
+    topmost.navigate("my-team");
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();

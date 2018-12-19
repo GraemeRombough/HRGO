@@ -34,6 +34,8 @@ exports.addEmployee = function(args){
     tempTeam.push(newEmployee);
     saveTeamMembers(tempTeam);
     displayTeamMembers(tempTeam);
+    pageData.set("employeeName", "");
+    pageData.set("employeeEmail", "");
 };
 exports.sendEmail = function(args){
     console.log("Send Email");

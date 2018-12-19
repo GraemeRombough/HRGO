@@ -1,3 +1,4 @@
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/calculators-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/home/home-view-model.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/home/home-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/walkthrough-page-2.js
@@ -5,6 +6,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/POC-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/main-page_arch.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-article-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/connect-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/my-team.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/test-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/code/navComponents.js

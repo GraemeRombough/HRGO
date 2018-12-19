@@ -38,4 +38,3 @@
 /Users/graemerombough/HRGO/platforms/android/app/build/exploded-dependencies/14/classes.jar
 /Users/graemerombough/HRGO/platforms/android/app/build/exploded-dependencies/22/classes.jar
 /Users/graemerombough/HRGO/platforms/android/app/build/exploded-dependencies/25/classes.jar
-/Users/graemerombough/HRGO/platforms/android/app/build/intermediates/javac/debug

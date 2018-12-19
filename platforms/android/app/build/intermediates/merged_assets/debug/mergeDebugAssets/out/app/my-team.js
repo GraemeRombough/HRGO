@@ -34,6 +34,8 @@ exports.addEmployee = function(args){
     tempTeam.push(newEmployee);
     saveTeamMembers(tempTeam);
     displayTeamMembers(tempTeam);
+    pageData.set("employeeName", "");
+    pageData.set("employeeEmail", "");
 };
 exports.sendEmail = function(args){
     console.log("Send Email");
@@ -93,8 +95,13 @@ var displayTeamMembers = function(membersToDisplay){
     // create dynamic content
     for(i = 0; i < teamMembers.length; i++){
         var teamMemberLabel = new Label;
-        teamMemberLabel.text = teamMembers[i].empName + " ( " + teamMembers[i].empEmail + " )";
+        var teamMemberEmail = new Label;
+        teamMemberLabel.text = teamMembers[i].empName;
+        teamMemberLabel.className = "Utility_MyTeam_TeamName";
+        teamMemberEmail.text = "  [" + teamMembers[i].empEmail + "]";
+        teamMemberEmail.className = "Utility_MyTeam_TeamEmail";
         teamStack.addChild(teamMemberLabel);
+        teamStack.addChild(teamMemberEmail);
     };
 };
 
