@@ -75,7 +75,10 @@ var getTeamMembers = function(){
             //Only to add testing value, otherwise set null
             var teamMembers = [];
             teamMembers[0] = {empName: "Graeme Rombough", empEmail: "graeme_rombough@hotmail.com"};
-            teamMembers[1] = {empName: "Graeme Rombough 2", empEmail: "graeme.rombough@forces.gc.ca"};
+            teamMembers[1] = {empName: "Danielle Morneault", empEmail: "Danielle.Morneault@forces.gc.ca"};
+            teamMembers[2] = {empName: "Julie Albert", empEmail: "Julie.Albert@forces.gc.ca"};
+            teamMembers[3] = {empName: "Leo Fleischer", empEmail: "Leonard.Fleischer@forces.gc.ca"};
+            teamMembers[4] = {empName: "Diana Scheper", empEmail: "Diana.Scheper@forces.gc.ca"};
             teamMemberPull = JSON.stringify(teamMembers);
         };
     var teamMemberReturn = JSON.parse(teamMemberPull);
