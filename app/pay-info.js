@@ -3,6 +3,7 @@ var view = require("ui/core/view");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
 var selectedClass, selectedStep;
+var classDD;
 var pageObject;
 const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
@@ -11,12 +12,13 @@ var pageVM;
 exports.onNavigatingTo = function(args){
     selectedClass = null;
     selectedStep = null;
-    const classifications = ["STDNT00", "AS   01", "AS   02", "AS   03", "AS   04"];
-    var steps = [1,2,3,4,5,6,7,8];
+    classDD = getClassList();
+    //const classifications = getClassList();
+    var steps = [1];
     const page = args.object;
     pageObject = page;
     pageData = fromObject({
-        classItems: classifications,
+        classItems: classDD,
         classIndex: 1,
         stepItems: steps,
         stepIndex:1,
@@ -24,6 +26,7 @@ exports.onNavigatingTo = function(args){
         salaryVisible: false
     }); 
     page.bindingContext = pageData;
+    
     
 }
 exports.pageLoaded = function(args) {
@@ -127,7 +130,42 @@ exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
+var getClassList = function(){
+    var databasePull = getFromDataBase();
+    var classList = [];
+    var itemIsDuplicate = false;
+    for(i = 0; i < databasePull.length; i++){
+        itemIsDuplicate = false;
+        for(x = 0; x < classList.length; x++){
+            if (databasePull[i].classCode == classList[x]){
+                itemIsDuplicate = true;
+            }
+        }
+        if (itemIsDuplicate == false){
+            classList.push(databasePull[i].classCode);
+            console.log(databasePull[i].classCode);
+        }
+    }
+    return classList;
+}
+var getStepCount = function(){
+    var databaseReturn = getFromDataBase();
+    for(i = 0; i < classDD.length; i++){
+        for(x=0; x < databaseReturn.length; x++);
+    }
+    //TO COMPLETE
+}
 var returnSalary = function(selectedClass, selectedStep){
+    var salaryList = getFromDataBase();    
+
+    for(i=0; i < salaryList.length; i++){
+        if(salaryList[i].classCode == selectedClass && salaryList[i].step == selectedStep){
+            return databaseReturn[i];
+            break;
+        }
+    }
+};
+var getFromDataBase = function(){
     var databaseReturn = [];
     var databaseLine = {};
     databaseLine = {classCode:"STDNT", step:"1", hourly:13.47, daily:101.025, biweekly:1010.25, annually:26266.5};
@@ -154,11 +192,6 @@ var returnSalary = function(selectedClass, selectedStep){
     databaseReturn.push(databaseLine);
     databaseLine = {classCode:"AS   01", step:"4", hourly:29.5605128205128, daily:221.703846153846, biweekly:2217.03846153846, annually:57643};
 
-    for(i=0; i < databaseReturn.length; i++){
-        if(databaseReturn[i].classCode == selectedClass && databaseReturn[i].step == selectedStep){
-            return databaseReturn[i];
-            break;
-        }
-    }
-};
+    return databaseReturn;
+}
 
