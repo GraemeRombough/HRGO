@@ -149,7 +149,11 @@ var getClassList = function(){
     return classList;
 }
 var getStepCount = function(){
-
+    var databaseReturn = getFromDataBase();
+    for(i = 0; i < classDD.length; i++){
+        for(x=0; x < databaseReturn.length; x++);
+    }
+    //TO COMPLETE
 }
 var returnSalary = function(selectedClass, selectedStep){
     var salaryList = getFromDataBase();    
