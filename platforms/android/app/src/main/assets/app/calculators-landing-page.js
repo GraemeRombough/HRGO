@@ -15,6 +15,10 @@ exports.goToWorkingDay = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("workdays-utility-page");
 };
+exports.goToSalary = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate("pay-info");
+};
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
