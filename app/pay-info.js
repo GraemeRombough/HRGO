@@ -99,6 +99,17 @@ var loadSteps = function(selection,inputArg){
     pageData.stepIndex = 1;
 
 };
+exports.resetSelections = function(args){
+    selectedClass = null;
+    selectedStep = null;
+    pageData.set("annualRate", "");
+    pageData.set("biweeklyRate", "");
+    pageData.set("dailyRate", "");
+    pageData.set("hourlyRate", "");
+    pageData.set("overtime1Rate", "");
+    pageData.set("infoVisible", true);
+    pageData.set("salaryVisible", false);
+}
 exports.getCalculatedInfo = function(){
     var overtimeCalc, hourlyCalc, dailyCalc, biweeklyCalc, annuallyCalc;
     var totalValue = 0;
