@@ -4,6 +4,7 @@ var observable = require("data/observable");
 var pageData = new observable.Observable();
 var selectedClass, selectedStep;
 var classDD;
+var classSteps;
 var pageObject;
 const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
@@ -13,6 +14,7 @@ exports.onNavigatingTo = function(args){
     selectedClass = null;
     selectedStep = null;
     classDD = getClassList();
+    classSteps = getStepCount();
     //const classifications = getClassList();
     var steps = [1];
     const page = args.object;
@@ -68,33 +70,31 @@ exports.getSalaryInfo = function(args){
     
     pageData.set("infoVisible", false);
     if(selectedClass != null && selectedStep !=null){
-    var salaryData = returnSalary(selectedClass[1], selectedStep[1]);
-    pageData.set("annualRate", "$" + Math.round(salaryData.annually * 100 + Number.EPSILON ) / 100);
-    pageData.set("biweeklyRate", "$" + Math.round(salaryData.biweekly * 100 + Number.EPSILON ) / 100);
-    pageData.set("dailyRate", "$" + Math.round(salaryData.daily * 100 + Number.EPSILON ) / 100);
-    pageData.set("hourlyRate", "$" + Math.round(salaryData.hourly * 100 + Number.EPSILON ) / 100);
-    pageData.set("overtime1Rate", "$" + Math.round((salaryData.hourly * 1.5) * 100 + Number.EPSILON ) / 100);
-
-    pageData.set("salaryVisible", true);
+        var salaryData = returnSalary(selectedClass[1], selectedStep[1]);
+        pageData.set("annualRate", "$" + Math.round(salaryData.annually * 100 + Number.EPSILON ) / 100);
+        pageData.set("biweeklyRate", "$" + Math.round(salaryData.biweekly * 100 + Number.EPSILON ) / 100);
+        pageData.set("dailyRate", "$" + Math.round(salaryData.daily * 100 + Number.EPSILON ) / 100);
+        pageData.set("hourlyRate", "$" + Math.round(salaryData.hourly * 100 + Number.EPSILON ) / 100);
+        pageData.set("overtime1Rate", "$" + Math.round((salaryData.hourly * 1.5) * 100 + Number.EPSILON ) / 100);
+        pageData.set("salaryVisible", true);
     }
 };
-var loadSteps = function(selectedClass,inputArg){
-    console.log('loadSteps');
+var loadSteps = function(selection,inputArg){
+    console.log(`loadSteps selectedClass = ${selectedClass}`);
     var numOfSteps;
-    var steps = [1,2,3];
-    /*switch(selectedClass){
-        case "STDNT00":
-        numOfSteps = 8;
-        break;
-        case "AS   01":
-        numOfSteps = 4;
-        break;
-    };
+    var steps = [];
+    console.log(classSteps.length);
+    for(x=0; x < classSteps.length; x++){
+        if(classSteps[x].class == selectedClass[1]){
+            numOfSteps = classSteps[x].steps;   
+        }
+    }
+
     for(i = 0; i < numOfSteps; i++){
         steps.push(i+1);
-    }*/
-    console.log(`steps: ${steps.length}`);
-    
+    }
+    //console.log(`steps: ${steps.length}`);
+    console.log(`steps: ${numOfSteps}`);
     pageData.stepItems = steps;
     pageData.stepIndex = 1;
 
@@ -102,7 +102,7 @@ var loadSteps = function(selectedClass,inputArg){
 exports.getCalculatedInfo = function(){
     var overtimeCalc, hourlyCalc, dailyCalc, biweeklyCalc, annuallyCalc;
     var totalValue = 0;
-    var salaryData = returnSalary("AS   01", "3");
+    var salaryData = returnSalary(selectedClass[1], selectedStep[1]);
     if(pageData.get("overtime1Number")){
         overtimeCalc = pageData.get("overtime1Number");
         totalValue += overtimeCalc * salaryData.hourly * 1.5;
@@ -150,17 +150,29 @@ var getClassList = function(){
 }
 var getStepCount = function(){
     var databaseReturn = getFromDataBase();
+    var numOfSteps = 0;
+    var returnClassSteps = [];
+    
     for(i = 0; i < classDD.length; i++){
-        for(x=0; x < databaseReturn.length; x++);
+        numOfSteps = 0;
+        var stepItem = {};
+        for(x=0; x < databaseReturn.length; x++){
+            if (classDD[i] == databaseReturn[x].classCode){
+                numOfSteps++;
+            }
+        }
+        stepItem = {class:classDD[i], steps:numOfSteps};
+        returnClassSteps.push(stepItem);
+        console.log("class: " + classDD[i] +  "steps: " + numOfSteps);
     }
-    //TO COMPLETE
+    return returnClassSteps;
 }
-var returnSalary = function(selectedClass, selectedStep){
+var returnSalary = function(selectedClassX, selectedStepX){
     var salaryList = getFromDataBase();    
 
     for(i=0; i < salaryList.length; i++){
-        if(salaryList[i].classCode == selectedClass && salaryList[i].step == selectedStep){
-            return databaseReturn[i];
+        if(salaryList[i].classCode == selectedClass[1] && salaryList[i].step == selectedStep[1]){
+            return salaryList[i];
             break;
         }
     }
