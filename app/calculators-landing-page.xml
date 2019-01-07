@@ -7,6 +7,8 @@
     <StackLayout orientation="vertical">
       <Button class="Landing_Nav" text="Day Calculators" tap="navToggle" value="DayCalculator"/>
         <Button class="Landing_SubNav_Compensation" id="2" text="Working Day Calculator" tap="goToWorkingDay" visibility="{{ DayCalculator ? 'visible' : 'collapsed' }}"/>
+      <Button class="Landing_Nav" text="Salary Calculators" tap="navToggle" value="SalaryCalculator"/>
+        <Button class="Landing_SubNav_Compensation" id="2" text="Working Day Calculator" tap="goToSalary" visibility="{{ SalaryCalculator ? 'visible' : 'collapsed' }}"/>
     </StackLayout>
   </StackLayout>
       

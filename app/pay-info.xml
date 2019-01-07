@@ -1,5 +1,5 @@
 <Page loaded="pageLoaded" navigatingTo="onNavigatingTo">
-  <ActionBar title="Pay Info" class="action-bar"></ActionBar>
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <ScrollView>
   <StackLayout row="0" orientation="vertical" width="100%">
