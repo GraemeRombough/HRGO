@@ -112,7 +112,7 @@ exports.getCalculatedInfo = function(){
         totalValue += hourlyCalc * salaryData.hourly;
     };
     if(pageData.get("dailyNumber")){
-        hourlyCalc = pageData.get("dailyNumber");
+        dailyCalc = pageData.get("dailyNumber");
         totalValue += dailyCalc * salaryData.daily;
     };
     if(pageData.get("biweeklyNumber")){
@@ -169,7 +169,7 @@ var getStepCount = function(){
 }
 var returnSalary = function(selectedClassX, selectedStepX){
     var salaryList = getFromDataBase();    
-
+    console.log("returnSalary");
     for(i=0; i < salaryList.length; i++){
         if(salaryList[i].classCode == selectedClass[1] && salaryList[i].step == selectedStep[1]){
             return salaryList[i];
