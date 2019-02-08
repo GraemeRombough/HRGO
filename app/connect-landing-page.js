@@ -15,6 +15,10 @@ exports.goToMyTeam= function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("my-team");
 };
+exports.goToPOC= function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+};
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");

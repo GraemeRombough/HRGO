@@ -7,6 +7,8 @@
     <StackLayout orientation="vertical">
       <Button class="Landing_Nav" text="Team Tools" tap="navToggle" value="TeamTools"/>
         <Button class="Landing_SubNav_Compensation" id="2" text="My Team Contact" tap="goToMyTeam" visibility="{{ TeamTools? 'visible' : 'collapsed' }}"/>
+      <Button class="Landing_Nav" text="Contact" tap="navToggle" value="Contact"/>
+        <Button class="Landing_SubNav_Compensation" id="2" text="Points of Contact" tap="goToPOC" visibility="{{ Contact? 'visible' : 'collapsed' }}"/>
     </StackLayout>
   </StackLayout>
       
