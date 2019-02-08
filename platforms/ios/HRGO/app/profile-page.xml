@@ -7,16 +7,16 @@
 <ScrollView>
     <StackLayout orientation="vertical">
       <label class="DayCalc_SectionTitle" text="Preferred Language"/>
-      <GridLayout columns="40%,20%,40%", rows="auto" style="horizontal-align:center;">
-        <label class="Home_NavLabel" row="0" col="0" text="English"/>
-        <Switch row="0" col="1" checked="{{ EngFreCheck }}"/>
-        <label class="Home_NavLabel" row="0" col="2" text="French"/>
+      <GridLayout columns="*,auto,*">
+        <label class="Home_NavLabel" col="0" text="English"/>
+        <Switch col="1" checked="{{ EngFreCheck }}"/>
+        <label class="Home_NavLabel" col="2" text="French"/>
       </GridLayout>
       
         <label class="DayCalc_SectionTitle" text="Work Email"/>
       
-        <TextField class="DayCalc_TextField" text="{{ workEmail }}" />
-        <Button class="DayCalc_SubmitButton" text="Save Profile" tap="setNotification"/>
+        <TextField class="Utility_TextBox" text="{{ workEmail }}" />
+        <Button class="DayCalc_SubmitButton" text="Save Profile" tap="saveProfile"/>
     </StackLayout>
 </ScrollView>
   </StackLayout>
