@@ -17,12 +17,11 @@ exports.goToConnect = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("connect-landing-page");
 };
-exports.switchToFrench = function(){
+exports.switchToEnglish = function(){
     var topmost = frameModule.topmost();
     var pageDetails = String(topmost.currentPage).split("///");
-    var frenchPageTitle = pageDetails[1].split("/")[1].split(".")[0] + "_FR";
-    console.log(frenchPageTitle);
-    topmost.navigate(frenchPageTitle);
+    var englishPageTitle = pageDetails[1].split("/")[1].split(".")[0];
+    console.log(englishPageTitle);
 };
 exports.goToTest = function(){
     var topmost = frameModule.topmost();

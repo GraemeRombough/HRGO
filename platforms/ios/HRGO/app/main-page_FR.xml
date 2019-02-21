@@ -4,7 +4,7 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" text="Home"/>
-      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
+      <Button col="1" row="0" class="HeaderLabel" text="EN" tap="switchToEnglish"/>
     </GridLayout>
     <StackLayout orientation="horizontal" class="SearchBar">
       <Button col="0" class="SearchBar_Button" tap="searchLanding">
