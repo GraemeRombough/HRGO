@@ -19,7 +19,7 @@ exports.pageLoaded = function(args) {
     getNavList();
     args.object.bindingContext = pageData;
     searchReference=page.navigationContext;
-    pageData.set("ActionBarTitle", "Search Results");
+     pageData.set("ActionBarTitle", "Search Results");
     pageData.set(subNavTitle, true);
     console.log(searchReference.SearchTerm);
     //getSearchResults(searchReference.SearchTerm);
