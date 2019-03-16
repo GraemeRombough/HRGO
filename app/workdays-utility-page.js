@@ -10,11 +10,15 @@ var navList = [];
 exports.pageLoaded = function(args) {
     const page = args.object;
     //vm = new Observable();
-    pageData.set("mondayCheck", true)
-    pageData.set("tuesdayCheck", true)
-    pageData.set("wednesdayCheck", true)
-    pageData.set("thursdayCheck", true)
-    pageData.set("fridayCheck", true)
+    pageData.set("mondayCheck", true);
+    pageData.set("tuesdayCheck", true);
+    pageData.set("wednesdayCheck", true);
+    pageData.set("thursdayCheck", true);
+    pageData.set("fridayCheck", true);
+    
+    pageData.set("sundayCheck", false);
+    pageData.set("saturdayCheck", false);
+    
     const TODAY = new Date();
     pageData.set("date", TODAY);
     pageData.set("endDateLabel", "End Date: ");
@@ -42,7 +46,11 @@ var addScheduleDays = function(startDate, schedule, totalDays){
         
         for(z = 0; z < schedule.length; z++){
             if (checkDate.getDay() == schedule[z]){
-                i++;
+                if(checkIfHoliday(checkDate) == true){
+
+                }else{
+                    i++;
+                } 
             }
         }
         if (i < totalDays){
@@ -56,6 +64,9 @@ var addScheduleDays = function(startDate, schedule, totalDays){
 var getDaysOfWork = function(){
     var daysOfWork = [];
     daysOfWork.length = 0;
+    if (pageData.get('sundayCheck')==true){
+        daysOfWork.push(0);
+    };
     if (pageData.get('mondayCheck')==true){
         daysOfWork.push(1);
     };
@@ -70,6 +81,9 @@ var getDaysOfWork = function(){
     };
     if (pageData.get('fridayCheck')==true){
         daysOfWork.push(5);
+    };
+    if (pageData.get('saturdayCheck')==true){
+        daysOfWork.push(6);
     };
     console.log(daysOfWork.length);
     return daysOfWork;
@@ -118,5 +132,46 @@ var formatDate = function(inputDate){
     }
     formattedDate = month + " " + dateInput.getDate() + ", " + dateInput.getFullYear();
     return formattedDate;
-    
+}
+var getHolidays = function(){
+    var holidayList = [];
+
+    //2019 Holidays
+    holidayList.push(new Date("January 1, 2019"));
+    holidayList.push(new Date("April 19, 2019"));
+    holidayList.push(new Date("April 22, 2019"));
+    holidayList.push(new Date("May 20, 2019"));
+    holidayList.push(new Date("July 1, 2019"));
+    holidayList.push(new Date("August 5, 2019"));
+    holidayList.push(new Date("September 2, 2019"));
+    holidayList.push(new Date("October 14, 2019"));
+    holidayList.push(new Date("November 11, 2019"));
+    holidayList.push(new Date("December 25, 2019"));
+    holidayList.push(new Date("December 26, 2019"));
+
+    //2020 Holidays
+    holidayList.push(new Date("January 1, 2020"));
+    holidayList.push(new Date("April 10, 2020"));
+    holidayList.push(new Date("April 13, 2020"));
+    holidayList.push(new Date("May 18, 2020"));
+    holidayList.push(new Date("July 1, 2020"));
+    holidayList.push(new Date("August 3, 2020"));
+    holidayList.push(new Date("September 7, 2020"));
+    holidayList.push(new Date("October 12, 2020"));
+    holidayList.push(new Date("November 11, 2020"));
+    holidayList.push(new Date("December 25, 2020"));
+    holidayList.push(new Date("December 26, 2020"));
+
+    return holidayList;
+}
+var checkIfHoliday = function(holidayTest){
+    var holidays = getHolidays();
+    console.log("holidayTest:" + holidayTest.getDate() + " | holiday1:" + holidays[0].getDate())
+    for(n = 0; n < holidays.length; n++){
+        if (holidayTest.toString() == holidays[n].toString()){
+            console.log("holiday:" + holidayTest.toString());
+            return true;    
+        }
+    }
+    return false;
 }
