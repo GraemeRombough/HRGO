@@ -40,7 +40,12 @@ exports.goToWalkthrough = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("walkthrough-page");
 };
-
+exports.switchToFrench = function(){
+    var topmost = frameModule.topmost();
+    var pageDetails = String(topmost.currentPage).split("///");
+    var frenchPageTitle = pageDetails[1].split("/")[1].split(".")[0];
+    console.log(frenchPageTitle);
+};
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
     //alert(args.object.value).then(() => {
