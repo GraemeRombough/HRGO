@@ -166,9 +166,9 @@ var getHolidays = function(){
 }
 var checkIfHoliday = function(holidayTest){
     var holidays = getHolidays();
-    console.log("holidayTest:" + holidayTest.getDate() + " | holiday1:" + holidays[0].getDate())
+    //console.log("holidayTest:" + holidayTest.getDate() + " | holiday1:" + holidays[0].getDate())
     for(n = 0; n < holidays.length; n++){
-        if (holidayTest.toString() == holidays[n].toString()){
+        if (holidayTest.toDateString() == holidays[n].toDateString()){
             console.log("holiday:" + holidayTest.toString());
             return true;    
         }
