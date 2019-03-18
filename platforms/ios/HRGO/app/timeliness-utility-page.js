@@ -10,33 +10,52 @@ var navList = [];
 exports.pageLoaded = function(args) {
     const page = args.object;
     //vm = new Observable();
-    pageData.set("mondayCheck", true);
-    pageData.set("tuesdayCheck", true);
-    pageData.set("wednesdayCheck", true);
-    pageData.set("thursdayCheck", true);
-    pageData.set("fridayCheck", true);
-    
-    pageData.set("sundayCheck", false);
-    pageData.set("saturdayCheck", false);
     
     const TODAY = new Date();
-    pageData.set("date", TODAY);
-    pageData.set("endDateLabel", "End Date: ");
-    pageData.set("numberOfDays", 90);
+    pageData.set("dayOfWork", TODAY);
+    pageData.set("employeeSubmitDate", "Employee Submit By: ");
+    pageData.set("managerApproveDate", "Manager Approve By: ");
+    pageData.set("payDate", "Paid On: ");
+    
     page.bindingContext = pageData;
 
 };
-exports.setNotification = function(){
-    //console.log(pageData.get("date"));
-    //console.log(pageData.get("mondayCheck"));
-    addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
+exports.calculateTimeliness = function(){
+    //addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
+
+    calculateSection34Timeliness(pageData.get("dayOfWork"), false);
+    
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
     
 };
+var calculateSection34Timeliness = function(workDate, isPayWeek){
+    //Sunday = 0 m1, t2, w3, t4, f5, s6
+    var calculateDate = new Date(workDate.toString());
+    var submitDate = new Date();
+    var approveDate = new Date();
+    var payDate = new Date();
+    var fridayDelta = 5 - calculateDate.getDay();
+    if(isPayWeek != true){
+        fridayDelta += 7;
+        submitDate.setDate(calculateDate.getDate() + fridayDelta);
+        approveDate.setDate(submitDate.getDate() + 3);
+        payDate.setDate(approveDate.getDate()+16);
+        pageData.set("employeeSubmitDate", "Employee Submit By: " + formatDate(submitDate.toString()) );
+        pageData.set("managerApproveDate", "Manager Approve By: " + formatDate(approveDate.toString()) );
+        pageData.set("payDate", "Paid On: " + formatDate(payDate.toString()) );
+    }else{
+        submitDate.setDate(calculateDate.getDate() + fridayDelta);
+        approveDate.setDate(submitDate.getDate() + 3);
+        payDate.setDate(approveDate.getDate()+16);
+        pageData.set("employeeSubmitDate", "Employee Submit By: " + formatDate(submitDate.toString()) );
+        pageData.set("managerApproveDate", "Manager Approve By: " + formatDate(approveDate.toString()) );
+        pageData.set("payDate", "Paid On: " + formatDate(payDate.toString()) );
+    }
 
+};
 var addScheduleDays = function(startDate, schedule, totalDays){
     var i = 0;
     var checkDate = new Date(startDate.toString());

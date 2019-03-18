@@ -9,33 +9,14 @@
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      <label class="DayCalc_SectionTitle" text="Start Date"/>
-      <DatePicker loaded="onDatePickerLoaded" date="{{ date }}"></DatePicker>
-      <label class="DayCalc_SectionTitle" text="Days of Work"/>
-      <GridLayout columns="auto,auto" rows="auto,auto,auto,auto,auto,auto,auto" style="horizontal-align:center;">
-        <label class="Home_NavLabel" row="0" col="0" text="Sunday"/>
-        <label class="Home_NavLabel" row="1" col="0" text="Monday"/>
-        <label class="Home_NavLabel" row="2" col="0" text="Tuesday"/>
-        <label class="Home_NavLabel" row="3" col="0" text="Wednesday"/>
-        <label class="Home_NavLabel" row="4" col="0" text="Thursday"/>
-        <label class="Home_NavLabel" row="5" col="0" text="Friday"/>
-        <label class="Home_NavLabel" row="6" col="0" text="Saturday"/>
-        <Switch row="0" col="1" checked="{{ sundayCheck }}"/>
-        <Switch row="1" col="1" checked="{{ mondayCheck }}"/>
-        <Switch row="2" col="1" checked="{{ tuesdayCheck }}"/>
-        <Switch row="3" col="1" checked="{{ wednesdayCheck }}"/>
-        <Switch row="4" col="1" checked="{{ thursdayCheck }}"/>
-        <Switch row="5" col="1" checked="{{ fridayCheck }}"/>
-        <Switch row="6" col="1" checked="{{ saturdayCheck }}"/>
-      </GridLayout>
-      <label class="DayCalc_SectionTitle" text="Number of Days"/>
-      <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfDays }}" />
+      <label class="DayCalc_SectionTitle" text="Day of Work"/>
+      <DatePicker loaded="onDatePickerLoaded" date="{{ dayOfWork }}"></DatePicker>
 
-      <label class="DayCalc_StartDate" text="{{ endDateLabel }}"/>
+      <label class="DayCalc_StartDate" text="{{ employeeSubmitDate }}"/>
+      <label class="DayCalc_StartDate" text="{{ managerApproveDate }}"/>
+      <label class="DayCalc_StartDate" text="{{ payDate }}"/>
 
-      <Button class="DayCalc_SubmitButton" text="Get End Date" tap="setNotification"/>
-
-      
+      <Button class="DayCalc_SubmitButton" text="Get Timeliness Cutoffs" tap="calculateTimeliness"/>
 
       </StackLayout>
       </ScrollView>

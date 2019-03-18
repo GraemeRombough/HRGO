@@ -9,7 +9,8 @@
 
     <StackLayout orientation="vertical">
       <Button class="Landing_Nav" text="Day Calculators" tap="navToggle" value="DayCalculator"/>
-        <Button class="Landing_SubNav_Compensation" id="2" text="Working Day Calculator" tap="goToWorkingDay" visibility="{{ DayCalculator ? 'visible' : 'collapsed' }}"/>
+        <Button class="Landing_SubNav_Compensation" id="2" text="Working Day Calculator" tap="goToUtility" pageName="workdays-utility-page" visibility="{{ DayCalculator ? 'visible' : 'collapsed' }}"/>
+        <Button class="Landing_SubNav_Compensation" id="2" text="Section 34 Timeliness Calculator" tap="goToUtility" pageName="timeliness-utility-page" visibility="{{ DayCalculator ? 'visible' : 'collapsed' }}"/>
       <Button class="Landing_Nav" text="Salary Calculators" tap="navToggle" value="SalaryCalculator"/>
         <Button class="Landing_SubNav_Compensation" id="2" text="Gross Salary Calculator" tap="goToSalary" visibility="{{ SalaryCalculator ? 'visible' : 'collapsed' }}"/>
     </StackLayout>

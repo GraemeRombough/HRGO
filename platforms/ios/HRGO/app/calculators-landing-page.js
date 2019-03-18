@@ -11,8 +11,13 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
 
 };
+exports.goToUtility = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate(args.object.pageName);
+};
 exports.goToWorkingDay = function(args){
     var topmost = frameModule.topmost();
+    console.log(args.object.pageName);
     topmost.navigate("workdays-utility-page");
 };
 exports.goToSalary = function(args){

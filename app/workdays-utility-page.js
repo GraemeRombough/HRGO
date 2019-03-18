@@ -165,6 +165,7 @@ var getHolidays = function(){
     return holidayList;
 }
 var checkIfHoliday = function(holidayTest){
+    //NOTE: Could use dateString or other factor as object index.  If date doesn't return, then it's not a holiday
     var holidays = getHolidays();
     //console.log("holidayTest:" + holidayTest.getDate() + " | holiday1:" + holidays[0].getDate())
     for(n = 0; n < holidays.length; n++){
