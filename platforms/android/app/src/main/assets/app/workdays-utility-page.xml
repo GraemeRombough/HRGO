@@ -12,17 +12,21 @@
       <label class="DayCalc_SectionTitle" text="Start Date"/>
       <DatePicker loaded="onDatePickerLoaded" date="{{ date }}"></DatePicker>
       <label class="DayCalc_SectionTitle" text="Days of Work"/>
-      <GridLayout columns="auto,auto" rows="auto,auto,auto,auto,auto" style="horizontal-align:center;">
-        <label class="Home_NavLabel" row="0" col="0" text="Monday"/>
-        <label class="Home_NavLabel" row="1" col="0" text="Tuesday"/>
-        <label class="Home_NavLabel" row="2" col="0" text="Wednesday"/>
-        <label class="Home_NavLabel" row="3" col="0" text="Thursday"/>
-        <label class="Home_NavLabel" row="4" col="0" text="Friday"/>
-        <Switch row="0" col="1" checked="{{ mondayCheck }}"/>
-        <Switch row="1" col="1"  checked="{{ tuesdayCheck }}"/>
-        <Switch row="2" col="1"  checked="{{ wednesdayCheck }}"/>
-        <Switch row="3" col="1"  checked="{{ thursdayCheck }}"/>
-        <Switch row="4" col="1"  checked="{{ fridayCheck }}"/>
+      <GridLayout columns="auto,auto" rows="auto,auto,auto,auto,auto,auto,auto" style="horizontal-align:center;">
+        <label class="Home_NavLabel" row="0" col="0" text="Sunday"/>
+        <label class="Home_NavLabel" row="1" col="0" text="Monday"/>
+        <label class="Home_NavLabel" row="2" col="0" text="Tuesday"/>
+        <label class="Home_NavLabel" row="3" col="0" text="Wednesday"/>
+        <label class="Home_NavLabel" row="4" col="0" text="Thursday"/>
+        <label class="Home_NavLabel" row="5" col="0" text="Friday"/>
+        <label class="Home_NavLabel" row="6" col="0" text="Saturday"/>
+        <Switch row="0" col="1" checked="{{ sundayCheck }}"/>
+        <Switch row="1" col="1" checked="{{ mondayCheck }}"/>
+        <Switch row="2" col="1" checked="{{ tuesdayCheck }}"/>
+        <Switch row="3" col="1" checked="{{ wednesdayCheck }}"/>
+        <Switch row="4" col="1" checked="{{ thursdayCheck }}"/>
+        <Switch row="5" col="1" checked="{{ fridayCheck }}"/>
+        <Switch row="6" col="1" checked="{{ saturdayCheck }}"/>
       </GridLayout>
       <label class="DayCalc_SectionTitle" text="Number of Days"/>
       <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfDays }}" />
