@@ -31,6 +31,14 @@
           </Button>
           <Button class="Home_Utility_Label" text="Connect" tap="goToConnect" col="1"/>
         </GridLayout>
+        <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
+          <Button class="Home_Utility_Button" tap="goToWalkthroughs" col="0">
+            <FormattedString>
+              <Span class="Home_Utility_Icon" text="&#xe9b9;"/>
+            </FormattedString>
+          </Button>
+          <Button class="Home_Utility_Label" text="Walkthroughs" tap="goToRefCalc" col="1"/>
+        </GridLayout>
       </StackLayout>
     </StackLayout>
         <!--
