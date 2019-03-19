@@ -2,6 +2,7 @@ var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var dialogs = require("ui/dialogs");
 var observable = require("data/observable");
+var moment = require('moment');
 var pageData = new observable.Observable();
 var subNavTitle = "YourPayInformation";
 var navList = [];
@@ -37,12 +38,16 @@ var calculateSection34Timeliness = function(workDate, isPayWeek){
     var submitDate = new Date();
     var approveDate = new Date();
     var payDate = new Date();
-    var fridayDelta = 5 - calculateDate.getDay();
+    var payDayDelta = 4 - calculateDate.getDay();
+    var todayDate = TODAY;
+
+    //console.log(Math.round((todayDate.getDate() - calculateDate.getDate()) / (7 * 24 * 60 * 60 * 1000)));
+
     if(isPayWeek != true){
-        fridayDelta += 7;
-        submitDate.setDate(calculateDate.getDate() + fridayDelta);
-        approveDate.setDate(submitDate.getDate() + 3);
-        payDate.setDate(approveDate.getDate()+16);
+        payDayDelta += 7;
+        submitDate.setDate(calculateDate.getDate() + payDayDelta);
+        approveDate.setDate(submitDate.getDate() + 1);
+        payDate.setDate(approveDate.getDate() + 12);
         pageData.set("employeeSubmitDate", "Employee Submit By: " + formatDate(submitDate.toString()) );
         pageData.set("managerApproveDate", "Manager Approve By: " + formatDate(approveDate.toString()) );
         pageData.set("payDate", "Paid On: " + formatDate(payDate.toString()) );
