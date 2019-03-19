@@ -52,9 +52,9 @@ var calculateSection34Timeliness = function(workDate, isPayWeek){
         pageData.set("managerApproveDate", "Manager Approve By: " + formatDate(approveDate.toString()) );
         pageData.set("payDate", "Paid On: " + formatDate(payDate.toString()) );
     }else{
-        submitDate.setDate(calculateDate.getDate() + fridayDelta);
-        approveDate.setDate(submitDate.getDate() + 3);
-        payDate.setDate(approveDate.getDate()+16);
+        submitDate.setTime(calculateDate.getTime() + daysToMilliseconds(payDayDelta));
+        approveDate.setTime(submitDate.getTime() + daysToMilliseconds(1));
+        payDate.setTime(approveDate.getTime() + daysToMilliseconds(12));
         pageData.set("employeeSubmitDate", "Employee Submit By: " + formatDate(submitDate.toString()) );
         pageData.set("managerApproveDate", "Manager Approve By: " + formatDate(approveDate.toString()) );
         pageData.set("payDate", "Paid On: " + formatDate(payDate.toString()) );
