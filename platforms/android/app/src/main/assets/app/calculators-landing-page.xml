@@ -13,6 +13,9 @@
         <Button class="Landing_SubNav_Compensation" id="2" text="Section 34 Timeliness Calculator" tap="goToUtility" pageName="timeliness-utility-page" visibility="{{ DayCalculator ? 'visible' : 'collapsed' }}"/>
       <Button class="Landing_Nav" text="Salary Calculators" tap="navToggle" value="SalaryCalculator"/>
         <Button class="Landing_SubNav_Compensation" id="2" text="Gross Salary Calculator" tap="goToSalary" visibility="{{ SalaryCalculator ? 'visible' : 'collapsed' }}"/>
+      <Button class="Landing_Nav" text="Notification Tools" tap="navToggle" value="Notification"/>
+        <Button class="Landing_SubNav_Compensation" id="2" text="Time Approval Notifications" tap="goToUtility" pageName="sec34-notifications-page" visibility="{{ Notification ? 'visible' : 'collapsed' }}"/>
+
     </StackLayout>
   </StackLayout>
       

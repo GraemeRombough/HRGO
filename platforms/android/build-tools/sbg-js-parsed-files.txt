@@ -10,6 +10,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-article-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/connect-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/search-page-utility.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/sec34-notifications-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/my-team.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/test-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/code/navComponents.js
