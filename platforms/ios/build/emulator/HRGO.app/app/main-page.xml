@@ -1,8 +1,11 @@
 <Page loaded="pageLoaded">
-  <ActionBar title="Home" class="action-bar"></ActionBar>
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <StackLayout row="0" orientation="vertical" width="100%">
-    <label class="HeaderLabel" text="Home"/>
+    <GridLayout columns="*,60" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" text="Home"/>
+      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
+    </GridLayout>
     <StackLayout orientation="horizontal" class="SearchBar">
       <Button col="0" class="SearchBar_Button" tap="searchLanding">
           <FormattedString>
@@ -12,13 +15,29 @@
       <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
     </StackLayout>
       <StackLayout width="100%" orientation="vertical">
-        <GridLayout columns="60,*" class="Home_Utility_Row">
-          <Button class="Home_Utility_Button" tap="goToLanding" col="0">
+        <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
+          <Button class="Home_Utility_Button" tap="goToRefCalc" col="0">
             <FormattedString>
               <Span class="Home_Utility_Icon" text="&#xe93b;"/>
             </FormattedString>
           </Button>
-          <Button class="Home_Utility_Label" text="Pay" col="1"/>
+          <Button class="Home_Utility_Label" text="Reference &amp; Calculators" tap="goToRefCalc" col="1"/>
+        </GridLayout>
+        <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
+          <Button class="Home_Utility_Button" tap="goToConnect" col="0">
+            <FormattedString>
+              <Span class="Home_Utility_Icon" text="&#xe972;"/>
+            </FormattedString>
+          </Button>
+          <Button class="Home_Utility_Label" text="Connect" tap="goToConnect" col="1"/>
+        </GridLayout>
+        <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
+          <Button class="Home_Utility_Button" tap="goToWalkthroughs" col="0">
+            <FormattedString>
+              <Span class="Home_Utility_Icon" text="&#xe9b9;"/>
+            </FormattedString>
+          </Button>
+          <Button class="Home_Utility_Label" text="Walkthroughs" tap="goToRefCalc" col="1"/>
         </GridLayout>
       </StackLayout>
     </StackLayout>

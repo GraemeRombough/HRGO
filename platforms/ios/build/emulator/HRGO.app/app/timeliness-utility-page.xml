@@ -1,0 +1,38 @@
+
+<Page loaded="pageLoaded">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <StackLayout row="0" orientation="vertical" width="100%">
+    <GridLayout columns="*,60" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" text="Time Approval Calculator"/>
+      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
+    </GridLayout>
+<ScrollView>
+    <StackLayout orientation="vertical">
+      <label class="DayCalc_SectionTitle" text="Day of Work"/>
+      <DatePicker loaded="onDatePickerLoaded" date="{{ dayOfWork }}"></DatePicker>
+
+      <label class="DayCalc_StartDate" text="{{ employeeSubmitDate }}"/>
+      <label class="DayCalc_StartDate" text="{{ managerApproveDate }}"/>
+      <label class="DayCalc_StartDate" text="{{ payDate }}"/>
+
+      <Button class="DayCalc_SubmitButton" text="Get Timeliness Cutoffs" tap="calculateTimeliness"/>
+
+      </StackLayout>
+      </ScrollView>
+  </StackLayout>
+      
+    
+    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+      </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>

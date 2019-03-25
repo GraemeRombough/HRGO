@@ -6,6 +6,7 @@ var pageObject;
 var applicationSettings = require("application-settings");
 const Label = require("tns-core-modules/ui/label/").Label;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
+const email = require("nativescript-email");
 
 
 exports.onNavigatingTo = function(args){
@@ -33,7 +34,36 @@ exports.addEmployee = function(args){
     tempTeam.push(newEmployee);
     saveTeamMembers(tempTeam);
     displayTeamMembers(tempTeam);
+    pageData.set("employeeName", "");
+    pageData.set("employeeEmail", "");
+};
+exports.sendEmail = function(args){
+    console.log("Send Email");
+    email.available().then(function(avail){
+        console.log("Email available? " + avail);
+    });
+    var eSubject = pageData.get("emailSubject");
+    var eBody = pageData.get("emailBody");
+    var toAddress = [];
+    var team = getTeamMembers();
+    for(i=0; i<team.length; i++){
+        toAddress.push(team[i].empEmail);
+    };
 
+    if(eSubject){
+        if (email.available()){
+            email.compose({
+                subject: eSubject,
+                body: eBody,
+                to: toAddress
+            });
+        } else {
+            console.log("Email Not Available");
+        }
+    } else {
+        console.log("Subject field blank");
+    }
+    console.log(toAddress);
 };
 var getTeamMembers = function(){
     var teamMemberPull;
@@ -44,9 +74,11 @@ var getTeamMembers = function(){
         else {
             //Only to add testing value, otherwise set null
             var teamMembers = [];
-            teamMembers[0] = {empName: "Person 1", empEmail: "Email 1"};
-            teamMembers[1] = {empName: "Person 2", empEmail: "Email 2"};
-            teamMembers[2] = {empName: "Person 3", empEmail: "Email 3"};
+            teamMembers[0] = {empName: "Graeme Rombough", empEmail: "graeme_rombough@hotmail.com"};
+            teamMembers[1] = {empName: "Danielle Morneault", empEmail: "Danielle.Morneault@forces.gc.ca"};
+            teamMembers[2] = {empName: "Julie Albert", empEmail: "Julie.Albert@forces.gc.ca"};
+            teamMembers[3] = {empName: "Leo Fleischer", empEmail: "Leonard.Fleischer@forces.gc.ca"};
+            teamMembers[4] = {empName: "Diana Scheper", empEmail: "Diana.Scheper@forces.gc.ca"};
             teamMemberPull = JSON.stringify(teamMembers);
         };
     var teamMemberReturn = JSON.parse(teamMemberPull);
@@ -66,8 +98,13 @@ var displayTeamMembers = function(membersToDisplay){
     // create dynamic content
     for(i = 0; i < teamMembers.length; i++){
         var teamMemberLabel = new Label;
-        teamMemberLabel.text = teamMembers[i].empName + " ( " + teamMembers[i].empEmail + " )";
+        var teamMemberEmail = new Label;
+        teamMemberLabel.text = teamMembers[i].empName;
+        teamMemberLabel.className = "Utility_MyTeam_TeamName";
+        teamMemberEmail.text = "  [" + teamMembers[i].empEmail + "]";
+        teamMemberEmail.className = "Utility_MyTeam_TeamEmail";
         teamStack.addChild(teamMemberLabel);
+        teamStack.addChild(teamMemberEmail);
     };
 };
 

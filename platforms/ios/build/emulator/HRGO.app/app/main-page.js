@@ -8,17 +8,30 @@ exports.pageLoaded = function(args) {
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("landing-page");
-
-
 }
+exports.goToRefCalc = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("calculators-landing-page");
+};
+exports.goToConnect = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("connect-landing-page");
+};
+exports.switchToFrench = function(){
+    var topmost = frameModule.topmost();
+    var pageDetails = String(topmost.currentPage).split("///");
+    var frenchPageTitle = pageDetails[1].split("/")[1].split(".")[0] + "_FR";
+    console.log(frenchPageTitle);
+    topmost.navigate(frenchPageTitle);
+};
 exports.goToTest = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("my-team");
+    topmost.navigate("dynamic-walkthrough-page");
     
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("workdays-utility-page");
+    topmost.navigate("profile-page");
     
 }
 exports.footer4 = function(){

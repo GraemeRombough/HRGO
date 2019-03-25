@@ -2,9 +2,15 @@
 button{
     background-color: #FFF;
     border-color: transparent;
-    border-width: 1;
+    border-width: 1px;
     box-shadow: none;
     margin: 0px;
+    padding: 0px;
+    height:auto;
+    vertical-align: middle;
+}
+.action-bar{
+    text-align: center;
 }
 .Home_NavButton{
     margin:5px;
@@ -26,7 +32,7 @@ button{
 }
 .Home_Utility_Icon{
     font-family: "icomoon"; 
-    font-size: 40pt;
+    font-size: 36px;
     background-color: #FFF;
     text-align: center;
     color: #284162;
@@ -37,10 +43,12 @@ button{
     white-space: normal;
     text-align: center;
     background-color: #FFF;
-    font-size: 30pt;
+    font-size: 26px;
 }
 .Home_Utility_Row{
-    height: 42pt;
+    height: auto;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-bottom-width: 1px;
     border-bottom-color: #284162;
 }
@@ -286,5 +294,45 @@ button{
     font-weight: bold;
     text-align: left;
     margin-left: 5px;
+}
+
+.Utility_TextBox{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    width: 100%;
+    color: #284162;
+    border-width: 3px;
+    border-color: #284162;
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.Utility_LongText{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    width: 100%;
+    height: 320px;
+    color: #284162;
+    border-width: 3px;
+    border-color: #284162;
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.Utility_MyTeam_TeamList{
+    padding-left: 48px;
+}
+.Utility_MyTeam_TeamName{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: normal;
+    color: #284162;
+}
+.Utility_MyTeam_TeamEmail{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    white-space: normal;
+    color: #284162;
 }
 /* Your CSS goes here */

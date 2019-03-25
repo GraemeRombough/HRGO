@@ -26,7 +26,7 @@ exports.switchToFrench = function(){
 };
 exports.goToTest = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("walkthrough-page");
+    topmost.navigate("dynamic-walkthrough-page");
     
 }
 exports.footer3 = function(){
