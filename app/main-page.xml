@@ -37,7 +37,7 @@
               <Span class="Home_Utility_Icon" text="&#xe9b9;"/>
             </FormattedString>
           </Button>
-          <Button class="Home_Utility_Label" text="Walkthroughs" col="1"/>
+          <Button class="Home_Utility_Label" text="Walkthroughs" col="1" tap="goToWalkthroughs"/>
         </GridLayout>
       </StackLayout>
     </StackLayout>

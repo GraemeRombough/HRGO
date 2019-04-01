@@ -17,6 +17,10 @@ exports.goToConnect = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("connect-landing-page");
 };
+exports.goToWalkthroughs = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate("walkthroughs-landing-page");
+}
 exports.switchToFrench = function(){
     var topmost = frameModule.topmost();
     var pageDetails = String(topmost.currentPage).split("///");
