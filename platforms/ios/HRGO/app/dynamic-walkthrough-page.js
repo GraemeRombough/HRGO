@@ -56,6 +56,7 @@ exports.swipeGestureSwitch = function(args){
 var getSlides = function(){
     var allSlides = [];
     var dbReturn = getFromDatabase(7);
+    pageData.set("walkthroughTitle", dbReturn[0].Title);
     var splitStepsTitle = dbReturn[0].Content.split("<*Step_Title*>");
     console.log(splitStepsTitle[1]);
     for(i=1; i<splitStepsTitle.length; i++){
