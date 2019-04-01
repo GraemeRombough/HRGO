@@ -8,15 +8,22 @@ const Button = require("tns-core-modules/ui/button/").Button;
 const observable = require("data/observable");
 const ActionBar = require("tns-core-modules/ui/action-bar/").ActionBar;
 const pageData = new observable.Observable();
-var articleReference;
+var pageObject;
+var walkthroughSlides;
 var stepNumber = 1;
+var maxSteps = 0;
 
 exports.pageLoaded = function(args) {
     const page = args.object;
-    pageData.set("ActionBarTitle", "Walkthrough");
+    //pageData.set("ActionBarTitle", "Walkthrough");
     //articleReference=page.navigationContext;
     //page.content = myActionBar;
-    page.content = createMainGrid();
+    //page.content = createMainGrid();
+    page.bindingContext = pageData;  
+    pageObject = page;
+    walkthroughSlides = getSlides();
+    setSlide(stepNumber - 1);
+    
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -27,134 +34,79 @@ exports.goToHome = function(){
     topmost.navigate("main-page");  
 }
 exports.previousSlide = function(){
-
+    if(stepNumber > 1){
+        stepNumber--;
+        setSlide(stepNumber - 1);
+    }
 }
 exports.nextSlide = function(){
-    var topmost = frameModule.topmost();
-    topmost.navigate("walkthrough-page-1");
-}
-var createMainGrid = function()
-{
-    var gridLayout = new layout.GridLayout();
-    layout.GridLayout.setRow(createWalkthrough(), 0);
-    layout.GridLayout.setRow(createFooterNav(), 1);
-    gridLayout.addChild(createWalkthrough());
-    gridLayout.addChild(createFooterNav());
-    var contentRow = new layout.ItemSpec(1, layout.GridUnitType.STAR);
-    var footerRow = new layout.ItemSpec(60, layout.GridUnitType.PIXEL);  
-    gridLayout.addRow(contentRow);
-    gridLayout.addRow(footerRow);
-    return gridLayout;
-}
-var createWalkthrough = function(){
-    var completeWalkthrough = new StackLayout;
-    var contentSection = new ScrollView;
-    var navSection = new layout.GridLayout;
-    contentSection = createStep();    
-
-    return contentSection;
-    
-}
-var createStep = function(){
-    var stepSection = new ScrollView;
-    var walkthroughStack = [];
-    walkthroughStack.push(new StackLayout);
-    var stepIndex = 0;
-    var LabelArray = [];  
-    var curWalkthroughText = getWalkthroughText("7","ENG");
-    
-    var walkthroughItemSplit;
-    console.log("curWalkthroughText: " + curWalkthroughText);
-    var walkthroughComponents = curWalkthroughText.split("<*");
-
-    for (z=0; z<walkthroughComponents.length; z++){
-        walkthroughItemSplit = walkthroughComponents[z].split("*>");
-        if (walkthroughItemSplit[0] == "Walkthrough_Image"){
-            var topImg = new Image();
-            topImg.imageSource = "~/images/" + walkthroughItemSplit[1] + ".jpg";
-            topImg.stretch = "aspectFill";
-            topImg.className = walkthroughItemSplit[0];
-            walkthroughStack[stepIndex].addChild(topImg);
-            console.log("Image Added");
-            walkthroughItemSplit.length = 0;
-        }else if(walkthroughItemSplit[0] == "Walkthrough_H1"){
-            if(walkthroughStack.length != 1){
-            walkthroughStack.push(new StackLayout);
-            stepIndex++;
-            }
-            var stepLabel = new Label();
-            stepLabel.text = walkthroughItemSplit[1];
-            stepLabel.className = walkthroughItemSplit[0];
-            stepLabel.textWrap = true;
-            walkthroughStack[stepIndex].addChild(stepLabel);
-            console.log("Header Added");
-            walkthroughItemSplit.length = 0;
-        }else {
-            var stepLabel = new Label();
-            stepLabel.text = walkthroughItemSplit[1];
-            stepLabel.className = walkthroughItemSplit[0];
-            stepLabel.textWrap = true;
-            walkthroughStack[stepIndex].addChild(stepLabel);
-            console.log("Label Added");
-            walkthroughItemSplit.length = 0;
-        }
-        /* walkthroughStack.addChild();
-        LabelArray.push(new Label());
-        LabelArray[z].className = walkthroughItemSplit[0];
-        LabelArray[z].text = walkthroughItemSplit[1]; */
+    if(stepNumber < maxSteps){
+        stepNumber++;
+        setSlide(stepNumber - 1);
     }
-    stepSection.content = walkthroughStack[0];
-    return stepSection;
     
 }
-var createFooterNav = function()
-{
-    const footerStack = new StackLayout();
-    // Set the orientation property
-    footerStack.orientation = "horizontal";
-    footerStack.row = 1;
-    footerStack.className = "FooterNav";
-    // >> (hide)
-    const fNav1 = new Button();
-    fNav1.className = "Footer_NavIcon";
-    fNav1.text = String.fromCharCode(0xe902);
-    fNav1.width = "20%";
-    fNav1.tap = "goToHome";
-    // << (hide)
-    const fNav2 = new Button();
-    fNav2.className = "Footer_NavIcon";
-    fNav2.text = String.fromCharCode(0xe904);
-    fNav2.width = "20%";
-    fNav2.tap = "goToHome";
+var getSlides = function(){
+    var allSlides = [];
+    
+    //SET CONTENT FOR STEP
+    var stepTitle = new Label;
+    var stepImage = new Image;
+    var stepDesc = new Label;
+    stepTitle.text = "Step 1";
+    stepTitle.className = "Article_H1";
+    stepImage.src = "~/images/1_001.jpg";
+    stepImage.stretch = "aspectFill";
+    stepImage.className = "Walkthrough_Image"; 
+    stepDesc.text = "Using the menu at the top of the pay system, select Self Service > Time Reporting > Report Time > Timesheet.";
+    stepDesc.className = "Article_Body";
+    var stepSlide = {Title:stepTitle, Image:stepImage, Desc:stepDesc};
+    allSlides.push(stepSlide);
 
-    const fNav3 = new Button();
-    fNav3.className = "Footer_NavIcon";
-    fNav3.text = String.fromCharCode(0xe994);
-    fNav3.width = "20%";
-    fNav3.tap = "goToHome";
+    stepTitle = new Label;
+    stepImage = new Image;
+    stepDesc = new Label;
+    
+    stepTitle.text = "Step 2";
+    stepTitle.className = "Article_H1";
+    stepImage.src = "~/images/1_002.jpg";
+    stepImage.stretch = "aspectFill";
+    stepImage.className = "Walkthrough_Image"; 
+    stepDesc.text = "Enter the time worked into the calendar.";
+    stepDesc.className = "Article_Body";
+    stepSlide = {Title:stepTitle, Image:stepImage, Desc:stepDesc};
+    allSlides.push(stepSlide);
 
-    const fNav4 = new Button();
-    fNav4.className = "Footer_NavIcon";
-    fNav4.text = String.fromCharCode(0xe945);
-    fNav4.width = "20%";
-    fNav4.tap = "goToHome";
+    stepTitle = new Label;
+    stepImage = new Image;
+    stepDesc = new Label;
 
-    const fNav5 = new Button();
-    fNav5.className = "Footer_NavIcon";
-    fNav5.text = String.fromCharCode(0xe953);
-    fNav5.width = "20%";
-    fNav5.tap = "goToHome";
+    stepTitle.text = "Step 3";
+    stepTitle.className = "Article_H1";
+    stepImage.src = "~/images/1_003.jpg";
+    stepImage.stretch = "aspectFill";
+    stepImage.className = "Walkthrough_Image"; 
+    stepDesc.text = "Select the Time Reporting Code for Overtime.";
+    stepDesc.className = "Article_Body";
+    stepSlide = {Title:stepTitle, Image:stepImage, Desc:stepDesc};
+    allSlides.push(stepSlide);
 
-    // Add views to stack layout
-    footerStack.addChild(fNav1);
-    footerStack.addChild(fNav2);
-    footerStack.addChild(fNav3);
-    footerStack.addChild(fNav4);
-    footerStack.addChild(fNav5);
-    // << stack-layout-code-behind
+    console.log(allSlides.length);
 
-    return footerStack;
+    maxSteps = allSlides.length;
+    return allSlides;
+    
 }
+var setSlide = function(slideID){ 
+    
+    var displaySlide = pageObject.getViewById("stepContent");
+    displaySlide.removeChildren();
+    displaySlide.addChild(walkthroughSlides[slideID].Title);
+    displaySlide.addChild(walkthroughSlides[slideID].Image);
+    displaySlide.addChild(walkthroughSlides[slideID].Desc);
+}
+
+
 var getFromDatabase = function(){
     //returnedItem = {Ref:"", BusinessLine:"", Category:"", Title:"", Type:"", Content:""};
     var returnedItem;

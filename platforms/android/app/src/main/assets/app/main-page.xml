@@ -6,14 +6,14 @@
       <label col="0" row="0" text="Home"/>
       <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
     </GridLayout>
-    <StackLayout orientation="horizontal" class="SearchBar">
+    <!--<StackLayout orientation="horizontal" class="SearchBar">
       <Button col="0" class="SearchBar_Button" tap="searchLanding">
           <FormattedString>
             <Span text="&#xe986;"/>
           </FormattedString>
       </Button>
       <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
-    </StackLayout>
+    </StackLayout>-->
       <StackLayout width="100%" orientation="vertical">
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="goToRefCalc" col="0">
@@ -37,7 +37,7 @@
               <Span class="Home_Utility_Icon" text="&#xe9b9;"/>
             </FormattedString>
           </Button>
-          <Button class="Home_Utility_Label" text="Walkthroughs" tap="goToRefCalc" col="1"/>
+          <Button class="Home_Utility_Label" text="Walkthroughs" col="1"/>
         </GridLayout>
       </StackLayout>
     </StackLayout>
