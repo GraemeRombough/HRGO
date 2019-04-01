@@ -9,7 +9,7 @@
 
     <!--<StackLayout row="1" orientation="vertical" width="100%">  -->
   <!-- STEP CONTENT  -->
-    <ScrollView row="1">
+    <ScrollView row="1" swipe="swipeGestureSwitch">
       <StackLayout id="stepContent">  
         <Label class="Article_H1" text="Step 1"/>
         <Image src="~/images/1_1.jpg" stretch="aspectFill" class="Walkthrough_Image" ></Image>
@@ -21,7 +21,7 @@
   <!-- BOTTOM SLIDER CONTROL -->
   <GridLayout columns="40,*,40" row="2">
     <Button text="<" tap="previousSlide" col="0"/>
-    <label text="Step 1" col="1" style="text-align:center;"/>
+    <label text="{{ stepNavText }}" col="1" style="text-align:center;"/>
     <Button text=">" tap="nextSlide" col="2"/>
   </GridLayout>
 
