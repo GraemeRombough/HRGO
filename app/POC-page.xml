@@ -4,7 +4,7 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <label class="HeaderLabel" text="Point of Contact"/>
     <StackLayout orientation="horizontal" class="SearchBar">
-      <Button col="0" class="SearchBar_Button" tap="searchLanding">
+      <Button col="0" class="SearchBar_Button" tap="searchPOC">
           <FormattedString>
             <Span text="&#xe986;"/>
           </FormattedString>
@@ -12,7 +12,7 @@
       <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
     </StackLayout>
     <ScrollView orientation="vertical">
-    <StackLayout>
+    <StackLayout id="POC_List">
     <!-- Layout for individual POC -->
      <GridLayout class="POC_Grid" rows="auto,auto,auto,auto" columns="*, 60">
       <label class="POC_H1" row="0" col="0" text="PSPC Call Center" />
