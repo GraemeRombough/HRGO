@@ -4,7 +4,7 @@
 		"/Users/graemerombough/HRGO/app/.DS_Store": "8165fe8a76582e88a1f1a8faa54a7bf16ec99b7a",
 		"/Users/graemerombough/HRGO/app/CODE_OF_CONDUCT.md": "3d921a467f0dc791385eb1d5db82d88e11d620e0",
 		"/Users/graemerombough/HRGO/app/LICENSE": "335b9d849600792946ffbd01f3617100fbd6e107",
-		"/Users/graemerombough/HRGO/app/POC-page.js": "eb7daae4ef0da45a7d299ce2860e88491057c2e3",
+		"/Users/graemerombough/HRGO/app/POC-page.js": "6407e5f2c9d00dad2697d91172595215d71b6a0c",
 		"/Users/graemerombough/HRGO/app/POC-page.xml": "ce19ea30a69e4b07a04d2cb982d6af88a6cf2828",
 		"/Users/graemerombough/HRGO/app/README.md": "c6d550a2f77eb68587dea464b008d9216fa7790d",
 		"/Users/graemerombough/HRGO/app/app-root.xml": "f6c5de4e5231a8059b8a21e8c5e6957894366c47",
@@ -73,14 +73,14 @@
 		"/Users/graemerombough/HRGO/app/images/1_2.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
 		"/Users/graemerombough/HRGO/app/images/1_3.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
 		"/Users/graemerombough/HRGO/app/images/apple.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
-		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_2.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
 		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_1.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
+		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_2.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
 		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_3.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01"
 	},
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": false,
-	"time": "Mon Apr 01 2019 21:40:26 GMT-0400 (EDT)",
+	"time": "Mon Apr 01 2019 21:41:14 GMT-0400 (EDT)",
 	"changesRequireBuildTime": "Sun Mar 24 2019 21:04:37 GMT-0400 (EDT)",
 	"projectFileHash": "88d78aa100d41725dabf67d5d563c2ff9cd8cade1b1d869f3555a285766dff33"
 }
