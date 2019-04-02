@@ -32,8 +32,8 @@
 		"/Users/graemerombough/HRGO/app/images/walkthroughs/.DS_Store": "092f3ac5d5be574b3b90aa25790bb2994977690a",
 		"/Users/graemerombough/HRGO/app/landing-page.js": "eed32f3669eaaf68d381cf343bd073592f0ef7c1",
 		"/Users/graemerombough/HRGO/app/landing-page.xml": "0f0aa2290734efb36cdd8e819cc738a7ff22e445",
+		"/Users/graemerombough/HRGO/app/main-page.js": "48625e34b9831579d32bf5f31b546348ea37dc1d",
 		"/Users/graemerombough/HRGO/app/main-page.xml": "603524287e51fa0cca1c92b2ea98b269f9740097",
-		"/Users/graemerombough/HRGO/app/main-page.js": "1915e1dd399d2712de4684a84e17458d9b478b65",
 		"/Users/graemerombough/HRGO/app/main-page_FR.js": "df87bbcb719dca6206c2e141d3c1a5c7eda22f50",
 		"/Users/graemerombough/HRGO/app/main-page_FR.xml": "3e47d517ac6afcec3a832645952cf494d7f43123",
 		"/Users/graemerombough/HRGO/app/main-page_arch.js": "83ef637f1555fecf6468b3c00c8098cbc6b13abb",
@@ -69,18 +69,18 @@
 		"/Users/graemerombough/HRGO/app/fonts/icons.ttf": "fc05de31234e0090f7ddc28ce1b23af4026cb1da",
 		"/Users/graemerombough/HRGO/app/images/1_003.jpg": "5d03bd8af9a7dcf18be314ebf070279142810b45",
 		"/Users/graemerombough/HRGO/app/images/1_002.jpg": "e28eb084cb3028979e827e87c291b32e7828dfe4",
-		"/Users/graemerombough/HRGO/app/images/1_1.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
 		"/Users/graemerombough/HRGO/app/images/1_2.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
-		"/Users/graemerombough/HRGO/app/images/1_3.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
+		"/Users/graemerombough/HRGO/app/images/1_1.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
 		"/Users/graemerombough/HRGO/app/images/apple.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
+		"/Users/graemerombough/HRGO/app/images/1_3.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
 		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_1.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
-		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_3.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
-		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_2.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01"
+		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_2.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01",
+		"/Users/graemerombough/HRGO/app/images/walkthroughs/1_3.jpg": "c033a7a48829675b73f5d1db5360ffd53a737e01"
 	},
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": false,
-	"time": "Sun Mar 31 2019 22:43:51 GMT-0400 (EDT)",
+	"time": "Sun Mar 31 2019 22:46:46 GMT-0400 (EDT)",
 	"changesRequireBuildTime": "Sun Mar 24 2019 21:04:37 GMT-0400 (EDT)",
 	"projectFileHash": "88d78aa100d41725dabf67d5d563c2ff9cd8cade1b1d869f3555a285766dff33"
 }

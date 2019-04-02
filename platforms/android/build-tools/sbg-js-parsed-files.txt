@@ -8,6 +8,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/POC-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/main-page_arch.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-article-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/walkthroughs-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/connect-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/search-page-utility.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/sec34-notifications-page.js

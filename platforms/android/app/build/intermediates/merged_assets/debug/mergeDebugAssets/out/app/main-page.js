@@ -17,6 +17,10 @@ exports.goToConnect = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("connect-landing-page");
 };
+exports.goToWalkthroughs = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate("walkthroughs-landing-page");
+}
 exports.switchToFrench = function(){
     var topmost = frameModule.topmost();
     var pageDetails = String(topmost.currentPage).split("///");
@@ -26,22 +30,22 @@ exports.switchToFrench = function(){
 };
 exports.goToTest = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("walkthrough-page");
+    //topmost.navigate("dynamic-walkthrough-page");
     
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    //topmost.navigate("profile-page");
     
 }
 exports.footer4 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    //topmost.navigate("POC-page");
     
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("pay-info");
+    //topmost.navigate("pay-info");
 }
 exports.searchLanding = function(){
     var searchField = page.getViewById("SearchBox").text;

@@ -1,22 +1,27 @@
 <Page loaded="pageLoaded">
-  <ActionBar title="Overtime" class="action-bar"></ActionBar>
-  <GridLayout rows="40,*,40,60">
-  <label class="HeaderLabel" row="0" text="Training Article"/> 
-  <StackLayout row="1" orientation="vertical" width="100%">   
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="auto,*,40,60">
+    
+    <GridLayout columns="*,60" rows="auto" row="0" class="HeaderLabel">
+      <label col="0" row="0" text="{{ walkthroughTitle }}"/>
+      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
+    </GridLayout>   
+
+    <!--<StackLayout row="1" orientation="vertical" width="100%">  -->
   <!-- STEP CONTENT  -->
-    <ScrollView>
-      <StackLayout>  
+    <ScrollView row="1" swipe="swipeGestureSwitch">
+      <StackLayout id="stepContent">  
         <Label class="Article_H1" text="Step 1"/>
         <Image src="~/images/1_1.jpg" stretch="aspectFill" class="Walkthrough_Image" ></Image>
         <Label textWrap="true" class="Article_Body" text="You can use your myKEY or PKI card to log into Compensation Web Applications"/>       
       </StackLayout> 
     </ScrollView>
-  </StackLayout>
+  <!-- </StackLayout> -->
 
   <!-- BOTTOM SLIDER CONTROL -->
   <GridLayout columns="40,*,40" row="2">
     <Button text="<" tap="previousSlide" col="0"/>
-    <label text="Step 1" col="1" style="text-align:center;"/>
+    <label text="{{ stepNavText }}" col="1" style="text-align:center;"/>
     <Button text=">" tap="nextSlide" col="2"/>
   </GridLayout>
 
@@ -29,7 +34,7 @@
     <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
   </StackLayout>
 
-    </GridLayout>
+  </GridLayout>
 
   <!-- Your UI components go here -->
 </Page>
