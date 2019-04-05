@@ -256,6 +256,7 @@ button{
     margin-bottom:5px;
     white-space: normal;
     color: #333;
+    text-align: left;
 }
 .POC_H1{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

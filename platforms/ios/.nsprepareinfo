@@ -4,11 +4,11 @@
 		"/Users/graemerombough/HRGO/app/.DS_Store": "8165fe8a76582e88a1f1a8faa54a7bf16ec99b7a",
 		"/Users/graemerombough/HRGO/app/CODE_OF_CONDUCT.md": "3d921a467f0dc791385eb1d5db82d88e11d620e0",
 		"/Users/graemerombough/HRGO/app/LICENSE": "335b9d849600792946ffbd01f3617100fbd6e107",
-		"/Users/graemerombough/HRGO/app/POC-page.js": "6407e5f2c9d00dad2697d91172595215d71b6a0c",
-		"/Users/graemerombough/HRGO/app/POC-page.xml": "ce19ea30a69e4b07a04d2cb982d6af88a6cf2828",
+		"/Users/graemerombough/HRGO/app/POC-page.js": "0c6042ee550a429c4f49ca0379704979c2c7cbc1",
+		"/Users/graemerombough/HRGO/app/POC-page.xml": "f29268101261722adfcf3ed081855c81d9aeae2a",
 		"/Users/graemerombough/HRGO/app/README.md": "c6d550a2f77eb68587dea464b008d9216fa7790d",
 		"/Users/graemerombough/HRGO/app/app-root.xml": "f6c5de4e5231a8059b8a21e8c5e6957894366c47",
-		"/Users/graemerombough/HRGO/app/app.css": "ffa5946d6f78e8b063b17cd8ff743c8d6c56d4d5",
+		"/Users/graemerombough/HRGO/app/app.css": "9441ebd40f2afc5feb29b81e874da9dd4b2484e3",
 		"/Users/graemerombough/HRGO/app/app.js": "0163ed8874a99daf48aa643490627e02ee1ed1b0",
 		"/Users/graemerombough/HRGO/app/article-page.js": "b6c1c7dd2b363ffd6e9fd76a6fe2eb998435c3f2",
 		"/Users/graemerombough/HRGO/app/article-page.xml": "ed41e81921bc5912644e5bc8cf51d5c3bdd3733b",
@@ -80,7 +80,7 @@
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": false,
-	"time": "Mon Apr 01 2019 21:41:14 GMT-0400 (EDT)",
+	"time": "Fri Apr 05 2019 10:12:12 GMT-0400 (EDT)",
 	"changesRequireBuildTime": "Sun Mar 24 2019 21:04:37 GMT-0400 (EDT)",
 	"projectFileHash": "88d78aa100d41725dabf67d5d563c2ff9cd8cade1b1d869f3555a285766dff33"
 }
