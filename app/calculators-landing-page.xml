@@ -15,6 +15,9 @@
         <Button class="Landing_SubNav_Compensation" id="2" text="Gross Salary Calculator" tap="goToSalary" visibility="{{ SalaryCalculator ? 'visible' : 'collapsed' }}"/>
       <Button class="Landing_Nav" text="Notification Tools" tap="navToggle" value="Notification"/>
         <Button class="Landing_SubNav_Compensation" id="2" text="Time Approval Notifications" tap="goToUtility" pageName="sec34-notifications-page" visibility="{{ Notification ? 'visible' : 'collapsed' }}"/>
+      <Button class="Landing_Nav" text="Lookup" tap="navToggle" value="Lookup"/>
+        <Button class="Landing_SubNav_Compensation" id="2" text="Leave Code Lookup" tap="goToUtility" pageName="leave-code-page" visibility="{{ Lookup ? 'visible' : 'collapsed' }}"/>
+      
 
     </StackLayout>
   </StackLayout>
