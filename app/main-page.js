@@ -35,7 +35,7 @@ exports.goToTest = function(){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    //topmost.navigate("profile-page");
+    topmost.navigate("profile-page");
     
 }
 exports.footer4 = function(){

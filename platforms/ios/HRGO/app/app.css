@@ -117,6 +117,12 @@ button{
     background-color: #FFF;
     color: #284162;
 }
+.Applicable_Switch{
+    font-size: 20pt; 
+    margin-left:25px;
+    margin-right: 5px;
+    text-align: right;
+}
 /* ARTICLE STYLES*/
 .Article_MainStack{
     overflow: auto;
