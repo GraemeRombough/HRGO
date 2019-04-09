@@ -342,4 +342,17 @@ button{
     white-space: normal;
     color: #284162;
 }
+.Utility_SmallButton{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #284162;
+    margin-bottom:14px;
+    margin-top: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-color: #284162;
+}
 /* Your CSS goes here */

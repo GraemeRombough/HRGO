@@ -14,27 +14,18 @@ exports.pageLoaded = function(args) {
     page.bindingContext = pageData;
     checkLanguage();
 };
-exports.setNotification = function(){
-    //console.log(pageData.get("date"));
-    //console.log(pageData.get("mondayCheck"));
-    addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
-};
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
-    
+    topmost.navigate("main-page"); 
 };
 exports.saveProfile = function(){
-    console.log(pageData.get("preferredLanguage"));
-        
+    console.log(pageData.get("preferredLanguage"));    
     var selectedLanguage;
-
     if(pageData.get("preferredLanguage") == true){
         selectedLanguage = "French";
     }else{
         selectedLanguage = "English";
     };
-    
     console.log("SaveProfile: " + selectedLanguage);
     if(pageData.get("preferredLanguage")){
         applicationSettings.setString("PreferredLanguage", selectedLanguage);
@@ -42,11 +33,8 @@ exports.saveProfile = function(){
     if(pageData.get("workEmail")){
         applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
     }
-    
 };
-
-var checkLanguage = function(){
-    
+var checkLanguage = function(){   
     if(applicationSettings.hasKey("PreferredLanguage")){
         console.log(applicationSettings.getString("PreferredLanguage"));
         var existingLanguage;
@@ -59,11 +47,8 @@ var checkLanguage = function(){
     }else{
         pageData.set("preferredLanguage", false);
     }
-
     if(applicationSettings.hasKey("WorkEmail")){
         pageData.set("workEmail", applicationSettings.getString("WorkEmail"));
     }
-
-
 };
 
