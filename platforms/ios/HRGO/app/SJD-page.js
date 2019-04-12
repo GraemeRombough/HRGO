@@ -7,6 +7,7 @@ const ScrollView = require("tns-core-modules/ui/scroll-view/").ScrollView;
 const Label = require("tns-core-modules/ui/label/").Label;
 const Button = require("tns-core-modules/ui/button/").Button;
 const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
+var applicationSettings = require("application-settings");
 var pageData = new observable.Observable();
 const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 var classDD;
@@ -147,11 +148,15 @@ var createSJDGrid = function(SJD_t, SJD_s, SJD_c, SJD_d, SJD_l){
 
 };
 var sendSJDLink = function(eventData){
+    var workEmail = "";
+    if(applicationSettings.hasKey("WorkEmail")){
+        workEmail = applicationSettings.getString("WorkEmail");
+    }
     if (email.available()){
         email.compose({
             subject: "A link to " + eventData.object.title,
             body: eventData.object.link,
-            to:""
+            to: workEmail
         });
     } else {
         console.log("Email Not Available");
