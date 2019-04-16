@@ -30,7 +30,7 @@ exports.switchToFrench = function(){
 };
 exports.goToTest = function(){
     var topmost = frameModule.topmost();
-    //topmost.navigate("dynamic-walkthrough-page");
+    topmost.navigate("landing-page");
     
 }
 exports.footer3 = function(){
