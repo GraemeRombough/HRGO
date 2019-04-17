@@ -1,10 +1,10 @@
 <Page loaded="pageLoaded">
-  <ActionBar title="Points of Contact" class="action-bar"></ActionBar>
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <StackLayout row="0" orientation="vertical" width="100%">
     <label class="HeaderLabel" text="Point of Contact"/>
     <StackLayout orientation="horizontal" class="SearchBar">
-      <Button col="0" class="SearchBar_Button" tap="searchLanding">
+      <Button col="0" class="SearchBar_Button" tap="searchPOC">
           <FormattedString>
             <Span text="&#xe986;"/>
           </FormattedString>
@@ -12,57 +12,8 @@
       <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
     </StackLayout>
     <ScrollView orientation="vertical">
-    <StackLayout>
+    <StackLayout id="POC_List">
     <!-- Layout for individual POC -->
-     <GridLayout class="POC_Grid" rows="auto,auto,auto,auto" columns="*, 60">
-      <label class="POC_H1" row="0" col="0" text="PSPC Call Center" />
-      <label class="POC_Icon" row="0" col="1" text="&#xe93b;"/>
-      <label class="POC_Phone" row="1" col="0" colSpan="2" text="Phone: 1-888-HRTOPAY"/>
-      <label class="POC_Phone" row="2" col="0" colSpan="2" text="Email: PAY@Canada.ca"/>
-      <label class="POC_Body" row="3" col="0" colSpan="2" text="Description: You can contact the Public Service Pay Center (PSPC) as your first stop for any pay related issues."/>
-    </GridLayout>
-    <GridLayout class="POC_Grid" rows="auto,auto,auto,auto" columns="*, 60">
-      <label class="POC_H1" row="0" col="0" text="HRSS Support Line" />
-      <label class="POC_Icon" row="0" col="1" text="&#xe93b;"/>
-      <label class="POC_Phone" row="1" col="0" colSpan="2" text="Phone: 1-833-747-6363"/>
-      <label class="POC_Phone" row="2" col="0" colSpan="2" text="Email: P.OTG.NationalCompensation@forces.gc.ca"/>
-      <label class="POC_Body" row="3" col="0" colSpan="2" text="Description: The Human Resources Services and Support (HRSS) hotline can be contacted for technical issues related to the HRSS system."/>
-    </GridLayout>
-    <GridLayout class="POC_Grid" rows="auto,auto,auto,auto" columns="*, 60">
-      <label class="POC_H1" row="0" col="0" text="Section 34 Manager Support Line" />
-      <label class="POC_Icon" row="0" col="1" text="&#xe93b;"/>
-      <label class="POC_Phone" row="1" col="0" colSpan="2" text="Phone: 1-833-747-6363"/>
-      <label class="POC_Phone" row="2" col="0" colSpan="2" text="Email: P.OTG.NationalCompensation@forces.gc.ca"/>
-      <label class="POC_Body" row="3" col="0" colSpan="2" text="Description: If you are a Section 34 Manager experiencing issues with time approval related tasks, agents at this hotline can help walk through your issues."/>
-    </GridLayout>
-    <GridLayout class="POC_Grid" rows="auto,auto,auto" columns="*, 60">
-      <label class="POC_H1" row="0" col="0" text="Ask DCEP" />
-      <label class="POC_Icon" row="0" col="1" text="&#xe972;"/>
-      <!-- <label class="POC_Phone" row="1" col="0" colSpan="2" text="Phone: 1-888-HRTOPAY"  /> -->
-      <label class="POC_Phone" row="1" col="0" colSpan="2" text="Email: P.OTGAskDCEP@forces.gc.ca"/>
-      <label class="POC_Body" row="2" col="0" colSpan="2" text="Description: The AskDCEP mailbox can be contacted for any questions related to staffing policy or the Public Service Resourcing System (PSRS)."/>
-    </GridLayout>
-    <GridLayout class="POC_Grid" rows="auto,auto,auto,auto" columns="*, 60">
-      <label class="POC_H1" row="0" col="0" text="PSPC Call Center" />
-      <label class="POC_Phone" row="1" col="0" colSpan="2" text="Phone: 1-888-HRTOPAY"/>
-      <label class="POC_Phone" row="2" col="0" colSpan="2" text="Email: PAY@Canada.ca"/>
-      <label class="POC_Body" row="3" col="0" colSpan="2" text="Description: You can contact the Public Service Pay Center (PSPC) as your first stop for any pay related issues."/>
-    </GridLayout>
-    <GridLayout class="POC_Grid" rows="auto,auto,auto,auto" columns="*, 60">
-      <label class="POC_H1" row="0" col="0" text="PSPC Call Center" />
-      <label class="POC_Phone" row="1" col="0" colSpan="2" text="Phone: 1-888-HRTOPAY"/>
-      <label class="POC_Phone" row="2" col="0" colSpan="2" text="Email: PAY@Canada.ca"/>
-      <label class="POC_Body" row="3" col="0" colSpan="2" text="Description: You can contact the Public Service Pay Center (PSPC) as your first stop for any pay related issues."/>
-    </GridLayout>
-
-
-
-
-
-
-
-
-
     </StackLayout>
     </ScrollView>
   </StackLayout>

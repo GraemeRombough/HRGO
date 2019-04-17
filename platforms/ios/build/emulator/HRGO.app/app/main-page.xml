@@ -1,44 +1,63 @@
 <Page loaded="pageLoaded">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
-  <GridLayout rows="*,60">
+  <GridLayout rows="*,auto">
   <StackLayout row="0" orientation="vertical" width="100%">
-    <GridLayout columns="*,60" rows="auto" class="HeaderLabel">
-      <label col="0" row="0" text="Home"/>
-      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
+    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe902;"/>
+      <label col="1" row="0" text="HOME" class="Header_Label"/>
     </GridLayout>
-    <StackLayout orientation="horizontal" class="SearchBar">
+    <!--<StackLayout orientation="horizontal" class="SearchBar">
       <Button col="0" class="SearchBar_Button" tap="searchLanding">
           <FormattedString>
             <Span text="&#xe986;"/>
           </FormattedString>
       </Button>
       <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
-    </StackLayout>
+    </StackLayout>-->
       <StackLayout width="100%" orientation="vertical">
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
-          <Button class="Home_Utility_Button" tap="goToRefCalc" col="0">
+          <Button class="Home_Utility_Button" tap="navToggle" value="Resources" col="0">
             <FormattedString>
-              <Span class="Home_Utility_Icon" text="&#xe93b;"/>
+              <Span class="Home_Utility_Icon" text="&#xe904;"/>
             </FormattedString>
           </Button>
-          <Button class="Home_Utility_Label" text="Reference &amp; Calculators" tap="goToRefCalc" col="1"/>
+          <Button class="Home_Utility_Label" text="My Resources" tap="navToggle" value="Resources" col="1"/>
         </GridLayout>
+        <Button class="Main_Nav_SubLine" text="Pay" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Student Hiring" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Flexible Work Arrangements" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
-          <Button class="Home_Utility_Button" tap="goToConnect" col="0">
+          <Button class="Home_Utility_Button" tap="navToggle" value="Contact" col="0">
             <FormattedString>
-              <Span class="Home_Utility_Icon" text="&#xe972;"/>
+              <Span class="Home_Utility_Icon" text="&#xe923;"/>
             </FormattedString>
           </Button>
-          <Button class="Home_Utility_Label" text="Connect" tap="goToConnect" col="1"/>
+          <Button class="Home_Utility_Label" text="My Contacts" tap="navToggle" value="Contact" col="1"/>
         </GridLayout>
+        <Button class="Main_Nav_SubLine" text="POC List" visibility="{{ Contact ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="My Team Contact" visibility="{{ Contact ? 'visible' : 'collapsed' }}"/>
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
-          <Button class="Home_Utility_Button" tap="goToWalkthroughs" col="0">
+          <Button class="Home_Utility_Button" tap="navToggle" value="Utility" col="0">
             <FormattedString>
-              <Span class="Home_Utility_Icon" text="&#xe9b9;"/>
+              <Span class="Home_Utility_Icon" text="&#xe991;"/>
             </FormattedString>
           </Button>
-          <Button class="Home_Utility_Label" text="Walkthroughs" tap="goToRefCalc" col="1"/>
+          <Button class="Home_Utility_Label" text="My Utilities" col="1" tap="navToggle" value="Utility"/>
         </GridLayout>
+        <Button class="Main_Nav_SubLine" text="Casual Work Day Calculator" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Timeliness Cutoff Calculator" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Gross Salary Calculator" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
+          <Button class="Home_Utility_Button" tap="navToggle" value="Lookup" col="0">
+            <FormattedString>
+              <Span class="Home_Utility_Icon" text="&#xe926;"/>
+            </FormattedString>
+          </Button>
+          <Button class="Home_Utility_Label" text="My Lookup" col="1" tap="navToggle" value="Lookup"/>
+        </GridLayout>
+        <Button class="Main_Nav_SubLine" text="Job Description Lookup" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Leave Code Lookup" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
+        
       </StackLayout>
     </StackLayout>
         <!--

@@ -7,16 +7,22 @@ const layout = require("tns-core-modules/ui/layouts/grid-layout");
 const Button = require("tns-core-modules/ui/button/").Button;
 const observable = require("data/observable");
 const ActionBar = require("tns-core-modules/ui/action-bar/").ActionBar;
+var gestures = require("tns-core-modules/ui/gestures");
 const pageData = new observable.Observable();
-var articleReference;
+var pageObject;
+var walkthroughSlides;
 var stepNumber = 1;
+var maxSteps = 0;
 
 exports.pageLoaded = function(args) {
     const page = args.object;
-    pageData.set("ActionBarTitle", "Walkthrough");
-    //articleReference=page.navigationContext;
-    //page.content = myActionBar;
-    page.content = createMainGrid();
+    page.bindingContext = pageData;  
+    pageObject = page;
+    walkthroughSlides = getSlides();
+    setSlide(stepNumber - 1);
+
+    
+    
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -27,134 +33,65 @@ exports.goToHome = function(){
     topmost.navigate("main-page");  
 }
 exports.previousSlide = function(){
-
+    if(stepNumber > 1){
+        stepNumber--;
+        setSlide(stepNumber - 1);
+    }
 }
 exports.nextSlide = function(){
-    var topmost = frameModule.topmost();
-    topmost.navigate("walkthrough-page-1");
-}
-var createMainGrid = function()
-{
-    var gridLayout = new layout.GridLayout();
-    layout.GridLayout.setRow(createWalkthrough(), 0);
-    layout.GridLayout.setRow(createFooterNav(), 1);
-    gridLayout.addChild(createWalkthrough());
-    gridLayout.addChild(createFooterNav());
-    var contentRow = new layout.ItemSpec(1, layout.GridUnitType.STAR);
-    var footerRow = new layout.ItemSpec(60, layout.GridUnitType.PIXEL);  
-    gridLayout.addRow(contentRow);
-    gridLayout.addRow(footerRow);
-    return gridLayout;
-}
-var createWalkthrough = function(){
-    var completeWalkthrough = new StackLayout;
-    var contentSection = new ScrollView;
-    var navSection = new layout.GridLayout;
-    contentSection = createStep();    
-
-    return contentSection;
-    
-}
-var createStep = function(){
-    var stepSection = new ScrollView;
-    var walkthroughStack = [];
-    walkthroughStack.push(new StackLayout);
-    var stepIndex = 0;
-    var LabelArray = [];  
-    var curWalkthroughText = getWalkthroughText("7","ENG");
-    
-    var walkthroughItemSplit;
-    console.log("curWalkthroughText: " + curWalkthroughText);
-    var walkthroughComponents = curWalkthroughText.split("<*");
-
-    for (z=0; z<walkthroughComponents.length; z++){
-        walkthroughItemSplit = walkthroughComponents[z].split("*>");
-        if (walkthroughItemSplit[0] == "Walkthrough_Image"){
-            var topImg = new Image();
-            topImg.imageSource = "~/images/" + walkthroughItemSplit[1] + ".jpg";
-            topImg.stretch = "aspectFill";
-            topImg.className = walkthroughItemSplit[0];
-            walkthroughStack[stepIndex].addChild(topImg);
-            console.log("Image Added");
-            walkthroughItemSplit.length = 0;
-        }else if(walkthroughItemSplit[0] == "Walkthrough_H1"){
-            if(walkthroughStack.length != 1){
-            walkthroughStack.push(new StackLayout);
-            stepIndex++;
-            }
-            var stepLabel = new Label();
-            stepLabel.text = walkthroughItemSplit[1];
-            stepLabel.className = walkthroughItemSplit[0];
-            stepLabel.textWrap = true;
-            walkthroughStack[stepIndex].addChild(stepLabel);
-            console.log("Header Added");
-            walkthroughItemSplit.length = 0;
-        }else {
-            var stepLabel = new Label();
-            stepLabel.text = walkthroughItemSplit[1];
-            stepLabel.className = walkthroughItemSplit[0];
-            stepLabel.textWrap = true;
-            walkthroughStack[stepIndex].addChild(stepLabel);
-            console.log("Label Added");
-            walkthroughItemSplit.length = 0;
-        }
-        /* walkthroughStack.addChild();
-        LabelArray.push(new Label());
-        LabelArray[z].className = walkthroughItemSplit[0];
-        LabelArray[z].text = walkthroughItemSplit[1]; */
+    if(stepNumber < maxSteps){
+        stepNumber++;
+        setSlide(stepNumber - 1);
     }
-    stepSection.content = walkthroughStack[0];
-    return stepSection;
     
 }
-var createFooterNav = function()
-{
-    const footerStack = new StackLayout();
-    // Set the orientation property
-    footerStack.orientation = "horizontal";
-    footerStack.row = 1;
-    footerStack.className = "FooterNav";
-    // >> (hide)
-    const fNav1 = new Button();
-    fNav1.className = "Footer_NavIcon";
-    fNav1.text = String.fromCharCode(0xe902);
-    fNav1.width = "20%";
-    fNav1.tap = "goToHome";
-    // << (hide)
-    const fNav2 = new Button();
-    fNav2.className = "Footer_NavIcon";
-    fNav2.text = String.fromCharCode(0xe904);
-    fNav2.width = "20%";
-    fNav2.tap = "goToHome";
-
-    const fNav3 = new Button();
-    fNav3.className = "Footer_NavIcon";
-    fNav3.text = String.fromCharCode(0xe994);
-    fNav3.width = "20%";
-    fNav3.tap = "goToHome";
-
-    const fNav4 = new Button();
-    fNav4.className = "Footer_NavIcon";
-    fNav4.text = String.fromCharCode(0xe945);
-    fNav4.width = "20%";
-    fNav4.tap = "goToHome";
-
-    const fNav5 = new Button();
-    fNav5.className = "Footer_NavIcon";
-    fNav5.text = String.fromCharCode(0xe953);
-    fNav5.width = "20%";
-    fNav5.tap = "goToHome";
-
-    // Add views to stack layout
-    footerStack.addChild(fNav1);
-    footerStack.addChild(fNav2);
-    footerStack.addChild(fNav3);
-    footerStack.addChild(fNav4);
-    footerStack.addChild(fNav5);
-    // << stack-layout-code-behind
-
-    return footerStack;
+exports.swipeGestureSwitch = function(args){
+    //1 is back a step, 2 is forward
+    if(args.direction == 1){
+        exports.previousSlide();
+    }else if(args.direction == 2){
+        exports.nextSlide();
+    } 
 }
+var getSlides = function(){
+    var allSlides = [];
+    var dbReturn = getFromDatabase(7);
+    pageData.set("walkthroughTitle", dbReturn[0].Title);
+    var splitStepsTitle = dbReturn[0].Content.split("<*Step_Title*>");
+    console.log(splitStepsTitle[1]);
+    for(i=1; i<splitStepsTitle.length; i++){
+        //Sample = <*Step_Title*>xxx<*Step_Image*>yyy.jpg<*Step_Desc*>zzz
+        var stepTitle = new Label;
+        stepTitle.text = splitStepsTitle[i].split("<*")[0];
+        stepTitle.className = "Article_H1";
+        var stepImage = new Image;
+        stepImage.src = splitStepsTitle[i].split("<*Step_Image*>")[1].split("<*")[0];
+        console.log(splitStepsTitle[i].split("<*Step_Image*>")[1].split("<*")[0]);
+        stepImage.stretch = "aspectFill";
+        stepImage.className = "Walkthrough_Image"; 
+        var stepDesc = new Label;
+        stepDesc.text = splitStepsTitle[i].split("<*Step_Desc*>")[1];
+        stepDesc.className = "Article_Body";
+        var stepSlide = {Title:stepTitle, Image:stepImage, Desc:stepDesc};
+        allSlides.push(stepSlide);
+    }
+
+    maxSteps = allSlides.length;
+    return allSlides;
+    
+}
+var setSlide = function(slideID){ 
+    
+    var displaySlide = pageObject.getViewById("stepContent");
+    displaySlide.removeChildren();
+    displaySlide.addChild(walkthroughSlides[slideID].Title);
+    displaySlide.addChild(walkthroughSlides[slideID].Image);
+    displaySlide.addChild(walkthroughSlides[slideID].Desc);
+
+    pageData.set("stepNavText", walkthroughSlides[slideID].Title.text);
+}
+
+
 var getFromDatabase = function(){
     //returnedItem = {Ref:"", BusinessLine:"", Category:"", Title:"", Type:"", Content:""};
     var returnedItem;
@@ -171,7 +108,7 @@ var getFromDatabase = function(){
     contentData.push(returnedItem);
     returnedItem = {Ref:"6", BusinessLine:"Compensation", Category:"Problems With Your Pay", Title:"Priority Payment on Non-Basic Pay", Type:"Article", Content:"<*Article_H1*>Priority Payment on Non-Basic Pay<*Article_Body*>If you are missing non-basic pay, such as an acting, overtime pay or promotion, speak to your manager about obtaining a priority payment.<*Article_Note*>Anyone experiencing regular pay issues should continue to use the normal Emergency Salary Advance (ESA) process. <*Article_Body*>Priority Payment on Non-Basic Pay is a department specific initiative and is meant to ease financial hardship as a result of outstanding or incomplete pay actions, including:<*Article_List*>1. Incorrect salary calculations due to promotion;<*Article_List*>2. Incorrect salary increments;<*Article_List*>3. Substantial overtime pay outstanding; and<*Article_List*>4. Other entitlements<*Article_Note*>Please note, only 66% of approved gross amounts will be paid.<*Article_H2*>How to Submit a Request<*Article_List*>Employees: Learn how to submit a request and your roles and responsibilities.<*Article_List*>S34 Managers: Learn more about your roles and responsibilities throughout the process."};
     contentData.push(returnedItem); */
-    returnedItem = {Ref:"7", BusinessLine:"Compensation", Category:"Your Pay Information", Title:"Entering Overtime", Type:"Walkthrough", Content:"<*Walkthrough_H1*>Step 1<*Walkthrough_Image*>1_001<*Walkthrough_Text*>Using the menu at the top of the pay system, select Self Service > Time Reporting > Report Time > Timesheet.<*Walkthrough_H1*>Step 2<*Walkthrough_Image*>1_002<*Walkthrough_Text*>Enter the time worked into the calendar.<Walkthrough_H1*>Step 3<*Walkthrough_Image*>1_003<*Walkthrough_Text*>Select the Time Reporting Code for Overtime."};
+    returnedItem = {Ref:"7", BusinessLine:"Compensation", Category:"Your Pay Information", Title:"Entering Overtime", Type:"Walkthrough", Content:"<*Step_Title*>Step 1<*Step_Image*>~/images/1_001.jpg<*Step_Desc*>Using the menu at the top of the pay system, select Self Service > Time Reporting > Report Time > Timesheet.<*Step_Title*>Step 2<*Step_Image*>~/images/1_002.jpg<*Step_Desc*>Enter the time worked into the calendar.<*Step_Title*>Step 3<*Step_Image*>~/images/1_003.jpg<*Step_Desc*>Select the Time Reporting Code for Overtime."};
     contentData.push(returnedItem);
     return contentData;
 }
@@ -187,7 +124,7 @@ var getWalkthroughText = function(aID, aLang)
         }
     }
 
-    walkthroughText = "<*Walkthrough_H1*>Step 1<*Walkthrough_Image*>1_001<*Walkthrough_Text*>Using the menu at the top of the pay system, select Self Service > Time Reporting > Report Time > Timesheet.<*Walkthrough_H1*>Step 2<*Walkthrough_Image*>1_002<*Walkthrough_Text*>Enter the time worked into the calendar.<Walkthrough_H1*>Step 3<*Walkthrough_Image*>1_003<*Walkthrough_Text*>Select the Time Reporting Code for Overtime.";
+    walkthroughText = "<*Step_Title*>Step 1<*Step_Image*>1_001<*Step_Desc*>Using the menu at the top of the pay system, select Self Service > Time Reporting > Report Time > Timesheet.<*Step_Title*>Step 2<*Step_Image*>1_002<*Step_Desc*>Enter the time worked into the calendar.<*Step_Title*>Step 3<*Step_Image*>1_003<*Step_Desc*>Select the Time Reporting Code for Overtime.";
     //articleText.push("<*Article_H1*>Overtime<*Article_Body*>Overtime refers to compensation for authorized work performed in excess of the standard daily or weekly hours of work, or on the normal days of rest an employee may be entitled to, pursuant to the provisions of the relevant collective agreement or terms and conditions of employment.<*Article_H2*>Claiming Overtime<*Article_Body*>Instruct your employee to complete the Extra Duty Pay and Shiftwork Report (Form DND 907). To learn how to complete this form, the manager's instructions are found on page 2.<*Article_Note*>Note that certain employees in excluded/ unrepresented positions are not entitled to overtime. In lieu, they may be eligible for management leave. Refer to the Appendix of the Directive on Terms and Conditions of Employment for more information on who is considered an Excluded/Unrepresented Employee.<*Article_H2*>Process Overview: Overtime Approval<*Article_Body*>Overtime must be authorized in advance and approved in accordance with Section 34 of the Financial Administration Act (FAA) and in accordance with the employee's applicable collective agreement. Once the employee has completed the Form DND 907, and it has been authorized accordingly, the original is forwarded to the compensation advisor responsible for the employee's pay, and the copy of Form DND 907 remains with the employee.");
     //articleText.push("<*Article_H1*>Emergency Salary Advance<*Article_H2*>Employee<*Article_Body*>If you require an Emergency Salary Advance (ESA): Tell your manager.<*Article_H2*>Section 34 Manager<*Article_Body*>When an employee requires an ESA: Submit Pay Action Request Form (PAR) with a request for Emergency Salary Advance to the Pay Centre via Trusted Source.<*Article_H2*>Phoenix Emergency Salary Advance Recoveries<*Article_Body*>When you received your ESA, you were informed that: <*Article_List*>1. The amount you received would be recovered after your pay issues were resolved (once you had received the full amount owed and a regular paycheck every two weeks); and <*Article_List*>2. The recovery period would be processed in the same length of time as you received your advances (for example, if you received two ESAs, the recovery of the full amount would be spread over two pay periods).<*Article_Body*>Please contact the Pay Centre if you have questions about this process.  As PSPC continues to eliminate the backlog and move towards a steady state, employees are now seeing their outstanding pay issues resolved and are in receipt of the full amounts owed to them.<*Article_Body*>Where possible, it is PSPC’s intent to process the ESA recoveries at the same time as your case is resolved. For some employees, pay issues may have been a resolved for a number of weeks prior to the ESA recovery.<*Article_Note*>If you haven’t been contacted regarding your ESA within 48 hours of your request, please contact the National Civilian Compensation Support Unit at: ++Civilian Compensation.");
     console.log("walkthroughText: " + walkthroughText);

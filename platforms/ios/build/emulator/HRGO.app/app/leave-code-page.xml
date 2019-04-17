@@ -1,0 +1,34 @@
+<Page loaded="pageLoaded">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <StackLayout row="0" orientation="vertical" width="100%">
+    <label class="HeaderLabel" text="Leave Code Lookup"/>
+    <StackLayout orientation="horizontal" class="SearchBar">
+      <Button col="0" class="SearchBar_Button" tap="searchPOC">
+          <FormattedString>
+            <Span text="&#xe986;"/>
+          </FormattedString>
+      </Button>
+      <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
+    </StackLayout>
+    <ScrollView orientation="vertical">
+    <StackLayout id="POC_List">
+    <!-- Layout for individual POC -->
+    </StackLayout>
+    </ScrollView>
+  </StackLayout>
+      
+    
+    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+      </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>

@@ -39,11 +39,19 @@ var calculateSection34Timeliness = function(workDate, isPayWeek){
     var approveDate = new Date();
     var payDate = new Date();
     var payDayDelta = 4 - calculateDate.getDay();
+    var historicPayDate = new Date("March 20, 2019");
+    historicPayDate.setTime(historicPayDate.getTime() + daysToMilliseconds(calculateDate.getDay() - historicPayDate.getDay()));
     //var todayDate = TODAY;
-
+    var payWeekDistance = Math.round((calculateDate - historicPayDate) / (7 * 24 * 60 * 60 * 1000));
+    if(payWeekDistance % 2 == 0 && calculateDate.getDay() != 4 && calculateDate.getDay() != 5 && calculateDate.getDay() != 6){
+        isPayWeek = true;
+    }else{
+        isPayWeek = false;
+    }
+    console.log(payWeekDistance);
     //console.log(Math.round((todayDate.getDate() - calculateDate.getDate()) / (7 * 24 * 60 * 60 * 1000)));
 
-    if(isPayWeek != true){
+    if(isPayWeek == false){//ispayweek
         payDayDelta += 7;
         submitDate.setTime(calculateDate.getTime() + daysToMilliseconds(payDayDelta));
         approveDate.setTime(submitDate.getTime() + daysToMilliseconds(1));
