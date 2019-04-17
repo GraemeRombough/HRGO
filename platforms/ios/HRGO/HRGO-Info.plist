@@ -44,7 +44,7 @@
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>CFBundleIdentifier</key>
-    <string>org.nativescript.HRGO</string>
+    <string>ca.forces.hrciv.hrgo</string>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
@@ -52,7 +52,7 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>orgnativescriptHRGO</string>
+          <string>caforceshrcivhrgo</string>
         </array>
       </dict>
     </array>

@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.HRGO",
+    "id": "ca.forces.hrciv.hrgo",
     "tns-android": {
       "version": "5.0.0"
     },

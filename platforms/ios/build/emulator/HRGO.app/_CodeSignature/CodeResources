@@ -62,7 +62,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		SfFBjvni3/GabbSqC2uh0Ml3ij0=
+		gmH5IMfRDCcxKYIKLhlSUZ7EoNo=
 		</data>
 		<key>Frameworks/NativeScript.framework/Info.plist</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Vr3LZPJg9oZPqFGgrTMwZ5fBFvM=
+		V9FCB3D+H1/jvL5dIYwCe2aqX5c=
 		</data>
 		<key>LaunchImage-1100-Landscape-2436h@3x.png</key>
 		<data>
@@ -166,7 +166,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		cgyryRh3IIja9bDr1cxAUfi+yNY=
+		mmgjOLwNbh61DlYw7X7I9/BB128=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -174,7 +174,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		ZNnxmsZjQKbpyG7pEOtKkwcvsTE=
+		JMF+7rTlY18UIA+KOTEzmwGJpyo=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -194,7 +194,7 @@
 		</data>
 		<key>app/POC-page.xml</key>
 		<data>
-		D0pOQu3YL0k7qbyST2nK3i7S4rc=
+		9SsB6vzF02tUryHXV53xv8l/io8=
 		</data>
 		<key>app/README.md</key>
 		<data>
@@ -206,7 +206,7 @@
 		</data>
 		<key>app/SJD-page.xml</key>
 		<data>
-		FQuygl95AzMjBxpCJq+EDNzdr3g=
+		6oMW96uVdXJllaVlpv3cnrDX9VY=
 		</data>
 		<key>app/app-root.xml</key>
 		<data>
@@ -214,7 +214,7 @@
 		</data>
 		<key>app/app.css</key>
 		<data>
-		A/w+GE3Seiom434aN8d7l2uyRQ0=
+		6oDgmsFfPndgxMgglLPlm/N5G3E=
 		</data>
 		<key>app/app.js</key>
 		<data>
@@ -250,7 +250,7 @@
 		</data>
 		<key>app/dynamic-article-page.js</key>
 		<data>
-		bXl5FN1deJ5DPFZ0x+T6DiE4Sps=
+		cUxgj2Coy78g0m6boJvIPbjOWfc=
 		</data>
 		<key>app/dynamic-article-page.xml</key>
 		<data>
@@ -306,7 +306,7 @@
 		</data>
 		<key>app/landing-page.xml</key>
 		<data>
-		DwqiKQc077Ns3Y6BnMc4p/8i5EU=
+		2C/sw23kpsUQq0gDcbbs1UelKYY=
 		</data>
 		<key>app/leave-code-page.js</key>
 		<data>
@@ -314,15 +314,15 @@
 		</data>
 		<key>app/leave-code-page.xml</key>
 		<data>
-		OcrXTX1A+ArKB69e9U3pBZZF3kQ=
+		s0FFTYMSxLEexnf8UeJQh1173X0=
 		</data>
 		<key>app/main-page.js</key>
 		<data>
-		gP/1bNxe9psfuNWblhcBNBjH9Zk=
+		uoGIsVSJBnylrX4TJip3olrINHM=
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		85kIA8hTJUXsDHndMhlo2AsvfSA=
+		NoYdURUQ9lK6TitYSsG8Nnmhf38=
 		</data>
 		<key>app/main-page_FR.js</key>
 		<data>
@@ -354,7 +354,7 @@
 		</data>
 		<key>app/my-team.xml</key>
 		<data>
-		mzngjMEDwqbC2zrRfDEOJC+UmVc=
+		6At9AdY1xCbuauSuISyaZmec1qo=
 		</data>
 		<key>app/package.json</key>
 		<data>
@@ -366,7 +366,15 @@
 		</data>
 		<key>app/pay-info.xml</key>
 		<data>
-		QAIK2CK8t5UuBaxq1huZNI9dgwA=
+		97EyEbUUienmrdPJ2gsZm9aCoL8=
+		</data>
+		<key>app/pay-landing-page.js</key>
+		<data>
+		7tMvNmnqr2jTgc80O9BzWS8O98E=
+		</data>
+		<key>app/pay-landing-page.xml</key>
+		<data>
+		If4Nq+pMWJ7B8UCj+PUt2UclD3Y=
 		</data>
 		<key>app/profile-page.js</key>
 		<data>
@@ -418,7 +426,7 @@
 		</data>
 		<key>app/timeliness-utility-page.xml</key>
 		<data>
-		ZuiGnBU2xCxSmsl7zJDYt8Y7buw=
+		7ErM6O0F5BxIjGHAFDpaZOH6UeY=
 		</data>
 		<key>app/tns_modules/moment/CHANGELOG.md</key>
 		<data>
@@ -3362,7 +3370,7 @@
 		</data>
 		<key>app/workdays-utility-page.xml</key>
 		<data>
-		q06ZEbSpkgt0OLpvRmYjY6Cj2Dk=
+		XtxjcKzaJJNm94Fk2K2Vq4UzodU=
 		</data>
 		<key>build.xcconfig</key>
 		<data>
@@ -3538,11 +3546,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SfFBjvni3/GabbSqC2uh0Ml3ij0=
+			gmH5IMfRDCcxKYIKLhlSUZ7EoNo=
 			</data>
 			<key>hash2</key>
 			<data>
-			us5Qeuo8O7e9U7224nK/C4TrHIBlJeP/0dFfEVe29jE=
+			1341fweZwLFxIVgbfYOrSufZGDUPGfK9JCsbUJusURQ=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/Info.plist</key>
@@ -3813,11 +3821,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cgyryRh3IIja9bDr1cxAUfi+yNY=
+			mmgjOLwNbh61DlYw7X7I9/BB128=
 			</data>
 			<key>hash2</key>
 			<data>
-			4IKa1IB2pCVsphwF/UPnR9IEm5l/GcTICI1AbDVxJRM=
+			x9W7o2w4vNG2AcsBVEgoxkFx/Er9G+Ae3WQHf6WoF9s=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -3835,11 +3843,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZNnxmsZjQKbpyG7pEOtKkwcvsTE=
+			JMF+7rTlY18UIA+KOTEzmwGJpyo=
 			</data>
 			<key>hash2</key>
 			<data>
-			KcWkPtlToNP+kL6hbnj36eOM1n/pu2D3c3MLG0BqA54=
+			E3Wjx29vGfsWmJ0U5ZPIZduOv1ySCWATSKKPXZongPA=
 			</data>
 		</dict>
 		<key>app/CODE_OF_CONDUCT.md</key>
@@ -3879,11 +3887,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D0pOQu3YL0k7qbyST2nK3i7S4rc=
+			9SsB6vzF02tUryHXV53xv8l/io8=
 			</data>
 			<key>hash2</key>
 			<data>
-			+LKGt6+acTcshGgtKR6NN9oTe3KUp7IaC5+pUvUvj3A=
+			y1NthRkcJLrsUNwto4Q1Ks6xKI4S3oOKkZErfJcRGtI=
 			</data>
 		</dict>
 		<key>app/README.md</key>
@@ -3912,11 +3920,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FQuygl95AzMjBxpCJq+EDNzdr3g=
+			6oMW96uVdXJllaVlpv3cnrDX9VY=
 			</data>
 			<key>hash2</key>
 			<data>
-			2JCrmyVUKh4QXI2uk7yFhLPXkn/sdsDwHwC+06xhbuo=
+			tB6pdIxC0qjzISCqmyIsCKWlBQwBYRJu8NkhJxmXnfU=
 			</data>
 		</dict>
 		<key>app/app-root.xml</key>
@@ -3934,11 +3942,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			A/w+GE3Seiom434aN8d7l2uyRQ0=
+			6oDgmsFfPndgxMgglLPlm/N5G3E=
 			</data>
 			<key>hash2</key>
 			<data>
-			KMg+IQBxobz74YvsJBbXp6XwTNHLnCxl1ZY32uYYN5M=
+			/6zflp3E6MjReayNCL/JCXtdzNT93whKmjhv/vJ5LBs=
 			</data>
 		</dict>
 		<key>app/app.js</key>
@@ -4033,11 +4041,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bXl5FN1deJ5DPFZ0x+T6DiE4Sps=
+			cUxgj2Coy78g0m6boJvIPbjOWfc=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZQfOpMRA0CQv7bZM7wklqcuE39+TVO76mNoT6IOIpcw=
+			/fu/WQvM+cTYruSVgObdbpn2LxxNo4TWNDgiGd6SlSU=
 			</data>
 		</dict>
 		<key>app/dynamic-article-page.xml</key>
@@ -4187,11 +4195,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DwqiKQc077Ns3Y6BnMc4p/8i5EU=
+			2C/sw23kpsUQq0gDcbbs1UelKYY=
 			</data>
 			<key>hash2</key>
 			<data>
-			k0+UEsLTv2UkolL2sn3rI1Ic3aFHPE0CY4opz+6Hqa4=
+			v93KCXQsONSSuieCuWzcwNKrdCmlPW8tvi5jJqrVjsI=
 			</data>
 		</dict>
 		<key>app/leave-code-page.js</key>
@@ -4209,33 +4217,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OcrXTX1A+ArKB69e9U3pBZZF3kQ=
+			s0FFTYMSxLEexnf8UeJQh1173X0=
 			</data>
 			<key>hash2</key>
 			<data>
-			nL0gLrdu1vY0VDcpxlH9yzdJrnTWP2uUBvY2MrMp4PM=
+			xpdSdP4Vc4rRLSFb0O+zW5iZaYIqHx+cMA2DO6WA5EQ=
 			</data>
 		</dict>
 		<key>app/main-page.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gP/1bNxe9psfuNWblhcBNBjH9Zk=
+			uoGIsVSJBnylrX4TJip3olrINHM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Nt4wdPoHu+H0SrwexhyrOM9w/WrebkbksXyhW9aypqI=
+			8VkI9/wHLVyKzfrOa+E0Sqh+2EmGWN2np10LR6sQu9w=
 			</data>
 		</dict>
 		<key>app/main-page.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			85kIA8hTJUXsDHndMhlo2AsvfSA=
+			NoYdURUQ9lK6TitYSsG8Nnmhf38=
 			</data>
 			<key>hash2</key>
 			<data>
-			Xw03b9i8vcb6fqDWLzxTsSZfnyNn4U9iCXhSPzocORk=
+			/B43yHSDzloO/pzqb46fRwlYuc6Yt9yGCFzLogO79Vo=
 			</data>
 		</dict>
 		<key>app/main-page_FR.js</key>
@@ -4319,11 +4327,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mzngjMEDwqbC2zrRfDEOJC+UmVc=
+			6At9AdY1xCbuauSuISyaZmec1qo=
 			</data>
 			<key>hash2</key>
 			<data>
-			7V0+IUSu8ARoMc9+8j0Ak0V+lwzKCN4ztV0Haou+bAo=
+			DiYludDh/zGvVCWw+Ai9EoIPRwIvwz+6hzKAy3bhxZ0=
 			</data>
 		</dict>
 		<key>app/package.json</key>
@@ -4352,11 +4360,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QAIK2CK8t5UuBaxq1huZNI9dgwA=
+			97EyEbUUienmrdPJ2gsZm9aCoL8=
 			</data>
 			<key>hash2</key>
 			<data>
-			Zen3JkP/GzgcgtlpnLPRLaITGJws1nWOSnQM8G3xmww=
+			z0VGcJTTOQP3aOJQ7zjebNL2TJQSn9wGkM/FsZ7FdEg=
+			</data>
+		</dict>
+		<key>app/pay-landing-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7tMvNmnqr2jTgc80O9BzWS8O98E=
+			</data>
+			<key>hash2</key>
+			<data>
+			EiXNvlyjD/uiASmLzZeQBaabNbG802U6CwdGwS0NPNo=
+			</data>
+		</dict>
+		<key>app/pay-landing-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			If4Nq+pMWJ7B8UCj+PUt2UclD3Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			jQk7YCl+9DMknbFZk01TVOxoO544HJBLohoE9v+RqgI=
 			</data>
 		</dict>
 		<key>app/profile-page.js</key>
@@ -4495,11 +4525,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZuiGnBU2xCxSmsl7zJDYt8Y7buw=
+			7ErM6O0F5BxIjGHAFDpaZOH6UeY=
 			</data>
 			<key>hash2</key>
 			<data>
-			WFLbetCRW2+dtBL1zzsOtj0ElU5TSNKouaG6XX7CvUo=
+			XxZNcpE4wJq6zlo8kDsm2eObALSWILwz88PJIHR1M8I=
 			</data>
 		</dict>
 		<key>app/tns_modules/moment/CHANGELOG.md</key>
@@ -12591,11 +12621,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			q06ZEbSpkgt0OLpvRmYjY6Cj2Dk=
+			XtxjcKzaJJNm94Fk2K2Vq4UzodU=
 			</data>
 			<key>hash2</key>
 			<data>
-			nabOt+DbKZ6WmXI1OpwqxrwtUN/YcbWCVEdmko/IzBY=
+			T0X/4VESJDVK+N7aZygpG3kXugEpsQVtyiVJl85PaPI=
 			</data>
 		</dict>
 		<key>build.xcconfig</key>

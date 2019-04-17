@@ -23,9 +23,9 @@
           </Button>
           <Button class="Home_Utility_Label" text="My Resources" tap="navToggle" value="Resources" col="1"/>
         </GridLayout>
-        <Button class="Main_Nav_SubLine" text="Pay" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Student Hiring" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Flexible Work Arrangements" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="pay-landing-page" text="My Pay" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="My Student Hiring" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="My Flexible Work" visibility="{{ Resources ? 'visible' : 'collapsed' }}"/>
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="navToggle" value="Contact" col="0">
             <FormattedString>
@@ -34,8 +34,8 @@
           </Button>
           <Button class="Home_Utility_Label" text="My Contacts" tap="navToggle" value="Contact" col="1"/>
         </GridLayout>
-        <Button class="Main_Nav_SubLine" text="POC List" visibility="{{ Contact ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="My Team Contact" visibility="{{ Contact ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="POC-page" text="My Points of Contact" visibility="{{ Contact ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="my-team" text="My Team" visibility="{{ Contact ? 'visible' : 'collapsed' }}"/>
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="navToggle" value="Utility" col="0">
             <FormattedString>
@@ -44,9 +44,9 @@
           </Button>
           <Button class="Home_Utility_Label" text="My Utilities" col="1" tap="navToggle" value="Utility"/>
         </GridLayout>
-        <Button class="Main_Nav_SubLine" text="Casual Work Day Calculator" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Timeliness Cutoff Calculator" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Gross Salary Calculator" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="workdays-utility-page" text="Calculate Casual End Dates" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="timeliness-utility-page" text="Calculate Timeliness Cutoffs" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="pay-info" text="Calculate Gross Pay" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="navToggle" value="Lookup" col="0">
             <FormattedString>
@@ -55,8 +55,8 @@
           </Button>
           <Button class="Home_Utility_Label" text="My Lookup" col="1" tap="navToggle" value="Lookup"/>
         </GridLayout>
-        <Button class="Main_Nav_SubLine" text="Job Description Lookup" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Leave Code Lookup" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="SJD-page" text="Our Job Descriptions" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="leave-code-page" text="Our Leave Types" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
         
       </StackLayout>
     </StackLayout>

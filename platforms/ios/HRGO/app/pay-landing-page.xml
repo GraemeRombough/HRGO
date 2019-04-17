@@ -1,5 +1,5 @@
 <Page loaded="pageLoaded">
-  <ActionBar title="Compensation" class="action-bar"></ActionBar>
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
@@ -9,15 +9,29 @@
 
     <StackLayout orientation="vertical">
       <Button class="Sub_Nav_Line" text="Your Pay Information" tap="navToggle" value="YourPayInformation"/>
-        <Button class="Main_Nav_SubLine" id="2" text="Acting Pay" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="1" text="Overtime" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="3" text="Part-time Employment" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="7" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="1" text="Pay Basics" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="2" text="View and Understand Your Pay" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+        
+      
       <Button class="Sub_Nav_Line" text="Problems With Your Pay" tap="navToggle" value="ProblemsWithYourPay"/>
+        <Button class="Main_Nav_SubLine" id="3" text="Reporting Your Pay Issue" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="4" text="Emergency Salary Advance" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="5" text="Report Your Pay Issue" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="6" text="Priority Payment on Non-Basic Pay" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
-    
+        
+
+      <Button class="Sub_Nav_Line" text="Pay Deadlines and Processes" tap="navToggle" value="DeadlinesAndProcesses"/>
+        <Button class="Main_Nav_SubLine" id="5" text="Employee Roles in Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="6" text="Section 34 Managers Roles in Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="7" text="Section 34 Self-Service Pay Requests" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="8" text="HR/Staffing Actions Affecting Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="100" text="Changing your Section 34 Manager in Phoenix" tap="goToWalkthrough" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+
+
+      <Button class="Sub_Nav_Line" text="Hours and Scheduling" tap="navToggle" value="Scheduling"/>
+        <Button class="Main_Nav_SubLine" id="9" text="Overtime" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="10" text="Managing Employee Schedules" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="100" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
+
+
     
     </StackLayout>
   </StackLayout>

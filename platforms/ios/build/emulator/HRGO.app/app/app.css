@@ -67,6 +67,20 @@ button{
 .Main_Nav_Line{
     
 }
+.Sub_Nav_Line{
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-left-width: 10px;
+    border-left-color:  rgb(0,31,91);
+    margin-top:10px;  
+    color: rgb(0,31,91);
+    white-space: normal;
+    text-align: left;
+    padding-left: 15px;
+    background-color: #DDD;
+    font-size: 26px;
+}
 .Home_Utility_Row{
     height: auto;
     padding-top: 8px;
@@ -75,12 +89,12 @@ button{
     border-left-color:  rgb(0,31,91);
     
     background-color: #DDD;
-    margin-top:10px;
+    margin-top:10px;  
 }
 .HeaderLabel{
     border-left-width: 10px;
     border-left-color: rgb(220,170,0);
-    font-size:24pt;
+    font-size:22px;
     vertical-align: middle;
     color: #FFF;
     font-family: Arial, Helvetica, sans-serif;
@@ -93,12 +107,12 @@ button{
     font-weight: 700;
 }
 .Header_Label{
-    font-size:26px;
+    font-size:22px;
     vertical-align: middle;
 }
 .Header_Icon{
     font-family: "icomoon"; 
-    font-size: 26px;
+    font-size: 22px;
     text-align: center;
     color: rgb(220,170,0);
 }

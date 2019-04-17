@@ -1,4 +1,5 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/calculators-landing-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/pay-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/home/home-view-model.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/home/home-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/timeliness-utility-page.js
@@ -18,6 +19,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-walkthrough-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/search-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/workdays-utility-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/main-utility-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/article-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/SJD-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/main-page_FR.js

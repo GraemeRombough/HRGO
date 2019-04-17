@@ -32,7 +32,7 @@ exports.goToArticle = function(args){
 };
 exports.goToWalkthrough = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("walkthrough-page");
+    topmost.navigate("dynamic-walkthrough-page");
 };
 
 exports.navToggle = function(args){
