@@ -11,6 +11,10 @@ exports.goToLanding = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("landing-page");
 }
+exports.goToUtility = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate(args.object.pageName);
+};
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
     //alert(args.object.value).then(() => {

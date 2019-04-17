@@ -4,10 +4,10 @@
   <ScrollView>
     <StackLayout row="0" orientation="vertical" width="100%">
       
-      <GridLayout columns="*,60" rows="auto" class="HeaderLabel">
-      <label col="0" row="0" text="My Team"/>
-      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
-    </GridLayout>
+    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+    <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
+    <label col="1" row="0" text="MY TEAM" class="Header_Label"/>
+  </GridLayout>
       <Label text="Add New Employee" class="Article_H1"/>
       <Label text="Name" class="Article_H3"/>
       <TextField text="{{ employeeName }}" class="Utility_TextBox"/>
