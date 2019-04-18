@@ -16,6 +16,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/my-team.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/test-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/code/navComponents.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/student-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-walkthrough-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/search-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/workdays-utility-page.js
