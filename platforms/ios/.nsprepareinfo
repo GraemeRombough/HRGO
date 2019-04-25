@@ -1,8 +1,8 @@
 {
 	"nativePlatformStatus": "3",
 	"appFilesHashes": {
-		"/Users/graemerombough/HRGO/app/.DS_Store": "b0ea9beb1ab3781f3e5096f74be9f8447c7b1a5e",
 		"/Users/graemerombough/HRGO/app/CODE_OF_CONDUCT.md": "3d921a467f0dc791385eb1d5db82d88e11d620e0",
+		"/Users/graemerombough/HRGO/app/.DS_Store": "b0ea9beb1ab3781f3e5096f74be9f8447c7b1a5e",
 		"/Users/graemerombough/HRGO/app/LICENSE": "335b9d849600792946ffbd01f3617100fbd6e107",
 		"/Users/graemerombough/HRGO/app/POC-page.js": "0c6042ee550a429c4f49ca0379704979c2c7cbc1",
 		"/Users/graemerombough/HRGO/app/POC-page.xml": "f52b01eafcc5d36b54af21d7579df1bfc97f8a8f",
@@ -19,10 +19,10 @@
 		"/Users/graemerombough/HRGO/app/code/navComponents.js": "c3c633688115fd0c6ed322c6154286997478a0e1",
 		"/Users/graemerombough/HRGO/app/connect-landing-page.js": "828bd8f52f5c10357f117d7faa7546ef13ef3088",
 		"/Users/graemerombough/HRGO/app/connect-landing-page.xml": "c6079820941eaa953e7a4f96e1d129a4616ff985",
-		"/Users/graemerombough/HRGO/app/dynamic-article-page.js": "d38a1c8c4d38e0527aa77c25a283c16ded0bfcac",
-		"/Users/graemerombough/HRGO/app/dynamic-article-page.xml": "817247a401655f3f3e46eb68772ef433a037a20c",
+		"/Users/graemerombough/HRGO/app/dynamic-article-page.js": "8fd2af28403840958d92b8a52bfa9c7c59dbe465",
+		"/Users/graemerombough/HRGO/app/dynamic-article-page.xml": "25155bb060d35405442369dcd563b12e981e2b0d",
 		"/Users/graemerombough/HRGO/app/dynamic-walkthrough-page.js": "d13191fded698539961340bcdadc11f92e35aff0",
-		"/Users/graemerombough/HRGO/app/dynamic-walkthrough-page.xml": "fc9a7d95bd14b7cd011d1a3689e2bc79f9c0e2a6",
+		"/Users/graemerombough/HRGO/app/dynamic-walkthrough-page.xml": "d4f9946248b2785e49d8a30190efa35d25753075",
 		"/Users/graemerombough/HRGO/app/fonts/.DS_Store": "c90178015c9741b96a97437b0f5d6ae6d22c24cb",
 		"/Users/graemerombough/HRGO/app/fonts/demo.html": "4eac541c7e85dcdd9f1775c246765a25419edd80",
 		"/Users/graemerombough/HRGO/app/fonts/icomoon.ttf": "30e066b820b3b27f846ea30d498cbb2f1e12aebd",
@@ -75,8 +75,8 @@
 	},
 	"release": false,
 	"bundle": false,
-	"changesRequireBuild": true,
-	"time": "Thu Apr 18 2019 00:19:08 GMT-0400 (EDT)",
+	"changesRequireBuild": false,
+	"time": "Thu Apr 25 2019 11:28:19 GMT-0400 (EDT)",
 	"changesRequireBuildTime": "Thu Apr 18 2019 00:19:08 GMT-0400 (EDT)",
 	"projectFileHash": "cc86bd0bc3a50921120abc36ebfa4ab512eb804456a8016117b701eaa9472cb3"
 }

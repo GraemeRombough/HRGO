@@ -2,10 +2,10 @@
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="auto,*,40,60">
     
-    <GridLayout columns="*,60" rows="auto" row="0" class="HeaderLabel">
-      <label col="0" row="0" text="{{ walkthroughTitle }}"/>
-      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
-    </GridLayout>   
+    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe926;"/>
+      <label col="1" row="0" text="Walkthrough" class="Header_Label"/>
+    </GridLayout>  
 
     <!--<StackLayout row="1" orientation="vertical" width="100%">  -->
   <!-- STEP CONTENT  -->

@@ -9,17 +9,15 @@ const observable = require("data/observable");
 const ActionBar = require("tns-core-modules/ui/action-bar/").ActionBar;
 const pageData = new observable.Observable();
 var articleReference;
+var pageObject;
 
 exports.pageLoaded = function(args) {
     const page = args.object;
     pageData.set("ActionBarTitle", "Hello World");
     articleReference=page.navigationContext;
-    //page.content = myActionBar;
-    page.content = createMainGrid();
-
-    
-    console.log(articleReference.Language);
-    console.log(articleReference.ArticleID);
+    pageObject = page;
+    page.bindingContext = pageData;
+    createArticle();
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -35,44 +33,26 @@ var getArticleText = function(aID, aLang)
     //.findIndex(value)
     var articles = getFromDatabase();
     var articleText;
+    var articleTitle;
+    var articleBusinessLine;
     for (i = 0; i < articles.length; i++){
+        if(articleTitle == null && articles[i].Ref == aID){
+            articleTitle = articles[i].Title;
+        }
+        if(articleBusinessLine == null && articles[i].Ref == aID){
+            articleBusinessLine = articles[i].BusinessLine;
+        }
         if(articles[i].Ref == aID){
             articleText = articles[i].Content;
             break;
         }
     }
-    
-    //articleText.push("<*Article_H1*>Overtime<*Article_Body*>Overtime refers to compensation for authorized work performed in excess of the standard daily or weekly hours of work, or on the normal days of rest an employee may be entitled to, pursuant to the provisions of the relevant collective agreement or terms and conditions of employment.<*Article_H2*>Claiming Overtime<*Article_Body*>Instruct your employee to complete the Extra Duty Pay and Shiftwork Report (Form DND 907). To learn how to complete this form, the manager's instructions are found on page 2.<*Article_Note*>Note that certain employees in excluded/ unrepresented positions are not entitled to overtime. In lieu, they may be eligible for management leave. Refer to the Appendix of the Directive on Terms and Conditions of Employment for more information on who is considered an Excluded/Unrepresented Employee.<*Article_H2*>Process Overview: Overtime Approval<*Article_Body*>Overtime must be authorized in advance and approved in accordance with Section 34 of the Financial Administration Act (FAA) and in accordance with the employee's applicable collective agreement. Once the employee has completed the Form DND 907, and it has been authorized accordingly, the original is forwarded to the compensation advisor responsible for the employee's pay, and the copy of Form DND 907 remains with the employee.");
-    //articleText.push("<*Article_H1*>Emergency Salary Advance<*Article_H2*>Employee<*Article_Body*>If you require an Emergency Salary Advance (ESA): Tell your manager.<*Article_H2*>Section 34 Manager<*Article_Body*>When an employee requires an ESA: Submit Pay Action Request Form (PAR) with a request for Emergency Salary Advance to the Pay Centre via Trusted Source.<*Article_H2*>Phoenix Emergency Salary Advance Recoveries<*Article_Body*>When you received your ESA, you were informed that: <*Article_List*>1. The amount you received would be recovered after your pay issues were resolved (once you had received the full amount owed and a regular paycheck every two weeks); and <*Article_List*>2. The recovery period would be processed in the same length of time as you received your advances (for example, if you received two ESAs, the recovery of the full amount would be spread over two pay periods).<*Article_Body*>Please contact the Pay Centre if you have questions about this process.  As PSPC continues to eliminate the backlog and move towards a steady state, employees are now seeing their outstanding pay issues resolved and are in receipt of the full amounts owed to them.<*Article_Body*>Where possible, it is PSPC’s intent to process the ESA recoveries at the same time as your case is resolved. For some employees, pay issues may have been a resolved for a number of weeks prior to the ESA recovery.<*Article_Note*>If you haven’t been contacted regarding your ESA within 48 hours of your request, please contact the National Civilian Compensation Support Unit at: ++Civilian Compensation.");
-    
-    return articleText;
-}
-var createMainGrid = function()
-{
-    var gridLayout = new layout.GridLayout();
-    var button1 = new Button();
-    var labelX = new Label();
-
-    //button1.text = "hello";
-    //labelX.text = "ohai";
-
-    layout.GridLayout.setRow(createArticle(), 0);
-    layout.GridLayout.setRow(createFooterNav(), 1);
-    gridLayout.addChild(createArticle());
-    gridLayout.addChild(createFooterNav());
-
-    var contentRow = new layout.ItemSpec(1, layout.GridUnitType.STAR);
-    var footerRow = new layout.ItemSpec(60, layout.GridUnitType.PIXEL);
-    
-    gridLayout.addRow(contentRow);
-    gridLayout.addRow(footerRow);
-
-    return gridLayout;
+    var articleReturn = {Title:articleTitle, Text:articleText, BusinessLine:articleBusinessLine};
+    return articleReturn;
+    //return articleText;
 }
 var createArticle = function()
-{
-    //<label class="HeaderLabel" text="Home > Compensation"/>
-    
+{   
     const contentStack = new StackLayout();
     const myScroller = new ScrollView();
     const articleStack = new StackLayout();
@@ -92,76 +72,21 @@ var createArticle = function()
     var LabelArray = [];
     console.log("Create Article: ");   
     var curArticleText = getArticleText(articleReference.ArticleID);
-    //var articleText = "<*Article_H1*>Overtime<*Article_Body*>Overtime refers to compensation for authorized work performed in excess of the standard daily or weekly hours of work, or on the normal days of rest an employee may be entitled to, pursuant to the provisions of the relevant collective agreement or terms and conditions of employment.<*Article_H2*>Claiming Overtime<*Article_Body*>Instruct your employee to complete the Extra Duty Pay and Shiftwork Report (Form DND 907). To learn how to complete this form, the manager's instructions are found on page 2.<*Article_Note*>Note that certain employees in excluded/ unrepresented positions are not entitled to overtime. In lieu, they may be eligible for management leave. Refer to the Appendix of the Directive on Terms and Conditions of Employment for more information on who is considered an Excluded/Unrepresented Employee.<*Article_H2*>Process Overview: Overtime Approval<*Article_Body*>Overtime must be authorized in advance and approved in accordance with Section 34 of the Financial Administration Act (FAA) and in accordance with the employee's applicable collective agreement. Once the employee has completed the Form DND 907, and it has been authorized accordingly, the original is forwarded to the compensation advisor responsible for the employee's pay, and the copy of Form DND 907 remains with the employee.";
-    //var articleText = "<*Article_H1*>Emergency Salary Advance<*Article_H2*>Employee<*Article_Body*>If you require an Emergency Salary Advance (ESA): Tell your manager.<*Article_H2*>Section 34 Manager<*Article_Body*>When an employee requires an ESA: Submit Pay Action Request Form (PAR) with a request for Emergency Salary Advance to the Pay Centre via Trusted Source.<*Article_H2*>Phoenix Emergency Salary Advance Recoveries<*Article_Body*>When you received your ESA, you were informed that: <*Article_List*>1. The amount you received would be recovered after your pay issues were resolved (once you had received the full amount owed and a regular paycheck every two weeks); and <*Article_List*>2. The recovery period would be processed in the same length of time as you received your advances (for example, if you received two ESAs, the recovery of the full amount would be spread over two pay periods).<*Article_Body*>Please contact the Pay Centre if you have questions about this process.  As PSPC continues to eliminate the backlog and move towards a steady state, employees are now seeing their outstanding pay issues resolved and are in receipt of the full amounts owed to them.<*Article_Body*>Where possible, it is PSPC’s intent to process the ESA recoveries at the same time as your case is resolved. For some employees, pay issues may have been a resolved for a number of weeks prior to the ESA recovery.<*Article_Note*>If you haven’t been contacted regarding your ESA within 48 hours of your request, please contact the National Civilian Compensation Support Unit at: ++Civilian Compensation.";
     var articleItemSplit;
 
-    var articleComponents = curArticleText.split("<*");
-
+    var articleComponents = curArticleText.Text.split("<*");
+    var articleSlide = pageObject.getViewById("articleContent");
+    articleSlide.removeChildren();
     for (z=0; z<articleComponents.length; z++){
         articleItemSplit = articleComponents[z].split("*>");
-        LabelArray.push(new Label());
-        LabelArray[z].className = articleItemSplit[0];
-        LabelArray[z].text = articleItemSplit[1];
+        var articleLabel = new Label();
+        //LabelArray.push(new Label());
+        articleLabel.className = articleItemSplit[0];
+        articleLabel.text = articleItemSplit[1];
+        articleSlide.addChild(articleLabel);
     }
+    pageData.set("HeaderTitle", curArticleText.Title);
 
-    for (i=0; i< LabelArray.length; i++)
-    {
-        articleStack.addChild(LabelArray[i]);
-    }
-    contentStack.addChild(headerLabel);
-    contentStack.addChild(articleStack);
-    myScroller.content = contentStack;
-
-    return myScroller;
-}
-var createFooterNav = function()
-{
-    const footerStack = new StackLayout();
-    // Set the orientation property
-    footerStack.orientation = "horizontal";
-    footerStack.row = 1;
-    footerStack.className = "FooterNav";
-    // >> (hide)
-    const fNav1 = new Button();
-    fNav1.className = "Footer_NavIcon";
-    fNav1.text = String.fromCharCode(0xe902);
-    fNav1.width = "20%";
-    fNav1.on(Button.tapEvent, goToHome, this);
-    // << (hide)
-    const fNav2 = new Button();
-    fNav2.className = "Footer_NavIcon";
-    fNav2.text = String.fromCharCode(0xe904);
-    fNav2.width = "20%";
-    fNav2.tap = "goToHome";
-
-    const fNav3 = new Button();
-    fNav3.className = "Footer_NavIcon";
-    fNav3.text = String.fromCharCode(0xe994);
-    fNav3.width = "20%";
-    fNav3.tap = "goToHome";
-
-    const fNav4 = new Button();
-    fNav4.className = "Footer_NavIcon";
-    fNav4.text = String.fromCharCode(0xe945);
-    fNav4.width = "20%";
-    fNav4.tap = "goToHome";
-
-    const fNav5 = new Button();
-    fNav5.className = "Footer_NavIcon";
-    fNav5.text = String.fromCharCode(0xe953);
-    fNav5.width = "20%";
-    fNav5.tap = "goToHome";
-
-    // Add views to stack layout
-    footerStack.addChild(fNav1);
-    footerStack.addChild(fNav2);
-    footerStack.addChild(fNav3);
-    footerStack.addChild(fNav4);
-    footerStack.addChild(fNav5);
-    // << stack-layout-code-behind
-
-    return footerStack;
 }
 var getFromDatabase = function(){
     //returnedItem = {Ref:"", BusinessLine:"", Category:"", Title:"", Type:"", Content:""};
