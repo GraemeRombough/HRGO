@@ -1,0 +1,44 @@
+<Page loaded="pageLoaded" navigatingTo="onNavigatingTo">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <ScrollView>
+    <StackLayout row="0" orientation="vertical" width="100%">
+      
+    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+    <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
+    <label col="1" row="0" text="MY TEAM" class="Header_Label"/>
+  </GridLayout>
+      <Label text="Add New Employee" class="Article_H1"/>
+      <Label text="Name" class="Article_H3"/>
+      <TextField text="{{ employeeName }}" class="Utility_TextBox"/>
+      <Label text="Email" class="Article_H3"/>
+      <TextField text="{{ employeeEmail }}" keyboardtype="email" class="Utility_TextBox"/>
+      <Button text="Add Employee" tap="addEmployee" class="DayCalc_SubmitButton"/>
+      <!-- TEAM LIST -->
+      <Label text="My Team Members" class="Article_H1"/>
+      <StackLayout id="teamListStack" class="Utility_MyTeam_TeamList">
+      </StackLayout>
+
+      <!-- COMPOSE EMAIL -->
+      <StackLayout>
+        <Label text="Compose Email to Team" class="Article_H1"/>
+        <Label text="Email Subject" class="Article_H3"/>
+        <TextField text="{{ emailSubject }}" class="Utility_TextBox"/>
+        <Label text="Email Body" class="Article_H3"/>
+        <TextView text="{{ emailBody }}" class="Utility_LongText"/>
+        <Button text="Send Email to Team" class="DayCalc_SubmitButton" tap="sendEmail"/>
+      </StackLayout>
+    </StackLayout>  
+  </ScrollView>
+  <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+  </StackLayout>
+  </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>

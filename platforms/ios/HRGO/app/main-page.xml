@@ -48,6 +48,9 @@
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="workdays-utility-page" text="Calculate Casual End Dates" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="timeliness-utility-page" text="Calculate Timeliness Cutoffs" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="pay-info" text="Calculate Gross Pay" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="promotion-calc-page" text="Calculate Promotion Step" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        
+        
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="navToggle" value="Lookup" col="0">
             <FormattedString>
