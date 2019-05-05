@@ -10,7 +10,7 @@
 <ScrollView>
     <StackLayout orientation="vertical">
       <Button text="Add Time" class="Home_Utility_Label" tap="navToggle" value="Process" />
-      <TextField>
+      <TextField >
       <Button class="DayCalc_SubmitButton" text="Get End Date" tap="setNotification"/>
 
       
