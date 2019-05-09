@@ -1,42 +1,96 @@
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var dialogs = require("ui/dialogs");
+const layout = require("tns-core-modules/ui/layouts/grid-layout");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "YourPayInformation";
-var navList = [];
+var applicationSettings = require("application-settings");
+var overTimeList = [];
+var switchModule = require("tns-core-modules/ui/switch");
+var pageObject;
+const Label = require("tns-core-modules/ui/label/").Label;
 
 
 exports.pageLoaded = function(args) {
     const page = args.object;
-    //vm = new Observable();
-    pageData.set("mondayCheck", true);
-    pageData.set("tuesdayCheck", true);
-    pageData.set("wednesdayCheck", true);
-    pageData.set("thursdayCheck", true);
-    pageData.set("fridayCheck", true);
-    
-    pageData.set("sundayCheck", false);
-    pageData.set("saturdayCheck", false);
-    
     const TODAY = new Date();
-    pageData.set("date", TODAY);
-    pageData.set("endDateLabel", "End Date: ");
-    pageData.set("numberOfDays", 90);
+    pageObject = page;
     page.bindingContext = pageData;
-
+    pageData.set("date", TODAY);
+    pageData.set("AddTime", false);
+    getOvertime();
+    displayOvertime();
 };
-exports.setNotification = function(){
-    //console.log(pageData.get("date"));
-    //console.log(pageData.get("mondayCheck"));
-    addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
+exports.navToggle = function(args){
+    subNavTitle = args.object.value;
+    //alert(args.object.value).then(() => {
+    console.log(subNavTitle);
+    //});
+    pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
+exports.addTime = function(args){
+    var enteredTime = {Date:pageData.get("submitDate"), Hours:pageData.get("submitHours"), Entered:false};
+    addToOvertime(enteredTime);
+}
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
     
 };
+exports.clearSubmittedTime = function(){
+    var tempOvertimeList = [];
+    for(i=0; i<overTimeList.length; i++){
+        if(overTimeList[i].Entered == false){
+            tempOvertimeList.push(overTimeList[i]);
+        }
+    }
+    overTimeList = tempOvertimeList;
+    var saveString = JSON.stringify(overTimeList);
+    applicationSettings.setString("Saved_Overtime", saveString);
+    pageData("ViewSchedule", false);
+    saveOvertime();
+    displayOvertime();
 
+}
+var displayOvertime = function(){
+    var otLayout = pageObject.getViewById("Overtime_Stack");
+    otLayout.removeChildren();
+
+    for(i=0; i<overTimeList.length; i++){
+        var gridLayout = new layout.GridLayout();
+        var rowTitle = new Label();
+        var dateInput = new Date(overTimeList[i].Date);
+        var enteredCheck = new switchModule.Switch();
+        
+        rowTitle.text = `${dateInput.getFullYear()}-${dateInput.getMonth()}-${dateInput.getDay()} : ${overTimeList[i].Hours}H`;
+        rowTitle.className = "Article_H3";
+        
+        enteredCheck.checked = overTimeList[i].Entered;
+        enteredCheck.id = i;
+        //enteredCheck.on("checkedChange", setItemEntered(this));
+        //enteredCheck.on(switchModule.Switch.tapEvent, setItemEntered, this);
+        enteredCheck.on("checkedChange", (args) => {setItemEntered(args);});
+
+        layout.GridLayout.setRow(rowTitle, 0);
+        layout.GridLayout.setRow(enteredCheck, 1);
+        gridLayout.addChild(rowTitle);
+        gridLayout.addChild(enteredCheck);
+
+        var titleRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
+        var checkRow= new layout.ItemSpec(1, layout.GridUnitType.AUTO);
+        gridLayout.addRow(titleRow);
+        gridLayout.addRow(checkRow);
+        gridLayout.className = "POC_Grid";
+        otLayout.addChild(gridLayout);
+    }
+
+}
+var setItemEntered = function(args){
+    console.log(args.object.id);
+    overTimeList[args.object.id].Entered = args.object.checked;
+    saveOvertime();
+}
 var addScheduleDays = function(startDate, schedule, totalDays){
     var i = 0;
     var checkDate = new Date(startDate.toString());
@@ -61,33 +115,7 @@ var addScheduleDays = function(startDate, schedule, totalDays){
     console.log("End Date: " + checkDate.toString());
     pageData.set("endDateLabel", "End Date: " + formatDate(checkDate.toString()));
 }
-var getDaysOfWork = function(){
-    var daysOfWork = [];
-    daysOfWork.length = 0;
-    if (pageData.get('sundayCheck')==true){
-        daysOfWork.push(0);
-    };
-    if (pageData.get('mondayCheck')==true){
-        daysOfWork.push(1);
-    };
-    if (pageData.get('tuesdayCheck')==true){
-        daysOfWork.push(2);
-    };
-    if (pageData.get('wednesdayCheck')==true){
-        daysOfWork.push(3);
-    };
-    if (pageData.get('thursdayCheck')==true){
-        daysOfWork.push(4);
-    };
-    if (pageData.get('fridayCheck')==true){
-        daysOfWork.push(5);
-    };
-    if (pageData.get('saturdayCheck')==true){
-        daysOfWork.push(6);
-    };
-    console.log(daysOfWork.length);
-    return daysOfWork;
-}
+
 var formatDate = function(inputDate){
     var dateInput = new Date(inputDate);
     var formattedDate;
@@ -176,3 +204,42 @@ var checkIfHoliday = function(holidayTest){
     }
     return false;
 }
+var getOvertime = function(){
+    var overtimePull;
+    if(applicationSettings.hasKey("Saved_Overtime")){
+        overtimePull = applicationSettings.getString("Saved_Overtime");
+        overTimeList = JSON.parse(overtimePull);
+    }
+    console.log(overTimeList.length);
+}
+var addToOvertime = function(timeToSave)
+{
+    //Get currently saved overtime
+    var overtimePull = null;
+    var saveString = "";
+    if(applicationSettings.hasKey("Saved_Overtime")){
+        overtimePull = applicationSettings.getString("Saved_Overtime");
+    }
+    else {
+    };
+    if(overtimePull == null){
+        var savedOvertime = [];
+        savedOvertime.push(timeToSave);
+        saveString = JSON.stringify(savedOvertime);
+        applicationSettings.setString("Saved_Overtime", saveString);
+    }else{
+        var savedOvertime = JSON.parse(overtimePull);
+        savedOvertime.push(timeToSave);
+        saveString = JSON.stringify(savedOvertime);
+        applicationSettings.setString("Saved_Overtime", saveString);
+    }
+    overTimeList = savedOvertime;
+    displayOvertime();
+}
+var saveOvertime = function(){
+
+    var saveString = "";
+    saveString = JSON.stringify(overTimeList);
+    applicationSettings.setString("Saved_Overtime", saveString);
+    
+};

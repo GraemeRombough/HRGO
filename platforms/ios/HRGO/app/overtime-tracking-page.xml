@@ -9,12 +9,30 @@
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      <Button text="Add Time" class="Home_Utility_Label" tap="navToggle" value="Process" />
-      <TextField>
-      <Button class="DayCalc_SubmitButton" text="Get End Date" tap="setNotification"/>
-
+      <Button text="Add Time" class="Home_Utility_Label" tap="navToggle" value="AddTime"/>
+      <StackLayout visibility="{{ AddTime ? 'visible' : 'collapsed' }}">
+        <label text="# of Hours:" class="DayCalc_SectionTitle"/>
+        <TextField text="{{ submitHours }}" keyboardType="number" class="DayCalc_TextField"/>
+        <label text="Date:" class="DayCalc_SectionTitle"/>
+        <DatePicker loaded="onDatePickerLoaded" date="{{ submitDate }}"></DatePicker>
+        <Button class="DayCalc_SubmitButton" text="Save New Time" tap="addTime"/>
+      </StackLayout>
       
+      <Button text="View Time" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
+      <StackLayout visibility="{{ ViewSchedule ? 'visible' : 'collapsed' }}" id="Overtime_Stack">
+        <GridLayout rows="auto, auto" columns="*">
+          <label row="0" col="0" text="3H - 2019/04/23" class="DayCalc_SectionTitle"/>
+          <Switch row="1" col="0" checked="true"/>
+        </GridLayout>
+        
+        <GridLayout rows="auto, auto" columns="*">
+          <label row="0" col="0" text="2.5H - 2019/05/05" class="DayCalc_SectionTitle"/>
+          <Switch row="1" col="0" checked="true"/>
+        </GridLayout>
 
+        
+      </StackLayout>
+        <Button class="DayCalc_SubmitButton" text="Clear Submitted Time" tap="clearSubmittedTime"/>
       </StackLayout>
       </ScrollView>
   </StackLayout>
