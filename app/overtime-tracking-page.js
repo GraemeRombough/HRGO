@@ -91,30 +91,6 @@ var setItemEntered = function(args){
     overTimeList[args.object.id].Entered = args.object.checked;
     saveOvertime();
 }
-var addScheduleDays = function(startDate, schedule, totalDays){
-    var i = 0;
-    var checkDate = new Date(startDate.toString());
-    console.log("Start Date: " + checkDate.toString());
-
-    while(i < totalDays){
-        
-        for(z = 0; z < schedule.length; z++){
-            if (checkDate.getDay() == schedule[z]){
-                if(checkIfHoliday(checkDate) == true){
-
-                }else{
-                    i++;
-                } 
-            }
-        }
-        if (i < totalDays){
-            checkDate.setDate(checkDate.getDate()+1);
-        }
-        
-    }
-    console.log("End Date: " + checkDate.toString());
-    pageData.set("endDateLabel", "End Date: " + formatDate(checkDate.toString()));
-}
 
 var formatDate = function(inputDate){
     var dateInput = new Date(inputDate);
@@ -160,49 +136,6 @@ var formatDate = function(inputDate){
     }
     formattedDate = month + " " + dateInput.getDate() + ", " + dateInput.getFullYear();
     return formattedDate;
-}
-var getHolidays = function(){
-    var holidayList = [];
-
-    //2019 Holidays
-    holidayList.push(new Date("January 1, 2019"));
-    holidayList.push(new Date("April 19, 2019"));
-    holidayList.push(new Date("April 22, 2019"));
-    holidayList.push(new Date("May 20, 2019"));
-    holidayList.push(new Date("July 1, 2019"));
-    holidayList.push(new Date("August 5, 2019"));
-    holidayList.push(new Date("September 2, 2019"));
-    holidayList.push(new Date("October 14, 2019"));
-    holidayList.push(new Date("November 11, 2019"));
-    holidayList.push(new Date("December 25, 2019"));
-    holidayList.push(new Date("December 26, 2019"));
-
-    //2020 Holidays
-    holidayList.push(new Date("January 1, 2020"));
-    holidayList.push(new Date("April 10, 2020"));
-    holidayList.push(new Date("April 13, 2020"));
-    holidayList.push(new Date("May 18, 2020"));
-    holidayList.push(new Date("July 1, 2020"));
-    holidayList.push(new Date("August 3, 2020"));
-    holidayList.push(new Date("September 7, 2020"));
-    holidayList.push(new Date("October 12, 2020"));
-    holidayList.push(new Date("November 11, 2020"));
-    holidayList.push(new Date("December 25, 2020"));
-    holidayList.push(new Date("December 26, 2020"));
-
-    return holidayList;
-}
-var checkIfHoliday = function(holidayTest){
-    //NOTE: Could use dateString or other factor as object index.  If date doesn't return, then it's not a holiday
-    var holidays = getHolidays();
-    //console.log("holidayTest:" + holidayTest.getDate() + " | holiday1:" + holidays[0].getDate())
-    for(n = 0; n < holidays.length; n++){
-        if (holidayTest.toDateString() == holidays[n].toDateString()){
-            console.log("holiday:" + holidayTest.toString());
-            return true;    
-        }
-    }
-    return false;
 }
 var getOvertime = function(){
     var overtimePull;

@@ -52,6 +52,7 @@
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="overtime-tracking-page" text="Track My Overtime" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         
         
+        
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="navToggle" value="Lookup" col="0">
             <FormattedString>
@@ -63,6 +64,7 @@
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="SJD-page" text="Our Job Descriptions" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="leave-code-page" text="Our Leave Types" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="roles-page" text="Our Roles and Responsibilities" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="understand-pay-page" text="Understand Our Paycheques" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
         
       </StackLayout>
       </ScrollView>
