@@ -1,18 +1,15 @@
 <Page loaded="pageLoaded">
 
-  <ActionBar title="{{ ActionBarTitle }}" class="action-bar"></ActionBar>
-  <!--<GridLayout rows="*,60">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
   <StackLayout row="0" orientation="vertical" width="100%"> 
-    <label class="HeaderLabel" text="Compensation > Overtime"/>
+    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe926;"/>
+      <label col="1" row="0" text="{{ HeaderTitle }}" class="Header_Label"/>
+    </GridLayout>
       <ScrollView orientation="vertical">
-      <StackLayout class="Article_MainStack" width="100%" orientation="vertical">
-        <label class="Article_H1" text="Overtime"/>
-        <label textWrap="true" class="Article_Body" text="Overtime refers to compensation for authorized work performed in excess of the standard daily or weekly hours of work, or on the normal days of rest an employee may be entitled to, pursuant to the provisions of the relevant collective agreement or terms and conditions of employment."/>
-        <label class="Article_H2" text="Claiming Overtime"/>
-        <label textWrap="true" class="Article_Body" text="Instruct your employee to complete the Extra Duty Pay and Shiftwork Report (Form DND 907). To learn how to complete this form, the manager's instructions are found on page 2."/>
-        <label textWrap="true" class="Article_Note" text="Note that certain employees in excluded/ unrepresented positions are not entitled to overtime. In lieu, they may be eligible for management leave. Refer to the Appendix of the Directive on Terms and Conditions of Employment for more information on who is considered an Excluded/Unrepresented Employee."/>
-        <label class="Article_H2" text="Process Overview: Overtime Approval"/>
-        <label class="Article_Body" text="Overtime must be authorized in advance and approved in accordance with Section 34 of the Financial Administration Act (FAA) and in accordance with the employee's applicable collective agreement. Once the employee has completed the Form DND 907, and it has been authorized accordingly, the original is forwarded to the compensation advisor responsible for the employee's pay, and the copy of Form DND 907 remains with the employee."/>
+      <StackLayout class="Article_MainStack" id="articleContent" width="100%" orientation="vertical">
+
       </StackLayout>
       </ScrollView>
 
@@ -28,6 +25,4 @@
       </StackLayout>
 
     </GridLayout>
-
-  <!-- Your UI components go here -->
 </Page>

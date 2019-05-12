@@ -48,7 +48,7 @@ exports.clearSubmittedTime = function(){
     overTimeList = tempOvertimeList;
     var saveString = JSON.stringify(overTimeList);
     applicationSettings.setString("Saved_Overtime", saveString);
-    pageData("ViewSchedule", false);
+    pageData.set("ViewSchedule", false);
     saveOvertime();
     displayOvertime();
 
@@ -60,26 +60,31 @@ var displayOvertime = function(){
     for(i=0; i<overTimeList.length; i++){
         var gridLayout = new layout.GridLayout();
         var rowTitle = new Label();
+        var hoursTitle = new Label();
         var dateInput = new Date(overTimeList[i].Date);
         var enteredCheck = new switchModule.Switch();
         
-        rowTitle.text = `${dateInput.getFullYear()}-${dateInput.getMonth()}-${dateInput.getDay()} : ${overTimeList[i].Hours}H`;
-        rowTitle.className = "Article_H3";
-        
+        rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()}\/${dateInput.getDay()}`;
+        rowTitle.className = "Main_Nav_SubLine";
+        hoursTitle.text = "Hours: " + overTimeList[i].Hours;
+        hoursTitle.className = "Article_Body"
         enteredCheck.checked = overTimeList[i].Entered;
         enteredCheck.id = i;
-        //enteredCheck.on("checkedChange", setItemEntered(this));
-        //enteredCheck.on(switchModule.Switch.tapEvent, setItemEntered, this);
         enteredCheck.on("checkedChange", (args) => {setItemEntered(args);});
 
         layout.GridLayout.setRow(rowTitle, 0);
-        layout.GridLayout.setRow(enteredCheck, 1);
+        layout.GridLayout.setRow(hoursTitle, 1);
+        layout.GridLayout.setRow(enteredCheck, 2);
+        
         gridLayout.addChild(rowTitle);
+        gridLayout.addChild(hoursTitle);
         gridLayout.addChild(enteredCheck);
 
         var titleRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
+        var hoursRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
         var checkRow= new layout.ItemSpec(1, layout.GridUnitType.AUTO);
         gridLayout.addRow(titleRow);
+        gridLayout.addRow(hoursRow);
         gridLayout.addRow(checkRow);
         gridLayout.className = "POC_Grid";
         otLayout.addChild(gridLayout);

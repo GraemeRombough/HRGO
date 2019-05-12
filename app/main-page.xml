@@ -1,4 +1,4 @@
-<Page loaded="pageLoaded">
+<Page actionBarHidden="true" loaded="pageLoaded">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,auto">
   <StackLayout row="0" orientation="vertical" width="100%">
@@ -50,6 +50,7 @@
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="pay-info" text="Calculate Gross Pay" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="promotion-calc-page" text="Calculate Promotion Step" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="overtime-tracking-page" text="Track My Overtime" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="leave-tracking-page" text="Track My Leave" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="student-onboard-page" text="My Student Onboarding" visibility="{{ Utility? 'visible' : 'collapsed' }}"/>
         
         

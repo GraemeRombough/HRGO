@@ -1,0 +1,57 @@
+<Page loaded="pageLoaded" navigatingTo="onNavigatingTo">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <ScrollView>
+  <StackLayout row="0" orientation="vertical" width="100%">
+    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
+      <label col="1" row="0" text="OUR ROLES" class="Header_Label"/>
+    </GridLayout>
+    
+    <!-- Mission 1 -->
+    <Button text="Pre Arrival" class="Home_Utility_Label" tap="navToggle" value="Mission1" />
+    <StackLayout visibility="{{ Mission1 ? 'visible' : 'collapsed' }}" id="mission1Content">
+    </StackLayout>
+
+    <!-- Mission 2a -->
+    <Button text="Your First Day" class="Home_Utility_Label" tap="navToggle" value="Mission2a" />
+    <StackLayout visibility="{{ Mission2a ? 'visible' : 'collapsed' }}" id="mission2aContent">
+    </StackLayout>
+
+    <!-- Mission 2b -->
+    <Button text="Your First Week" class="Home_Utility_Label" tap="navToggle" value="Mission2b" />
+    <StackLayout visibility="{{ Mission2b ? 'visible' : 'collapsed' }}" id="mission2bContent">
+    </StackLayout>
+
+    <!-- Mission 3 -->
+    <Button text="Your First Month" class="Home_Utility_Label" tap="navToggle" value="Mission3" />
+    <StackLayout visibility="{{ Mission3 ? 'visible' : 'collapsed' }}" id="mission3Content">
+    </StackLayout>
+
+    <!-- Mission 4 -->
+    <Button text="Complete Your Onboarding" class="Home_Utility_Label" tap="navToggle" value="Mission4" />
+    <StackLayout visibility="{{ Mission4 ? 'visible' : 'collapsed' }}" id="mission4Content">
+    </StackLayout>
+
+    <!-- Mission 5-->
+    <Button text="Your Last Week" class="Home_Utility_Label" tap="navToggle" value="Mission5" />
+    <StackLayout visibility="{{ Mission5 ? 'visible' : 'collapsed' }}" id="mission5Content">
+    </StackLayout>
+
+    
+
+  </StackLayout>
+  </ScrollView>
+    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
+        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
+      </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>

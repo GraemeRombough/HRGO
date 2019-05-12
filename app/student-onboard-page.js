@@ -23,9 +23,6 @@ exports.pageLoaded = function(args) {
 };
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
-    //alert(args.object.value).then(() => {
-    console.log(subNavTitle);
-    //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
 
@@ -51,8 +48,6 @@ var loadMissionContent = function(){
             descLabel.text = descriptionItemSplit[1];
             missionContentBox.addChild(descLabel);
         }
-
-
 
     }
 }

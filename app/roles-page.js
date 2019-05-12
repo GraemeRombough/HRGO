@@ -107,12 +107,10 @@ function loadResponsibilities(eventData) {
     for (z=0; z<descriptionComponents.length; z++){
         descriptionItemSplit = descriptionComponents[z].split("*>");
         var descLabel = new Label();
-        //LabelArray.push(new Label());
         descLabel.className = descriptionItemSplit[0];
         descLabel.text = descriptionItemSplit[1];
         responsibilitiesStack.addChild(descLabel);
     }
-
     pageData.set("Process", false);
     pageData.set("Roles", false);
     pageData.set("Responsibilities", true);
