@@ -16,7 +16,7 @@ exports.onNavigatingTo = function(args){
     const page = args.object;
     pageObject = page;
     page.bindingContext = pageData;
-    loadProcesses();
+    loadMissionContent();
 }
 exports.pageLoaded = function(args) {
     
@@ -28,114 +28,51 @@ exports.navToggle = function(args){
     //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
-function loadRoles(args){
-    //<Button text="Employee" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
-    var dbReturn = getFromDataBase();
-    var relatedRoles = [];
-    selectedProcess = args.object.text;
-    console.log(selectedProcess);
-    for (i=0; i < dbReturn.length; i++){
-        if (dbReturn[i].process == selectedProcess){
-            relatedRoles.push(dbReturn[i]);
-        }
-    }
-    console.log(relatedRoles.length);
-    var rolesStack = pageObject.getViewById("rolesLayout");
-    rolesStack.removeChildren();
-    for(z=0; z<relatedRoles.length; z++){
-        var addLabel = new Button();
-        addLabel.className = "Main_Nav_SubLine";
-        addLabel.text = relatedRoles[z].role;
-        addLabel.on(buttonModule.Button.tapEvent, loadResponsibilities, this);
-        rolesStack.addChild(addLabel);
-    }
-    pageData.set("Process", false);
-    pageData.set("Roles", true);
-}
-function loadProcesses(){
-    //<Button text="Extra Duty Pay" class="Main_Nav_SubLine" tap="loadRoles"/>
-    var dbReturn = getFromDataBase();
-    var processes = [];
-    var itemIsDuplicate = false;
-    for(i = 0; i < dbReturn.length; i++){
-        itemIsDuplicate = false;
-        for(x = 0; x < processes.length; x++){
-            if (dbReturn[i].process == processes[x]){
-                itemIsDuplicate = true;
-            }
-        }
-        if (itemIsDuplicate == false){
-            processes.push(dbReturn[i].process);
-        }
-    }
-    //Load in buttons
-    var responsibilitiesStack = pageObject.getViewById("processesLayout");
-    responsibilitiesStack.removeChildren();
-    for(z=0; z<processes.length; z++){
-        var addLabel = new Button();
-        addLabel.className = "Main_Nav_SubLine";
-        addLabel.text = processes[z];
-        addLabel.on(buttonModule.Button.tapEvent, loadRoles, this);
-        responsibilitiesStack.addChild(addLabel);
-    }
-    pageData.set("Process", true);
-    pageData.set("Roles", false);
-    pageData.set("Responsibilities", false);
-    
-}
-function loadResponsibilities(eventData) {
-    var responsibilitiesStack = pageObject.getViewById("responsibilityContent");
-    selectedRole = eventData.object.text;
-    //console.log(eventData.object.text);
-    var dbReturn = getFromDataBase();
-    var descriptionText = "";
-    //Get proper description
-    for(i=0; i<dbReturn.length; i++){
-        if(dbReturn[i].process == selectedProcess && dbReturn[i].role == selectedRole){
-            descriptionText = dbReturn[i].description;
-            break;
-        }
-    }
-    //load into description area
-    var descriptionItemSplit;
-    var descriptionComponents = descriptionText.split("<*");
-    responsibilitiesStack.removeChildren();
-    var headerLabel = new Label()
-    headerLabel.text = selectedProcess + "  > " + selectedRole;
-    headerLabel.className = "Article_H2";
-    responsibilitiesStack.addChild(headerLabel);
-    for (z=0; z<descriptionComponents.length; z++){
-        descriptionItemSplit = descriptionComponents[z].split("*>");
-        var descLabel = new Label();
-        //LabelArray.push(new Label());
-        descLabel.className = descriptionItemSplit[0];
-        descLabel.text = descriptionItemSplit[1];
-        responsibilitiesStack.addChild(descLabel);
-    }
-
-    pageData.set("Process", false);
-    pageData.set("Roles", false);
-    pageData.set("Responsibilities", true);
-  }
 
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
 
+var loadMissionContent = function(){
+    var dbReturn = getFromDataBase();
+    for(i=0; i<dbReturn.length; i++){
+        var contentID = dbReturn[i].mission + "Content";
+        var missionContentBox = pageObject.getViewById(contentID);
+        missionContentBox.removeChildren();
+        var descriptionText = dbReturn[i].description;
+        var descriptionItemSplit;
+        var descriptionComponents = descriptionText.split("<*");
+        for (z=0; z<descriptionComponents.length; z++){
+            descriptionItemSplit = descriptionComponents[z].split("*>");
+            var descLabel = new Label();
+            //LabelArray.push(new Label());
+            descLabel.className = descriptionItemSplit[0];
+            descLabel.text = descriptionItemSplit[1];
+            missionContentBox.addChild(descLabel);
+        }
+
+
+
+    }
+}
+
 var getFromDataBase = function(){
     var databaseReturn = [];
     var databaseLine = {};
-    databaseLine = {process:"Extra Duty Pay", role:"Employee", description:"<*Article_Body*>Be sure to have a valid MyKey or PKI Card<*Article_Body*>Enter time in Phoenix self-service<*Article_Body*>Respect and prioritize timeliness cutoff dates<*Article_Body*>Enter late time submissions in Phoenix self-service within 6 months"};
+    databaseLine = {mission:"mission1", description:"<*Article_H2*>Mission #1: Pre-Onboarding<*Article_Body*>We want to help you make a positive first impression! Before you start your student employment at DND, please ensure that you take the time to review the information below so that you are prepared for your first day of work.<*Article_H3*>Read about who we are<*Article_List*>Go to the About Us page to read about the Defence Team’s vision and organizational priorities.<*Article_H3*>Familiarize yourself with the organizational structure at DND, CAF Ranks and Insignia<*Article_List*>Go to the About Organizational Structure page to read about DND’s high-level reporting structure.<*Article_List*>Go to the Rank Appointment Insignia page to read about the ranks within the CAF.<*Article_H3*>Familiarize yourself with the Terms and Conditions of Employment for Students<*Article_List*>Students are paid in accordance with the Terms and Conditions of Employment for Students (Student Rates of Pay).<*Article_H3*>Read and complete all forms provided by your manager/ supervisor and/or Human Resources (HR)<*Article_List*>Letter of Offer<*Article_List*>Direct Deposit Form<*Article_List*>Tax Forms (Federal and Provincial)<*Article_List*>Employee Questionnaire Form<*Article_List*>Solemn Oath or Affirmation Form (new hires external to the public service only)<*Article_List*>Political Activities and You! Brochure<*Article_List*>DND and CF Code of Values and Ethics Brochure<*Article_List*>DND/CF Self-Identification Form<*Article_List*>New Student Passport: Pre-onboarding Checklist<*Article_H3*>Prepare for your first day of work<*Article_List*>If your manager/supervisor hasn’t contacted you, contact them to confirm your start date, expected time of arrival, work location, transportation options/parking, what to do when you arrive, etc.<*Article_List*>Be prepared to talk to your manager/supervisor about your role and expectations, work hours/breaks, any workplace accommodations that are needed, employment equity initiatives, the importance of diversity and inclusion in the workplace and remuneration. Come prepared with any questions you might have, as your manager/supervisor will be setting some time aside to review your Letter of Offer and other HR documents with you.<*Article_List*>Ask about the dress code, language of work (including the designation of your work unit) and any other cultural expectations of the workplace.<*Article_List*>Prepare to bring with you<*Article_List*>A valid piece of government-issued photo ID (i.e. Driver’s License, Health Card, etc.) in order to receive a temporary building pass.<*Article_List*>Your signed Letter of Offer and any other completed forms as instructed by HR, if not already sent.<*Article_List*>Any other information requested by your manager/supervisor."};
     databaseReturn.push(databaseLine);
-    databaseLine = {process:"Extra Duty Pay", role:"Manager", description:"<*Article_Body*>Review and approve time in Phoenix self-service<*Article_Body*>Enter time in Phoenix self-service on behalf of employees who do not have access"};
+    databaseLine = {mission:"mission2a", description:"<*Article_H2*>Mission #2A: Pre-Onboarding<*Article_Body*>We want to help you make a positive first impression! Before you start your student employment at DND, please ensure that you take the time to review the information below so that you are prepared for your first day of work.<*Article_H3*>Read about who we are<*Article_List*>Go to the About Us page to read about the Defence Team’s vision and organizational priorities."};
     databaseReturn.push(databaseLine);
-    databaseLine = {process:"Benefits Enrollment", role:"Employee", description:"<*Article_H2*>Public Service Health Care Plan<*Article_Body*>Enroll in and amend PSHCP coverage using Phoenix self-service<*Article_Body*>Completing a Phoenix Feedback Form to enroll in any voluntary insurance plans or other benefits not available for enrollment through Phoenix self-service"};
+    databaseLine = {mission:"mission2b", description:"<*Article_H2*>Mission #2B: Pre-Onboarding<*Article_Body*>We want to help you make a positive first impression! Before you start your student employment at DND, please ensure that you take the time to review the information below so that you are prepared for your first day of work.<*Article_H3*>Read about who we are<*Article_List*>Go to the About Us page to read about the Defence Team’s vision and organizational priorities."};
     databaseReturn.push(databaseLine);
-    databaseLine = {process:"Benefits Enrollment", role:"Pay Center", description:"<*Article_H2*>Public Service Health Care Plan<*Article_Body*>Responsible for communicating with Sun Life Financial regarding errors and initiating any data corrections<*Article_Body*>Starting the registration to the applicable insurance plans or changing the information regarding the enrolment in Phoenix<*Article_Body*>Completing and sending the Public Service Management Insurance forms to the Compensation Sector, Pay Systems Sustainment and Pay Policies Directorate<*Article_Body*>Starting, changing or stopping enrolment of other benefits in Phoenix when the relevant documents are received if required"};
+    databaseLine = {mission:"mission3", description:"<*Article_H2*>Mission #3: Pre-Onboarding<*Article_Body*>We want to help you make a positive first impression! Before you start your student employment at DND, please ensure that you take the time to review the information below so that you are prepared for your first day of work.<*Article_H3*>Read about who we are<*Article_List*>Go to the About Us page to read about the Defence Team’s vision and organizational priorities."};
     databaseReturn.push(databaseLine);
-    databaseLine = {process:"Benefits Enrollment", role:"Pension Center", description:"<*Article_H2*>Public Service Health Care Plan<*Article_Body*>"};
+    databaseLine = {mission:"mission4", description:"<*Article_H2*>Mission #4: Pre-Onboarding<*Article_Body*>We want to help you make a positive first impression! Before you start your student employment at DND, please ensure that you take the time to review the information below so that you are prepared for your first day of work.<*Article_H3*>Read about who we are<*Article_List*>Go to the About Us page to read about the Defence Team’s vision and organizational priorities."};
     databaseReturn.push(databaseLine);
+    databaseLine = {mission:"mission5", description:"<*Article_H2*>Mission #5: Pre-Onboarding<*Article_Body*>We want to help you make a positive first impression! Before you start your student employment at DND, please ensure that you take the time to review the information below so that you are prepared for your first day of work.<*Article_H3*>Read about who we are<*Article_List*>Go to the About Us page to read about the Defence Team’s vision and organizational priorities."};
+    databaseReturn.push(databaseLine);
+
     
 
     return databaseReturn;

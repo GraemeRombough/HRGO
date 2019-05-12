@@ -8,30 +8,37 @@
       <label col="1" row="0" text="OUR ROLES" class="Header_Label"/>
     </GridLayout>
     
-    <!-- PROCESS -->
-    <Button text="Process" class="Home_Utility_Label" tap="navToggle" value="Process" />
-    <StackLayout visibility="{{ Process ? 'visible' : 'collapsed' }}" id="processesLayout">
-      <Button text="Extra Duty Pay" class="Main_Nav_SubLine" tap="loadRoles"/>
-      <Button text="Pay Issue Escalation" class="Main_Nav_SubLine" tap="loadRoles"/>
-      <Button text="Military Section 34 Time Submission" class="Main_Nav_SubLine" tap="loadRoles"/>
+    <!-- Mission 1 -->
+    <Button text="Pre Arrival" class="Home_Utility_Label" tap="navToggle" value="Mission1" />
+    <StackLayout visibility="{{ Mission1 ? 'visible' : 'collapsed' }}" id="mission1Content">
     </StackLayout>
 
-  <!-- ROLES -->
-    <Button text="Roles" class="Home_Utility_Label" tap="navToggle" value="Roles" />
-    <StackLayout visibility="{{ Roles ? 'visible' : 'collapsed' }}"  id="rolesLayout">
-      <Button text="Employee" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
-      <Button text="Section 34 Manager" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
-      <Button text="DND Compensation" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
-      <Button text="Public Service Pay Center" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
+    <!-- Mission 2a -->
+    <Button text="Your First Day" class="Home_Utility_Label" tap="navToggle" value="Mission2a" />
+    <StackLayout visibility="{{ Mission2a ? 'visible' : 'collapsed' }}" id="mission2aContent">
     </StackLayout>
 
-  <!-- Responsibilities -->
-  <Button text="Responsibilities" class="Home_Utility_Label" tap="navToggle" value="Responsibilities" />
-    <StackLayout class="Article_MainStack" id="responsibilityContent" width="100%" orientation="vertical" visibility="{{ Responsibilities ? 'visible' : 'collapsed' }}">
-      <Label text="Stuff here" class="Article_Body"/>
-      <Label text="Stuff here" class="Article_Body"/>
-      <Label text="Stuff here" class="Article_Body"/>
+    <!-- Mission 2b -->
+    <Button text="Your First Week" class="Home_Utility_Label" tap="navToggle" value="Mission2b" />
+    <StackLayout visibility="{{ Mission2b ? 'visible' : 'collapsed' }}" id="mission2bContent">
     </StackLayout>
+
+    <!-- Mission 3 -->
+    <Button text="Your First Month" class="Home_Utility_Label" tap="navToggle" value="Mission3" />
+    <StackLayout visibility="{{ Mission3 ? 'visible' : 'collapsed' }}" id="mission3Content">
+    </StackLayout>
+
+    <!-- Mission 4 -->
+    <Button text="Complete Your Onboarding" class="Home_Utility_Label" tap="navToggle" value="Mission4" />
+    <StackLayout visibility="{{ Mission4 ? 'visible' : 'collapsed' }}" id="mission4Content">
+    </StackLayout>
+
+    <!-- Mission 5-->
+    <Button text="Your Last Week" class="Home_Utility_Label" tap="navToggle" value="Mission5" />
+    <StackLayout visibility="{{ Mission5 ? 'visible' : 'collapsed' }}" id="mission5Content">
+    </StackLayout>
+
+    
 
   </StackLayout>
   </ScrollView>
