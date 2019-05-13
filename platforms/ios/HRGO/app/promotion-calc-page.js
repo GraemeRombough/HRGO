@@ -94,9 +94,6 @@ exports.getPromotionStep = function(args){
 };
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
-    //alert(args.object.value).then(() => {
-    console.log(subNavTitle);
-    //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
 exports.onClassListPickerLoaded = function(args){
@@ -104,8 +101,7 @@ exports.onClassListPickerLoaded = function(args){
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         vm.set("classIndex", listPicker.selectedIndex);
-        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+        
         selectedSubClass = [listPicker.selectedIndex, listPicker.selectedValue];
         selectedSubStep = null;
         loadSteps(listPicker.selectedValue,args);
@@ -116,11 +112,9 @@ exports.onTargClassListPickerLoaded = function(args){
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         vm.set("targClassIndex", listPicker.selectedIndex);
-        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+    
         selectedTargClass = [listPicker.selectedIndex, listPicker.selectedValue];
-        //selectedSubStep = null;
-        //loadSteps(listPicker.selectedValue,args);
+        
     });
 }
 exports.onStepListPickerLoaded = function(args){
