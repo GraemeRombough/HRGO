@@ -2,23 +2,18 @@
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <StackLayout row="0" orientation="vertical" width="100%">
-    <GridLayout columns="*,60" rows="auto" class="HeaderLabel">
-      <label col="0" row="0" text="Reference &amp; Calculators"/>
-      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
+    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
+      <label col="1" row="0" text="CALCULATORS" class="Header_Label"/>
     </GridLayout>
 
     <StackLayout orientation="vertical">
-      <Button class="Landing_Nav" text="Day Calculators" tap="navToggle" value="DayCalculator"/>
-        <Button class="Landing_SubNav_Compensation" id="2" text="Working Day Calculator" tap="goToUtility" pageName="workdays-utility-page" visibility="{{ DayCalculator ? 'visible' : 'collapsed' }}"/>
-        <Button class="Landing_SubNav_Compensation" id="2" text="Section 34 Timeliness Calculator" tap="goToUtility" pageName="timeliness-utility-page" visibility="{{ DayCalculator ? 'visible' : 'collapsed' }}"/>
-      <Button class="Landing_Nav" text="Salary Calculators" tap="navToggle" value="SalaryCalculator"/>
-        <Button class="Landing_SubNav_Compensation" id="2" text="Gross Salary Calculator" tap="goToSalary" visibility="{{ SalaryCalculator ? 'visible' : 'collapsed' }}"/>
-      <Button class="Landing_Nav" text="Notification Tools" tap="navToggle" value="Notification"/>
-        <Button class="Landing_SubNav_Compensation" id="2" text="Time Approval Notifications" tap="goToUtility" pageName="sec34-notifications-page" visibility="{{ Notification ? 'visible' : 'collapsed' }}"/>
-      <Button class="Landing_Nav" text="Lookup" tap="navToggle" value="Lookup"/>
-        <Button class="Landing_SubNav_Compensation" id="2" text="Leave Code Lookup" tap="goToUtility" pageName="leave-code-page" visibility="{{ Lookup ? 'visible' : 'collapsed' }}"/>
-        <Button class="Landing_SubNav_Compensation" id="2" text="Job Description Lookup" tap="goToUtility" pageName="SJD-page" visibility="{{ Lookup ? 'visible' : 'collapsed' }}"/>
-      
+      <Button class="Sub_Nav_Line" text="Pay Calculation" tap="navToggle" value="PayCalculation"/>
+        <Button class="Main_Nav_SubLine" text="Calculate Gross Pay" pageName="pay-info" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calculate Promotion Step" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calculate Timeliness Cutoffs" pageName="timeliness-utility-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Staffing Calculation" tap="navToggle" value="StaffingCalculation"/>
+        <Button class="Main_Nav_SubLine" text="Calculate Casual End Dates" pageName="workdays-utility-page" tap="goToUtility" visibility="{{ StaffingCalculation ? 'visible' : 'collapsed' }}"/>
 
     </StackLayout>
   </StackLayout>

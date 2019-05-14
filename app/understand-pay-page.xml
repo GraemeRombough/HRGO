@@ -1,4 +1,4 @@
-<Page loaded="pageLoaded" navigatingTo="onNavigatingTo">
+<Page loaded="pageLoaded" navigatingTo="onNavigatingTo" actionBarHidden="true">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <ScrollView>

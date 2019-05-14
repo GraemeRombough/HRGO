@@ -64,7 +64,7 @@ var displayOvertime = function(){
         var dateInput = new Date(overTimeList[i].Date);
         var enteredCheck = new switchModule.Switch();
         
-        rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()}\/${dateInput.getDay()}`;
+        rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()+1}\/${dateInput.getDate()}`;
         rowTitle.className = "Main_Nav_SubLine";
         hoursTitle.text = "Hours: " + overTimeList[i].Hours;
         hoursTitle.className = "Article_Body"

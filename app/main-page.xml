@@ -7,7 +7,7 @@
       <label col="1" row="0" text="HOME" class="Header_Label"/>
     </GridLayout>
       <ScrollView>
-       <StackLayout width="100%" orientation="vertical">
+       <!--<StackLayout width="100%" orientation="vertical">
         <GridLayout columns="60,*" rows="auto" class="Home_Utility_Row">
           <Button class="Home_Utility_Button" tap="navToggle" value="Resources" col="0">
             <FormattedString>
@@ -59,9 +59,9 @@
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="leave-code-page" text="Our Leave Types" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="roles-page" text="Our Roles and Responsibilities" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" tap="goToUtility" pageName="understand-pay-page" text="Understand Our Paycheques" visibility="{{ Lookup? 'visible' : 'collapsed' }}"/> 
-      </StackLayout> 
+      </StackLayout> -->
 
-<!--
+
       <StackLayout orientation="vertical">
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
@@ -69,37 +69,37 @@
             <Button row="1" class="Home_Nav_Label" text="MY &#xA; PAY" tap="goToUtility" pageName="pay-landing-page"/>
           </GridLayout>
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe940;" tap="goToUtility" pageName="pay-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe940;" tap="goToUtility" pageName="calculators-landing-page"/>
             <Button row="1" class="Home_Nav_Label" text="MY &#xA; CALCULATORS" tap="goToUtility" pageName="calculators-landing-page"/>
           </GridLayout>
         </StackLayout> 
 
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe972;" tap="goToUtility" pageName="pay-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe972;" tap="goToUtility" pageName="student-landing-page"/>
             <Button row="1" class="Home_Nav_Label" text="MY &#xA; STUDENTS" tap="goToUtility" pageName="student-landing-page"/>
           </GridLayout>
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe9b8;" tap="goToUtility" pageName="pay-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="MY &#xA; TRACKING" tap="goToUtility" pageName="pay-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe9b8;" tap="goToUtility" pageName="tracking-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="MY &#xA; TRACKING" tap="goToUtility" pageName="tracking-landing-page"/>
           </GridLayout>
         </StackLayout> 
 
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe926;" tap="goToUtility" pageName="pay-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="MY &#xA; LOOKUP" tap="goToUtility" pageName="pay-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe926;" tap="goToUtility" pageName="lookup-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="MY &#xA; LOOKUP" tap="goToUtility" pageName="lookup-landing-page"/>
           </GridLayout>
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe923;" tap="goToUtility" pageName="pay-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="MY &#xA; CONTACT" tap="goToUtility" pageName="pay-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe923;" tap="goToUtility" pageName="contact-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="MY &#xA; CONTACT" tap="goToUtility" pageName="contact-landing-page"/>
           </GridLayout>
         </StackLayout>   
 
 
 
 
-      </StackLayout>-->
+      </StackLayout>
 
       </ScrollView>
     </StackLayout>
@@ -108,7 +108,7 @@
         <Button class="Footer_NavIcon" text="&#xe902;" width="20%"/>
         <Button class="Footer_NavIcon" text="&#xe904;"  width="20%" tap="goToTest"/>
         <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
-        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
         <Button class="Footer_NavIcon" text="&#xe953;"  width="20%" tap ="footer5"/>
       </StackLayout>
 

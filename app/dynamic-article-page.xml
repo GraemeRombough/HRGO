@@ -1,4 +1,4 @@
-<Page loaded="pageLoaded">
+<Page loaded="pageLoaded" actionBarHidden="true">
 
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">

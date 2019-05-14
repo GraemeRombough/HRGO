@@ -1,4 +1,4 @@
-<Page loaded="pageLoaded">
+<Page loaded="pageLoaded" actionBarHidden="true">
   <ActionBar title="Compensation" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <StackLayout row="0" orientation="vertical" width="100%">
