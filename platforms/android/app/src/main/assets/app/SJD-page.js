@@ -23,13 +23,6 @@ exports.pageLoaded = function(args) {
     //displayPOCs(getFromDatabase());
     selectedClass = null;
     classDD = getClassList();
-    //const classifications = getClassList();
-    /* pageData = fromObject({
-        classItems: classDD,
-        classIndex: 1,
-        searchSection:true,
-        contentSection:false
-    });  */
 
     page.bindingContext = pageData; 
     pageData.set("searchSection", true);
@@ -46,6 +39,30 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
     
 };
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+}
 exports.showSearch = function(){
     pageData.set("classIndex", 1);
     pageData.set("classCheck", false);
@@ -177,18 +194,7 @@ var getFromDatabase = function(){
 
     return databaseReturn;
 };
-var emailPOC = function(eventData){
-    console.log(eventData.object.email);
-    if (email.available()){
-        email.compose({
-            subject: "",
-            body: "",
-            to: eventData.object.email
-        });
-    } else {
-        console.log("Email Not Available");
-    }
-};
+
 exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;

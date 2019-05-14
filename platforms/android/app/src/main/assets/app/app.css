@@ -180,6 +180,10 @@ button{
     font-size: 30px;
     background-color: rgb(0,31,91);
 }
+.Footer_NavIcon_Image{
+    color:rgb(220,170,0);
+    width:30px;
+}
 
 .SearchBar{
     border-bottom-width: 1px;

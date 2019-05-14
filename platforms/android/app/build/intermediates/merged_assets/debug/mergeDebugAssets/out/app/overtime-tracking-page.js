@@ -38,6 +38,30 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
     
 };
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+}
 exports.clearSubmittedTime = function(){
     var tempOvertimeList = [];
     for(i=0; i<overTimeList.length; i++){
@@ -64,7 +88,7 @@ var displayOvertime = function(){
         var dateInput = new Date(overTimeList[i].Date);
         var enteredCheck = new switchModule.Switch();
         
-        rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()}\/${dateInput.getDay()}`;
+        rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()+1}\/${dateInput.getDate()}`;
         rowTitle.className = "Main_Nav_SubLine";
         hoursTitle.text = "Hours: " + overTimeList[i].Hours;
         hoursTitle.className = "Article_Body"

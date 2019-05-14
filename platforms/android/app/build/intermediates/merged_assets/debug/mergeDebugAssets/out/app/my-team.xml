@@ -1,4 +1,4 @@
-<Page loaded="pageLoaded" navigatingTo="onNavigatingTo">
+<Page loaded="pageLoaded" navigatingTo="onNavigatingTo" actionBarHidden="true">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <ScrollView>
@@ -7,7 +7,7 @@
     <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
     <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
     <label col="1" row="0" text="MY TEAM" class="Header_Label"/>
-  </GridLayout>
+    </GridLayout>
       <Label text="Add New Employee" class="Article_H1"/>
       <Label text="Name" class="Article_H3"/>
       <TextField text="{{ employeeName }}" class="Utility_TextBox"/>
@@ -18,7 +18,7 @@
       <Label text="My Team Members" class="Article_H1"/>
       <StackLayout id="teamListStack" class="Utility_MyTeam_TeamList">
       </StackLayout>
-
+      <Button text="Clear Team Members" tap="clearTeam" class="DayCalc_SubmitButton"/>
       <!-- COMPOSE EMAIL -->
       <StackLayout>
         <Label text="Compose Email to Team" class="Article_H1"/>
@@ -32,11 +32,11 @@
   </ScrollView>
   <StackLayout row="1" class="FooterNav" orientation="horizontal">
         <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
-        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
-  </StackLayout>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+    </StackLayout>
   </GridLayout>
 
   <!-- Your UI components go here -->

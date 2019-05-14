@@ -5,6 +5,8 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/feedback-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/timeliness-utility-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/profile-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/lookup-landing-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tracking-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/leave-code-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/POC-page.js
@@ -16,14 +18,13 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/understand-pay-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/sec34-notifications-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/my-team.js
-/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/test-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/code/navComponents.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/contact-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/roles-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/student-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-walkthrough-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/search-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/workdays-utility-page.js
-/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/main-utility-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/article-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/SJD-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/overtime-tracking-page.js
