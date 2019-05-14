@@ -30,7 +30,30 @@ exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
-
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+}
 var loadMissionContent = function(){
     var dbReturn = getFromDataBase();
     for(i=0; i<dbReturn.length; i++){

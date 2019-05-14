@@ -6,23 +6,24 @@
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
       <label col="1" row="0" text="CONTACT" class="Header_Label"/>
     </GridLayout>
-
+    <ScrollView>
     <StackLayout orientation="vertical">
       <Button class="Sub_Nav_Line" text="My Team" tap="navToggle" value="TeamContact"/>
         <Button class="Main_Nav_SubLine" text="Contact My Team" pageName="my-team" tap="goToUtility" visibility="{{ TeamContact ? 'visible' : 'collapsed' }}"/>
       <Button class="Sub_Nav_Line" text="All Contacts" tap="navToggle" value="POC"/>
         <Button class="Main_Nav_SubLine" text="HR POCs" pageName="POC-page" tap="goToUtility" visibility="{{ POC ? 'visible' : 'collapsed' }}"/>
     </StackLayout>
+    </ScrollView>
   </StackLayout>
       
     
     <StackLayout row="1" class="FooterNav" orientation="horizontal">
         <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
-        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
-      </StackLayout>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+    </StackLayout>
 
     </GridLayout>
 

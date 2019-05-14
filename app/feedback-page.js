@@ -14,23 +14,47 @@ exports.onNavigatingTo = function(args){
     page.bindingContext = pageData;  
     feedbackPage=page.navigationContext;
     pageObject = page;
+    console.log(feedbackPage.PageName);
     
     
 };
 exports.pageLoaded = function(args) {
     
 };
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+}
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
 exports.sendEmail = function(args){
-    console.log(feedbackPage.PageName);
     email.available().then(function(avail){
         console.log("Email available? " + avail);
     });
-    var eSubject = "HRGO Feedback Submission"
-    var eBody = `Page: ${feedbackPage.PageName}, Date: ${feedback.DateTime}`;
+    var eSubject = "HRGO Feedback Submission";
+    var eBody = `Page: ${feedbackPage.PageName}, Date: ${TODAY}`;
     eBody += pageData.get("feedbackBody");
     var toAddress = "graeme_rombough@hotmail.com";
     if(eSubject){

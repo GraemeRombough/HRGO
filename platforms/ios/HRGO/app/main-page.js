@@ -64,12 +64,11 @@ exports.footer4 = function(){
                 DateTime: TODAY
                 }
             }
-    topmost.navigate(navigationOptions);
-    
+    topmost.navigate(navigationOptions); 
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    //topmost.navigate("pay-info");
+    topmost.navigate("POC-page");
 }
 exports.searchLanding = function(){
     var searchField = page.getViewById("SearchBox").text;

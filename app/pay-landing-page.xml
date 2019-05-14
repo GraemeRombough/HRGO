@@ -6,7 +6,7 @@
       <label col="0" row="0" class="Header_Icon" text="&#xe93b;"/>
       <label col="1" row="0" text="MY PAY" class="Header_Label"/>
     </GridLayout>
-
+    <ScrollView>
     <StackLayout orientation="vertical">
       <Button class="Sub_Nav_Line" text="Your Pay Information" tap="navToggle" value="YourPayInformation"/>
         <Button class="Main_Nav_SubLine" id="1" text="Pay Basics" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
@@ -45,16 +45,16 @@
         <Button class="Main_Nav_SubLine" text="Understand Our Paycheques" pageName="understand-pay-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Leave Type Lookup" pageName="leave-code-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
     </StackLayout>
+    </ScrollView>
   </StackLayout>
-      
-    
+
     <StackLayout row="1" class="FooterNav" orientation="horizontal">
         <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
-        <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
-        <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
-      </StackLayout>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+    </StackLayout>
 
     </GridLayout>
 
