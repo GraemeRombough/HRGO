@@ -7,7 +7,7 @@
     <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
     <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
     <label col="1" row="0" text="MY TEAM" class="Header_Label"/>
-  </GridLayout>
+    </GridLayout>
       <Label text="Add New Employee" class="Article_H1"/>
       <Label text="Name" class="Article_H3"/>
       <TextField text="{{ employeeName }}" class="Utility_TextBox"/>
@@ -18,7 +18,7 @@
       <Label text="My Team Members" class="Article_H1"/>
       <StackLayout id="teamListStack" class="Utility_MyTeam_TeamList">
       </StackLayout>
-
+      <Button text="Clear Team Members" tap="clearTeam" class="DayCalc_SubmitButton"/>
       <!-- COMPOSE EMAIL -->
       <StackLayout>
         <Label text="Compose Email to Team" class="Article_H1"/>
