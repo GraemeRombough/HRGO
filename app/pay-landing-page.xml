@@ -23,13 +23,13 @@
         <Button class="Main_Nav_SubLine" id="6" text="Section 34 Managers Roles in Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="7" text="Section 34 Self-Service Pay Requests" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="8" text="HR/Staffing Actions Affecting Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="100" text="Changing your Section 34 Manager in Phoenix" tap="goToWalkthrough" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <!--<Button class="Main_Nav_SubLine" id="100" text="Changing your Section 34 Manager in Phoenix" tap="goToWalkthrough" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>-->
 
 
       <Button class="Sub_Nav_Line" text="Hours and Scheduling" tap="navToggle" value="Scheduling"/>
         <Button class="Main_Nav_SubLine" id="9" text="Overtime" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="10" text="Managing Employee Schedules" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="100" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
+        <!--<Button class="Main_Nav_SubLine" id="100" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>-->
 
       <Button class="Sub_Nav_Line" text="Leave" tap="navToggle" value="Leave"/>
         <Button class="Main_Nav_SubLine" id="19" text="Leave Basics" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
