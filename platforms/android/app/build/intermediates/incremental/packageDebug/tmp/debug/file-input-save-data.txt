@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue May 14 00:20:28 EDT 2019
+#Tue May 14 22:25:07 EDT 2019
 739.baseType=DIRECTORY
 38.path=app/tns_modules/tns-core-modules/ui/styling/style-properties.js
 429.baseType=DIRECTORY

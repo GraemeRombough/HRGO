@@ -57,7 +57,7 @@ exports.searchPOC = function(){
             filteredResults.push(dataBaseReturn[i]);
         }else if(dataBaseReturn[i].Desc.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
             filteredResults.push(dataBaseReturn[i]);
-        }else if(dataBaseReturn[i].KeyWords.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
+        }else if(dataBaseReturn[i].Keywords.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
             filteredResults.push(dataBaseReturn[i]);
         }
     }
@@ -69,10 +69,13 @@ exports.searchPOC = function(){
 }
 var displayPOCs = function(Codes){
     var LeaveList = pageObject.getViewById("POC_List");
+    LeaveList.visible = false;
     LeaveList.removeChildren();
     for(i = 0; i < Codes.length; i++ ){
         LeaveList.addChild(createPOCGrid(Codes[i].Title, Codes[i].Paid, Codes[i].Code, Codes[i].Desc));
     }
+    pageData.set("SearchCriteria", "");
+    LeaveList.visible = true;
 };
 var createPOCGrid = function(Leave_t, Leave_p, Leave_c, Leave_d){
     var gridLayout = new layout.GridLayout();

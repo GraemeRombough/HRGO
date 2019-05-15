@@ -179,21 +179,7 @@ var sendSJDLink = function(eventData){
         console.log("Email Not Available");
     }
 }
-var getFromDatabase = function(){
-    var databaseReturn = [];
-    var dbRow = {};
 
-    dbRow = {Title:"Administrative Assistant I ", WDNumber:"0000057333", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027" , Desc:"Provides administrative assistance to an executive at Level C, represents the organization at admin meetings. No supervisory responsibilities."};
-    databaseReturn.push(dbRow);
-    dbRow = {Title:"Records and Information Management Administrator", WDNumber:"0000057416", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"The position is responsible for the provision of records and information management services to an organization and typically reports to a civilian supervisor in the administrative field Directions and information pertaining to the applicable business process with respect to records/information management can generally be obtained from the line organization responsible for Records and Information Management. This position has no supervisory responsibilities."};
-    databaseReturn.push(dbRow);
-    dbRow = {Title:"Compensation Agent", WDNumber:"0000057225", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"Provides general advice and services on compensation and benefits, issues/entitlements to DND civilians, clients and/or their representatives."};
-    databaseReturn.push(dbRow);
-    dbRow = {Title:"Service Desk Technician", WDNumber:"0000057225", Salary:"$53611 - $69088", Supervisory:"No", Classification:"CS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"The position provides IM/IT Service Desk services within a centralized Service Desk for DND/CAF staff and clients within a service delivery model such as an SMC.  An SMC is an IT services organization resulting from the consolidation of multiple IT points of service (service desks and service providers) into a single Level One organization (L1) that provides services to its assigned clients. The SMC addresses the needs of the DND/CAF to ensure efficient, effective, and responsive IT service delivery by establishing an enterprise-wide approach including an optimized service delivery model, streamlined IT service provision centres and standardized tools and processes. It also facilitates the establishment of measurable levels of IT service delivery, providing accurate information for a commander’s situational awareness and decision making with respect to the Department’s IT investments.  The primary responsibility of the 1st line of support, the Service Desk, is the initiation, execution and oversight of incidents and of some service requests.  Each Service Desk is responsible for the oversight and/or execution of the following: Incident Management, Service Request Management, Escalation of incidents, service requests and issues that may need higher attention, and Communications with the end user community.  The position generally reports to a Level F or above and has no supervisory responsibilities."};
-    databaseReturn.push(dbRow);
-
-    return databaseReturn;
-};
 
 exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
@@ -225,5 +211,22 @@ var getClassList = function(){
     }
     return classList;
 }
+var getFromDatabase = function(){
+    var databaseReturn = [];
+    var dbRow = {};
+
+    dbRow = {Title:"Administrative Assistant I ", WDNumber:"0000057333", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027" , Desc:"Provides administrative assistance to an executive at Level C, represents the organization at admin meetings. No supervisory responsibilities."};
+    databaseReturn.push(dbRow);
+    dbRow = {Title:"Records and Information Management Administrator", WDNumber:"0000057416", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"The position is responsible for the provision of records and information management services to an organization and typically reports to a civilian supervisor in the administrative field Directions and information pertaining to the applicable business process with respect to records/information management can generally be obtained from the line organization responsible for Records and Information Management. This position has no supervisory responsibilities."};
+    databaseReturn.push(dbRow);
+    dbRow = {Title:"Compensation Agent", WDNumber:"0000057225", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"Provides general advice and services on compensation and benefits, issues/entitlements to DND civilians, clients and/or their representatives."};
+    databaseReturn.push(dbRow);
+    dbRow = {Title:"Service Desk Technician", WDNumber:"0000057225", Salary:"$53611 - $69088", Supervisory:"No", Classification:"CS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"The position provides IM/IT Service Desk services within a centralized Service Desk for DND/CAF staff and clients within a service delivery model such as an SMC.  An SMC is an IT services organization resulting from the consolidation of multiple IT points of service (service desks and service providers) into a single Level One organization (L1) that provides services to its assigned clients. The SMC addresses the needs of the DND/CAF to ensure efficient, effective, and responsive IT service delivery by establishing an enterprise-wide approach including an optimized service delivery model, streamlined IT service provision centres and standardized tools and processes. It also facilitates the establishment of measurable levels of IT service delivery, providing accurate information for a commander’s situational awareness and decision making with respect to the Department’s IT investments.  The primary responsibility of the 1st line of support, the Service Desk, is the initiation, execution and oversight of incidents and of some service requests.  Each Service Desk is responsible for the oversight and/or execution of the following: Incident Management, Service Request Management, Escalation of incidents, service requests and issues that may need higher attention, and Communications with the end user community.  The position generally reports to a Level F or above and has no supervisory responsibilities."};
+    databaseReturn.push(dbRow);
+
+    
+
+    return databaseReturn;
+};
 
 
