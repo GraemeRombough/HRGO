@@ -50,13 +50,15 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
 };
 exports.sendEmail = function(args){
+    const TODAY = new Date();
     email.available().then(function(avail){
         console.log("Email available? " + avail);
     });
     var eSubject = "HRGO Feedback Submission";
-    var eBody = `Page: ${feedbackPage.PageName}, Date: ${TODAY}`;
+    var eBody = `Page: ${feedbackPage.PageName}, Date: ${TODAY} -- `;
     eBody += pageData.get("feedbackBody");
-    var toAddress = "graeme_rombough@hotmail.com";
+    var toAddress = [];
+    toAddress.push("graeme.rombough@forces.gc.ca");
     if(eSubject){
         if (email.available()){
             email.compose({
