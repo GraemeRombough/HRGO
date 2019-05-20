@@ -15,6 +15,10 @@ exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate(args.object.pageName);
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
     //alert(args.object.value).then(() => {

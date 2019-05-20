@@ -49,6 +49,10 @@ exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 exports.sendEmail = function(args){
     const TODAY = new Date();
     email.available().then(function(avail){
