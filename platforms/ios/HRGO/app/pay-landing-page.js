@@ -18,6 +18,10 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
     
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("profile-page");
@@ -65,6 +69,10 @@ exports.navToggle = function(args){
     console.log("nav toggle");
     //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
+};
+exports.goToUtility = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate(args.object.pageName);
 };
 var getNavList = function(){
     var navItem = {};

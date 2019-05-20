@@ -66,6 +66,10 @@ exports.navToggle = function(args){
     //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
+exports.goToUtility = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate(args.object.pageName);
+};
 var getNavList = function(){
     var navItem = {};
     navItem = {title:"Emergency Salary Advance", ref:"1"};

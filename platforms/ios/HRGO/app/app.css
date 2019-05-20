@@ -9,6 +9,14 @@ button{
     height:auto;
     vertical-align: middle;
 }
+.Back_Button{
+    font-family: "icomoon"; 
+    border-radius: 15%;
+    background-color: rgb(0,31,91);
+    font-size: 22px;
+    text-align: center;
+    color: rgb(220,170,0);
+}
 .Home_Nav_Row{
     padding-bottom:10%;
     padding-top:10%;

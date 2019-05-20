@@ -75,6 +75,10 @@ exports.switchToFrench = function(){
     var frenchPageTitle = pageDetails[1].split("/")[1].split(".")[0];
     console.log(frenchPageTitle);
 };
+exports.goToUtility = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate(args.object.pageName);
+};
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
     //alert(args.object.value).then(() => {

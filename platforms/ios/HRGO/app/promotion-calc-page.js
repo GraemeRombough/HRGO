@@ -68,11 +68,11 @@ exports.getPromotionStep = function(args){
         }
     }
     //get target class step info
-    for(i=0; i < dbReturn.length; i++){
+    /* for(i=0; i < dbReturn.length; i++){
         if(dbReturn[i].classCode == selectedTargClass[1]){
             classTargStepInfo.push(dbReturn[i]);
         }
-    }
+    } */
     //get target class step info
     for(i=0; i < dbReturn.length; i++){
         if(dbReturn[i].classCode == selectedTargClass[1]){
