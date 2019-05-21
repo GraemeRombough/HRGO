@@ -3,9 +3,10 @@
   <GridLayout rows="*,60">
   <ScrollView>
   <StackLayout row="0" orientation="vertical" width="100%">
-    <GridLayout columns="60,*" rows="auto" class="HeaderLabel">
+    <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
       <label col="1" row="0" text="PROMOTION PAY" class="Header_Label"/>
+      <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
     
     <!-- SUBSTANTIVE CLASS  tap="navToggle" value="FAQ" -->
@@ -24,7 +25,7 @@
       <ListPicker id="classPicker" items="{{ targClassItems }}" selectedIndex="{{ targClassIndex }}" loaded="onTargClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
     </StackLayout>
     <label text="{{ ResultLabel }}" class="DayCalc_StartDate"/>
-    <Button class="DayCalc_SubmitButton" text="Get Promotion Step" tap="getPromotionStep"/>
+    <Button class="Submit_Button_1" text="Get Promotion Step" tap="getPromotionStep"/>
 
   </StackLayout>
   </ScrollView>

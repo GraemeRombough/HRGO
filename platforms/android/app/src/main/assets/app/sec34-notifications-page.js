@@ -36,7 +36,10 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
     
 };
-
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 var addScheduleDays = function(startDate, schedule, totalDays){
     var i = 0;
     var checkDate = new Date(startDate.toString());

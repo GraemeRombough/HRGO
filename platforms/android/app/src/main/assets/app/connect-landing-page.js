@@ -11,7 +11,7 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
 
 };
-exports.goToMyTeam= function(args){
+exports.goToMyTeam = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("my-team");
 };
@@ -48,6 +48,10 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
     
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 exports.goToArticle = function(args){
     var navigationOptions={
         moduleName:'dynamic-article-page',

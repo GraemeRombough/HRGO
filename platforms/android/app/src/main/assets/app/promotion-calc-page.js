@@ -29,9 +29,7 @@ exports.onNavigatingTo = function(args){
     pageData.set("stepIndex", 1);
     pageData.set("targClassItems", classDD);
     pageData.set("targClassIndex", 1);
-    pageData.set("ResultLabel", resultLabel);
-    
-    
+    pageData.set("ResultLabel", resultLabel);  
 }
 exports.pageLoaded = function(args) {
     
@@ -208,6 +206,10 @@ exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("profile-page");

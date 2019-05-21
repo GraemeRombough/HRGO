@@ -18,6 +18,14 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
     
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("profile-page");
