@@ -13,9 +13,11 @@
       <!-- COMPOSE EMAIL -->
       <StackLayout>
         <Label text="Your Feedback" class="Article_H1"/>
-        <Label text="Comments" class="Article_H3"/>
+        <GridLayout columns="*,auto">
+        <Label col="0" text="Comments" class="Article_H3"/>
+        <Button col="1" text="Send Email" class="Submit_Button_2" tap="sendEmail"/>
+        </GridLayout>
         <TextView text="{{ feedbackBody }}" class="Utility_LongText"/>
-        <Button text="Submit Feedback by Email" class="DayCalc_SubmitButton" tap="sendEmail"/>
       </StackLayout>
     </StackLayout>  
   </ScrollView>

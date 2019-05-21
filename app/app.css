@@ -9,6 +9,35 @@ button{
     height:auto;
     vertical-align: middle;
 }
+.Submit_Button_1{
+    width: 80%;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top:12px;
+    margin-bottom:12px;  
+    color: #222;
+    white-space: normal;
+    padding-left: 30px;
+    background-color: #DDD;
+    font-size: 24px;
+    border-radius: 15%;
+    text-align: center;
+
+}
+.Submit_Button_2{
+    padding:8px;
+    padding-left: 14px;
+    padding-right:14px;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #222;
+    white-space: normal;
+    background-color: #DDD;
+    font-size: 16px;
+    border-radius: 15%;
+    text-align: center;
+}
 .Back_Button{
     font-family: "icomoon"; 
     border-radius: 15%;
@@ -90,18 +119,16 @@ button{
 }
 .Main_Nav_SubLine{
     margin:0px;
-    color: #FFF;
+    color: #222;
     white-space: normal;
-    border-bottom-color: rgb(220,170,0);
-    border-left-width:10px;
-    border-left-color: rgb(220,170,0);
-    padding-top:4px;
-    padding-bottom:4px;
+    border-bottom-color: #DDD;
+    padding-top:8px;
+    padding-bottom:8px;
     border-bottom-width: 1px;
-    padding-left: 24px;
+    padding-left: 40px;
     text-align: left;
-    background-color: rgb(0,31,91);
-    font-size: 24px;
+    background-color: #FFF;
+    font-size: 18px;
 }
 .Main_Nav_Line{
     
@@ -110,15 +137,13 @@ button{
     height: auto;
     padding-top: 8px;
     padding-bottom: 8px;
-    border-left-width: 10px;
-    border-left-color:  rgb(0,31,91);
     margin-top:10px;  
-    color: rgb(0,31,91);
+    color: #222;
     white-space: normal;
     text-align: left;
-    padding-left: 15px;
+    padding-left: 30px;
     background-color: #DDD;
-    font-size: 26px;
+    font-size: 20px;
 }
 .Home_Utility_Row{
     height: auto;
@@ -269,6 +294,7 @@ button{
     margin-right: 25px;
     margin-top: 28px;
     margin-bottom:14px;
+    padding-top:0px;
     white-space: normal;
     color: #333;
 }
@@ -288,7 +314,7 @@ button{
     font-size: 16px;
     margin-left: 50px;
     margin-right: 25px;
-    margin-top: 5px;
+    margin-top: 18px;
     margin-bottom:5px;
     white-space: normal;
     color: #333;

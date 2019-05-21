@@ -9,13 +9,13 @@
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
     <StackLayout visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
-      <Label text="Classification" class="Article_H2"/>
-      <ListPicker id="classPicker" items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
+      <Button text="Classification" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
+      <ListPicker id="classPicker" items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
 
-      <Label text="Step" class="Article_H2"/>
-      <ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker"/>
+      <Button text="Step" class="Home_Utility_Label" tap="navToggle" value="SubstantiveStep" />
+      <ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveStep ? 'visible' : 'collapsed' }}"/>
       <!--<TextField class="DayCalc_TextField" keyboardType="number" text="{{ stepNumber }}" />-->
-      <Button class="DayCalc_SubmitButton" text="Get Salary Info" tap="getSalaryInfo"/>
+      <Button class="Submit_Button_1" text="Get Salary Info" tap="getSalaryInfo"/>
     </StackLayout>
     <!-- SALARY INFO SECTION-->
       <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
@@ -37,7 +37,7 @@
         <Label col="0" row="11" class="Article_Body" text="{{ overtime1Rate }}"/>
         <TextField col="1" row="11" class="DayCalc_TextField" keyboardType="number" text="{{ overtime1Number }}" />
         <Label col="0" row="12" colSpan="3" class="Article_Body" text="{{ calculatedMoney }}"/>
-        <Button col="0" row="13" colSpan="3" class="DayCalc_SubmitButton" text="Calculate Totals" tap="getCalculatedInfo"/>
+        <Button col="0" row="13" colSpan="3" class="Submit_Button_1" text="Calculate Totals" tap="getCalculatedInfo"/>
         
       </GridLayout>
       

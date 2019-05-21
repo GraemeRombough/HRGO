@@ -14,12 +14,12 @@
       <TextField text="{{ employeeName }}" class="Utility_TextBox"/>
       <Label text="Email" class="Article_H3"/>
       <TextField text="{{ employeeEmail }}" keyboardtype="email" class="Utility_TextBox"/>
-      <Button text="Add Employee" tap="addEmployee" class="DayCalc_SubmitButton"/>
+      <Button text="Add Employee" tap="addEmployee" class="Submit_Button_1"/>
       <!-- TEAM LIST -->
       <Label text="My Team Members" class="Article_H1"/>
       <StackLayout id="teamListStack" class="Utility_MyTeam_TeamList">
       </StackLayout>
-      <Button text="Clear Team Members" tap="clearTeam" class="DayCalc_SubmitButton"/>
+      <Button text="Clear Team Members" tap="clearTeam" class="Submit_Button_1"/>
       <!-- COMPOSE EMAIL -->
       <StackLayout>
         <Label text="Compose Email to Team" class="Article_H1"/>
@@ -27,7 +27,7 @@
         <TextField text="{{ emailSubject }}" class="Utility_TextBox"/>
         <Label text="Email Body" class="Article_H3"/>
         <TextView text="{{ emailBody }}" class="Utility_LongText"/>
-        <Button text="Send Email to Team" class="DayCalc_SubmitButton" tap="sendEmail"/>
+        <Button text="Send Email to Team" class="Submit_Button_1" tap="sendEmail"/>
       </StackLayout>
     </StackLayout>  
   </ScrollView>

@@ -9,6 +9,7 @@ var pageObject;
 const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 var pageVM;
+var subNavTitle = "YourPayInformation";
 
 exports.onNavigatingTo = function(args){
     selectedClass = null;
@@ -25,7 +26,9 @@ exports.onNavigatingTo = function(args){
         stepItems: steps,
         stepIndex:1,
         infoVisible: true,
-        salaryVisible: false
+        salaryVisible: false,
+        SubstantiveClass: true,
+        SubstantiveStep: false
     }); 
     page.bindingContext = pageData;
     
@@ -41,11 +44,13 @@ exports.onClassListPickerLoaded = function(args){
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         vm.set("classIndex", listPicker.selectedIndex);
-        console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
         selectedStep = null;
         loadSteps(listPicker.selectedValue,args);
+        pageData.set("SubstantiveStep", true);
+        pageData.set("SubstantiveClass", false);
     });
 }
 exports.onStepListPickerLoaded = function(args){
@@ -53,8 +58,8 @@ exports.onStepListPickerLoaded = function(args){
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         vm.set("stepIndex", listPicker.selectedIndex);
-        console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedStep = [listPicker.selectedIndex, listPicker.selectedValue];
         
         
@@ -148,6 +153,13 @@ exports.footer3 = function(){
     topmost.navigate("profile-page");
     
 }
+exports.navToggle = function(args){
+    subNavTitle = args.object.value;
+    //alert(args.object.value).then(() => {
+    console.log("nav toggle");
+    //});
+    pageData.set(subNavTitle, !pageData.get(subNavTitle));
+};
 exports.footer4 = function(){
     console.log("Go To Feedback");
     var topmost = frameModule.topmost();
@@ -180,7 +192,7 @@ var getClassList = function(){
         }
         if (itemIsDuplicate == false){
             classList.push(databasePull[i].classCode);
-            console.log(databasePull[i].classCode);
+            //console.log(databasePull[i].classCode);
         }
     }
     return classList;
@@ -200,7 +212,7 @@ var getStepCount = function(){
         }
         stepItem = {class:classDD[i], steps:numOfSteps};
         returnClassSteps.push(stepItem);
-        console.log("class: " + classDD[i] +  "steps: " + numOfSteps);
+        //console.log("class: " + classDD[i] +  "steps: " + numOfSteps);
     }
     return returnClassSteps;
 }

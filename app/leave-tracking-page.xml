@@ -18,7 +18,7 @@
         <DatePicker loaded="onDatePickerLoaded" date="{{ submitDate }}"></DatePicker>
         <label text="End Date:" class="DayCalc_SectionTitle"/>
         <DatePicker loaded="onDatePickerLoaded" date="{{ endDate }}"></DatePicker>
-        <Button class="DayCalc_SubmitButton" text="Save New Time" tap="addTime"/>
+        <Button class="Submit_Button_1" text="Save New Time" tap="addTime"/>
       </StackLayout>
       
       <Button text="Leave to Submit" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
@@ -36,7 +36,7 @@
 
         
       </StackLayout>
-        <Button class="DayCalc_SubmitButton" text="Clear Submitted Time" tap="clearSubmittedTime"/>
+        <Button class="Submit_Button_1" text="Clear Submitted Time" tap="clearSubmittedTime"/>
       </StackLayout>
       </ScrollView>
   </StackLayout>

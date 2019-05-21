@@ -33,7 +33,7 @@
 
       <label class="DayCalc_StartDate" text="{{ endDateLabel }}"/>
 
-      <Button class="DayCalc_SubmitButton" text="Get End Date" tap="setNotification"/>
+      <Button class="Submit_Button_1" text="Get End Date" tap="setNotification"/>
 
       
 

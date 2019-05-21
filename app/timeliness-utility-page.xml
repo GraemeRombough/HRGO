@@ -17,7 +17,7 @@
       <label class="DayCalc_StartDate" text="{{ managerApproveDate }}"/>
       <label class="DayCalc_StartDate" text="{{ payDate }}"/>
 
-      <Button class="DayCalc_SubmitButton" text="Get Timeliness Cutoffs" tap="calculateTimeliness"/>
+      <Button class="Submit_Button_1" text="Get Timeliness Cutoffs" tap="calculateTimeliness"/>
 
       </StackLayout>
       </ScrollView>

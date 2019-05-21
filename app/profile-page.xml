@@ -20,7 +20,7 @@
         <label class="DayCalc_SectionTitle" text="Work Email"/>
       
         <TextField class="Utility_TextBox" text="{{ workEmail }}" />
-        <Button class="DayCalc_SubmitButton" text="Save Profile" tap="saveProfile"/>
+        <Button class="Submit_Button_1" text="Save Profile" tap="saveProfile"/>
     </StackLayout>
 </ScrollView>
   </StackLayout>

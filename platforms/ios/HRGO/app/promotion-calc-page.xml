@@ -25,7 +25,7 @@
       <ListPicker id="classPicker" items="{{ targClassItems }}" selectedIndex="{{ targClassIndex }}" loaded="onTargClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
     </StackLayout>
     <label text="{{ ResultLabel }}" class="DayCalc_StartDate"/>
-    <Button class="DayCalc_SubmitButton" text="Get Promotion Step" tap="getPromotionStep"/>
+    <Button class="Submit_Button_1" text="Get Promotion Step" tap="getPromotionStep"/>
 
   </StackLayout>
   </ScrollView>
