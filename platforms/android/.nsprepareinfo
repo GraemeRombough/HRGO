@@ -2,8 +2,8 @@
 	"nativePlatformStatus": "3",
 	"appFilesHashes": {
 		"/Users/graemerombough/HRGO/app/.DS_Store": "2b5d511fecb0c2e331ecd2af53dc5284f9aa6da1",
-		"/Users/graemerombough/HRGO/app/CODE_OF_CONDUCT.md": "3d921a467f0dc791385eb1d5db82d88e11d620e0",
 		"/Users/graemerombough/HRGO/app/LICENSE": "335b9d849600792946ffbd01f3617100fbd6e107",
+		"/Users/graemerombough/HRGO/app/CODE_OF_CONDUCT.md": "3d921a467f0dc791385eb1d5db82d88e11d620e0",
 		"/Users/graemerombough/HRGO/app/POC-page.js": "7d140652e6f8c66147c5a77f8d9da3f47f9f8ead",
 		"/Users/graemerombough/HRGO/app/POC-page.xml": "54074ba354206a6b59c84e4ce2d7b4141e1bd512",
 		"/Users/graemerombough/HRGO/app/README.md": "c6d550a2f77eb68587dea464b008d9216fa7790d",
@@ -54,7 +54,7 @@
 		"/Users/graemerombough/HRGO/app/overtime-tracking-page.js": "880de11b3c90dab3a747e495081ccaf19fd54712",
 		"/Users/graemerombough/HRGO/app/overtime-tracking-page.xml": "f4007d644cd75c24b479b37e611c549532d0953b",
 		"/Users/graemerombough/HRGO/app/package.json": "2a048b675a0372201b4d6cac2522162030730dcb",
-		"/Users/graemerombough/HRGO/app/pay-info.js": "1d9b64905ba80b449c28982d23b36103302f7c3e",
+		"/Users/graemerombough/HRGO/app/pay-info.js": "773eb124a6db44686c7510a46f01ae4029fb2e68",
 		"/Users/graemerombough/HRGO/app/pay-info.xml": "d92e742c6e78c53fcd2a10bbfd605c4aa129d5de",
 		"/Users/graemerombough/HRGO/app/pay-landing-page.js": "c4933968ec7183432c0ea7211d57ba6c3bf9e7f6",
 		"/Users/graemerombough/HRGO/app/pay-landing-page.xml": "b562d1b3e60798cf8baabc9ca2202d58f5495c25",
@@ -85,8 +85,8 @@
 		"/Users/graemerombough/HRGO/app/walkthroughs-landing-page.xml": "a941d3d4373b6dc018c978d1435e2cd8ac109621",
 		"/Users/graemerombough/HRGO/app/workdays-utility-page.js": "5a07de4e0623219ad79fc4319a3914447d3c0ec6",
 		"/Users/graemerombough/HRGO/app/workdays-utility-page.xml": "4311a9e1f7afd5ebcd0acea13af402de98fdfe0f",
-		"/Users/graemerombough/HRGO/app/images/1_002.jpg": "e28eb084cb3028979e827e87c291b32e7828dfe4",
 		"/Users/graemerombough/HRGO/app/images/1_003.jpg": "5d03bd8af9a7dcf18be314ebf070279142810b45",
+		"/Users/graemerombough/HRGO/app/images/1_002.jpg": "e28eb084cb3028979e827e87c291b32e7828dfe4",
 		"/Users/graemerombough/HRGO/app/images/hr-go-ui-icon_alpha.png": "bbc0f44e82f929a8b3706cbf2927a43ba7701666",
 		"/Users/graemerombough/HRGO/app/images/hr-go-ui-logo.png": "e4219913c76df768eab5fef5c7061a9d98cc3ddb",
 		"/Users/graemerombough/HRGO/app/SJD-page.js": "e3c7f82629cdf54b5d3a69b1c13069568baa6cd8"
@@ -94,7 +94,7 @@
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": false,
-	"time": "Mon May 20 2019 21:43:45 GMT-0400 (EDT)",
+	"time": "Wed May 22 2019 14:40:58 GMT-0400 (EDT)",
 	"changesRequireBuildTime": "Thu Apr 18 2019 00:24:07 GMT-0400 (EDT)",
 	"projectFileHash": "38b0197338cb439d621d06db37cc50a80ccf949fd522020fc8a878dc55183a69"
 }

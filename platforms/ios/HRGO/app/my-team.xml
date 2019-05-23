@@ -9,25 +9,28 @@
     <label col="1" row="0" text="MY TEAM" class="Header_Label"/>
     <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
-      <Label text="Add New Employee" class="Article_H1"/>
+      <Label text="Add New Employee" class="Home_Utility_Label"/>
       <Label text="Name" class="Article_H3"/>
       <TextField text="{{ employeeName }}" class="Utility_TextBox"/>
       <Label text="Email" class="Article_H3"/>
       <TextField text="{{ employeeEmail }}" keyboardtype="email" class="Utility_TextBox"/>
       <Button text="Add Employee" tap="addEmployee" class="Submit_Button_1"/>
       <!-- TEAM LIST -->
-      <Label text="My Team Members" class="Article_H1"/>
+      <Label text="My Team Members" class="Home_Utility_Label"/>
       <StackLayout id="teamListStack" class="Utility_MyTeam_TeamList">
       </StackLayout>
       <Button text="Clear Team Members" tap="clearTeam" class="Submit_Button_1"/>
       <!-- COMPOSE EMAIL -->
       <StackLayout>
-        <Label text="Compose Email to Team" class="Article_H1"/>
-        <Label text="Email Subject" class="Article_H3"/>
+        <Label text="Email to Team" class="Home_Utility_Label"/>
+        <GridLayout columns="*,auto">
+        <Label col="0" text="Email Subject" class="Article_H3"/>
+        <Button col="1" text="Send Email" class="Submit_Button_2" tap="sendEmail"/>
+        </GridLayout>
         <TextField text="{{ emailSubject }}" class="Utility_TextBox"/>
         <Label text="Email Body" class="Article_H3"/>
         <TextView text="{{ emailBody }}" class="Utility_LongText"/>
-        <Button text="Send Email to Team" class="Submit_Button_1" tap="sendEmail"/>
+        
       </StackLayout>
     </StackLayout>  
   </ScrollView>

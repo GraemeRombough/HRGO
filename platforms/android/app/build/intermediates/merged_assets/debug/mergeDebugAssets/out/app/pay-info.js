@@ -10,6 +10,7 @@ const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 var pageVM;
 var subNavTitle = "YourPayInformation";
+var lastTimer = {id: null, value: -1};
 
 exports.onNavigatingTo = function(args){
     selectedClass = null;
@@ -43,15 +44,43 @@ exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
-        vm.set("classIndex", listPicker.selectedIndex);
-        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+       /*  vm.set("classIndex", listPicker.selectedIndex);
+        console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+        console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+        selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
+        selectedStep = null;
+        loadSteps(listPicker.selectedValue,args);
+        pageData.set("SubstantiveStep", true);
+        pageData.set("SubstantiveClass", false); */
+
+    // If we are the same index as the last time, or the next time; we skip doing anything.
+
+    // Grab our current value...
+    lastTimer.value = args.selectedIndexChanges;
+ 
+    // If the timer is already running, clear it...
+    if (lastTimer.id != null) { clearTimeout(lastTimer.id); }
+ 
+    // Start a new timer  (runs in 1/4 of a second)
+    lastTimer.id = setTimeout( () => { 
+        lastTimer.id = null; 
+        selectedIndexChangeCallback(lpargs);  
+    }, 250); 
+
+
+    });
+}
+
+function selectedIndexChangeCallback(args) { 
+    const listPicker = args.object;
+    const vm = listPicker.page.bindingContext;
+    //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
         //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
         selectedStep = null;
         loadSteps(listPicker.selectedValue,args);
         pageData.set("SubstantiveStep", true);
         pageData.set("SubstantiveClass", false);
-    });
 }
 exports.onStepListPickerLoaded = function(args){
     const listPicker = args.object;

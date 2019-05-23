@@ -10,6 +10,7 @@ const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 var pageVM;
 var subNavTitle = "YourPayInformation";
+var lastTimer = {id: null, value: -1};
 
 exports.onNavigatingTo = function(args){
     selectedClass = null;
@@ -49,10 +50,11 @@ exports.onClassListPickerLoaded = function(args){
         selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
         selectedStep = null;
         loadSteps(listPicker.selectedValue,args);
-        pageData.set("SubstantiveStep", true);
-        pageData.set("SubstantiveClass", false);
+        //pageData.set("SubstantiveStep", true);
+        //pageData.set("SubstantiveClass", false); 
     });
 }
+
 exports.onStepListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
@@ -159,6 +161,11 @@ exports.navToggle = function(args){
     console.log("nav toggle");
     //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
+
+    if(subNavTitle == "SubstantiveStep"){
+        //pageData.set("SubstantiveStep", true);
+        pageData.set("SubstantiveClass", false);
+    }
 };
 exports.footer4 = function(){
     console.log("Go To Feedback");

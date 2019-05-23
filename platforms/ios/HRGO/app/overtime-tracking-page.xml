@@ -33,7 +33,7 @@
 
         
       </StackLayout>
-        <Button class="Submit_Butonn_1" text="Clear Submitted Time" tap="clearSubmittedTime"/>
+        <Button class="Submit_Button_1" text="Clear Submitted Time" tap="clearSubmittedTime"/>
       </StackLayout>
       </ScrollView>
   </StackLayout>
