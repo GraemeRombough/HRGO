@@ -2,11 +2,9 @@ var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var dialogs = require("ui/dialogs");
 var observable = require("data/observable");
-
 var pageData = new observable.Observable();
 var subNavTitle = "YourPayInformation";
 var navList = [];
-
 
 exports.pageLoaded = function(args) {
     const page = args.object;
@@ -32,6 +30,34 @@ exports.goToHome = function(){
     topmost.navigate("main-page");
     
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+}
 var calculateSection34Timeliness = function(workDate, isPayWeek){
     //Sunday = 0 m1, t2, w3, t4, f5, s6
     var calculateDate = new Date(workDate.toString());
@@ -48,7 +74,7 @@ var calculateSection34Timeliness = function(workDate, isPayWeek){
     }else{
         isPayWeek = false;
     }
-    console.log(payWeekDistance);
+    console.log("Pay Week Distance: " + payWeekDistance);
     //console.log(Math.round((todayDate.getDate() - calculateDate.getDate()) / (7 * 24 * 60 * 60 * 1000)));
 
     if(isPayWeek == false){//ispayweek
@@ -208,7 +234,7 @@ var checkIfHoliday = function(holidayTest){
     //console.log("holidayTest:" + holidayTest.getDate() + " | holiday1:" + holidays[0].getDate())
     for(n = 0; n < holidays.length; n++){
         if (holidayTest.toDateString() == holidays[n].toDateString()){
-            console.log("holiday:" + holidayTest.toString());
+            //console.log("holiday:" + holidayTest.toString());
             return true;    
         }
     }

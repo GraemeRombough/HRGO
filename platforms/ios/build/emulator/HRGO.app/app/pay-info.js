@@ -9,6 +9,8 @@ var pageObject;
 const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 var pageVM;
+var subNavTitle = "YourPayInformation";
+var lastTimer = {id: null, value: -1};
 
 exports.onNavigatingTo = function(args){
     selectedClass = null;
@@ -25,7 +27,9 @@ exports.onNavigatingTo = function(args){
         stepItems: steps,
         stepIndex:1,
         infoVisible: true,
-        salaryVisible: false
+        salaryVisible: false,
+        SubstantiveClass: true,
+        SubstantiveStep: false
     }); 
     page.bindingContext = pageData;
     
@@ -41,20 +45,23 @@ exports.onClassListPickerLoaded = function(args){
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         vm.set("classIndex", listPicker.selectedIndex);
-        console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
         selectedStep = null;
         loadSteps(listPicker.selectedValue,args);
+        //pageData.set("SubstantiveStep", true);
+        //pageData.set("SubstantiveClass", false); 
     });
 }
+
 exports.onStepListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         vm.set("stepIndex", listPicker.selectedIndex);
-        console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedStep = [listPicker.selectedIndex, listPicker.selectedValue];
         
         
@@ -139,6 +146,46 @@ exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.navToggle = function(args){
+    subNavTitle = args.object.value;
+    //alert(args.object.value).then(() => {
+    console.log("nav toggle");
+    //});
+    pageData.set(subNavTitle, !pageData.get(subNavTitle));
+
+    if(subNavTitle == "SubstantiveStep"){
+        //pageData.set("SubstantiveStep", true);
+        pageData.set("SubstantiveClass", false);
+    }
+};
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+}
 var getClassList = function(){
     var databasePull = getFromDataBase();
     var classList = [];
@@ -152,7 +199,7 @@ var getClassList = function(){
         }
         if (itemIsDuplicate == false){
             classList.push(databasePull[i].classCode);
-            console.log(databasePull[i].classCode);
+            //console.log(databasePull[i].classCode);
         }
     }
     return classList;
@@ -172,7 +219,7 @@ var getStepCount = function(){
         }
         stepItem = {class:classDD[i], steps:numOfSteps};
         returnClassSteps.push(stepItem);
-        console.log("class: " + classDD[i] +  "steps: " + numOfSteps);
+        //console.log("class: " + classDD[i] +  "steps: " + numOfSteps);
     }
     return returnClassSteps;
 }
@@ -189,30 +236,6 @@ var returnSalary = function(selectedClassX, selectedStepX){
 var getFromDataBase = function(){
     var databaseReturn = [];
     var databaseLine = {};
-    /* databaseLine = {classCode:"STDNT", step:"1", hourly:13.47, daily:101.025, biweekly:1010.25, annually:26266.5};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"STDNT", step:"2", hourly:14.43, daily:108.225, biweekly:1082.25, annually:28138.5};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"STDNT", step:"3", hourly:15.42, daily:115.65, biweekly:1156.5, annually:30069};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"STDNT", step:"4", hourly:16.49, daily:123.675, biweekly:1236.75, annually:32155.5};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"STDNT", step:"5", hourly:17.64, daily:132.3, biweekly:1323, annually:34398};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"STDNT", step:"6", hourly:18.91, daily:141.825, biweekly:1418.25, annually:36874.5};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"STDNT", step:"7", hourly:20.19, daily:151.425, biweekly:1514.25, annually:39370.5};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"STDNT", step:"8", hourly:21.64, daily:162.3, biweekly:1623, annually:42198};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"AS   01", step:"1", hourly:26.4297435897436, daily:198.223076923077, biweekly:1982.23076923077, annually:51538};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"AS   01", step:"2", hourly:27.4348717948718, daily:205.761538461538, biweekly:2057.61538461538, annually:53498};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"AS   01", step:"3", hourly:28.4769230769231, daily:213.576923076923, biweekly:2135.76923076923, annually:55530};
-    databaseReturn.push(databaseLine);
-    databaseLine = {classCode:"AS   01", step:"4", hourly:29.5605128205128, daily:221.703846153846, biweekly:2217.03846153846, annually:57643}; */
-
 databaseLine = {classCode:"STDNT-COL", step:"1", hourly:15.4, daily:115.5, biweekly:1155, annually:30131.64 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"STDNT-COL", step:"2", hourly:16.35, daily:122.625, biweekly:1226.25, annually:31990.41 };

@@ -13,5 +13,13 @@
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Info.plist": "dc8fd3b747be7a8137d97e6942de2b2baede4ec1",
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Modules/module.modulemap": "00d2220e76eb098f1808eb4e9b5c43ad4cadf1da",
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/TNSWidgets": "a39fdc0579b7a1641908db5d17268aac354fc770"
+	},
+	"nativescript-local-notifications": {
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/LocalNotificationsPlugin.h": "163c778c1cc83960f312ead925e784b977e9d730",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/Notification.h": "bb5585ed8288125b0d2982969650975069cdbc21",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/NotificationManager.h": "98369ea595cbc9a58137164331dd632f89c34d2b",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Info.plist": "71dbe994a37f4bfb22ae27f7bc595d01787e928e",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Modules/module.modulemap": "31f6986413efefd63736de3a478a194dbd8dc1c3",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/LocalNotificationsPlugin": "69184e091583276ccc0d4eaecd278fe6bbfec25d"
 	}
 }

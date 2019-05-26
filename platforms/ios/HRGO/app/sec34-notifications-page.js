@@ -3,8 +3,8 @@ var view = require("ui/core/view");
 var dialogs = require("ui/dialogs");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
-var subNavTitle = "YourPayInformation";
-var navList = [];
+var LocalNotifications = require("nativescript-local-notifications").LocalNotifications;
+var dialogs = require("ui/dialogs");
 
 
 exports.pageLoaded = function(args) {
@@ -26,10 +26,23 @@ exports.pageLoaded = function(args) {
     page.bindingContext = pageData;
 
 };
-exports.setNotification = function(){
-    //console.log(pageData.get("date"));
-    //console.log(pageData.get("mondayCheck"));
-    addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
+exports.setNotification = function(args){
+    LocalNotifications.requestPermission().then((granted) => {
+        if(granted) {
+            LocalNotifications.schedule([{
+                id: 10,
+                title: "Timeliness Reminder",
+                body: "You Need To Do Something",
+                at: new Date(new Date().getTime() + 10000)
+            }]).then(() => {
+                console.log("Notification scheduled");
+            }, (error) => {
+                console.log("ERROR", error);
+            });
+        }
+    })
+    
+    
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();

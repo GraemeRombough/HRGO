@@ -9,6 +9,74 @@ button{
     height:auto;
     vertical-align: middle;
 }
+.Submit_Button_1{
+    width: 80%;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top:12px;
+    margin-bottom:12px;  
+    color: #222;
+    white-space: normal;
+    padding-left: 30px;
+    background-color: #DDD;
+    font-size: 24px;
+    border-radius: 15%;
+    text-align: center;
+
+}
+.Submit_Button_2{
+    padding:8px;
+    padding-left: 14px;
+    padding-right:14px;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #222;
+    white-space: normal;
+    background-color: #DDD;
+    font-size: 16px;
+    border-radius: 15%;
+    text-align: center;
+}
+.Back_Button{
+    font-family: "icomoon"; 
+    border-radius: 15%;
+    background-color: rgb(0,31,91);
+    font-size: 22px;
+    text-align: center;
+    color: rgb(220,170,0);
+}
+.Home_Nav_Row{
+    padding-bottom:10%;
+    padding-top:10%;
+}
+.Home_Nav_Grid{
+    padding-top:10%;
+    padding-bottom: 10%;
+    border-radius: 15%;
+    background-color: #DDD;
+    text-align: center;
+    margin-left: 10%;
+    width: 35%;
+    height: auto;
+}
+.Home_Nav_Icon{
+    font-family: "icomoon"; 
+    font-size: 60px;
+    width:100%;
+    text-align: center;
+    background-color: #DDD;
+    color: rgb(220,170,0);
+}
+.Home_Nav_Label{
+    color: #000;
+    text-align: center;
+    width:100%;
+    padding-top:10%;
+    text-align: center;
+    background-color: #DDD;
+    white-space: normal;
+}
 .action-bar{
     text-align: center;
 }
@@ -51,18 +119,16 @@ button{
 }
 .Main_Nav_SubLine{
     margin:0px;
-    color: #FFF;
+    color: #222;
     white-space: normal;
-    border-bottom-color: rgb(220,170,0);
-    border-left-width:10px;
-    border-left-color: rgb(220,170,0);
-    padding-top:4px;
-    padding-bottom:4px;
+    border-bottom-color: #DDD;
+    padding-top:8px;
+    padding-bottom:8px;
     border-bottom-width: 1px;
-    padding-left: 24px;
+    padding-left: 40px;
     text-align: left;
-    background-color: rgb(0,31,91);
-    font-size: 24px;
+    background-color: #FFF;
+    font-size: 18px;
 }
 .Main_Nav_Line{
     
@@ -71,15 +137,13 @@ button{
     height: auto;
     padding-top: 8px;
     padding-bottom: 8px;
-    border-left-width: 10px;
-    border-left-color:  rgb(0,31,91);
     margin-top:10px;  
-    color: rgb(0,31,91);
+    color: #222;
     white-space: normal;
     text-align: left;
-    padding-left: 15px;
+    padding-left: 30px;
     background-color: #DDD;
-    font-size: 26px;
+    font-size: 20px;
 }
 .Home_Utility_Row{
     height: auto;
@@ -92,8 +156,9 @@ button{
     margin-top:10px;  
 }
 .HeaderLabel{
-    border-left-width: 10px;
-    border-left-color: rgb(220,170,0);
+    border-bottom-width: 6px;
+    border-bottom-color: rgb(220,170,0);
+    
     font-size:22px;
     vertical-align: middle;
     color: #FFF;
@@ -136,7 +201,7 @@ button{
 }
 
 .FooterNav{
-    border-top-width: 10px;
+    border-top-width: 6px;
     padding-top:15px;
     padding-bottom:15px;
     border-top-color: rgb(220,170,0);
@@ -147,6 +212,10 @@ button{
     font-family: "icomoon";
     font-size: 30px;
     background-color: rgb(0,31,91);
+}
+.Footer_NavIcon_Image{
+    color:rgb(220,170,0);
+    width:30px;
 }
 
 .SearchBar{
@@ -183,7 +252,7 @@ button{
 }
 .Article_H1{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 34px;
+    font-size: 28px;
     line-height: 1.1;
     font-weight: 700;
     margin-bottom: 10px;
@@ -196,7 +265,7 @@ button{
 }
 .Article_H2{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 26px;
+    font-size: 24px;
     line-height: 1.1;
     font-weight: 700;
     margin-bottom: 10px;
@@ -225,6 +294,7 @@ button{
     margin-right: 25px;
     margin-top: 28px;
     margin-bottom:14px;
+    padding-top:0px;
     white-space: normal;
     color: #333;
 }
@@ -244,7 +314,7 @@ button{
     font-size: 16px;
     margin-left: 50px;
     margin-right: 25px;
-    margin-top: 5px;
+    margin-top: 18px;
     margin-bottom:5px;
     white-space: normal;
     color: #333;

@@ -1,11 +1,12 @@
-<Page loaded="pageLoaded">
+<Page loaded="pageLoaded" actionBarHidden="true">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="auto,*,40,60">
     
-    <GridLayout columns="*,60" rows="auto" row="0" class="HeaderLabel">
-      <label col="0" row="0" text="{{ walkthroughTitle }}"/>
-      <Button col="1" row="0" class="HeaderLabel" text="FR" tap="switchToFrench"/>
-    </GridLayout>   
+    <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe926;"/>
+      <label col="1" row="0" text="Walkthrough" class="Header_Label"/>
+      <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+    </GridLayout>  
 
     <!--<StackLayout row="1" orientation="vertical" width="100%">  -->
   <!-- STEP CONTENT  -->
@@ -26,13 +27,13 @@
   </GridLayout>
 
   <!-- FOOTER NAV -->
-  <StackLayout row="3" class="FooterNav" orientation="horizontal">
-    <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
-    <Button class="Footer_NavIcon" text="&#xe904;"  width="20%"/>
-    <Button class="Footer_NavIcon" text="&#xe994;"  width="20%"/>
-    <Button class="Footer_NavIcon" text="&#xe945;"  width="20%"/>
-    <Button class="Footer_NavIcon" text="&#xe953;"  width="20%"/>
-  </StackLayout>
+  <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+    </StackLayout>
 
   </GridLayout>
 

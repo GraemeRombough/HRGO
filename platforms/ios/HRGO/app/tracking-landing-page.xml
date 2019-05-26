@@ -11,6 +11,7 @@
     <StackLayout orientation="vertical">
       <Button class="Sub_Nav_Line" text="Pay Tracking" tap="navToggle" value="PayTracking"/>
         <Button class="Main_Nav_SubLine" text="Track My Overtime" pageName="overtime-tracking-page" tap="goToUtility" visibility="{{ PayTracking ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Timeliness Notification" pageName="sec34-notifications-page" tap="goToUtility" visibility="{{ PayTracking ? 'visible' : 'collapsed' }}"/>
       <Button class="Sub_Nav_Line" text="HR Tracking" tap="navToggle" value="HRTracking"/>
         <Button class="Main_Nav_SubLine" text="Track My Leave" pageName="leave-tracking-page" tap="goToUtility" visibility="{{ HRTracking ? 'visible' : 'collapsed' }}"/>
 

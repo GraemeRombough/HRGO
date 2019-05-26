@@ -25,6 +25,38 @@ exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
+}
+exports.clearTeam = function(args){
+    applicationSettings.remove("My_Team_Members");
+    displayTeamMembers(getTeamMembers());
+}
 exports.addEmployee = function(args){
     var newEmployee = {empName: pageData.employeeName, empEmail: pageData.employeeEmail};
     var employeeString = JSON.stringify(newEmployee);
@@ -74,11 +106,7 @@ var getTeamMembers = function(){
         else {
             //Only to add testing value, otherwise set null
             var teamMembers = [];
-            /* teamMembers[0] = {empName: "Graeme Rombough", empEmail: "graeme_rombough@hotmail.com"};
-            teamMembers[1] = {empName: "Danielle Morneault", empEmail: "Danielle.Morneault@forces.gc.ca"};
-            teamMembers[2] = {empName: "Julie Albert", empEmail: "Julie.Albert@forces.gc.ca"};
-            teamMembers[3] = {empName: "Leo Fleischer", empEmail: "Leonard.Fleischer@forces.gc.ca"};
-            teamMembers[4] = {empName: "Diana Scheper", empEmail: "Diana.Scheper@forces.gc.ca"}; */
+            /* teamMembers[0] = {empName: "Graeme Rombough", empEmail: "graeme_rombough@hotmail.com"};*/
             teamMemberPull = JSON.stringify(teamMembers);
         };
     var teamMemberReturn = JSON.parse(teamMemberPull);

@@ -15,6 +15,10 @@ exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate(args.object.pageName);
 };
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
     //alert(args.object.value).then(() => {
@@ -52,13 +56,23 @@ exports.footer3 = function(){
     
 }
 exports.footer4 = function(){
+    console.log("Go To Feedback");
     var topmost = frameModule.topmost();
-    //topmost.navigate("POC-page");
-    
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    //topmost.navigate("pay-info");
+    topmost.navigate("POC-page");
 }
 exports.searchLanding = function(){
     var searchField = page.getViewById("SearchBox").text;

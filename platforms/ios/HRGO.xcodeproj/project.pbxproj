@@ -16,6 +16,8 @@
 		37F2BCAD64DE49D1A75E2C8C /* NativeScriptEmbedder.m in Sources */ = {isa = PBXBuildFile; fileRef = 727A2650D4D94289B7447F81 /* NativeScriptEmbedder.m */; };
 		D4AA906014DA4C7B9A1D6568 /* TNSWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57ABEF8541F34E759A31D31F /* TNSWidgets.framework */; };
 		620F90B6AC304D6EA17DDE83 /* TNSWidgets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57ABEF8541F34E759A31D31F /* TNSWidgets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E7F4F4C1CC334E7F94EE52CA /* LocalNotificationsPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF58C70BE6A4435BFFD538E /* LocalNotificationsPlugin.framework */; };
+		99E39F1EC11947C6B7DEC4A3 /* LocalNotificationsPlugin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAF58C70BE6A4435BFFD538E /* LocalNotificationsPlugin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +28,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				620F90B6AC304D6EA17DDE83 /* TNSWidgets.framework in Embed Frameworks */,
+				99E39F1EC11947C6B7DEC4A3 /* LocalNotificationsPlugin.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,6 +52,7 @@
 		0217CE7258CE4C31A71729FE /* NativeScriptEmbedder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NativeScriptEmbedder.h; path = "../../node_modules/tns-core-modules/platforms/ios/src/NativeScriptEmbedder.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		727A2650D4D94289B7447F81 /* NativeScriptEmbedder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NativeScriptEmbedder.m; path = "../../node_modules/tns-core-modules/platforms/ios/src/NativeScriptEmbedder.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		57ABEF8541F34E759A31D31F /* TNSWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TNSWidgets.framework; path = "$(SRCROOT)/../../node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework"; sourceTree = "<group>"; };
+		BAF58C70BE6A4435BFFD538E /* LocalNotificationsPlugin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalNotificationsPlugin.framework; path = "$(SRCROOT)/../../node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4AA906014DA4C7B9A1D6568 /* TNSWidgets.framework in Frameworks */,
+				E7F4F4C1CC334E7F94EE52CA /* LocalNotificationsPlugin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				57ABEF8541F34E759A31D31F /* TNSWidgets.framework */,
+				BAF58C70BE6A4435BFFD538E /* LocalNotificationsPlugin.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../node_modules/tns-core-modules-widgets/platforms/ios\"",
+					"\"$(SRCROOT)/../../node_modules/nativescript-local-notifications/platforms/ios\"",
 				);
 			};
 			name = Debug;
@@ -391,6 +398,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../node_modules/tns-core-modules-widgets/platforms/ios\"",
+					"\"$(SRCROOT)/../../node_modules/nativescript-local-notifications/platforms/ios\"",
 				);
 			};
 			name = Release;
