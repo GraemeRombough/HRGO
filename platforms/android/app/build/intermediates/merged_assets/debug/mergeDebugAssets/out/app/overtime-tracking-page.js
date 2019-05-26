@@ -200,6 +200,7 @@ var addToOvertime = function(timeToSave)
         applicationSettings.setString("Saved_Overtime", saveString);
     }
     overTimeList = savedOvertime;
+    pageData.set("AddTime", false);
     displayOvertime();
 }
 var saveOvertime = function(){

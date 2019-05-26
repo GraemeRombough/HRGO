@@ -27,8 +27,7 @@ exports.pageLoaded = function(args) {
 
 };
 exports.setNotification = function(){
-    //console.log(pageData.get("date"));
-    //console.log(pageData.get("mondayCheck"));
+    pageData.set("endDateLabel", "Processing");
     addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
 };
 exports.goToHome = function(){
@@ -65,6 +64,7 @@ exports.footer5 = function(){
     topmost.navigate("POC-page");
 }
 var addScheduleDays = function(startDate, schedule, totalDays){
+    
     var i = 0;
     var checkDate = new Date(startDate.toString());
     console.log("Start Date: " + checkDate.toString());

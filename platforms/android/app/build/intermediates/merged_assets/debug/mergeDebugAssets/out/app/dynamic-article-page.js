@@ -106,11 +106,21 @@ var createArticle = function()
     var articleSlide = pageObject.getViewById("articleContent");
     articleSlide.removeChildren();
     for (z=0; z<articleComponents.length; z++){
+        
+        
         articleItemSplit = articleComponents[z].split("*>");
         var articleLabel = new Label();
         //LabelArray.push(new Label());
+        var textString = "";
+        if(articleItemSplit[0] == "Article_List"){
+            textString = "\u2022 ";
+        }
+        if(articleItemSplit[1]){
+            textString += articleItemSplit[1]
+        }
+        
         articleLabel.className = articleItemSplit[0];
-        articleLabel.text = articleItemSplit[1];
+        articleLabel.text = textString;
         articleSlide.addChild(articleLabel);
     }
     pageData.set("HeaderTitle", curArticleText.Title);

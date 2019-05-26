@@ -44,44 +44,17 @@ exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
-       /*  vm.set("classIndex", listPicker.selectedIndex);
-        console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
-        selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
-        selectedStep = null;
-        loadSteps(listPicker.selectedValue,args);
-        pageData.set("SubstantiveStep", true);
-        pageData.set("SubstantiveClass", false); */
-
-    // If we are the same index as the last time, or the next time; we skip doing anything.
-
-    // Grab our current value...
-    lastTimer.value = args.selectedIndexChanges;
- 
-    // If the timer is already running, clear it...
-    if (lastTimer.id != null) { clearTimeout(lastTimer.id); }
- 
-    // Start a new timer  (runs in 1/4 of a second)
-    lastTimer.id = setTimeout( () => { 
-        lastTimer.id = null; 
-        selectedIndexChangeCallback(lpargs);  
-    }, 250); 
-
-
-    });
-}
-
-function selectedIndexChangeCallback(args) { 
-    const listPicker = args.object;
-    const vm = listPicker.page.bindingContext;
-    //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+        vm.set("classIndex", listPicker.selectedIndex);
+        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
         //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
         selectedStep = null;
         loadSteps(listPicker.selectedValue,args);
-        pageData.set("SubstantiveStep", true);
-        pageData.set("SubstantiveClass", false);
+        //pageData.set("SubstantiveStep", true);
+        //pageData.set("SubstantiveClass", false); 
+    });
 }
+
 exports.onStepListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
@@ -188,6 +161,11 @@ exports.navToggle = function(args){
     console.log("nav toggle");
     //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
+
+    if(subNavTitle == "SubstantiveStep"){
+        //pageData.set("SubstantiveStep", true);
+        pageData.set("SubstantiveClass", false);
+    }
 };
 exports.footer4 = function(){
     console.log("Go To Feedback");
