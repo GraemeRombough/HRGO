@@ -490,4 +490,9 @@ button{
     border-bottom-width: 3px;
     border-color: rgb(0,31,91);
 }
+.Utility_TableText_1{
+    font-size: 16px;
+    color: #222;
+    text-align:center;
+}
 /* Your CSS goes here */
