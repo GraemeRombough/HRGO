@@ -74,14 +74,26 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
 }
-var addScheduleDays = function(startDate, schedule, totalDays){
-    
+var addScheduleDays = function(startDate, schedule, totalDays){  
     var i = 0;
     var checkDate = new Date(startDate.toString());
     console.log("Start Date: " + checkDate.toString());
 
     while(i < totalDays){
-        
+        for(z = 0; z < schedule.length; z++){
+            if (checkDate.getDay() == schedule[z]){
+                    i++; 
+            }
+        }
+        if (i < totalDays){
+            checkDate.setDate(checkDate.getDate()+1);
+        }
+    }
+    //ADD CHECK HOLIDAYS HERE INSTEAD OF DURING LOOP
+    var addedDays = numberOfHolidaysPassed(startDate, checkDate);
+    i = 0;
+    console.log("Temp End: " + checkDate.toString() + " | Days to Add: " + addedDays);
+    while(i <= addedDays){
         for(z = 0; z < schedule.length; z++){
             if (checkDate.getDay() == schedule[z]){
                 if(checkIfHoliday(checkDate) == true){
@@ -91,13 +103,23 @@ var addScheduleDays = function(startDate, schedule, totalDays){
                 } 
             }
         }
-        if (i < totalDays){
+        if (i <= addedDays){
             checkDate.setDate(checkDate.getDate()+1);
         }
-        
     }
     console.log("End Date: " + checkDate.toString());
     pageData.set("endDateLabel", "End Date: " + formatDate(checkDate.toString()));
+}
+var numberOfHolidaysPassed = function(sDate, eDate){
+    var holidayList = getHolidays();
+    var daysToAdd = 0;
+    for(x=0; x < holidayList.length; x++){
+        if(sDate.getTime() < holidayList[x].getTime() && holidayList[x].getTime() < eDate.getTime()){
+            daysToAdd++;
+            console.log("Holiday Date: " + holidayList[x]);
+        }
+    }
+    return daysToAdd;
 }
 var getDaysOfWork = function(){
     var daysOfWork = [];
@@ -117,28 +139,6 @@ var getDaysOfWork = function(){
         }
     }
 
-    /* if (pageData.get('sundayCheck')==true){
-        daysOfWork.push(0);
-    };
-    if (pageData.get('mondayCheck')==true){
-        daysOfWork.push(1);
-    };
-    if (pageData.get('tuesdayCheck')==true){
-        daysOfWork.push(2);
-    };
-    if (pageData.get('wednesdayCheck')==true){
-        daysOfWork.push(3);
-    };
-    if (pageData.get('thursdayCheck')==true){
-        daysOfWork.push(4);
-    };
-    if (pageData.get('fridayCheck')==true){
-        daysOfWork.push(5);
-    };
-    if (pageData.get('saturdayCheck')==true){
-        daysOfWork.push(6);
-    }; */
-    console.log(daysOfWork.length);
     return daysOfWork;
 }
 var formatDate = function(inputDate){
