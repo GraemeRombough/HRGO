@@ -1,4 +1,5 @@
-<Page loaded="pageLoaded" actionBarHidden="true">
+<Page loaded="pageLoaded" actionBarHidden="true" xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:CheckBox="nativescript-checkbox" loaded="pageLoaded">
+
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
   <StackLayout row="0" orientation="vertical" width="100%">
@@ -8,6 +9,7 @@
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
+      <CheckBox:CheckBox checked="false" text="CheckBox" id="myCheckbox" />
       <label class="DayCalc_SectionTitle" text="Desired Notifications"/>
       <GridLayout columns="auto,auto" rows="auto,auto" style="horizontal-align:center;">
         <label class="Home_NavLabel" row="0" col="0" text="Submission Notifications"/>

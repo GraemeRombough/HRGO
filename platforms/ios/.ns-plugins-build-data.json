@@ -21,5 +21,8 @@
 		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Info.plist": "71dbe994a37f4bfb22ae27f7bc595d01787e928e",
 		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Modules/module.modulemap": "31f6986413efefd63736de3a478a194dbd8dc1c3",
 		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/LocalNotificationsPlugin": "69184e091583276ccc0d4eaecd278fe6bbfec25d"
+	},
+	"nativescript-checkbox": {
+		"/Users/graemerombough/HRGO/node_modules/nativescript-checkbox/platforms/ios/Podfile": "a2f76473dcfd793feb87a694f1b980a51945cd47"
 	}
 }

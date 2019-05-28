@@ -44,6 +44,15 @@ exports.setNotification = function(args){
     
     
 };
+exports.toggleCheck = function(args){
+    if(args.object.value == "true"){
+        args.object.value = "false";
+        args.object.text = "";
+    }else{
+        args.object.value = "true";
+        args.object.text = "\uea10";
+    }
+};
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page");

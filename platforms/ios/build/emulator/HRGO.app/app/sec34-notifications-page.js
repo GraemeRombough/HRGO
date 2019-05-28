@@ -3,7 +3,7 @@ var view = require("ui/core/view");
 var dialogs = require("ui/dialogs");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
-var LocalNotifications = require("nativescript-local-notifications");
+var LocalNotifications = require("nativescript-local-notifications").LocalNotifications;
 var dialogs = require("ui/dialogs");
 
 
@@ -30,10 +30,10 @@ exports.setNotification = function(args){
     LocalNotifications.requestPermission().then((granted) => {
         if(granted) {
             LocalNotifications.schedule([{
-                id: this.id,
+                id: 10,
                 title: "Timeliness Reminder",
                 body: "You Need To Do Something",
-                at: new Date(new Date().getTime() + 1000)
+                at: new Date(new Date().getTime() + 10000)
             }]).then(() => {
                 console.log("Notification scheduled");
             }, (error) => {

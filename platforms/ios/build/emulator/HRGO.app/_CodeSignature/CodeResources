@@ -62,7 +62,19 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		0Xf5jDTnl84A4QHr8TCfujbL/uw=
+		KADEXGgoJNSHUkVrL9i3JhAho34=
+		</data>
+		<key>Frameworks/BEMCheckBox.framework/BEMCheckBox</key>
+		<data>
+		zOkUDxLZ1nW7GA21lsLSkpqKmwA=
+		</data>
+		<key>Frameworks/BEMCheckBox.framework/Info.plist</key>
+		<data>
+		YFQnZLTF54Zc5soc2MvvhKwnVDQ=
+		</data>
+		<key>Frameworks/BEMCheckBox.framework/_CodeSignature/CodeResources</key>
+		<data>
+		8HqL3ZP6j8elI2Ccv/7xIolME9o=
 		</data>
 		<key>Frameworks/LocalNotificationsPlugin.framework/Info.plist</key>
 		<data>
@@ -178,7 +190,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		gWr+RsXMwC7S9w1i7sB4HnizaHw=
+		LSF2re6SrMgrFgImCF4aWI/T558=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -186,7 +198,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		3YwaP2Awm7w+1ZNvwF121f+1t/M=
+		NYmH4bj3QXmLMIo3v8Uvusixr8w=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -474,11 +486,11 @@
 		</data>
 		<key>app/sec34-notifications-page.js</key>
 		<data>
-		sFqwiqjPb7rx6LtbxjuDlVMWrf8=
+		H5RKVcfNZKFqOITQGKr7X8oc0SM=
 		</data>
 		<key>app/sec34-notifications-page.xml</key>
 		<data>
-		e43Fisq58KfWeXiQltgXHENQDwY=
+		yQRZOAYd/K+qVxi4HTKgFcA/rwE=
 		</data>
 		<key>app/student-landing-page.js</key>
 		<data>
@@ -1955,6 +1967,30 @@
 		<key>app/tns_modules/moment/src/moment.js</key>
 		<data>
 		whcBikTplo4kKRmbjfEqrEbLtPY=
+		</data>
+		<key>app/tns_modules/nativescript-checkbox/README.md</key>
+		<data>
+		O1lmwZzS3fk0rz2+rrw6qFhch8k=
+		</data>
+		<key>app/tns_modules/nativescript-checkbox/angular/index.js</key>
+		<data>
+		a3XY0qEvcdLl/cRZZHwBPNhbPFk=
+		</data>
+		<key>app/tns_modules/nativescript-checkbox/angular/index.metadata.json</key>
+		<data>
+		3ZwzY2dGS8Q8autcPmxKq0J/puU=
+		</data>
+		<key>app/tns_modules/nativescript-checkbox/checkbox-common.js</key>
+		<data>
+		lNtfk0LxRfGpPAGCVIlUs82yiuQ=
+		</data>
+		<key>app/tns_modules/nativescript-checkbox/checkbox.js</key>
+		<data>
+		yGbFghw0EqByRQEfmy25nVwmdU8=
+		</data>
+		<key>app/tns_modules/nativescript-checkbox/package.json</key>
+		<data>
+		6ex4KHkSOz/9psXX7s/r32nhujA=
 		</data>
 		<key>app/tns_modules/nativescript-email/LICENSE</key>
 		<data>
@@ -3658,11 +3694,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0Xf5jDTnl84A4QHr8TCfujbL/uw=
+			KADEXGgoJNSHUkVrL9i3JhAho34=
 			</data>
 			<key>hash2</key>
 			<data>
-			16rhG7V73E06vxXoIYRsi6+kWRaUoQQhgqRbpGeNAqk=
+			xSPE0Wm9WYvMwFy0sz/PEBn3Mpr0a1R51BmyNysHknA=
+			</data>
+		</dict>
+		<key>Frameworks/BEMCheckBox.framework/BEMCheckBox</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zOkUDxLZ1nW7GA21lsLSkpqKmwA=
+			</data>
+			<key>hash2</key>
+			<data>
+			jyaZ91zVyBVVdi0ok2eir4KXtTPiXrXESJKptftdTOY=
+			</data>
+		</dict>
+		<key>Frameworks/BEMCheckBox.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YFQnZLTF54Zc5soc2MvvhKwnVDQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			3ov1EGSdASWlr6H6sSviKbCp9AMtb+wbaKxutIKGVT0=
+			</data>
+		</dict>
+		<key>Frameworks/BEMCheckBox.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8HqL3ZP6j8elI2Ccv/7xIolME9o=
+			</data>
+			<key>hash2</key>
+			<data>
+			uGj8xr6ypNzrIZx1BgZCA8kY/pxgHOhW/28/Tynb0oc=
 			</data>
 		</dict>
 		<key>Frameworks/LocalNotificationsPlugin.framework/Info.plist</key>
@@ -3966,11 +4035,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gWr+RsXMwC7S9w1i7sB4HnizaHw=
+			LSF2re6SrMgrFgImCF4aWI/T558=
 			</data>
 			<key>hash2</key>
 			<data>
-			GxBQI/hf3Kb35VB3iaoB244pY5NQSFwEYWJjWww84SI=
+			IZ7VuUJMGXR0HMJMzi0vnZXZhxIsVKFOEX0FR9Dxvtk=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -3988,11 +4057,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3YwaP2Awm7w+1ZNvwF121f+1t/M=
+			NYmH4bj3QXmLMIo3v8Uvusixr8w=
 			</data>
 			<key>hash2</key>
 			<data>
-			d3Hrd/6GjBtf3iTzqbedrq6DlJlHo9FEqzBpK5BEYsw=
+			6Y8qXyiovoa7HNlEXP5QskXNpwe2g1osSjkx3kTHxCM=
 			</data>
 		</dict>
 		<key>app/CODE_OF_CONDUCT.md</key>
@@ -4769,22 +4838,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sFqwiqjPb7rx6LtbxjuDlVMWrf8=
+			H5RKVcfNZKFqOITQGKr7X8oc0SM=
 			</data>
 			<key>hash2</key>
 			<data>
-			KSHFm87xAM9bgBykUKaULaDEE1odXzzTRx2K8YElVsU=
+			wRydRqE7fnNI6r1H4rZM75AP7laGfUabM+SoBqKlXuw=
 			</data>
 		</dict>
 		<key>app/sec34-notifications-page.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			e43Fisq58KfWeXiQltgXHENQDwY=
+			yQRZOAYd/K+qVxi4HTKgFcA/rwE=
 			</data>
 			<key>hash2</key>
 			<data>
-			y1BZBiyMa9lI3XReMvjqe5aw8KQSN/ipPAp5A/k2nCQ=
+			OgAop61nc6Rs+1oI1dox0R/88DaG94o1clAMdFQrYdo=
 			</data>
 		</dict>
 		<key>app/student-landing-page.js</key>
@@ -8844,6 +8913,72 @@
 			<key>hash2</key>
 			<data>
 			DmriPsrJlqxsg/zu0b0cgJ3mFXH01coDGNo/Asa95Ww=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-checkbox/README.md</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			O1lmwZzS3fk0rz2+rrw6qFhch8k=
+			</data>
+			<key>hash2</key>
+			<data>
+			D6TPzypjqql3Y/vkn0kVGZu067FO1zLr+p8tGqHTw1A=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-checkbox/angular/index.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			a3XY0qEvcdLl/cRZZHwBPNhbPFk=
+			</data>
+			<key>hash2</key>
+			<data>
+			jwFDhqVr6lLw2xnaA3C17zKTvJvvVEmCSaAuJKAqQzQ=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-checkbox/angular/index.metadata.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3ZwzY2dGS8Q8autcPmxKq0J/puU=
+			</data>
+			<key>hash2</key>
+			<data>
+			HabN7QcmhhWfOAHngYTQoDUhAK5sEJoIPqekCuuxXnE=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-checkbox/checkbox-common.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lNtfk0LxRfGpPAGCVIlUs82yiuQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			YEUCzRtvFLOMUPPG3d9rgveQAg5oNTI532Rj7B59YWU=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-checkbox/checkbox.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yGbFghw0EqByRQEfmy25nVwmdU8=
+			</data>
+			<key>hash2</key>
+			<data>
+			P0PGFDKwOg6xsNExLSbhYt0CetX06abgaJYbjUaXnkM=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-checkbox/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6ex4KHkSOz/9psXX7s/r32nhujA=
+			</data>
+			<key>hash2</key>
+			<data>
+			BmTqvRiwRwfPM+sOQBWDCtQvYNu5aiZWk022LO8mxEg=
 			</data>
 		</dict>
 		<key>app/tns_modules/nativescript-email/LICENSE</key>
