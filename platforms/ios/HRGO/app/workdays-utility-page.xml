@@ -20,13 +20,20 @@
         <label class="Home_NavLabel" row="4" col="0" text="Thursday"/>
         <label class="Home_NavLabel" row="5" col="0" text="Friday"/>
         <label class="Home_NavLabel" row="6" col="0" text="Saturday"/>
-        <Switch row="0" col="1" checked="{{ sundayCheck }}"/>
-        <Switch row="1" col="1" checked="{{ mondayCheck }}"/>
-        <Switch row="2" col="1" checked="{{ tuesdayCheck }}"/>
-        <Switch row="3" col="1" checked="{{ wednesdayCheck }}"/>
-        <Switch row="4" col="1" checked="{{ thursdayCheck }}"/>
-        <Switch row="5" col="1" checked="{{ fridayCheck }}"/>
-        <Switch row="6" col="1" checked="{{ saturdayCheck }}"/>
+        <!--<Switch row="0" col="1" checked="{{ sundayCheck }}"/>-->
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="sundayCheck" value="false"/>
+        <!--<Switch row="1" col="1" checked="{{ mondayCheck }}"/>-->
+        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="mondayCheck" value="false"/>
+        <!--<Switch row="2" col="1" checked="{{ tuesdayCheck }}"/>-->
+        <Button row="2" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="tuesdayCheck" value="false"/>
+        <!--<Switch row="3" col="1" checked="{{ wednesdayCheck }}"/>-->
+        <Button row="3" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="wednesdayCheck" value="false"/>
+        <!--<Switch row="4" col="1" checked="{{ thursdayCheck }}"/>-->
+        <Button row="4" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="thursdayCheck" value="false"/>
+        <!--<Switch row="5" col="1" checked="{{ fridayCheck }}"/>-->
+        <Button row="5" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="fridayCheck" value="false"/>
+        <!--<Switch row="6" col="1" checked="{{ saturdayCheck }}"/>-->
+        <Button row="6" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="saturdayCheck" value="false"/>
       </GridLayout>
       <label class="DayCalc_SectionTitle" text="Number of Days"/>
       <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfDays }}" />

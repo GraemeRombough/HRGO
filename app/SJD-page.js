@@ -14,6 +14,7 @@ var classDD;
 var selectedClass;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 const email = require("nativescript-email");
+var pageObject;
 
 exports.pageLoaded = function(args) {
    

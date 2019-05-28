@@ -21,8 +21,11 @@
         <label class="Home_NavLabel" row="5" col="0" text="Friday"/>
         <label class="Home_NavLabel" row="6" col="0" text="Saturday"/>
         <Switch row="0" col="1" checked="{{ sundayCheck }}"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="sundayCheck" value="false"/>
         <Switch row="1" col="1" checked="{{ mondayCheck }}"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="mondayCheck" value="false"/>
         <Switch row="2" col="1" checked="{{ tuesdayCheck }}"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="tuesdayCheck" value="false"/>
         <Switch row="3" col="1" checked="{{ wednesdayCheck }}"/>
         <Switch row="4" col="1" checked="{{ thursdayCheck }}"/>
         <Switch row="5" col="1" checked="{{ fridayCheck }}"/>

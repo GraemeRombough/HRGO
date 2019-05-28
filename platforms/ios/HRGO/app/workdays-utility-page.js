@@ -5,10 +5,12 @@ var observable = require("data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "YourPayInformation";
 var navList = [];
+var pageObject;
 
 
 exports.pageLoaded = function(args) {
     const page = args.object;
+    pageObject = page;
     //vm = new Observable();
     pageData.set("mondayCheck", true);
     pageData.set("tuesdayCheck", true);
@@ -44,6 +46,15 @@ exports.footer3 = function(){
     topmost.navigate("profile-page");
     
 }
+exports.toggleCheck = function(args){
+    if(args.object.value == "true"){
+        args.object.value = "false";
+        args.object.text = "";
+    }else{
+        args.object.value = "true";
+        args.object.text = "\uea10";
+    }
+};
 exports.footer4 = function(){
     console.log("Go To Feedback");
     var topmost = frameModule.topmost();
@@ -91,7 +102,22 @@ var addScheduleDays = function(startDate, schedule, totalDays){
 var getDaysOfWork = function(){
     var daysOfWork = [];
     daysOfWork.length = 0;
-    if (pageData.get('sundayCheck')==true){
+    var dayValues = []
+    dayValues[0] = pageObject.getViewById("sundayCheck");
+    dayValues[1] = pageObject.getViewById("mondayCheck");
+    dayValues[2] = pageObject.getViewById("tuesdayCheck");
+    dayValues[3] = pageObject.getViewById("wednesdayCheck");
+    dayValues[4] = pageObject.getViewById("thursdayCheck");
+    dayValues[5] = pageObject.getViewById("fridayCheck");
+    dayValues[6] = pageObject.getViewById("saturdayCheck");
+
+    for(x = 0; x < dayValues.length; x++){
+        if(dayValues[x].value == "true"){
+            daysOfWork.push(x);
+        }
+    }
+
+    /* if (pageData.get('sundayCheck')==true){
         daysOfWork.push(0);
     };
     if (pageData.get('mondayCheck')==true){
@@ -111,7 +137,7 @@ var getDaysOfWork = function(){
     };
     if (pageData.get('saturdayCheck')==true){
         daysOfWork.push(6);
-    };
+    }; */
     console.log(daysOfWork.length);
     return daysOfWork;
 }

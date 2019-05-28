@@ -1,4 +1,4 @@
-<Page loaded="pageLoaded" actionBarHidden="true" xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:CheckBox="nativescript-checkbox" loaded="pageLoaded">
+<Page loaded="pageLoaded" actionBarHidden="true" loaded="pageLoaded">
 
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
   <GridLayout rows="*,60">
@@ -9,14 +9,15 @@
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      <CheckBox:CheckBox checked="false" text="CheckBox" id="myCheckbox" />
+      
       <label class="DayCalc_SectionTitle" text="Desired Notifications"/>
       <GridLayout columns="auto,auto" rows="auto,auto" style="horizontal-align:center;">
         <label class="Home_NavLabel" row="0" col="0" text="Submission Notifications"/>
         <label class="Home_NavLabel" row="1" col="0" text="Approval Notifications"/>
         
-        <Switch row="0" col="1" checked="{{ submissionCheck }}"/>
-        <Switch row="1" col="1" checked="{{ approvalCheck }}"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="submissionCheck" value="false"/>
+        
+        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="approvalCheck" value="false"/>
         
       </GridLayout>
       <label class="DayCalc_SectionTitle" text="Weeks to Repeat Notifications"/>
