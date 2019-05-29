@@ -105,17 +105,20 @@ var displayOvertime = function(){
         rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()+1}\/${dateInput.getDate()} - ${dateEnd.getFullYear()}\/${dateEnd.getMonth()+1}\/${dateEnd.getDate()}`;
         rowTitle.className = "Main_Nav_SubLine";
         hoursTitle.text = "Hours:";
-        hoursTitle.className = "Utility_TableText_1";
+        hoursTitle.className = "Utility_TableText_1L";
         hoursNumber.text = overTimeList[i].Hours;
         hoursNumber.className = "Utility_TableText_1";
         enteredTitle.text = "Entered?";
-        enteredTitle.className = "Utility_TableText_1";
+        enteredTitle.className = "Utility_TableText_1L";
         enteredCheck.className = "Home_Checkbox";
         enteredCheck.value = overTimeList[i].Entered;
         enteredCheck.id = i;
+        if(overTimeList[i].Entered == "true"){enteredCheck.text = "\uea10";};
         enteredCheck.on(buttonModule.Button.tapEvent, setItemEntered, this);
         clearButton.text = "Clear";
+        clearButton.id = i;
         clearButton.className = "Submit_Button_1";
+        clearButton.on(buttonModule.Button.tapEvent, clearThisItem, this);
 
         layout.GridLayout.setRow(rowTitle, 0);
         layout.GridLayout.setRow(hoursTitle, 1);
@@ -191,6 +194,16 @@ var displayOvertime = function(){
         otLayout.addChild(gridLayout); */
     }
 
+}
+var clearThisItem = function(args){
+    console.log(args.object.id);
+    overTimeList.splice(args.object.id, 1);
+    var saveString = JSON.stringify(overTimeList);
+    applicationSettings.setString("Saved_Overtime", saveString);
+    pageData.set("ViewSchedule", false);
+    saveOvertime();
+    displayOvertime();
+    pageData.set("ViewSchedule", true);
 }
 var setItemEntered = function(args){
     console.log(args.object.id);
