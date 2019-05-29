@@ -6,11 +6,13 @@ var pageData = new observable.Observable();
 var applicationSettings = require("application-settings");
 var subNavTitle = "YourPayInformation";
 var navList = [];
+var pageObject
 
 
 exports.pageLoaded = function(args) {
     const page = args.object;
     //vm = new Observable();
+    pageObject = page;
     page.bindingContext = pageData;
     checkLanguage();
 };
@@ -46,18 +48,27 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
 }
+exports.setToEng = function(args){
+    var freButton = pageObject.getViewById("FrenchButton");
+    args.object.style.backgroundColor = "rgb(0,31,91)";
+    args.object.style.color = "#FFF";
+    
+    freButton.style.backgroundColor = "#DDD";
+    freButton.style.color = "#222";
+    applicationSettings.setString("PreferredLanguage", "English");
+}
+exports.setToFre = function(args){
+    var engButton = pageObject.getViewById("EnglishButton");
+    args.object.style.backgroundColor = "rgb(0,31,91)";
+    args.object.style.color = "#FFF";
+    engButton.style.backgroundColor = "#DDD";
+    engButton.style.color = "#222";
+    applicationSettings.setString("PreferredLanguage", "French");
+}
 exports.saveProfile = function(){
-    console.log(pageData.get("preferredLanguage"));    
-    var selectedLanguage;
-    if(pageData.get("preferredLanguage") == true){
-        selectedLanguage = "French";
-    }else{
-        selectedLanguage = "English";
-    };
-    console.log("SaveProfile: " + selectedLanguage);
-    if(pageData.get("preferredLanguage")){
-        applicationSettings.setString("PreferredLanguage", selectedLanguage);
-    }
+    
+    
+    
     if(pageData.get("workEmail")){
         applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
     }
@@ -67,14 +78,17 @@ var checkLanguage = function(){
         console.log(applicationSettings.getString("PreferredLanguage"));
         var existingLanguage;
         if(applicationSettings.getString("PreferredLanguage") == "French"){
-            existingLanguage = true;
-        }else{
-            existingLanguage = false;
+            var freButton = pageObject.getViewById("FrenchButton");
+            freButton.style.backgroundColor = "rgb(0,31,91)";
+            freButton.style.color = "#FFF";
         }
-        pageData.set("preferredLanguage", existingLanguage);
-    }else{
-        pageData.set("preferredLanguage", false);
+        if(applicationSettings.getString("PreferredLanguage") == "English"){
+            var engButton = pageObject.getViewById("EnglishButton");
+            engButton.style.backgroundColor = "rgb(0,31,91)";
+            engButton.style.color = "#FFF";
+        }   
     }
+    
     if(applicationSettings.hasKey("WorkEmail")){
         pageData.set("workEmail", applicationSettings.getString("WorkEmail"));
     }

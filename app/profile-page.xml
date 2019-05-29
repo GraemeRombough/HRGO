@@ -11,10 +11,9 @@
 <ScrollView>
     <StackLayout orientation="vertical">
       <label class="DayCalc_SectionTitle" text="Preferred Language"/>
-      <GridLayout columns="*,auto,*">
-        <label class="Home_NavLabel" col="0" text="English"/>
-        <Switch col="1" checked="{{ preferredLanguage }}"/>
-        <label class="Home_NavLabel" col="2" text="French"/>
+      <GridLayout columns="*,*">
+        <Button class="Submit_Button_1" col="0" text="English" tap="setToEng" id="EnglishButton"/>
+        <Button class="Submit_Button_1" col="1" text="French" tap="setToFre" id="FrenchButton"/>
       </GridLayout>
       
         <label class="DayCalc_SectionTitle" text="Work Email"/>
