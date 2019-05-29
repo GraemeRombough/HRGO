@@ -14,8 +14,8 @@ button{
     height: auto;
     padding-top: 12px;
     padding-bottom: 12px;
-    margin-top:12px;
-    margin-bottom:12px;  
+    margin-top:28px;
+    margin-bottom:28px;  
     color: #222;
     white-space: normal;
     padding-left: 30px;
@@ -494,5 +494,17 @@ button{
     font-size: 16px;
     color: #222;
     text-align:center;
+}
+.Utility_TableText_1L{
+    font-size: 16px;
+    color: #222;
+    padding-left:40px;
+    text-align:left;
+}
+.Utility_TableText_1R{
+    font-size: 16px;
+    color: #222;
+    padding-right:40px;
+    text-align:right;
 }
 /* Your CSS goes here */
