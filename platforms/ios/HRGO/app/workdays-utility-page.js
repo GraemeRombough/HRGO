@@ -54,7 +54,7 @@ exports.toggleCheck = function(args){
     }else{
         args.object.value = "true";
         args.object.text = String.fromCharCode(0xea10);
-        args.object.text = "test";
+        
         args.object.style.backgroundColor = "#222";
         
     }
