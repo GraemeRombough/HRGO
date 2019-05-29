@@ -14,6 +14,7 @@ var classDD;
 var selectedClass;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 const email = require("nativescript-email");
+var pageObject;
 
 exports.pageLoaded = function(args) {
    
@@ -143,7 +144,7 @@ var createSJDGrid = function(SJD_t, SJD_s, SJD_c, SJD_d, SJD_l){
     SJDLink.text = "Send Link";
     SJDLink.link = SJD_l;
     SJDLink.title = SJD_t;
-    SJDLink.className = "Utility_SmallButton";
+    SJDLink.className = "Submit_Button_1";
 
     SJDLink.on(buttonModule.Button.tapEvent, sendSJDLink, this);
 
@@ -190,15 +191,15 @@ exports.onClassListPickerLoaded = function(args){
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         pageData.set("classIndex", listPicker.selectedIndex);
-        console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
+        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
+        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
 
     });
 }
 var getClassList = function(){
     var databasePull = getFromDatabase();
-    console.log(databasePull.length);
+    //console.log(databasePull.length);
     var classList = [];
     var itemIsDuplicate = false;
     for(i = 0; i < databasePull.length; i++){
@@ -210,7 +211,7 @@ var getClassList = function(){
         }
         if (itemIsDuplicate == false){
             classList.push(databasePull[i].Classification);
-            console.log(databasePull[i].Classification);
+            //console.log(databasePull[i].Classification);
         }
     }
     return classList;

@@ -3,8 +3,8 @@ var view = require("ui/core/view");
 var dialogs = require("ui/dialogs");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
-var subNavTitle = "YourPayInformation";
-var navList = [];
+var LocalNotifications = require("nativescript-local-notifications").LocalNotifications;
+var dialogs = require("ui/dialogs");
 
 
 exports.pageLoaded = function(args) {
@@ -26,10 +26,36 @@ exports.pageLoaded = function(args) {
     page.bindingContext = pageData;
 
 };
-exports.setNotification = function(){
-    //console.log(pageData.get("date"));
-    //console.log(pageData.get("mondayCheck"));
-    addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
+exports.goBack = function(args){
+    const thisPage = args.object.page;
+    thisPage.frame.goBack()
+}
+exports.setNotification = function(args){
+    LocalNotifications.requestPermission().then((granted) => {
+        if(granted) {
+            LocalNotifications.schedule([{
+                id: 10,
+                title: "Timeliness Reminder",
+                body: "You Need To Do Something",
+                at: new Date(new Date().getTime() + 10000)
+            }]).then(() => {
+                console.log("Notification scheduled");
+            }, (error) => {
+                console.log("ERROR", error);
+            });
+        }
+    })
+    
+    
+};
+exports.toggleCheck = function(args){
+    if(args.object.value == "true"){
+        args.object.value = "false";
+        args.object.text = "";
+    }else{
+        args.object.value = "true";
+        args.object.text = "\uea10";
+    }
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
@@ -39,6 +65,30 @@ exports.goToHome = function(){
 exports.goBack = function(args){
     const thisPage = args.object.page;
     thisPage.frame.goBack()
+}
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
+    
+}
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+}
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
 }
 var addScheduleDays = function(startDate, schedule, totalDays){
     var i = 0;

@@ -19,11 +19,11 @@
         <Switch col="1" row="0" checked="{{ titleCheck }}" class="Applicable_Switch"/>
       </GridLayout>
       <TextField class="Utility_TextBox" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
-      <Button text="Seach Job Descriptions" tap="searchSJD" class="DayCalc_SubmitButton"/>
+      <Button text="Seach Job Descriptions" tap="searchSJD" class="Submit_Button_1"/>
     </StackLayout>
     <ScrollView orientation="vertical" visibility="{{ contentSection ? 'visible' : 'collapsed' }}">
     <StackLayout orientation="vertical">
-      <Button text="Back to Search" tap="showSearch" class="DayCalc_SubmitButton"/>
+      <Button text="Back to Search" tap="showSearch" class="Submit_Button_1"/>
       <StackLayout id="SJD_List">
       <!-- Layout for individual POC -->
       </StackLayout>

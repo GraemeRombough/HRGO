@@ -1,6 +1,6 @@
 android {
             defaultConfig {
-                applicationId = "org.nativescript.HRGO"
+                applicationId = "ca.forces.hrciv.hrgo"
 
                 if (false) {
                     minSdkVersion = false

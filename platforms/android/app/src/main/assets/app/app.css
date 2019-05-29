@@ -14,8 +14,8 @@ button{
     height: auto;
     padding-top: 12px;
     padding-bottom: 12px;
-    margin-top:12px;
-    margin-bottom:12px;  
+    margin-top:28px;
+    margin-bottom:28px;  
     color: #222;
     white-space: normal;
     padding-left: 30px;
@@ -45,6 +45,18 @@ button{
     font-size: 22px;
     text-align: center;
     color: rgb(220,170,0);
+}
+
+.Home_Checkbox{
+    width:50px;
+    height:50px;
+    font-size:20px;
+    text-align: center;
+    border:2px;
+    border-color: #222;
+    font-family: "icomoon";
+    color: #222;
+
 }
 .Home_Nav_Row{
     padding-bottom:10%;
@@ -172,7 +184,7 @@ button{
     font-weight: 700;
 }
 .Header_Label{
-    font-size:22px;
+    font-size:18px;
     vertical-align: middle;
 }
 .Header_Icon{
@@ -477,5 +489,22 @@ button{
     border-top-width: 3px;
     border-bottom-width: 3px;
     border-color: rgb(0,31,91);
+}
+.Utility_TableText_1{
+    font-size: 16px;
+    color: #222;
+    text-align:center;
+}
+.Utility_TableText_1L{
+    font-size: 16px;
+    color: #222;
+    padding-left:40px;
+    text-align:left;
+}
+.Utility_TableText_1R{
+    font-size: 16px;
+    color: #222;
+    padding-right:40px;
+    text-align:right;
 }
 /* Your CSS goes here */

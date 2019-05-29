@@ -19,7 +19,7 @@
     </StackLayout>
     <!-- SALARY INFO SECTION-->
       <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
-        <Button col="0" row="0" colSpan="3" class="DayCalc_SubmitButton" text="Re Enter Info" tap="resetSelections"/>
+        <Button col="0" row="0" colSpan="3" class="Submit_Button_1" text="Reset Search" tap="resetSelections"/>
         <Label col="0" row="1" colSpan="2" text="Salary Info" class="Article_H2"/>
         <Label col="0" row="2" colSpan="2" text="Annual Gross Salary" class="Article_H3"/>
         <Label col="0" row="3" class="Article_Body" text="{{ annualRate }}"/>

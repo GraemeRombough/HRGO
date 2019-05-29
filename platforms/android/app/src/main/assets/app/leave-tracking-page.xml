@@ -23,20 +23,9 @@
       
       <Button text="Leave to Submit" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
       <StackLayout visibility="{{ ViewSchedule ? 'visible' : 'collapsed' }}" id="Overtime_Stack">
-        <GridLayout rows="auto, auto" columns="*">
-          <label row="0" col="0" text="2019/04/23 - 2019/04/24" class="DayCalc_SectionTitle"/>
-          <label row="0" col="0" text="Hours: 2" class="Article_H3"/>
-          <Switch row="1" col="0" checked="true"/>
-        </GridLayout>
-        
-        <GridLayout rows="auto, auto" columns="*">
-          <label row="0" col="0" text="2.5H - 2019/05/05" class="DayCalc_SectionTitle"/>
-          <Switch row="1" col="0" checked="true"/>
-        </GridLayout>
-
         
       </StackLayout>
-        <Button class="Submit_Button_1" text="Clear Submitted Time" tap="clearSubmittedTime"/>
+        
       </StackLayout>
       </ScrollView>
   </StackLayout>

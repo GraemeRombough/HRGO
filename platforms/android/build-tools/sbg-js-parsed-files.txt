@@ -188,3 +188,5 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/matrix/matrix.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/bundle-entry-points.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/console/console.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-local-notifications/local-notifications.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-local-notifications/local-notifications-common.js

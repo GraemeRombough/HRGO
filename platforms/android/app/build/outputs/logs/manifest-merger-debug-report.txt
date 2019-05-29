@@ -4,11 +4,12 @@ ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidMani
 INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
 INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
 INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
-MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/5d23dcc490ebcdf81af03c48ca05f375/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-v4:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/ee2760eb8286ab966cfe2cb88074f341/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/5d23dcc490ebcdf81af03c48ca05f375/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/c25adb10738e96347d125bf205e708bc/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/7569826a9b86564119dbe540e0814252/AndroidManifest.xml:17:1-22:12
 MERGED from [:nativescript-optimized-with-inspector:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/nativescript-optimized-with-inspector.aar/4a823fab9653d824adff71bfa88dc3fd/AndroidManifest.xml:2:1-11:12
+MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:2:1-36:12
 MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/widgets-release.aar/9647d0a7b862e0e428b20f7a9a29c7bd/AndroidManifest.xml:2:1-14:12
 MERGED from [com.android.support:support-media-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/85392e7f62985abc5a37ab4b20e8f354/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/e9a3d97daca6b52b0ac356b5ca3d8bd6/AndroidManifest.xml:17:1-22:12
@@ -70,16 +71,18 @@ uses-sdk
 ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
 INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
 INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
-MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/5d23dcc490ebcdf81af03c48ca05f375/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/5d23dcc490ebcdf81af03c48ca05f375/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/ee2760eb8286ab966cfe2cb88074f341/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-v4:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/ee2760eb8286ab966cfe2cb88074f341/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/5d23dcc490ebcdf81af03c48ca05f375/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/5d23dcc490ebcdf81af03c48ca05f375/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/c25adb10738e96347d125bf205e708bc/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/c25adb10738e96347d125bf205e708bc/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/7569826a9b86564119dbe540e0814252/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/7569826a9b86564119dbe540e0814252/AndroidManifest.xml:20:5-44
 MERGED from [:nativescript-optimized-with-inspector:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/nativescript-optimized-with-inspector.aar/4a823fab9653d824adff71bfa88dc3fd/AndroidManifest.xml:7:5-9:41
 MERGED from [:nativescript-optimized-with-inspector:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/nativescript-optimized-with-inspector.aar/4a823fab9653d824adff71bfa88dc3fd/AndroidManifest.xml:7:5-9:41
+MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:7:5-9:41
+MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:7:5-9:41
 MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/widgets-release.aar/9647d0a7b862e0e428b20f7a9a29c7bd/AndroidManifest.xml:7:5-9:41
 MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/widgets-release.aar/9647d0a7b862e0e428b20f7a9a29c7bd/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:support-media-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/85392e7f62985abc5a37ab4b20e8f354/AndroidManifest.xml:20:5-44
@@ -166,6 +169,8 @@ application
 ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:21:2-42:16
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/c25adb10738e96347d125bf205e708bc/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/c25adb10738e96347d125bf205e708bc/AndroidManifest.xml:22:5-20
+MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:14:5-34:19
+MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:14:5-34:19
 MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/widgets-release.aar/9647d0a7b862e0e428b20f7a9a29c7bd/AndroidManifest.xml:11:5-12:19
 MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/widgets-release.aar/9647d0a7b862e0e428b20f7a9a29c7bd/AndroidManifest.xml:11:5-12:19
 MERGED from [com.android.support:support-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/f0fdc8c0ac946d319aa90c0eb6831ac1/AndroidManifest.xml:22:5-94
@@ -214,3 +219,47 @@ activity#com.tns.ErrorReportActivity
 ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:41:3-57
 	android:name
 		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:41:13-55
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:11:22-78
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:12:5-68
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:12:22-65
+service#com.telerik.localnotifications.NotificationActionReceiver
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:15:9-17:40
+	android:exported
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:17:13-37
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:16:13-85
+receiver#com.telerik.localnotifications.NotificationClearedReceiver
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:19:9-21:40
+	android:exported
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:21:13-37
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:20:13-86
+receiver#com.telerik.localnotifications.NotificationAlarmReceiver
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:22:9-24:40
+	android:exported
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:24:13-37
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:23:13-84
+receiver#com.telerik.localnotifications.NotificationRestoreReceiver
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:25:9-33:20
+	android:exported
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:28:13-37
+	android:directBootAware
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:27:13-43
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:26:13-86
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.LOCKED_BOOT_COMPLETED
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:29:13-32:29
+action#android.intent.action.LOCKED_BOOT_COMPLETED
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:30:17-86
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:30:25-83
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:31:17-79
+	android:name
+		ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-1/files-1.1/app-release.aar/39cb6cdedd378fc36c1b527333fe5c29/AndroidManifest.xml:31:25-76
