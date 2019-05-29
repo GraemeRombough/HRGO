@@ -29,6 +29,13 @@ exports.goBack = function(args){
     const thisPage = args.object.page;
     thisPage.frame.goBack()
 }
+exports.navToggle = function(args){
+    subNavTitle = args.object.value;
+    //alert(args.object.value).then(() => {
+    console.log(subNavTitle);
+    //});
+    pageData.set(subNavTitle, !pageData.get(subNavTitle));
+};
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("profile-page");
@@ -61,13 +68,15 @@ exports.addEmployee = function(args){
     var newEmployee = {empName: pageData.employeeName, empEmail: pageData.employeeEmail};
     var employeeString = JSON.stringify(newEmployee);
     console.log(employeeString);
+    if(newEmployee.empName != "" && newEmployee.empEmail !== ""){
+        var tempTeam = getTeamMembers();
+        tempTeam.push(newEmployee);
+        saveTeamMembers(tempTeam);
+        displayTeamMembers(tempTeam);
+        pageData.set("employeeName", "");
+        pageData.set("employeeEmail", "");  
+    }
     
-    var tempTeam = getTeamMembers();
-    tempTeam.push(newEmployee);
-    saveTeamMembers(tempTeam);
-    displayTeamMembers(tempTeam);
-    pageData.set("employeeName", "");
-    pageData.set("employeeEmail", "");
 };
 exports.sendEmail = function(args){
     console.log("Send Email");

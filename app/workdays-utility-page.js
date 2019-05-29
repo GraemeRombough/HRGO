@@ -50,10 +50,15 @@ exports.toggleCheck = function(args){
     if(args.object.value == "true"){
         args.object.value = "false";
         args.object.text = "";
+        args.object.style.backgroundColor = "#FFF";
     }else{
         args.object.value = "true";
-        args.object.text = "\uea10";
+        args.object.text = String.fromCharCode(0xea10);
+        args.object.text = "test";
+        args.object.style.backgroundColor = "#222";
+        
     }
+
 };
 exports.footer4 = function(){
     console.log("Go To Feedback");

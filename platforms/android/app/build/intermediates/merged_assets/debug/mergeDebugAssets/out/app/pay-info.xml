@@ -18,23 +18,23 @@
       <Button class="Submit_Button_1" text="Get Salary Info" tap="getSalaryInfo"/>
     </StackLayout>
     <!-- SALARY INFO SECTION-->
-      <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
+      <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="*,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
         <Button col="0" row="0" colSpan="3" class="Submit_Button_1" text="Reset Search" tap="resetSelections"/>
         <Label col="0" row="1" colSpan="2" text="Salary Info" class="Article_H2"/>
-        <Label col="0" row="2" colSpan="2" text="Annual Gross Salary" class="Article_H3"/>
-        <Label col="0" row="3" class="Article_Body" text="{{ annualRate }}"/>
-        <TextField col="1" row="3" class="DayCalc_TextField" keyboardType="number" text="{{ annualNumber }}" />
-        <Label col="0" row="4" text="BiWeekly Pay Rate" class="Article_H3"/>
-        <Label col="0" row="5" class="Article_Body" text="{{ biweeklyRate}}"/>
+        <Label col="0" row="2" colSpan="2" text="Annual Gross Salary" class="Sub_Nav_Line"/>
+        <Label col="0" row="3" class="Utility_TableText_1L" text="{{ annualRate }}"/>
+        <TextField col="1" row="3" class="Utility_TableTextInput_1R" keyboardType="number" text="{{ annualNumber }}" />
+        <Label col="0" row="4" colSpan="2" text="BiWeekly Pay Rate" class="Sub_Nav_Line"/>
+        <Label col="0" row="5" class="Utility_TableText_1L" text="{{ biweeklyRate}}"/>
         <TextField col="1" row="5" class="DayCalc_TextField" keyboardType="number" text="{{ biweeklyNumber }}" />
-        <Label col="0" row="6" text="Daily Pay Rate" class="Article_H3"/>
-        <Label col="0" row="7" class="Article_Body" text="{{ dailyRate }}"/>
+        <Label col="0" row="6" colSpan="2" text="Daily Pay Rate" class="Sub_Nav_Line"/>
+        <Label col="0" row="7" class="Utility_TableText_1L" text="{{ dailyRate }}"/>
         <TextField col="1" row="7" class="DayCalc_TextField" keyboardType="number" text="{{ dailyNumber }}" />
-        <Label col="0" row="8" text="Hourly Pay Rate" class="Article_H3"/>
-        <Label col="0" row="9" class="Article_Body" text="{{ hourlyRate }}"/>
+        <Label col="0" row="8" colSpan="2" text="Hourly Pay Rate" class="Sub_Nav_Line"/>
+        <Label col="0" row="9" class="Utility_TableText_1L" text="{{ hourlyRate }}"/>
         <TextField col="1" row="9" class="DayCalc_TextField" keyboardType="number" text="{{ hourlyNumber }}" />
-        <Label col="0" row="10" colSpan="2" text="Overtime Hourly Pay Rate (x1.5)" class="Article_H3"/>
-        <Label col="0" row="11" class="Article_Body" text="{{ overtime1Rate }}"/>
+        <Label col="0" row="10" colSpan="2" text="Overtime Hourly Pay Rate (x1.5)" class="Sub_Nav_Line"/>
+        <Label col="0" row="11" class="Utility_TableText_1L" text="{{ overtime1Rate }}"/>
         <TextField col="1" row="11" class="DayCalc_TextField" keyboardType="number" text="{{ overtime1Number }}" />
         <Label col="0" row="12" colSpan="3" class="Article_Body" text="{{ calculatedMoney }}"/>
         <Button col="0" row="13" colSpan="3" class="Submit_Button_1" text="Calculate Totals" tap="getCalculatedInfo"/>

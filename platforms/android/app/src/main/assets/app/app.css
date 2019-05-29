@@ -53,9 +53,12 @@ button{
     font-size:20px;
     text-align: center;
     border:2px;
+    padding: 0px 0px 0px 0px;
     border-color: #222;
     font-family: "icomoon";
+    background-color:#FFF;
     color: #222;
+    margin: 4px 4px 4px 4px;
 
 }
 .Home_Nav_Row{
@@ -353,22 +356,22 @@ button{
     font-size: 26px;
     font-weight: 700;
     color: rgb(0,31,91);
-    margin-bottom:68px;
-    margin-top: 68px;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    margin-bottom:36px;
+    margin-top: 36px;
+    padding-top: 18px;
+    padding-bottom: 18px;
     border-top-width: 3px;
     border-bottom-width: 3px;
     border-color: rgb(0,31,91);
 }
 .DayCalc_TextField{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: rgb(0,31,91);
-    border-width: 3px;
-    border-width: 3px;
-    border-color: rgb(0,31,91);
+    font-size: 18px;
+    font-weight: 400;
+    color: #222;
+    border-width: 2px;
+    border-width: 2px;
+    border-color: #222;
     text-align: center;
     width: 33%;
 }
@@ -440,23 +443,23 @@ button{
 
 .Utility_TextBox{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 22px;
-    width: 100%;
-    color: rgb(0,31,91);
+    font-size: 18px;
+    width: 90%;
+    color: #222;
     border-width: 3px;
-    border-color: rgb(0,31,91);
+    border-color: #222;
     text-align: left;
     padding-top: 4px;
     padding-bottom: 4px;
 }
 .Utility_LongText{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 22px;
-    width: 100%;
+    font-size: 18px;
+    width: 90%;
     height: 320px;
-    color: rgb(0,31,91);
+    color: #222;
     border-width: 3px;
-    border-color: rgb(0,31,91);
+    border-color: #222;
     text-align: left;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -469,13 +472,13 @@ button{
     font-size: 18px;
     font-weight: 700;
     white-space: normal;
-    color: rgb(0,31,91);
+    color: #222;
 }
 .Utility_MyTeam_TeamEmail{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 18px;
     white-space: normal;
-    color: rgb(0,31,91);
+    color: #222;
 }
 .Utility_SmallButton{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -506,5 +509,18 @@ button{
     color: #222;
     padding-right:40px;
     text-align:right;
+}
+.Utility_TableTextInput_1R{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #222;
+    border-width: 2px;
+    border-width: 2px;
+    border-color: #222;
+    margin-top:4px;
+    margin-bottom:4px;
+    text-align: center;
+    width: 100%;
 }
 /* Your CSS goes here */

@@ -18,7 +18,6 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/understand-pay-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/sec34-notifications-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/my-team.js
-/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/code/navComponents.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/contact-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/roles-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/student-landing-page.js
