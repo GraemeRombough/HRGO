@@ -1,0 +1,9 @@
+{
+	"nativescript-local-notifications": {
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/android/app-release.aar": "3ab586eace47782549a734c3f758fe18c407d8bf",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/android/include.gradle": "4f992285c2aef9454171825175b68993b2eb8bcc"
+	},
+	"tns-core-modules-widgets": {
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/android/widgets-release.aar": "efe67a699a507e38b3daf4e9903fc0cdc9435a86"
+	}
+}
