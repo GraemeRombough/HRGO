@@ -171,9 +171,12 @@ var setItemEntered = function(args){
     if(args.object.value == "true"){
         args.object.value = "false";
         args.object.text = "";
+        args.object.style.backgroundColor = "#FFF";
     }else{
         args.object.value = "true";
-        args.object.text = "\uea10";
+        args.object.text = String.fromCharCode(0xea10);
+        args.object.style.backgroundColor = "#222";
+        
     }
     console.log(args.object.id + "| " + args.object.value);
     overTimeList[args.object.id].Entered = args.object.value;

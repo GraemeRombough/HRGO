@@ -194,6 +194,7 @@ button{
     font-family: "icomoon"; 
     font-size: 22px;
     text-align: center;
+    vertical-align:middle;
     color: rgb(220,170,0);
 }
 .Landing_Nav{

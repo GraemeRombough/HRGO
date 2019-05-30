@@ -93,6 +93,11 @@ exports.getPromotionStep = function(args){
 exports.navToggle = function(args){
     subNavTitle = args.object.value;
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
+
+    if(subNavTitle == "TargetClass"){
+        //pageData.set("SubstantiveStep", true);
+        pageData.set("SubstantiveClass", false);
+    }
 };
 exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
