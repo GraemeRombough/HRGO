@@ -1,8 +1,0 @@
-use_frameworks!
-
-target "HRGO" do
-# Begin Podfile - /Users/graemerombough/HRGO/node_modules/nativescript-checkbox/platforms/ios/Podfile
-pod 'BEMCheckBox', '~> 1.4.1'
-
-# End Podfile
-end
