@@ -9,22 +9,29 @@
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
 <ScrollView>
-    <StackLayout orientation="vertical">
-      
+        <StackLayout orientation="vertical">
+      <!--employee add pay wednesdays every week or pay | managers between friday and monday every week or pay -->
       <label class="DayCalc_SectionTitle" text="Desired Notifications"/>
-      <GridLayout columns="auto,auto" rows="auto,auto" style="horizontal-align:center;">
-        <label class="Home_NavLabel" row="0" col="0" text="Submission Notifications"/>
-        <label class="Home_NavLabel" row="1" col="0" text="Approval Notifications"/>
-        
-        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="submissionCheck" value="false"/>
-        
-        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="approvalCheck" value="false"/>
-        
+      <label text="Rappels des soumissions des employé" class="Sub_Nav_Line"/>
+      <GridLayout columns="auto,auto" rows="*,*" style="horizontal-align:center;">
+        <label class="Utility_TableText_1" row="0" col="0" text="Rappel de semaine"/>
+        <label class="Utility_TableText_1" row="1" col="0" text="Rappel de semaine de paye"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="weeklySubmission" value="false"/>
+        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="paySubmission" value="false"/>
       </GridLayout>
-      <label class="DayCalc_SectionTitle" text="Weeks to Repeat Notifications"/>
+
+      <label text="Rappels des approbations des gestionnaires" class="Sub_Nav_Line"/>
+      <GridLayout columns="auto,auto" rows="*,*" style="horizontal-align:center;">
+        <label class="Utility_TableText_1" row="0" col="0" text="Rappel de semaine"/>
+        <label class="Utility_TableText_1" row="1" col="0" text="Rappel de semaine de paye"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="weeklyApproval" value="false"/>
+        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="payApproval" value="false"/>
+      </GridLayout>
+
+      <label class="DayCalc_SectionTitle" text="Semaines les rappels répétés"/>
       <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfWeeks }}" />
 
-      <Button class="DayCalc_SubmitButton" text="Set Notifications" tap="setNotification"/>
+      <Button class="Submit_Button_1" text="Enregistrez votre rappels" tap="setNotification"/>
 
       
 

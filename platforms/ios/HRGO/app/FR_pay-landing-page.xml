@@ -9,27 +9,27 @@
     </GridLayout>
     <ScrollView>
     <StackLayout orientation="vertical">
-      <Button class="Sub_Nav_Line" text="Your Pay Information" tap="navToggle" value="YourPayInformation"/>
-        <Button class="Main_Nav_SubLine" id="1" text="Pay Basics" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="2" text="View and Understand Your Pay" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Renseignements sur votre paye" tap="navToggle" value="YourPayInformation"/>
+        <Button class="Main_Nav_SubLine" id="1" text="Principes de base de la rémunération" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="2" text="Consulter et comprendre votre paye" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
         
       
-      <Button class="Sub_Nav_Line" text="Problems With Your Pay" tap="navToggle" value="ProblemsWithYourPay"/>
-        <Button class="Main_Nav_SubLine" id="3" text="Reporting Your Pay Issue" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="4" text="Emergency Salary Advance" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Problèmes de paye" tap="navToggle" value="ProblemsWithYourPay"/>
+        <Button class="Main_Nav_SubLine" id="3" text="Signalez votre problème de rémunération" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="4" text="Demande d’avance de salaire en cas d’urgence" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
         
 
-      <Button class="Sub_Nav_Line" text="Pay Deadlines and Processes" tap="navToggle" value="DeadlinesAndProcesses"/>
-        <Button class="Main_Nav_SubLine" id="5" text="Employee Roles in Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="6" text="Section 34 Managers Roles in Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="7" text="Section 34 Self-Service Pay Requests" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="8" text="HR/Staffing Actions Affecting Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Échéances et processus relatifs à la paye" tap="navToggle" value="DeadlinesAndProcesses"/>
+        <Button class="Main_Nav_SubLine" id="5" text="Rôles des employés" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="6" text="Rôles des gestionnaires délégués aux termes de l’article 34" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="7" text="Demandes de traitement aux termes de l’article 34" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="8" text="Mouvements de RH/dotation qui ont une incidence sur la paye" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
         <!--<Button class="Main_Nav_SubLine" id="100" text="Changing your Section 34 Manager in Phoenix" tap="goToWalkthrough" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>-->
 
 
-      <Button class="Sub_Nav_Line" text="Hours and Scheduling" tap="navToggle" value="Scheduling"/>
-        <Button class="Main_Nav_SubLine" id="9" text="Overtime" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="10" text="Managing Employee Schedules" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Heures et horaires de travail" tap="navToggle" value="Scheduling"/>
+        <Button class="Main_Nav_SubLine" id="9" text="Heures supplémentaires" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="10" text="Gestion des horaires des employés" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
         <!--<Button class="Main_Nav_SubLine" id="100" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>-->
 
       <Button class="Sub_Nav_Line" text="Leave" tap="navToggle" value="Leave"/>
@@ -38,13 +38,13 @@
         <Button class="Main_Nav_SubLine" id="21" text="Pre-retirement Transition Leave" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
 
       <Button class="Sub_Nav_Line" text="Utilities" tap="navToggle" value="Utilities"/>
-        <Button class="Main_Nav_SubLine" text="Calculate Gross Pay" pageName="pay-info" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Calculate Promotion Step" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Calculate Timeliness Cutoffs" pageName="timeliness-utility-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Track My Overtime" pageName="overtime-tracking-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Our Roles and Responsibilities" pageName="roles-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Understand Our Paycheques" pageName="understand-pay-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Leave Type Lookup" pageName="leave-code-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Paie brute" pageName="pay-info" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Promotion" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Échéances de soumission" pageName="timeliness-utility-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Suivi - Heures supp" pageName="overtime-tracking-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Rôles et responsabilités" pageName="roles-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Comprendre le relevé de paie" pageName="understand-pay-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Consultation - Types de congé" pageName="leave-code-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
     </StackLayout>
     </ScrollView>
   </StackLayout>

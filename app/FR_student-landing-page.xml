@@ -9,25 +9,22 @@
     </GridLayout>
     <ScrollView>
     <StackLayout orientation="vertical">
-      <Button class="Sub_Nav_Line" text="Student Hiring Initiative" tap="navToggle" value="Initiative"/>
-        <Button class="Main_Nav_SubLine" id="11" text="Campaign for 19/20" tap="goToArticle" visibility="{{ Initiative ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="12" text="Commitment for 19/20" tap="goToArticle" visibility="{{ Initiative ? 'visible' : 'collapsed' }}"/>
-        
       
-      <Button class="Sub_Nav_Line" text="Student Hiring Process" tap="navToggle" value="Process"/>
-        <Button class="Main_Nav_SubLine" id="13" text="National Student Hiring Team" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="14" text="Student Security Screening" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="15" text="Student Targeted Inventories" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="16" text="E-Staffing and Student Re-Hires" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Information sur l’embauche d’étudiant" tap="navToggle" value="Process"/>
+        <Button class="Main_Nav_SubLine" id="11" text="Information sur l’embauche d’étudiants à l’intention des gestionnaires" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="12" text="Équipe nationale d’embauche des étudiants" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="13" text="Vérification de la fiabilité des étudiants" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="14" text="Des nouveaux programmes PFETE ciblés" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="15" text="e-Dotation et réembauche des étudiants" tap="goToArticle" visibility="{{ Process ? 'visible' : 'collapsed' }}"/>
         
 
-      <Button class="Sub_Nav_Line" text="Student FAQs" tap="navToggle" value="FAQ"/>
-        <Button class="Main_Nav_SubLine" id="17" text="FAQs - FSWEP" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="18" text="FAQs - Hiring a Former Student" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
-      
+      <Button class="Sub_Nav_Line" text="FAQ d’étudiants" tap="navToggle" value="FAQ"/>
+        <Button class="Main_Nav_SubLine" id="16" text="FAQ - PFETE" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="17" text="FAQ - Embauche d’un(e) ancien(ne) étudiant(e)" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
+      <!-->
       <Button class="Sub_Nav_Line" text="Utilities" tap="navToggle" value="Utilities"/>
         <Button class="Main_Nav_SubLine" text="Student Onboarding" pageName="student-onboard-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-
+-->
     
     </StackLayout>
     </ScrollView>

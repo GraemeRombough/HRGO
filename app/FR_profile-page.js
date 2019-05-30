@@ -56,6 +56,10 @@ exports.setToEng = function(args){
     freButton.style.backgroundColor = "#DDD";
     freButton.style.color = "#222";
     applicationSettings.setString("PreferredLanguage", "English");
+
+    exports.saveProfile();
+    var topmost = frameModule.topmost();
+    topmost.navigate("profile-page");
 }
 exports.setToFre = function(args){
     var engButton = pageObject.getViewById("EnglishButton");

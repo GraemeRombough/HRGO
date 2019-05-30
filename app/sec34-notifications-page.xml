@@ -10,21 +10,28 @@
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      
+      <!--employee add pay wednesdays every week or pay | managers between friday and monday every week or pay -->
       <label class="DayCalc_SectionTitle" text="Desired Notifications"/>
-      <GridLayout columns="auto,auto" rows="auto,auto" style="horizontal-align:center;">
-        <label class="Home_NavLabel" row="0" col="0" text="Submission Notifications"/>
-        <label class="Home_NavLabel" row="1" col="0" text="Approval Notifications"/>
-        
-        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="submissionCheck" value="false"/>
-        
-        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="approvalCheck" value="false"/>
-        
+      <label text="Employee Pay Entry Notifications" class="Sub_Nav_Line"/>
+      <GridLayout columns="auto,auto" rows="*,*" style="horizontal-align:center;">
+        <label class="Utility_TableText_1" row="0" col="0" text="Weekly Reminders"/>
+        <label class="Utility_TableText_1" row="1" col="0" text="Pay Week Reminders"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="weeklySubmission" value="false"/>
+        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="paySubmission" value="false"/>
       </GridLayout>
+
+      <label text="Manager Pay Approval Notifications" class="Sub_Nav_Line"/>
+      <GridLayout columns="auto,auto" rows="*,*" style="horizontal-align:center;">
+        <label class="Utility_TableText_1" row="0" col="0" text="Weekly Reminders"/>
+        <label class="Utility_TableText_1" row="1" col="0" text="Pay Week Reminders"/>
+        <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="weeklyApproval" value="false"/>
+        <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="payApproval" value="false"/>
+      </GridLayout>
+
       <label class="DayCalc_SectionTitle" text="Weeks to Repeat Notifications"/>
       <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfWeeks }}" />
 
-      <Button class="DayCalc_SubmitButton" text="Set Notifications" tap="setNotification"/>
+      <Button class="Submit_Button_1" text="Set Notifications" tap="setNotification"/>
 
       
 

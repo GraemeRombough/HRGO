@@ -64,11 +64,11 @@ exports.setToFre = function(args){
     engButton.style.backgroundColor = "#DDD";
     engButton.style.color = "#222";
     applicationSettings.setString("PreferredLanguage", "French");
+    exports.saveProfile();
+    var topmost = frameModule.topmost();
+    topmost.navigate("FR_profile-page");
 }
 exports.saveProfile = function(){
-    
-    
-    
     if(pageData.get("workEmail")){
         applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
     }
