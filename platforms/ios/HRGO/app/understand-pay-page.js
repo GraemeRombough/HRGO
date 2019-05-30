@@ -160,7 +160,7 @@ var getFromDataBase = function(){
     var databaseReturn = [];
     var databaseLine = {};
     
-    databaseLine = {section:"View Paycheque", item:"", description:"This is the section at the top of your paycheque with high level information on the current paycheque."};
+    /* databaseLine = {section:"View Paycheque", item:"", description:"This is the section at the top of your paycheque with high level information on the current paycheque."};
     databaseReturn.push(databaseLine);
     databaseLine = {section:"View Paycheque", item:"Company", description:"The company you work for as it would appear on your T4."};
     databaseReturn.push(databaseLine);
@@ -197,7 +197,44 @@ var getFromDataBase = function(){
     databaseLine = {section:"Tax Data", item:"Fed Addl Amount", description:"Additionally requested federal tax deductions as a specific amount."};
     databaseReturn.push(databaseLine);
     databaseLine = {section:"Tax Data", item:"PROV Net Claim", description:"The standard personal deduction for your Provincial taxes."};
-    databaseReturn.push(databaseLine);
+    databaseReturn.push(databaseLine); */
+    databaseLine ={section:"Other Deductions", item: "Association Dues", description: "The amount deducted for association or union dues."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Other Deductions", item: "Death Benefits ", description: "The amount deducted for disability insurance. "};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Other Deductions", item: "Disability Insurance ", description: "The amount deducted for disability insurance. "};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Other Deductions", item: "Health Insurance", description: "The amount deducted for the Public Service Health Care Plan (PSHCP)."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Other Deductions", item: "Group Medical Insurance ", description: "The amount deducted for the provincial Health Care Plan "};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Other Deductions", item: "Taxable Allowance Benefits ", description: "The amount of employer paid benefits added to income for tax purposes"};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Other Deductions", item: "Medical Services BC", description: "The amount deducted for BC provincial health care."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Entitlements and Deductions", item: "Retro Pay", description: "Retroactive pay is a payment made in the current pay period for any increase in wages or salary earned during a past period."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Entitlements and Deductions", item: "Acting Pay", description: "No defintion available"};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Entitlements and Deductions", item: "Salary adjustments ", description: "No definition available "};
     return databaseReturn;
 }
 

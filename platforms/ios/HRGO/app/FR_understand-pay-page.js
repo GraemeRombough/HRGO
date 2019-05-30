@@ -160,44 +160,43 @@ var getFromDataBase = function(){
     var databaseReturn = [];
     var databaseLine = {};
     
-    databaseLine = {section:"View Paycheque", item:"", description:"This is the section at the top of your paycheque with high level information on the current paycheque."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"View Paycheque", item:"Company", description:"The company you work for as it would appear on your T4."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"View Paycheque", item:"Net Pay", description:"The entire dollar amount that will be (is) paid to you through your desired payment method."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"", description:"This section contains personal information and items related to your job and base pay rate."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Name", description:"Your name as it is represented in HRMS."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Employee ID", description:"Your PRI."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Address", description:"Your home address, where any paper documentation would be sent and what will appear on your T4."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Business Unit", description:"Represents your department."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Pay Group", description:"The group you belong to for pay purposes according to the Pay Center."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Department", description:"The code identifying your substantive department."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Location", description:"Location code related to your position information in HRMS.  This is important for tax purposes."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Job Title", description:"Your Job Title."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"General", item:"Pay Rate", description:"The amount and rate of base pay for your substantive position."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"Tax Data", item:"", description:"This section contains information related to the taxes you pay, standard deductions, or any additional tax deductions."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"Tax Data", item:"Fed Net Claim", description:"The standard personal deduction for Federal taxes."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"Tax Data", item:"Fed Spcl Letters", description:""};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"Tax Data", item:"Fed Addl Percent", description:"Additionally requested federal tax deductions as a percentage."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"Tax Data", item:"Fed Addl Amount", description:"Additionally requested federal tax deductions as a specific amount."};
-    databaseReturn.push(databaseLine);
-    databaseLine = {section:"Tax Data", item:"PROV Net Claim", description:"The standard personal deduction for your Provincial taxes."};
-    databaseReturn.push(databaseLine);
+databaseLine ={section:"Autres Retenues", item: "Cotisations Syndicales", description: "Le montant déduit pour les cotisations syndicales."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Autres Retenues", item: "Presentation de décès", description: "Le montant déduit pour la couverture du Régime de prestations supplémentaires de décès."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Autres Retenues", item: "Assurance-invalidité", description: "Le montant déduit pour l`assurance-invalidité."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Autres Retenues", item: "Assurance-santé", description: "La somme retenue pour les primes du régime d`assurance-maladie provincial pour les provinces d`Alberta et de la Colombie-Britannique."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Autres Retenues", item: "Assurance médicale de groupe", description: "La somme retenue pour le Régime de soins de santé de la fonction publique (RSSFP), si vous avez décidé de participer à ce régime."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Autres Retenues", item: "Allo./Pres. Imposables", description: "Le montant des prestations versées par l`employeur qui sont ajoutées au revenu à des fins fiscales. "};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Autres Retenues", item: "Services médicaux C.-B", description: "Le montant retenu pour les soins de santé provinciaux de la C.-B."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Allocations et retenues", item: "Paiement rétroactif", description: "Une paye rétroactive est un paiement effectué pendant la période de paye en cours pour toute augmentation du salaire ou du traitement versé pendant une période antérieure."};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Allocations et retenues", item: "Rémunération intérimaire ", description: "Non disponible"};
+
+databaseReturn.push(databaseLine);
+
+databaseLine ={section:"Allocations et retenues", item: "Rajustements salarieux", description: "Non disponible"};
     return databaseReturn;
 }
 
