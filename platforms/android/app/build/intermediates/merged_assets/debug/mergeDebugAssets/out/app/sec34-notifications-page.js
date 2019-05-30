@@ -35,8 +35,8 @@ exports.setNotification = function(args){
         if(granted) {
             LocalNotifications.schedule([{
                 id: 10,
-                title: "Timeliness Reminder",
-                body: "You Need To Do Something",
+                title: "HRGO Pay Action Reminder",
+                body: "Notification System Is Currently Not Operational",
                 at: new Date(new Date().getTime() + 10000)
             }]).then(() => {
                 console.log("Notification scheduled");
@@ -52,9 +52,11 @@ exports.toggleCheck = function(args){
     if(args.object.value == "true"){
         args.object.value = "false";
         args.object.text = "";
+        args.object.style.backgroundColor = "#FFF";
     }else{
         args.object.value = "true";
-        args.object.text = "\uea10";
+        args.object.text = String.fromCharCode(0xea10);    
+        args.object.style.backgroundColor = "#222"; 
     }
 };
 exports.goToHome = function(){
