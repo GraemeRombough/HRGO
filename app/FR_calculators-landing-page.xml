@@ -4,17 +4,17 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="CALCULATORS" class="Header_Label"/>
+      <label col="1" row="0" text="CALCULATEURS" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
     <ScrollView>
     <StackLayout orientation="vertical">
-      <Button class="Sub_Nav_Line" text="Pay Calculation" tap="navToggle" value="PayCalculation"/>
-        <Button class="Main_Nav_SubLine" text="Calculate Gross Pay" pageName="pay-info" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Calculate Promotion Step" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Calculate Timeliness Cutoffs" pageName="timeliness-utility-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
-      <Button class="Sub_Nav_Line" text="Staffing Calculation" tap="navToggle" value="StaffingCalculation"/>
-        <Button class="Main_Nav_SubLine" text="Calculate Casual End Dates" pageName="workdays-utility-page" tap="goToUtility" visibility="{{ StaffingCalculation ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Calcul - Paie" tap="navToggle" value="PayCalculation"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Paie brute" pageName="pay-info" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Promotion" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Échéances de soumission" pageName="timeliness-utility-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Calcul - Dotation" tap="navToggle" value="StaffingCalculation"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Date de fin - Occasionnel" pageName="workdays-utility-page" tap="goToUtility" visibility="{{ StaffingCalculation ? 'visible' : 'collapsed' }}"/>
 
     </StackLayout>
     </ScrollView>

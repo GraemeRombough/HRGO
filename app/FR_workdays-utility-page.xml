@@ -4,22 +4,22 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="CASUAL WORKDAYS" class="Header_Label"/>
+      <label col="1" row="0" text="JOURS de TRAVAIL" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      <label class="DayCalc_SectionTitle" text="Start Date"/>
+      <label class="DayCalc_SectionTitle" text="Date de début"/>
       <DatePicker loaded="onDatePickerLoaded" date="{{ date }}"></DatePicker>
-      <label class="DayCalc_SectionTitle" text="Days of Work"/>
+      <label class="DayCalc_SectionTitle" text="Jours de travail"/>
       <GridLayout columns="auto,auto" rows="auto,auto,auto,auto,auto,auto,auto" style="horizontal-align:center;">
-        <label class="Home_NavLabel" row="0" col="0" text="Sunday"/>
-        <label class="Home_NavLabel" row="1" col="0" text="Monday"/>
-        <label class="Home_NavLabel" row="2" col="0" text="Tuesday"/>
-        <label class="Home_NavLabel" row="3" col="0" text="Wednesday"/>
-        <label class="Home_NavLabel" row="4" col="0" text="Thursday"/>
-        <label class="Home_NavLabel" row="5" col="0" text="Friday"/>
-        <label class="Home_NavLabel" row="6" col="0" text="Saturday"/>
+        <label class="Home_NavLabel" row="0" col="0" text="Dimanche"/>
+        <label class="Home_NavLabel" row="1" col="0" text="Lundi"/>
+        <label class="Home_NavLabel" row="2" col="0" text="Mardi"/>
+        <label class="Home_NavLabel" row="3" col="0" text="Mercredi"/>
+        <label class="Home_NavLabel" row="4" col="0" text="Jeudi"/>
+        <label class="Home_NavLabel" row="5" col="0" text="Vendredi"/>
+        <label class="Home_NavLabel" row="6" col="0" text="Samedi"/>
         <!--<Switch row="0" col="1" checked="{{ sundayCheck }}"/>-->
         <Button row="0" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="sundayCheck" value="false"/>
         <!--<Switch row="1" col="1" checked="{{ mondayCheck }}"/>-->
@@ -35,12 +35,12 @@
         <!--<Switch row="6" col="1" checked="{{ saturdayCheck }}"/>-->
         <Button row="6" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="saturdayCheck" value="false"/>
       </GridLayout>
-      <label class="DayCalc_SectionTitle" text="Number of Days"/>
+      <label class="DayCalc_SectionTitle" text="Nombre de jours"/>
       <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfDays }}" />
 
       <label class="DayCalc_StartDate" text="{{ endDateLabel }}"/>
 
-      <Button class="Submit_Button_1" text="Get End Date" tap="setNotification"/>
+      <Button class="Submit_Button_1" text="Obtenir la date de fin" tap="setNotification"/>
 
       
 

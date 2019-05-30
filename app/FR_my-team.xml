@@ -6,34 +6,34 @@
       
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
     <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
-    <label col="1" row="0" text="MY TEAM" class="Header_Label"/>
+    <label col="1" row="0" text="ÉQUIPE" class="Header_Label"/>
     <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
-      <Button text="Add New Employee" class="Home_Utility_Label" tap="navToggle" value="AddEmployee"/>
+      <Button text="Ajouter un employé" class="Home_Utility_Label" tap="navToggle" value="AddEmployee"/>
       <StackLayout visibility="{{ AddEmployee ? 'visible' : 'collapsed' }}">
-        <Label text="Name" class="Article_H3"/>
+        <Label text="Nom" class="Article_H3"/>
         <TextField text="{{ employeeName }}" class="Utility_TextBox"/>
-        <Label text="Email" class="Article_H3"/>
+        <Label text="Courriel" class="Article_H3"/>
         <TextField text="{{ employeeEmail }}" keyboardtype="email" class="Utility_TextBox"/>
-        <Button text="Add Employee" tap="addEmployee" class="Submit_Button_1"/>
+        <Button text="Ajouter l'employé" tap="addEmployee" class="Submit_Button_1"/>
       </StackLayout>
       <!-- TEAM LIST -->
-      <Button text="My Team Members" class="Home_Utility_Label" tap="navToggle" value="EmployeeList"/>
+      <Button text="Membres de l'équipe" class="Home_Utility_Label" tap="navToggle" value="EmployeeList"/>
       <StackLayout visibility="{{ EmployeeList ? 'visible' : 'collapsed' }}">
         <StackLayout id="teamListStack" class="Utility_MyTeam_TeamList">
         </StackLayout>
-        <Button text="Clear Team Members" tap="clearTeam" class="Submit_Button_1"/>
+        <Button text="Effacer les membres de l'équipe" tap="clearTeam" class="Submit_Button_1"/>
       </StackLayout>
       
       <!-- COMPOSE EMAIL -->
-      <Button text="Email to Team" class="Home_Utility_Label" tap="navToggle" value="ComposeEmail"/>
+      <Button text="Courriel à l'équipe" class="Home_Utility_Label" tap="navToggle" value="ComposeEmail"/>
       <StackLayout visibility="{{ ComposeEmail ? 'visible' : 'collapsed' }}">
         <GridLayout columns="*,auto">
-        <Label col="0" text="Email Subject" class="Article_H3"/>
-        <Button col="1" text="Send Email" class="Submit_Button_2" tap="sendEmail"/>
+        <Label col="0" text="Objet du courriel" class="Article_H3"/>
+        <Button col="1" text="Envoyer le courriel" class="Submit_Button_2" tap="sendEmail"/>
         </GridLayout>
         <TextField text="{{ emailSubject }}" class="Utility_TextBox"/>
-        <Label text="Email Body" class="Article_H3"/>
+        <Label text="Corps du courriel" class="Article_H3"/>
         <TextView text="{{ emailBody }}" class="Utility_LongText"/>
         
       </StackLayout>

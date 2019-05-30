@@ -23,18 +23,18 @@ exports.pageLoaded = function(args) {
     
     const TODAY = new Date();
     pageData.set("date", TODAY);
-    pageData.set("endDateLabel", "End Date: ");
+    pageData.set("endDateLabel", "Date de fin: ");
     pageData.set("numberOfDays", 90);
     page.bindingContext = pageData;
 
 };
 exports.setNotification = function(){
-    pageData.set("endDateLabel", "Processing");
+    //pageData.set("endDateLabel", "Processing");
     addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 };
 exports.goBack = function(args){
@@ -43,7 +43,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.toggleCheck = function(args){
@@ -67,7 +67,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -77,7 +77,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 var addScheduleDays = function(startDate, schedule, totalDays){  
     var i = 0;
@@ -113,7 +113,7 @@ var addScheduleDays = function(startDate, schedule, totalDays){
         }
     }
     console.log("End Date: " + checkDate.toString());
-    pageData.set("endDateLabel", "End Date: " + formatDate(checkDate.toString()));
+    pageData.set("endDateLabel", "Date de fin: " + formatDate(checkDate.toString()));
 }
 var numberOfHolidaysPassed = function(sDate, eDate){
     var holidayList = getHolidays();

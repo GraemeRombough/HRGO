@@ -140,11 +140,11 @@ exports.getCalculatedInfo = function(){
         totalValue += annuallyCalc * salaryData.annually;
     };
 
-    pageData.set("calculatedMoney", "Gross Salary Calculation: $" + Math.round(totalValue * 100 + Number.EPSILON ) / 100);
+    pageData.set("calculatedMoney", "Paie brute: $" + Math.round(totalValue * 100 + Number.EPSILON ) / 100);
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
 };
 exports.goBack = function(args){
     const thisPage = args.object.page;
@@ -152,7 +152,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.navToggle = function(args){
@@ -174,7 +174,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY

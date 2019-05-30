@@ -5,19 +5,19 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="TIMELINESS CUTOFFS" class="Header_Label"/>
+      <label col="1" row="0" text="ÉCHÉANCES" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      <label class="DayCalc_SectionTitle" text="Day of Work"/>
+      <label class="DayCalc_SectionTitle" text="Jour de travail"/>
       <DatePicker loaded="onDatePickerLoaded" date="{{ dayOfWork }}"></DatePicker>
 
       <label class="DayCalc_StartDate" text="{{ employeeSubmitDate }}"/>
       <label class="DayCalc_StartDate" text="{{ managerApproveDate }}"/>
       <label class="DayCalc_StartDate" text="{{ payDate }}"/>
 
-      <Button class="Submit_Button_1" text="Get Timeliness Cutoffs" tap="calculateTimeliness"/>
+      <Button class="Submit_Button_1" text="Obtenir les échéances" tap="calculateTimeliness"/>
 
       </StackLayout>
       </ScrollView>

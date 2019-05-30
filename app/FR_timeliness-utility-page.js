@@ -12,9 +12,9 @@ exports.pageLoaded = function(args) {
     
     const TODAY = new Date();
     pageData.set("dayOfWork", TODAY);
-    pageData.set("employeeSubmitDate", "Employee Submit By: ");
-    pageData.set("managerApproveDate", "Manager Approve By: ");
-    pageData.set("payDate", "Paid On: ");
+    pageData.set("employeeSubmitDate", "Soumission avant le (empl): ");
+    pageData.set("managerApproveDate", "Approbation avant le (gest): ");
+    pageData.set("payDate", "Versé le: ");
     
     page.bindingContext = pageData;
 
@@ -27,7 +27,7 @@ exports.calculateTimeliness = function(){
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 };
 exports.goBack = function(args){
@@ -36,7 +36,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -46,7 +46,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -56,7 +56,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 var calculateSection34Timeliness = function(workDate, isPayWeek){
     //Sunday = 0 m1, t2, w3, t4, f5, s6
@@ -82,16 +82,16 @@ var calculateSection34Timeliness = function(workDate, isPayWeek){
         submitDate.setTime(calculateDate.getTime() + daysToMilliseconds(payDayDelta));
         approveDate.setTime(submitDate.getTime() + daysToMilliseconds(1));
         payDate.setTime(approveDate.getTime() + daysToMilliseconds(12));
-        pageData.set("employeeSubmitDate", "Employee Submit By: " + formatDate(submitDate.toString()) );
-        pageData.set("managerApproveDate", "Manager Approve By: " + formatDate(approveDate.toString()) );
-        pageData.set("payDate", "Paid On: " + formatDate(payDate.toString()) );
+        pageData.set("employeeSubmitDate", "Soumission avant le (empl): " + formatDate(submitDate.toString()) );
+        pageData.set("managerApproveDate", "Approbation avant le (gest): " + formatDate(approveDate.toString()) );
+        pageData.set("payDate", "Versé le: " + formatDate(payDate.toString()) );
     }else{
         submitDate.setTime(calculateDate.getTime() + daysToMilliseconds(payDayDelta));
         approveDate.setTime(submitDate.getTime() + daysToMilliseconds(1));
         payDate.setTime(approveDate.getTime() + daysToMilliseconds(12));
-        pageData.set("employeeSubmitDate", "Employee Submit By: " + formatDate(submitDate.toString()) );
-        pageData.set("managerApproveDate", "Manager Approve By: " + formatDate(approveDate.toString()) );
-        pageData.set("payDate", "Paid On: " + formatDate(payDate.toString()) );
+        pageData.set("employeeSubmitDate", "Soumission avant le (empl): " + formatDate(submitDate.toString()) );
+        pageData.set("managerApproveDate", "Approbation avant le (gest): " + formatDate(approveDate.toString()) );
+        pageData.set("payDate", "Versé le: " + formatDate(payDate.toString()) );
     }
 
 };
@@ -159,40 +159,40 @@ var formatDate = function(inputDate){
     var month;
     switch (dateInput.getMonth()){
     case 0 :
-        month = "January";
+        month = "Janvier";
         break;
     case 1 :
-        month = "February";
+        month = "Février";
         break;
     case 2 :
-        month = "March";
+        month = "Mars";
         break;
     case 3 :
-        month = "April";
+        month = "Avril";
         break;
     case 4 :
-        month = "May";
+        month = "Mai";
         break;
     case 5 :
-        month = "June";
+        month = "Juin";
         break;
     case 6 :
-        month = "July";
+        month = "Juillet";
         break;
     case 7 :
-        month = "August";
+        month = "Août";
         break;
     case 8 :
-        month = "September";
+        month = "Septembre";
         break;
     case 9 :
-        month = "October";
+        month = "Octobre";
         break;
     case 10 :
-        month = "November";
+        month = "Novembre";
         break;
     case 11 :
-        month = "December";
+        month = "Décembre";
         break;
     }
     formattedDate = month + " " + dateInput.getDate() + ", " + dateInput.getFullYear();

@@ -20,7 +20,7 @@ exports.pageLoaded = function(args) {
 
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 };
 exports.goBack = function(args){
@@ -29,7 +29,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -39,7 +39,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -49,7 +49,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 exports.searchPOC = function(){
     var dataBaseReturn = getFromDatabase();
@@ -84,10 +84,10 @@ var createPOCGrid = function(POC_t, POC_p, POC_e, POC_d){
 
     POCTitle.text = POC_t;
     POCTitle.className = "POC_H1";
-    POCPhone.text = "Phone: " + POC_p;
+    POCPhone.text = "Téléphone: " + POC_p;
     POCPhone.className = "POC_Phone";
     POCPhone.phone = POC_p;
-    POCEmail.text = "Email: " + POC_e;
+    POCEmail.text = "Courriel: " + POC_e;
     POCEmail.className = "POC_Phone";
     POCEmail.email = POC_e;
     POCDesc.text = "Description: " + POC_d;

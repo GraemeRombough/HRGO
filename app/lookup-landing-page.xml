@@ -11,7 +11,7 @@
     <StackLayout orientation="vertical">
       <Button class="Sub_Nav_Line" text="Leave Lookup" tap="navToggle" value="LeaveLookup"/>
         <Button class="Main_Nav_SubLine" text="Leave Type Lookup" pageName="leave-code-page" tap="goToUtility" visibility="{{ LeaveLookup ? 'visible' : 'collapsed' }}"/>
-      <Button class="Sub_Nav_Line" text="Staffing Lookup" tap="navToggle" value="StaffingLookup"/>
+      <Button class="Sub_Nav_Line" text="Classification Lookup" tap="navToggle" value="StaffingLookup"/>
         <Button class="Main_Nav_SubLine" text="Job Description Lookup" pageName="SJD-page" tap="goToUtility" visibility="{{ StaffingLookup ? 'visible' : 'collapsed' }}"/>
       <Button class="Sub_Nav_Line" text="Pay Lookup" tap="navToggle" value="PayLookup"/>
         <Button class="Main_Nav_SubLine" text="Our Roles and Responsibilities" pageName="roles-page" tap="goToUtility" visibility="{{ PayLookup ? 'visible' : 'collapsed' }}"/>

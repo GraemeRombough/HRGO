@@ -87,7 +87,7 @@ exports.getPromotionStep = function(args){
     }
     console.log(currentSalary);
     console.log(targetStep);
-    resultLabel = `${selectedSubClass[1]} > ${selectedTargClass[1]} = Step: ${targetStep} | $${targetSalary}`;
+    resultLabel = `${selectedSubClass[1]} > ${selectedTargClass[1]} = Échelon: ${targetStep} | $${targetSalary}`;
     pageData.set("ResultLabel", resultLabel);
 };
 exports.navToggle = function(args){
@@ -138,7 +138,7 @@ exports.getSalaryInfo = function(args){
     //args.object.bindingContext = pageData;
     //console.log("getSalaryInfo");
     
-    pageData.set("infoVisible", false);
+/*     pageData.set("infoVisible", false);
     if(selectedSubClass != null && selectedSubStep !=null){
         var salaryData = returnSalary(selectedSubClass[1], selectedSubStep[1]);
         pageData.set("annualRate", "$" + Math.round(salaryData.annually * 100 + Number.EPSILON ) / 100);
@@ -147,7 +147,7 @@ exports.getSalaryInfo = function(args){
         pageData.set("hourlyRate", "$" + Math.round(salaryData.hourly * 100 + Number.EPSILON ) / 100);
         pageData.set("overtime1Rate", "$" + Math.round((salaryData.hourly * 1.5) * 100 + Number.EPSILON ) / 100);
         pageData.set("salaryVisible", true);
-    }
+    } */
 };
 var loadSteps = function(selection,inputArg){
     //console.log(`loadSteps selectedSubClass = ${selectedSubClass}`);
@@ -209,7 +209,7 @@ exports.getCalculatedInfo = function(){
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
 };
 exports.goBack = function(args){
     const thisPage = args.object.page;
@@ -217,7 +217,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -227,7 +227,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -237,7 +237,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 var getClassList = function(){
     var databasePull = getFromDataBase();

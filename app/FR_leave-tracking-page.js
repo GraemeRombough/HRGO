@@ -41,7 +41,7 @@ exports.addTime = function(args){
 }
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 };
 exports.goBack = function(args){
@@ -50,7 +50,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -60,7 +60,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -70,7 +70,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 exports.clearSubmittedTime = function(){
     var tempOvertimeList = [];
@@ -104,18 +104,18 @@ var displayOvertime = function(){
         
         rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()+1}\/${dateInput.getDate()} - ${dateEnd.getFullYear()}\/${dateEnd.getMonth()+1}\/${dateEnd.getDate()}`;
         rowTitle.className = "Main_Nav_SubLine";
-        hoursTitle.text = "Hours:";
+        hoursTitle.text = "Heures:";
         hoursTitle.className = "Utility_TableText_1L";
         hoursNumber.text = overTimeList[i].Hours;
         hoursNumber.className = "Utility_TableText_1";
-        enteredTitle.text = "Entered?";
+        enteredTitle.text = "Soumis?";
         enteredTitle.className = "Utility_TableText_1L";
         enteredCheck.className = "Home_Checkbox";
         enteredCheck.value = overTimeList[i].Entered;
         enteredCheck.id = i;
         if(overTimeList[i].Entered == "true"){enteredCheck.text = "\uea10";};
         enteredCheck.on(buttonModule.Button.tapEvent, setItemEntered, this);
-        clearButton.text = "Clear";
+        clearButton.text = "Effacer";
         clearButton.id = i;
         clearButton.className = "Submit_Button_1";
         clearButton.on(buttonModule.Button.tapEvent, clearThisItem, this);
@@ -159,39 +159,6 @@ var displayOvertime = function(){
         gridLayout.className = "POC_Grid";
         otLayout.addChild(gridLayout);
 
-        /* //DIVIDE
-        
-        var gridLayout = new layout.GridLayout();
-        var rowTitle = new Label();
-        var hoursTitle = new Label();
-        var dateInput = new Date(overTimeList[i].Date);
-        var dateEnd = new Date(overTimeList[i].EndDate);
-        var enteredCheck = new switchModule.Switch();
-        console.log(overTimeList[i].Date);
-        rowTitle.text = `${dateInput.getFullYear()}\/${dateInput.getMonth()+1}\/${dateInput.getDate()} - ${dateEnd.getFullYear()}\/${dateEnd.getMonth()+1}\/${dateEnd.getDate()}`;
-        rowTitle.className = "Main_Nav_SubLine";
-        hoursTitle.text = "Hours: " + overTimeList[i].Hours;
-        hoursTitle.className = "Article_Body"
-        enteredCheck.checked = overTimeList[i].Entered;
-        enteredCheck.id = i;
-        enteredCheck.on("checkedChange", (args) => {setItemEntered(args);});
-
-        layout.GridLayout.setRow(rowTitle, 0);
-        layout.GridLayout.setRow(hoursTitle, 1);
-        layout.GridLayout.setRow(enteredCheck, 2);
-        
-        gridLayout.addChild(rowTitle);
-        gridLayout.addChild(hoursTitle);
-        gridLayout.addChild(enteredCheck);
-
-        var titleRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-        var hoursRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-        var checkRow= new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-        gridLayout.addRow(titleRow);
-        gridLayout.addRow(hoursRow);
-        gridLayout.addRow(checkRow);
-        gridLayout.className = "POC_Grid";
-        otLayout.addChild(gridLayout); */
     }
 
 }

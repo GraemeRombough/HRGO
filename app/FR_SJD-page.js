@@ -37,7 +37,7 @@ exports.pageLoaded = function(args) {
 
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 };
 exports.goBack = function(args){
@@ -46,7 +46,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -56,7 +56,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -66,7 +66,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 exports.showSearch = function(){
     pageData.set("classIndex", 1);
@@ -141,7 +141,7 @@ var createSJDGrid = function(SJD_t, SJD_s, SJD_c, SJD_d, SJD_l){
     SJDSalary.className = "POC_Phone";
     SJDDesc.text = SJD_d;
     SJDDesc.className = "POC_Body";
-    SJDLink.text = "Send Link";
+    SJDLink.text = "Envoyer un lien";
     SJDLink.link = SJD_l;
     SJDLink.title = SJD_t;
     SJDLink.className = "Submit_Button_1";
@@ -176,7 +176,7 @@ var sendSJDLink = function(eventData){
     }
     if (email.available()){
         email.compose({
-            subject: "A link to " + eventData.object.title,
+            subject: "Le lien " + eventData.object.title,
             body: eventData.object.link,
             to: workEmail
         });
@@ -220,15 +220,7 @@ var getFromDatabase = function(){
     var databaseReturn = [];
     var dbRow = {};
 
-    /* dbRow = {Title:"Administrative Assistant I ", WDNumber:"0000057333", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027" , Desc:"Provides administrative assistance to an executive at Level C, represents the organization at admin meetings. No supervisory responsibilities."};
-    databaseReturn.push(dbRow);
-    dbRow = {Title:"Records and Information Management Administrator", WDNumber:"0000057416", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"The position is responsible for the provision of records and information management services to an organization and typically reports to a civilian supervisor in the administrative field Directions and information pertaining to the applicable business process with respect to records/information management can generally be obtained from the line organization responsible for Records and Information Management. This position has no supervisory responsibilities."};
-    databaseReturn.push(dbRow);
-    dbRow = {Title:"Compensation Agent", WDNumber:"0000057225", Salary:"$51538 - $57643", Supervisory:"No", Classification:"AS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"Provides general advice and services on compensation and benefits, issues/entitlements to DND civilians, clients and/or their representatives."};
-    databaseReturn.push(dbRow);
-    dbRow = {Title:"Service Desk Technician", WDNumber:"0000057225", Salary:"$53611 - $69088", Supervisory:"No", Classification:"CS   01", Link:"https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/DND-PA-58027", Desc:"The position provides IM/IT Service Desk services within a centralized Service Desk for DND/CAF staff and clients within a service delivery model such as an SMC.  An SMC is an IT services organization resulting from the consolidation of multiple IT points of service (service desks and service providers) into a single Level One organization (L1) that provides services to its assigned clients. The SMC addresses the needs of the DND/CAF to ensure efficient, effective, and responsive IT service delivery by establishing an enterprise-wide approach including an optimized service delivery model, streamlined IT service provision centres and standardized tools and processes. It also facilitates the establishment of measurable levels of IT service delivery, providing accurate information for a commander’s situational awareness and decision making with respect to the Department’s IT investments.  The primary responsibility of the 1st line of support, the Service Desk, is the initiation, execution and oversight of incidents and of some service requests.  Each Service Desk is responsible for the oversight and/or execution of the following: Incident Management, Service Request Management, Escalation of incidents, service requests and issues that may need higher attention, and Communications with the end user community.  The position generally reports to a Level F or above and has no supervisory responsibilities."};
-    databaseReturn.push(dbRow); */
-    dbRow = {Title:"Accountant – Comptroller (Nature of Impact A3)", WDNumber:"59948", Salary:"$66576 - $90314", Supervisory:"Yes", Classification:"FI-02", Link:"DND-FI-59948", Desc:"This position is a part of the FI – Generalist stream, typically located in a comptrollership environment.\n\nThis positions provides substantive advice, guidance, analysis and recommendations in the management, control, coordination and delivery of financial operational practices or procedures. Plans, coordinates and implements corporate financial management policies, services and project activities to ensure alignment with central agency, departmental mandate, and corporate priorities. Delivers information sessions and develops analyses, briefings, and reports. Conducts cost/benefit risk and trend analyses, and prepares expenditure forecasts.\n\nThe position is responsible for activities in one of the categories below: \n\n• Planning and Resource Management: including provision of advice, guidance and financial services in planning; budgeting, costing and reporting;\n• Policy and Systems Development: development, implementation and application of policies, procedures and controls, including development, review, testing and maintenance of business processes, procedures, controls, data and software applications for the production of financial and non-financial information;\n• Accounting Operations: expenditure and revenue accounting and control, financial reporting, and recording and tracking of financial transactions\n• Others (list, i.e. Internal Control over Financial Management or Management, Resources and Results Structure or Main Estimates, MAF etc.): \n\nTypically, this position reports to a FI-03 or higher, or a military position. \n\nThis position may also have supervisory duties. \n\nNature of Impact:  Degree A3\nSize and Nature of Resources: Over $85 Million to $850 Million\nLevel of Influence: 4 or more organizational levels to the decision-maker"};
+dbRow = {Title:"Accountant – Comptroller (Nature of Impact A3)", WDNumber:"59948", Salary:"$66576 - $90314", Supervisory:"Yes", Classification:"FI-02", Link:"DND-FI-59948", Desc:"This position is a part of the FI – Generalist stream, typically located in a comptrollership environment.\n\nThis positions provides substantive advice, guidance, analysis and recommendations in the management, control, coordination and delivery of financial operational practices or procedures. Plans, coordinates and implements corporate financial management policies, services and project activities to ensure alignment with central agency, departmental mandate, and corporate priorities. Delivers information sessions and develops analyses, briefings, and reports. Conducts cost/benefit risk and trend analyses, and prepares expenditure forecasts.\n\nThe position is responsible for activities in one of the categories below: \n\n• Planning and Resource Management: including provision of advice, guidance and financial services in planning; budgeting, costing and reporting;\n• Policy and Systems Development: development, implementation and application of policies, procedures and controls, including development, review, testing and maintenance of business processes, procedures, controls, data and software applications for the production of financial and non-financial information;\n• Accounting Operations: expenditure and revenue accounting and control, financial reporting, and recording and tracking of financial transactions\n• Others (list, i.e. Internal Control over Financial Management or Management, Resources and Results Structure or Main Estimates, MAF etc.): \n\nTypically, this position reports to a FI-03 or higher, or a military position. \n\nThis position may also have supervisory duties. \n\nNature of Impact:  Degree A3\nSize and Nature of Resources: Over $85 Million to $850 Million\nLevel of Influence: 4 or more organizational levels to the decision-maker"};
 
 databaseReturn.push(dbRow);
 

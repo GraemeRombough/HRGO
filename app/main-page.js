@@ -2,8 +2,15 @@ var frameModule = require("ui/frame");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "";
+var applicationSettings = require("application-settings");
 var page;
 exports.pageLoaded = function(args) {
+    if(applicationSettings.hasKey("WorkEmail")){
+        if(applicationSettings.getString("PreferredLanguage") == "French"){
+            var topmost = frameModule.topmost();
+            topmost.navigate("FR_main-page");
+        }
+    }
     page = args.object;
     args.object.bindingContext = pageData;
 };

@@ -4,7 +4,7 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
-      <label col="1" row="0" text="POINTS OF CONTACT" class="Header_Label"/>
+      <label col="1" row="0" text="POINT de CONTACT" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
 
@@ -14,7 +14,7 @@
             <Span text="&#xe986;"/>
           </FormattedString>
       </Button>
-      <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search"/>
+      <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Recherche"/>
     </StackLayout>
     <ScrollView orientation="vertical">
     <StackLayout id="POC_List">

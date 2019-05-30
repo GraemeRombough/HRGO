@@ -5,26 +5,26 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="UNDERSTAND MY PAY" class="Header_Label"/>
+      <label col="1" row="0" text="RELEVÉ de PAIE" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
     
     <!-- Sections -->
-    <Button text="Select a Section" class="Home_Utility_Label" tap="navToggle" value="Section" />
+    <Button text="Sélectionnez une section" class="Home_Utility_Label" tap="navToggle" value="Section" />
     <StackLayout visibility="{{ Section ? 'visible' : 'collapsed' }}" id="sectionLayout">
-      <Button text="Extra Duty Pay" class="Main_Nav_SubLine" tap="loadRoles"/>
+      
     </StackLayout>
 
   <!-- Items -->
-    <Button text="Select an Item" class="Home_Utility_Label" tap="navToggle" value="Item" />
+    <Button text="Sélectionnez un item" class="Home_Utility_Label" tap="navToggle" value="Item" />
     <StackLayout visibility="{{ Item ? 'visible' : 'collapsed' }}"  id="itemLayout">
-      <Button text="Employee" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
+      
     </StackLayout>
 
   <!-- Descriptions -->
-  <Button text="View Description" class="Home_Utility_Label" tap="navToggle" value="Descriptions" />
+  <Button text="Voir la description" class="Home_Utility_Label" tap="navToggle" value="Descriptions" />
     <StackLayout class="Article_MainStack" id="descriptionContent" width="100%" orientation="vertical" visibility="{{ Descriptions ? 'visible' : 'collapsed' }}">
-      <Label text="Stuff here" class="Article_Body"/>
+      
     </StackLayout>
 
   </StackLayout>

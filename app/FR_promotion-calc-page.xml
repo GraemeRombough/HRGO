@@ -5,27 +5,27 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="PROMOTION PAY" class="Header_Label"/>
+      <label col="1" row="0" text="CALCUL - PROMOTION" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
     
     <!-- SUBSTANTIVE CLASS  tap="navToggle" value="FAQ" -->
-    <Button text="Substantive Classification" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
+    <Button text="Classification du poste d'attache" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
     <StackLayout visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}">
       <Label text="Classification" class="Article_H2"/>
       <ListPicker id="classPicker" items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
-      <Label text="Step" class="Article_H2"/>
+      <Label text="Échelon" class="Article_H2"/>
       <ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker"/>
     </StackLayout>
 
 <!-- TARGET CLASS -->
-    <Button text="Target Classification" class="Home_Utility_Label" tap="navToggle" value="TargetClass" />
+    <Button text="Classification cible" class="Home_Utility_Label" tap="navToggle" value="TargetClass" />
     <StackLayout visibility="{{ TargetClass ? 'visible' : 'collapsed' }}" >
       <Label text="Classification" class="Article_H2"/>
       <ListPicker id="classPicker" items="{{ targClassItems }}" selectedIndex="{{ targClassIndex }}" loaded="onTargClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
     </StackLayout>
     <label text="{{ ResultLabel }}" class="DayCalc_StartDate"/>
-    <Button class="Submit_Button_1" text="Get Promotion Step" tap="getPromotionStep"/>
+    <Button class="Submit_Button_1" text="Obtenir la promotion" tap="getPromotionStep"/>
 
   </StackLayout>
   </ScrollView>

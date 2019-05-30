@@ -9,11 +9,11 @@ exports.pageLoaded = function(args) {
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("landing-page");
+    topmost.navigate("FR_landing-page");
 }
 exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate(args.object.pageName);
+    topmost.navigate("FR_" + args.object.pageName);
 };
 exports.goBack = function(args){
     const thisPage = args.object.page;
@@ -28,15 +28,15 @@ exports.navToggle = function(args){
 };
 exports.goToRefCalc = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("calculators-landing-page");
+    topmost.navigate("FR_calculators-landing-page");
 };
 exports.goToConnect = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("connect-landing-page");
+    topmost.navigate("FR_connect-landing-page");
 };
 exports.goToWalkthroughs = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("walkthroughs-landing-page");
+    topmost.navigate("FR_walkthroughs-landing-page");
 }
 exports.switchToFrench = function(){
     var topmost = frameModule.topmost();
@@ -47,12 +47,12 @@ exports.switchToFrench = function(){
 };
 exports.goToTest = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("landing-page");
+    topmost.navigate("FR_landing-page");
     
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -62,7 +62,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -72,13 +72,13 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 exports.searchLanding = function(){
     var searchField = page.getViewById("SearchBox").text;
     
     var navigationOptions={
-        moduleName:'search-page',
+        moduleName:'FR_search-page',
         context:{SearchTerm: searchField
                 }
             }

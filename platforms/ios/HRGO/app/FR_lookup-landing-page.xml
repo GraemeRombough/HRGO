@@ -4,18 +4,18 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="LOOKUP" class="Header_Label"/>
+      <label col="1" row="0" text="CONSULTATION" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
 
     <StackLayout orientation="vertical">
-      <Button class="Sub_Nav_Line" text="Leave Lookup" tap="navToggle" value="LeaveLookup"/>
-        <Button class="Main_Nav_SubLine" text="Leave Type Lookup" pageName="leave-code-page" tap="goToUtility" visibility="{{ LeaveLookup ? 'visible' : 'collapsed' }}"/>
-      <Button class="Sub_Nav_Line" text="Staffing Lookup" tap="navToggle" value="StaffingLookup"/>
-        <Button class="Main_Nav_SubLine" text="Job Description Lookup" pageName="SJD-page" tap="goToUtility" visibility="{{ StaffingLookup ? 'visible' : 'collapsed' }}"/>
-      <Button class="Sub_Nav_Line" text="Pay Lookup" tap="navToggle" value="PayLookup"/>
-        <Button class="Main_Nav_SubLine" text="Our Roles and Responsibilities" pageName="roles-page" tap="goToUtility" visibility="{{ PayLookup ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Understand Our Paycheques" pageName="understand-pay-page" tap="goToUtility" visibility="{{ PayLookup ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Consultation - Congés" tap="navToggle" value="LeaveLookup"/>
+        <Button class="Main_Nav_SubLine" text="Consultation - Types de congé" pageName="leave-code-page" tap="goToUtility" visibility="{{ LeaveLookup ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Consultation - Classification" tap="navToggle" value="StaffingLookup"/>
+        <Button class="Main_Nav_SubLine" text="Consultation - Description de poste" pageName="SJD-page" tap="goToUtility" visibility="{{ StaffingLookup ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Consultation - Paie" tap="navToggle" value="PayLookup"/>
+        <Button class="Main_Nav_SubLine" text="Rôles et responsabilités" pageName="roles-page" tap="goToUtility" visibility="{{ PayLookup ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Comprendre le relevé de paie" pageName="understand-pay-page" tap="goToUtility" visibility="{{ PayLookup ? 'visible' : 'collapsed' }}"/>
       
     </StackLayout>
   </StackLayout>

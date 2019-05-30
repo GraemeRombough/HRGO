@@ -6,7 +6,7 @@ var subNavTitle = "YourPayInformation";
 var navList = [];
 
 exports.pageLoaded = function(args) {
-    pageData.set("ActionBarTitle", "Hello World");
+    //pageData.set("ActionBarTitle", "Hello World");
     //pageData.set(subNavTitle, true);
     getNavList();
     args.object.bindingContext = pageData;
@@ -15,20 +15,17 @@ exports.pageLoaded = function(args) {
 
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 };
 exports.goBack = function(args){
     const thisPage = args.object.page;
     thisPage.frame.goBack()
 }
-exports.goBack = function(args){
-    const thisPage = args.object.page;
-    thisPage.frame.goBack()
-}
+
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -38,7 +35,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -48,11 +45,11 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 exports.goToArticle = function(args){
     var navigationOptions={
-        moduleName:'dynamic-article-page',
+        moduleName:'FR_dynamic-article-page',
         context:{Language: "ENG",
                 ArticleID: args.object.id,
                 ArticleTitle: args.object.text
@@ -64,7 +61,7 @@ exports.goToArticle = function(args){
 };
 exports.goToWalkthrough = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("dynamic-walkthrough-page");
+    topmost.navigate("FR_dynamic-walkthrough-page");
 };
 
 exports.navToggle = function(args){
@@ -76,7 +73,7 @@ exports.navToggle = function(args){
 };
 exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate(args.object.pageName);
+    topmost.navigate("FR_" + args.object.pageName);
 };
 var getNavList = function(){
     var navItem = {};

@@ -5,23 +5,23 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="TRACK LEAVE" class="Header_Label"/>
+      <label col="1" row="0" text="SUIVIS de CONGÉ" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      <Button text="Add Leave" class="Home_Utility_Label" tap="navToggle" value="AddTime"/>
+      <Button text="Ajout de congé" class="Home_Utility_Label" tap="navToggle" value="AddTime"/>
       <StackLayout visibility="{{ AddTime ? 'visible' : 'collapsed' }}">
-        <label text="# of Hours:" class="DayCalc_SectionTitle"/>
+        <label text="Heures:" class="DayCalc_SectionTitle"/>
         <TextField text="{{ submitHours }}" keyboardType="number" class="DayCalc_TextField"/>
-        <label text="Start Date:" class="DayCalc_SectionTitle"/>
+        <label text="Date de début:" class="DayCalc_SectionTitle"/>
         <DatePicker loaded="onDatePickerLoaded" date="{{ submitDate }}"></DatePicker>
-        <label text="End Date:" class="DayCalc_SectionTitle"/>
+        <label text="Date de fin:" class="DayCalc_SectionTitle"/>
         <DatePicker loaded="onDatePickerLoaded" date="{{ endDate }}"></DatePicker>
-        <Button class="Submit_Button_1" text="Save New Time" tap="addTime"/>
+        <Button class="Submit_Button_1" text="Enregistrer les heures" tap="addTime"/>
       </StackLayout>
       
-      <Button text="Leave to Submit" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
+      <Button text="Congé à soumettre" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
       <StackLayout visibility="{{ ViewSchedule ? 'visible' : 'collapsed' }}" id="Overtime_Stack">
         
       </StackLayout>

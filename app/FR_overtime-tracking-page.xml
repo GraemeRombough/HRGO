@@ -5,22 +5,22 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="OVERTIME TRACKING" class="Header_Label"/>
+      <label col="1" row="0" text="SUIVI - HEURES SUPP" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
 <ScrollView>
     <StackLayout orientation="vertical">
-      <Button text="Add Time" class="Home_Utility_Label" tap="navToggle" value="AddTime"/>
+      <Button text="Ajout d'heures" class="Home_Utility_Label" tap="navToggle" value="AddTime"/>
       <StackLayout visibility="{{ AddTime ? 'visible' : 'collapsed' }}">
         
         <label text="Date:" class="DayCalc_SectionTitle"/>
         <DatePicker loaded="onDatePickerLoaded" date="{{ submitDate }}"></DatePicker>
-        <label text="# of Hours:" class="DayCalc_SectionTitle"/>
+        <label text="Heures:" class="DayCalc_SectionTitle"/>
         <TextField text="{{ submitHours }}" keyboardType="number" class="DayCalc_TextField"/>
-        <Button class="Submit_Button_1" text="Save New Time" tap="addTime"/>
+        <Button class="Submit_Button_1" text="Enregistrer les heures" tap="addTime"/>
       </StackLayout>
       
-      <Button text="View Time" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
+      <Button text="Consultation des heures" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
       <StackLayout visibility="{{ ViewSchedule ? 'visible' : 'collapsed' }}" id="Overtime_Stack">
         
       </StackLayout>
