@@ -5,7 +5,7 @@ var subNavTitle = "";
 var applicationSettings = require("application-settings");
 var page;
 exports.pageLoaded = function(args) {
-    if(applicationSettings.hasKey("WorkEmail")){
+    if(applicationSettings.hasKey("PreferredLanguage")){
         if(applicationSettings.getString("PreferredLanguage") == "French"){
             var topmost = frameModule.topmost();
             topmost.navigate("FR_main-page");
