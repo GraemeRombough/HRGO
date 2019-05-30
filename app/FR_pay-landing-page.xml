@@ -32,12 +32,12 @@
         <Button class="Main_Nav_SubLine" id="10" text="Gestion des horaires des employés" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
         <!--<Button class="Main_Nav_SubLine" id="100" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>-->
 
-      <Button class="Sub_Nav_Line" text="Leave" tap="navToggle" value="Leave"/>
-        <Button class="Main_Nav_SubLine" id="19" text="Leave Basics" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="20" text="Leave with Income Averaging" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" id="21" text="Pre-retirement Transition Leave" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
+      <Button class="Sub_Nav_Line" text="Congés" tap="navToggle" value="Leave"/>
+        <Button class="Main_Nav_SubLine" id="19" text="Principes de base des Congés" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="20" text="Congé avec étalement du revenu" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="21" text="Congé de transition à la retraite" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
 
-      <Button class="Sub_Nav_Line" text="Utilities" tap="navToggle" value="Utilities"/>
+      <Button class="Sub_Nav_Line" text="Outils" tap="navToggle" value="Utilities"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Paie brute" pageName="pay-info" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Promotion" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Échéances de soumission" pageName="timeliness-utility-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>

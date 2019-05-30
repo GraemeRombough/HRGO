@@ -1,0 +1,40 @@
+
+<Page loaded="pageLoaded" actionBarHidden="true">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <StackLayout row="0" orientation="vertical" width="100%">
+    <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
+      <label col="1" row="0" text="SETTINGS" class="Header_Label"/>
+      <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+    </GridLayout>
+<ScrollView>
+    <StackLayout orientation="vertical">
+      <label class="DayCalc_SectionTitle" text="Preferred Language"/>
+      <GridLayout columns="*,*">
+        <Button class="Submit_Button_1" col="0" text="English" tap="setToEng" id="EnglishButton"/>
+        <Button class="Submit_Button_1" col="1" text="French" tap="setToFre" id="FrenchButton"/>
+      </GridLayout>
+      
+        <label class="DayCalc_SectionTitle" text="Work Email"/>
+      
+        <TextField class="Utility_TextBox" text="{{ workEmail }}" />
+        <Button class="Submit_Button_1" text="Save Profile" tap="saveProfile"/>
+    </StackLayout>
+</ScrollView>
+  </StackLayout>
+      
+    
+    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+    </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>
