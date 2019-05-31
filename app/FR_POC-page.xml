@@ -14,7 +14,7 @@
             <Span text="&#xe986;"/>
           </FormattedString>
       </Button>
-      <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Recherche"/>
+      <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Recherche" returnKeyType="search" returnPress="searchPOC"/>
     </StackLayout>
     <ScrollView orientation="vertical">
     <StackLayout id="POC_List">

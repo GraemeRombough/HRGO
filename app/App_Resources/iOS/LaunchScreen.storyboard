@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,6 +26,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen.Center" translatesAutoresizingMaskIntoConstraints="NO" id="s1z-aa-wYv">
                                 <rect key="frame" x="0.0" y="150" width="375" height="512"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen.BR" translatesAutoresizingMaskIntoConstraints="NO" id="6PK-2X-mTF" userLabel="LaunchScreen.BR">
+                                <rect key="frame" x="343" y="742" width="16" height="16"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="LaunchScreen.TL" translatesAutoresizingMaskIntoConstraints="NO" id="EsU-Xp-lcI" userLabel="LaunchScreen.TL">
+                                <rect key="frame" x="16" y="64" width="301" height="39"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -34,10 +39,15 @@
                             <constraint firstAttribute="bottom" secondItem="wtH-rr-YfP" secondAttribute="bottom" id="5CS-At-4ka"/>
                             <constraint firstItem="wtH-rr-YfP" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Awn-b8-xf1"/>
                             <constraint firstItem="s1z-aa-wYv" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="BpJ-vb-eKA"/>
+                            <constraint firstItem="EsU-Xp-lcI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="D5C-IA-uOj"/>
+                            <constraint firstItem="s1z-aa-wYv" firstAttribute="bottom" secondItem="wtH-rr-YfP" secondAttribute="top" constant="662" id="HPV-Tt-cn1"/>
+                            <constraint firstItem="EsU-Xp-lcI" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="20" id="I1x-rH-zPv"/>
                             <constraint firstItem="s1z-aa-wYv" firstAttribute="trailing" secondItem="wtH-rr-YfP" secondAttribute="trailing" id="QIM-7J-OZz"/>
                             <constraint firstAttribute="trailing" secondItem="wtH-rr-YfP" secondAttribute="trailing" id="RXg-rW-UK8"/>
                             <constraint firstItem="s1z-aa-wYv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Rcp-LG-48z"/>
                             <constraint firstItem="wtH-rr-YfP" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="cch-8E-tYu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6PK-2X-mTF" secondAttribute="trailing" id="tKh-cL-Tmm"/>
+                            <constraint firstItem="6PK-2X-mTF" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" constant="-20" id="vdw-CY-MtA"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -48,6 +58,8 @@
     </scenes>
     <resources>
         <image name="LaunchScreen.AspectFill" width="768" height="1024"/>
+        <image name="LaunchScreen.BR" width="16" height="16"/>
         <image name="LaunchScreen.Center" width="384" height="512"/>
+        <image name="LaunchScreen.TL" width="16" height="16"/>
     </resources>
 </document>

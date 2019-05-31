@@ -23,7 +23,7 @@
         <Label col="0" row="1" colSpan="2" text="Salary Info" class="Article_H2"/>
         <Label col="0" row="2" colSpan="2" text="Annual Gross Salary" class="Sub_Nav_Line"/>
         <Label col="0" row="3" class="Utility_TableText_1L" text="{{ annualRate }}"/>
-        <TextField col="1" row="3" class="Utility_TableTextInput_1R" keyboardType="number" text="{{ annualNumber }}" />
+        <TextField col="1" row="3" class="DayCalc_TextField" keyboardType="number" text="{{ annualNumber }}" />
         <Label col="0" row="4" colSpan="2" text="BiWeekly Pay Rate" class="Sub_Nav_Line"/>
         <Label col="0" row="5" class="Utility_TableText_1L" text="{{ biweeklyRate}}"/>
         <TextField col="1" row="5" class="DayCalc_TextField" keyboardType="number" text="{{ biweeklyNumber }}" />
