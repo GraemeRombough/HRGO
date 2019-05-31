@@ -6,9 +6,9 @@
         <bitmap android:gravity="center" android:src="@drawable/logo" />
     </item>
     <item>
-        <bitmap android:gravity="right|bottom" android:src="@drawable/canada" />
+        <bitmap android:gravity="right|bottom" android:layout_margin="10dp" android:src="@drawable/canada" />
     </item>
     <item android:top="7dp" android:left="7dp">
-        <bitmap android:gravity="left|top" android:src="@drawable/dnd" />
+        <bitmap android:gravity="left|top" android:layout_margin="10dp" android:src="@drawable/dnd" />
     </item>
 </layer-list>
