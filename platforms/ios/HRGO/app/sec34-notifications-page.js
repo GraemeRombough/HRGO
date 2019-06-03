@@ -20,37 +20,94 @@ exports.goBack = function(args){
     thisPage.frame.goBack()
 }
 exports.setNotification = function(args){
-    var repeatWeeks = pageData.get("numberOfWeeks");
-    var employeeWeeklySub = pageObject.getViewById("weeklySubmission");
-    var employeePaySub = pageObject.getViewById("paySubmission");
-    var managerWeeklyApp = pageObject.getViewById("weeklyApproval");
-    var managerPayApp = pageObject.getViewById("payApproval");
+    var TODAY = new Date();
+    var repeatWeeks = Number(pageData.get("numberOfWeeks"));
+    var employeeWeeklySub = pageObject.getViewById("weeklySubmission").value;
+    var employeePaySub = pageObject.getViewById("paySubmission").value;
+    var managerWeeklyApp = pageObject.getViewById("weeklyApproval").value;
+    var managerPayApp = pageObject.getViewById("payApproval").value;
     var notID = 0;
+
+    console.log("Employee Weekly: " + employeeWeeklySub + " for " + repeatWeeks);
     
+    var submissionDay = TODAY;
+    submissionDay.setTime(TODAY.getTime() + daysToMilliseconds(3 - TODAY.getDay()));
+    if(submissionDay.getTime() < TODAY.getTime()){
+        submissionDay.setTime(submissionDay.getTime() + daysToMilliseconds(7));
+    }
+    var payWeek = checkIfPayWeek(submissionDay);
     
     if(repeatWeeks > 0 ){
         LocalNotifications.requestPermission().then((granted) => {
             if(granted) {
                 //EMPLOYEE NOTIFICATIONS
                 //MANAGER NOTIFICATIONS
-
-                setNotification(1, "HRGO Pay Action Reminder", "Notification System Is Currently Not Operational",new Date(new Date().getTime() + 10000));
-                setNotification(2, "Test Notification", "Notification System Is Currently Not Operational",new Date(new Date().getTime() + 11000));
-
-                LocalNotifications.getScheduledIds().then(
-                    function(ids) {
-                      console.log("ID's: " + ids);
-                    }
-                )
-                var not_IDs = LocalNotifications.getScheduledIds();
-                console.log(not_IDs.ids.length);
-                
+                for(z = 0; z <= repeatWeeks; z++){
+                    console.log("week: " + z );
+                    var notificationDate = new Date().setTime(submissionDay.getTime() + daysToMilliseconds(7*z));
+                    var approvalDate = new Date().setTime(notificationDate.getTime() + daysToMilliseconds(2));
+                    if(payWeek == true){
+                        if(employeeWeeklySub == "true"){
+                            setNotification(notID, "Time Submission Reminder", "Don't forget to submit your time for manager approval.", notificationDate);
+                            notID++;
+                            console.log("Notification set for: " + notificationDate);
+                        }
+                        if(employeePaySub == "true"){
+                            setNotification(notID, "Time Submission Reminder", "Don't forget to submit your time for manager approval.", notificationDate);
+                            notID++;
+                            console.log("Notification set for: " + notificationDate);
+                        }
+                        if(managerWeeklyApp == "true"){
+                            setNotification(notID, "Time Approval Reminder", "Don't forget to approve submitted time.", approvalDate);
+                            notID++;
+                            console.log("Manager Notification set for: " + approvalDate);
+                        }
+                        if(managerPayApp == "true"){
+                            setNotification(notID, "Time Approval Reminder", "Don't forget to approve submitted time.", approvalDate);
+                            notID++;
+                            console.log("Manager Notification set for: " + approvalDate);
+                        }
+                    }else{
+                        if(employeeWeeklySub == "true"){
+                            setNotification(notID, "Time Submission Reminder", "Don't forget to submit your time for manager approval.", notificationDate);
+                            notID++;
+                            console.log("Notification set for: " + notificationDate);
+                        }
+                        if(managerWeeklyApp == "true"){
+                            setNotification(notID, "Time Approval Reminder", "Don't forget to approve submitted time.", approvalDate);
+                            notID++;
+                            console.log("Manager Notification set for: " + approvalDate);
+                        }
+                    } 
+                }
             }
         })
     }else{
         alert("Please select a number of weeks to repeat.");
     }   
     
+};
+var checkIfPayWeek = function(setDate){
+    var TODAY = setDate;
+    var historicPayDate = new Date("March 20, 2019");
+    var isPayWeek;
+    historicPayDate.setTime(historicPayDate.getTime() + daysToMilliseconds(TODAY.getDay() - historicPayDate.getDay()));
+    //var todayDate = TODAY;
+    var payWeekDistance = Math.round((TODAY - historicPayDate) / (7 * 24 * 60 * 60 * 1000));
+    if(payWeekDistance % 2 == 0 && TODAY.getDay() != 4 && TODAY.getDay() != 5 && TODAY.getDay() != 6){
+        isPayWeek = true;
+    }else{
+        isPayWeek = false;
+    }
+    console.log(isPayWeek);
+    return isPayWeek;
+}
+var daysToMilliseconds = function(days){
+    var milliseconds;
+
+    milliseconds = days * 24 * 60 * 60 * 1000;
+
+    return milliseconds;
 };
 exports.resetNotification = function(args){
     console.log("notifications cancelled");
