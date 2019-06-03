@@ -28,10 +28,12 @@
         <Button row="1" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="payApproval" value="false"/>
       </GridLayout>
 
-      <label class="DayCalc_SectionTitle" text="Weeks to Repeat Notifications"/>
+      <label class="Sub_Nav_Line" text="Weeks to Repeat Notifications"/>
       <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfWeeks }}" />
+      
 
       <Button class="Submit_Button_1" text="Set Notifications" tap="setNotification"/>
+      <Button class="Submit_Button_1" text="Reset Notifications" tap="resetNotification"/>
 
       
 

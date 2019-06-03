@@ -5,25 +5,14 @@ var observable = require("data/observable");
 var pageData = new observable.Observable();
 var LocalNotifications = require("nativescript-local-notifications").LocalNotifications;
 var dialogs = require("ui/dialogs");
+var pageObject;
 
 
 exports.pageLoaded = function(args) {
     const page = args.object;
     //vm = new Observable();
-    pageData.set("mondayCheck", true);
-    pageData.set("tuesdayCheck", true);
-    pageData.set("wednesdayCheck", true);
-    pageData.set("thursdayCheck", true);
-    pageData.set("fridayCheck", true);
-    
-    pageData.set("sundayCheck", false);
-    pageData.set("saturdayCheck", false);
-    
-    const TODAY = new Date();
-    pageData.set("date", TODAY);
-    pageData.set("endDateLabel", "End Date: ");
-    pageData.set("numberOfDays", 90);
     page.bindingContext = pageData;
+    pageObject = page;
 
 };
 exports.goBack = function(args){
@@ -31,22 +20,49 @@ exports.goBack = function(args){
     thisPage.frame.goBack()
 }
 exports.setNotification = function(args){
+    var repeatWeeks = pageData.get("numberOfWeeks");
+    var employeeWeeklySub = pageObject.getViewById("weeklySubmission");
+    var employeePaySub = pageObject.getViewById("paySubmission");
+    var managerWeeklyApp = pageObject.getViewById("weeklyApproval");
+    var managerPayApp = pageObject.getViewById("payApproval");
+    var notID = 0;
+    
+    
+    if(repeatWeeks > 0 ){
+        LocalNotifications.requestPermission().then((granted) => {
+            if(granted) {
+                //EMPLOYEE NOTIFICATIONS
+                //MANAGER NOTIFICATIONS
+
+                setNotification(1, "HRGO Pay Action Reminder", "Notification System Is Currently Not Operational",new Date(new Date().getTime() + 10000));
+                setNotification(2, "Test Notification", "Notification System Is Currently Not Operational",new Date(new Date().getTime() + 11000));
+
+                LocalNotifications.getScheduledIds().then(
+                    function(ids) {
+                      console.log("ID's: " + ids);
+                    }
+                )
+                var not_IDs = LocalNotifications.getScheduledIds();
+                console.log(not_IDs.ids.length);
+                
+            }
+        })
+    }else{
+        alert("Please select a number of weeks to repeat.");
+    }   
+    
+};
+exports.resetNotification = function(args){
+    console.log("notifications cancelled");
+    LocalNotifications.cancelAll();
+}
+var setNotification = function(not_id, not_title, not_body, not_at){
     LocalNotifications.requestPermission().then((granted) => {
         if(granted) {
-            LocalNotifications.schedule([{
-                id: 10,
-                title: "HRGO Pay Action Reminder",
-                body: "Notification System Is Currently Not Operational",
-                at: new Date(new Date().getTime() + 10000)
-            }]).then(() => {
-                console.log("Notification scheduled");
-            }, (error) => {
-                console.log("ERROR", error);
-            });
+            LocalNotifications.schedule([{id: not_id, title: not_title, body: not_body, at: not_at
+            }]).then(() => {console.log("Notification scheduled");}, (error) => {console.log("ERROR", error);});
         }
     })
-    
-    
 };
 exports.toggleCheck = function(args){
     if(args.object.value == "true"){

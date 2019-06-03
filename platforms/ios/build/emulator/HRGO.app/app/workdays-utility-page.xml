@@ -36,7 +36,7 @@
         <Button row="6" col="1" class="Home_Checkbox" text="" tap="toggleCheck" id="saturdayCheck" value="false"/>
       </GridLayout>
       <label class="DayCalc_SectionTitle" text="Number of Days"/>
-      <TextField class="DayCalc_TextField" keyboardType="number" text="{{ numberOfDays }}" />
+      <TextField class="DayCalc_TextField" keyboardType="number" returnKeyType="done" text="{{ numberOfDays }}" />
 
       <label class="DayCalc_StartDate" text="{{ endDateLabel }}"/>
 

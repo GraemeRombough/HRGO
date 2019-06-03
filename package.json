@@ -8,7 +8,7 @@
       "version": "5.0.0"
     }
   },
-  "description": "NativeScript Application",
+  "description": "ADM(HR-Civ) Mobile Application",
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "dependencies": {
