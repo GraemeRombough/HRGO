@@ -27,6 +27,10 @@ exports.setNotification = function(args){
     var managerWeeklyApp = pageObject.getViewById("weeklyApproval").value;
     var managerPayApp = pageObject.getViewById("payApproval").value;
     var notID = 0;
+    var subTitle = "Time Submission Reminder";
+    var subBody = "Don't forget to submit your time for manager approval.";
+    var appTitle = "Time Approval Reminder";
+    var appBody = "Don't forget to approve submitted time."; 
 
     console.log("Employee Weekly: " + employeeWeeklySub + " for " + repeatWeeks);
     
@@ -40,46 +44,51 @@ exports.setNotification = function(args){
     if(repeatWeeks > 0 ){
         LocalNotifications.requestPermission().then((granted) => {
             if(granted) {
-                //EMPLOYEE NOTIFICATIONS
-                //MANAGER NOTIFICATIONS
+                exports.resetNotification();
                 for(z = 0; z <= repeatWeeks; z++){
+                    
                     console.log("week: " + z );
-                    var notificationDate = new Date().setTime(submissionDay.getTime() + daysToMilliseconds(7*z));
-                    var approvalDate = new Date().setTime(notificationDate.getTime() + daysToMilliseconds(2));
+                    
+                    var notificationDate = new Date();
+                    notificationDate.setTime(submissionDay.getTime() + daysToMilliseconds(7*z));
+                    var approvalDate = new Date()
+                    approvalDate.setTime(notificationDate.getTime() + daysToMilliseconds(2));
+                    console.log(notificationDate);
                     if(payWeek == true){
                         if(employeeWeeklySub == "true"){
-                            setNotification(notID, "Time Submission Reminder", "Don't forget to submit your time for manager approval.", notificationDate);
+                            setNotification(notID, subTitle, subBody, notificationDate);
                             notID++;
                             console.log("Notification set for: " + notificationDate);
                         }
                         if(employeePaySub == "true"){
-                            setNotification(notID, "Time Submission Reminder", "Don't forget to submit your time for manager approval.", notificationDate);
+                            setNotification(notID, subTitle, subBody, notificationDate);
                             notID++;
                             console.log("Notification set for: " + notificationDate);
                         }
                         if(managerWeeklyApp == "true"){
-                            setNotification(notID, "Time Approval Reminder", "Don't forget to approve submitted time.", approvalDate);
+                            setNotification(notID, appTitle, appBody, approvalDate);
                             notID++;
                             console.log("Manager Notification set for: " + approvalDate);
                         }
                         if(managerPayApp == "true"){
-                            setNotification(notID, "Time Approval Reminder", "Don't forget to approve submitted time.", approvalDate);
+                            setNotification(notID, appTitle, appBody, approvalDate);
                             notID++;
                             console.log("Manager Notification set for: " + approvalDate);
                         }
                     }else{
                         if(employeeWeeklySub == "true"){
-                            setNotification(notID, "Time Submission Reminder", "Don't forget to submit your time for manager approval.", notificationDate);
+                            setNotification(notID, subTitle, subBody, notificationDate);
                             notID++;
                             console.log("Notification set for: " + notificationDate);
                         }
                         if(managerWeeklyApp == "true"){
-                            setNotification(notID, "Time Approval Reminder", "Don't forget to approve submitted time.", approvalDate);
+                            setNotification(notID, appTitle, appBody, approvalDate);
                             notID++;
                             console.log("Manager Notification set for: " + approvalDate);
                         }
                     } 
                 }
+                console.log("Number of notification" + notID);
             }
         })
     }else{
@@ -117,11 +126,15 @@ var setNotification = function(not_id, not_title, not_body, not_at){
     LocalNotifications.requestPermission().then((granted) => {
         if(granted) {
             LocalNotifications.schedule([{id: not_id, title: not_title, body: not_body, at: not_at
-            }]).then(() => {console.log("Notification scheduled");}, (error) => {console.log("ERROR", error);});
+            }]).then(() => {}, (error) => {console.log("ERROR", error);});
         }
     })
 };
 exports.toggleCheck = function(args){
+    var employeeWeeklySub = pageObject.getViewById("weeklySubmission");
+    var employeePaySub = pageObject.getViewById("paySubmission");
+    var managerWeeklyApp = pageObject.getViewById("weeklyApproval");
+    var managerPayApp = pageObject.getViewById("payApproval");
     if(args.object.value == "true"){
         args.object.value = "false";
         args.object.text = "";
@@ -130,7 +143,37 @@ exports.toggleCheck = function(args){
         args.object.value = "true";
         args.object.text = String.fromCharCode(0xea10);    
         args.object.style.backgroundColor = "#222"; 
+
+        if(args.object.id == "weeklySubmission"){
+            //exports.toggleCheck(employeePaySub);
+            employeePaySub.value = "false";
+            employeePaySub.text = "";
+            employeePaySub.style.backgroundColor = "#FFF";
+            
+        }
+        if(args.object.id == "weeklyApproval"){
+            //exports.toggleCheck(managerPayApp);
+            managerPayApp.value = "false";
+            managerPayApp.text = "";
+            managerPayApp.style.backgroundColor = "#FFF";
+            
+        }
+        if(args.object.id == "paySubmission"){
+            //exports.toggleCheck(employeeWeeklySub);
+            employeeWeeklySub.value = "false";
+            employeeWeeklySub.text = "";
+            employeeWeeklySub.style.backgroundColor = "#FFF";
+            
+        }
+        if(args.object.id == "payApproval"){
+            //exports.toggleCheck(managerWeeklyApp);
+            managerWeeklyApp.value = "false";
+            managerWeeklyApp.text = "";
+            managerWeeklyApp.style.backgroundColor = "#FFF";
+            
+        }
     }
+    
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
