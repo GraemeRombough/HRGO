@@ -10,20 +10,8 @@ var dialogs = require("ui/dialogs");
 exports.pageLoaded = function(args) {
     const page = args.object;
     //vm = new Observable();
-    pageData.set("mondayCheck", true);
-    pageData.set("tuesdayCheck", true);
-    pageData.set("wednesdayCheck", true);
-    pageData.set("thursdayCheck", true);
-    pageData.set("fridayCheck", true);
-    
-    pageData.set("sundayCheck", false);
-    pageData.set("saturdayCheck", false);
-    
-    const TODAY = new Date();
-    pageData.set("date", TODAY);
-    pageData.set("endDateLabel", "End Date: ");
-    pageData.set("numberOfDays", 90);
     page.bindingContext = pageData;
+    pageObject = page;
 
 };
 exports.goBack = function(args){
@@ -31,24 +19,109 @@ exports.goBack = function(args){
     thisPage.frame.goBack()
 }
 exports.setNotification = function(args){
-    LocalNotifications.requestPermission().then((granted) => {
-        if(granted) {
-            LocalNotifications.schedule([{
-                id: 10,
-                title: "HRGO - Rappel d'action de paye",
-                body: "Système de rappel ne fonction pas maintenant.",
-                at: new Date(new Date().getTime() + 10000)
-            }]).then(() => {
-                console.log("Notification scheduled");
-            }, (error) => {
-                console.log("ERROR", error);
-            });
-        }
-    })
+    var TODAY = new Date();
+    var repeatWeeks = Number(pageData.get("numberOfWeeks"));
+    var employeeWeeklySub = pageObject.getViewById("weeklySubmission").value;
+    var employeePaySub = pageObject.getViewById("paySubmission").value;
+    var managerWeeklyApp = pageObject.getViewById("weeklyApproval").value;
+    var managerPayApp = pageObject.getViewById("payApproval").value;
+    var notID = 0;
+    var subTitle = "Rappel - Soumettez vos heures";
+    var subBody = "N'oubliez pas de soumettre vos heures pour l'approbation du gestionnaire.";
+    var appTitle = "Rappel - Approbation des heures";
+    var appBody = "N'oubliez pas d'approuver les heures d'employés."; 
+
+    console.log("Employee Weekly: " + employeeWeeklySub + " for " + repeatWeeks);
     
+    var submissionDay = TODAY;
+    submissionDay.setTime(TODAY.getTime() + daysToMilliseconds(3 - TODAY.getDay()));
+    if(submissionDay.getTime() < TODAY.getTime()){
+        submissionDay.setTime(submissionDay.getTime() + daysToMilliseconds(7));
+    }
+    var payWeek = checkIfPayWeek(submissionDay);
+    
+    if(repeatWeeks > 0 ){
+        LocalNotifications.requestPermission().then((granted) => {
+            if(granted) {
+                exports.resetNotification();
+                for(z = 0; z <= repeatWeeks; z++){
+                    
+                    console.log("week: " + z );
+                    
+                    var notificationDate = new Date();
+                    notificationDate.setTime(submissionDay.getTime() + daysToMilliseconds(7*z));
+                    var approvalDate = new Date()
+                    approvalDate.setTime(notificationDate.getTime() + daysToMilliseconds(2));
+                    console.log(notificationDate);
+                    if(payWeek == true){
+                        if(employeeWeeklySub == "true"){
+                            setNotification(notID, subTitle, subBody, notificationDate);
+                            notID++;
+                            console.log("Notification set for: " + notificationDate);
+                        }
+                        if(employeePaySub == "true"){
+                            setNotification(notID, subTitle, subBody, notificationDate);
+                            notID++;
+                            console.log("Notification set for: " + notificationDate);
+                        }
+                        if(managerWeeklyApp == "true"){
+                            setNotification(notID, appTitle, appBody, approvalDate);
+                            notID++;
+                            console.log("Manager Notification set for: " + approvalDate);
+                        }
+                        if(managerPayApp == "true"){
+                            setNotification(notID, appTitle, appBody, approvalDate);
+                            notID++;
+                            console.log("Manager Notification set for: " + approvalDate);
+                        }
+                    }else{
+                        if(employeeWeeklySub == "true"){
+                            setNotification(notID, subTitle, subBody, notificationDate);
+                            notID++;
+                            console.log("Notification set for: " + notificationDate);
+                        }
+                        if(managerWeeklyApp == "true"){
+                            setNotification(notID, appTitle, appBody, approvalDate);
+                            notID++;
+                            console.log("Manager Notification set for: " + approvalDate);
+                        }
+                    } 
+                }
+                setNotification(notID+1, "Les rappels ont été sauvegardés", "Vous avez sauvgardé " + notID + " rappels.", new Date());
+            }
+        })
+    }else{
+        alert("Please select a number of weeks to repeat.");
+    }   
     
 };
+var daysToMilliseconds = function(days){
+    var milliseconds;
+
+    milliseconds = days * 24 * 60 * 60 * 1000;
+
+    return milliseconds;
+};
+var checkIfPayWeek = function(setDate){
+    var TODAY = setDate;
+    var historicPayDate = new Date("March 20, 2019");
+    var isPayWeek;
+    historicPayDate.setTime(historicPayDate.getTime() + daysToMilliseconds(TODAY.getDay() - historicPayDate.getDay()));
+    //var todayDate = TODAY;
+    var payWeekDistance = Math.round((TODAY - historicPayDate) / (7 * 24 * 60 * 60 * 1000));
+    if(payWeekDistance % 2 == 0 && TODAY.getDay() != 4 && TODAY.getDay() != 5 && TODAY.getDay() != 6){
+        isPayWeek = true;
+    }else{
+        isPayWeek = false;
+    }
+    console.log(isPayWeek);
+    return isPayWeek;
+}
 exports.toggleCheck = function(args){
+    var employeeWeeklySub = pageObject.getViewById("weeklySubmission");
+    var employeePaySub = pageObject.getViewById("paySubmission");
+    var managerWeeklyApp = pageObject.getViewById("weeklyApproval");
+    var managerPayApp = pageObject.getViewById("payApproval");
     if(args.object.value == "true"){
         args.object.value = "false";
         args.object.text = "";
@@ -57,7 +130,49 @@ exports.toggleCheck = function(args){
         args.object.value = "true";
         args.object.text = String.fromCharCode(0xea10);    
         args.object.style.backgroundColor = "#222"; 
+
+        if(args.object.id == "weeklySubmission"){
+            //exports.toggleCheck(employeePaySub);
+            employeePaySub.value = "false";
+            employeePaySub.text = "";
+            employeePaySub.style.backgroundColor = "#FFF";
+            
+        }
+        if(args.object.id == "weeklyApproval"){
+            //exports.toggleCheck(managerPayApp);
+            managerPayApp.value = "false";
+            managerPayApp.text = "";
+            managerPayApp.style.backgroundColor = "#FFF";
+            
+        }
+        if(args.object.id == "paySubmission"){
+            //exports.toggleCheck(employeeWeeklySub);
+            employeeWeeklySub.value = "false";
+            employeeWeeklySub.text = "";
+            employeeWeeklySub.style.backgroundColor = "#FFF";
+            
+        }
+        if(args.object.id == "payApproval"){
+            //exports.toggleCheck(managerWeeklyApp);
+            managerWeeklyApp.value = "false";
+            managerWeeklyApp.text = "";
+            managerWeeklyApp.style.backgroundColor = "#FFF";
+            
+        }
     }
+    
+};
+exports.resetNotification = function(args){
+    console.log("notifications cancelled");
+    LocalNotifications.cancelAll();
+}
+var setNotification = function(not_id, not_title, not_body, not_at){
+    LocalNotifications.requestPermission().then((granted) => {
+        if(granted) {
+            LocalNotifications.schedule([{id: not_id, title: not_title, body: not_body, at: not_at
+            }]).then(() => {}, (error) => {console.log("ERROR", error);});
+        }
+    })
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();

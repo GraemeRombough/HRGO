@@ -88,7 +88,9 @@ exports.setNotification = function(args){
                         }
                     } 
                 }
-                console.log("Number of notification" + notID);
+                //console.log("Number of notification" + notID);
+
+                setNotification(notID+1, "Notifications Scheduled", "You have successfully scheduled " + notID + " notifications.", new Date());
             }
         })
     }else{
