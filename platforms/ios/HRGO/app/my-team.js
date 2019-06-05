@@ -60,6 +60,12 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
 }
+exports.clearKeyboard = function(args){
+    var textInput = pageObject.getViewById("subjectText");
+    var textInput2 = pageObject.getViewById("bodyText");
+    textInput.dismissSoftInput();
+    textInput2.dismissSoftInput();
+}
 exports.clearTeam = function(args){
     applicationSettings.remove("My_Team_Members");
     displayTeamMembers(getTeamMembers());

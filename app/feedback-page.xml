@@ -11,13 +11,13 @@
     </GridLayout>
 
       <!-- COMPOSE EMAIL -->
-      <StackLayout>
+      <StackLayout tap="clearKeyboard">
         <Label text="Your Feedback" class="Article_H1"/>
         <GridLayout columns="*,auto">
         <Label col="0" text="Comments" class="Article_H3"/>
         <Button col="1" text="Send Email" class="Submit_Button_2" tap="sendEmail"/>
         </GridLayout>
-        <TextView text="{{ feedbackBody }}" class="Utility_LongText"/>
+        <TextView text="{{ feedbackBody }}" class="Utility_LongText" id="feedBackText"/>
       </StackLayout>
     </StackLayout>  
   </ScrollView>

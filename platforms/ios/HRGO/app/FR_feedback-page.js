@@ -53,6 +53,10 @@ exports.goBack = function(args){
     const thisPage = args.object.page;
     thisPage.frame.goBack()
 }
+exports.clearKeyboard = function(args){
+    var textInput = pageObject.getViewById("feedBackText");
+    textInput.dismissSoftInput();
+}
 exports.sendEmail = function(args){
     const TODAY = new Date();
     email.available().then(function(avail){
