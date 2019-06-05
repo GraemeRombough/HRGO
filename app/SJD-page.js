@@ -89,9 +89,10 @@ exports.searchSJD = function(){
                 if(selectedClass && dataBaseReturn[i].Classification.toLowerCase().includes(selectedClass[1].toLowerCase()) == true ){
                     if (dataBaseReturn[i].Title.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
                         filteredResults.push(dataBaseReturn[i]);
-                    }else if(dataBaseReturn[i].Desc.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
-                        filteredResults.push(dataBaseReturn[i]);
-                    } 
+                    }
+                    //else if(dataBaseReturn[i].Desc.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
+                    //    filteredResults.push(dataBaseReturn[i]);
+                    //} 
                 }  
             }
             displayPOCs(filteredResults);    
@@ -107,9 +108,10 @@ exports.searchSJD = function(){
         for (i = 0; i < dataBaseReturn.length; i++) {
             if (dataBaseReturn[i].Title.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
                 filteredResults.push(dataBaseReturn[i]);
-            }else if(dataBaseReturn[i].Desc.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
-                filteredResults.push(dataBaseReturn[i]);
-            } 
+            }
+            //else if(dataBaseReturn[i].Desc.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
+            //    filteredResults.push(dataBaseReturn[i]);
+            //} 
         }
         displayPOCs(filteredResults);
     }else{

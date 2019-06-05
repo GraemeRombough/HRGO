@@ -92,7 +92,7 @@ exports.setNotification = function(args){
                 dialogs.alert({
                     title: "Notifications Scheduled",
                     message: "You have successfully scheduled " + notID + " notifications.",
-                    okButtonText: "Okay"
+                    okButtonText: "Continue"
                 }).then(function () {
                     console.log("Dialog closed!");
                 });

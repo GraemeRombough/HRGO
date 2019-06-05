@@ -90,7 +90,7 @@ exports.setNotification = function(args){
                 dialogs.alert({
                     title: "Les rappels ont été sauvegardés",
                     message: "Vous avez sauvgardé " + notID + " rappels.",
-                    okButtonText: "Okay"
+                    okButtonText: "Continuez"
                 }).then(function () {
                     console.log("Dialog closed!");
                 });
