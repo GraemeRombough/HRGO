@@ -1,0 +1,45 @@
+
+<Page loaded="pageLoaded" actionBarHidden="true">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <StackLayout row="0" orientation="vertical" width="100%">
+    <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
+      <label col="1" row="0" text="SUIVI - HEURES SUPP" class="Header_Label"/>
+      <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+    </GridLayout>
+<ScrollView>
+    <StackLayout orientation="vertical">
+      <Button text="Ajout d'heures" class="Home_Utility_Label" tap="navToggle" value="AddTime"/>
+      <StackLayout visibility="{{ AddTime ? 'visible' : 'collapsed' }}">
+        
+        <label text="Date:" class="DayCalc_SectionTitle"/>
+        <DatePicker loaded="onDatePickerLoaded" date="{{ submitDate }}"></DatePicker>
+        <label text="Heures:" class="DayCalc_SectionTitle"/>
+        <TextField text="{{ submitHours }}" keyboardType="number" class="DayCalc_TextField"/>
+        <Button class="Submit_Button_1" text="Enregistrer les heures" tap="addTime"/>
+      </StackLayout>
+      
+      <Button text="Consultation des heures" class="Home_Utility_Label" tap="navToggle" value="ViewSchedule"/>
+      <StackLayout visibility="{{ ViewSchedule ? 'visible' : 'collapsed' }}" id="Overtime_Stack">
+        
+      </StackLayout>
+        <!--<Button class="Submit_Button_1" text="Clear Submitted Time" tap="clearSubmittedTime"/>-->
+      </StackLayout>
+      </ScrollView>
+  </StackLayout>
+      
+    
+    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+    </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>
