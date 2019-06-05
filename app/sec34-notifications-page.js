@@ -51,6 +51,7 @@ exports.setNotification = function(args){
                     
                     var notificationDate = new Date();
                     notificationDate.setTime(submissionDay.getTime() + daysToMilliseconds(7*z));
+                    notificationDate.setHours(9);
                     var approvalDate = new Date()
                     approvalDate.setTime(notificationDate.getTime() + daysToMilliseconds(2));
                     console.log(notificationDate);

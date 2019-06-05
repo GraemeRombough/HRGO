@@ -4,15 +4,22 @@ var pageData = new observable.Observable();
 var subNavTitle = "";
 var applicationSettings = require("application-settings");
 var page;
+var pageObject;
 exports.pageLoaded = function(args) {
+    
+    page = args.object;
+    args.object.bindingContext = pageData;
+    pageObject = page;
+
     if(applicationSettings.hasKey("PreferredLanguage")){
         if(applicationSettings.getString("PreferredLanguage") == "French"){
             var topmost = frameModule.topmost();
             topmost.navigate("FR_main-page");
         }
+    }else{
+        var langSection = pageObject.getViewById("languageSelection");
+        langSection.visibility = "visible";
     }
-    page = args.object;
-    args.object.bindingContext = pageData;
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -80,6 +87,29 @@ exports.footer4 = function(){
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
+}
+exports.setToEng = function(args){
+    var freButton = pageObject.getViewById("FrenchButton");
+    args.object.style.backgroundColor = "rgb(0,31,91)";
+    args.object.style.color = "#FFF";
+    
+    freButton.style.backgroundColor = "#DDD";
+    freButton.style.color = "#222";
+    applicationSettings.setString("PreferredLanguage", "English");
+    var langSection = pageObject.getViewById("languageSelection");
+        langSection.visibility = "collapsed";
+}
+exports.setToFre = function(args){
+    var engButton = pageObject.getViewById("EnglishButton");
+    args.object.style.backgroundColor = "rgb(0,31,91)";
+    args.object.style.color = "#FFF";
+    engButton.style.backgroundColor = "#DDD";
+    engButton.style.color = "#222";
+    applicationSettings.setString("PreferredLanguage", "French");
+    var langSection = pageObject.getViewById("languageSelection");
+    langSection.visibility = "collapsed";
+    var topmost = frameModule.topmost();
+    topmost.navigate("FR_main-page");
 }
 exports.searchLanding = function(){
     var searchField = page.getViewById("SearchBox").text;
