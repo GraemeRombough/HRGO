@@ -134,8 +134,8 @@
 	},
 	"release": false,
 	"bundle": false,
-	"changesRequireBuild": false,
-	"time": "Tue Jun 04 2019 22:55:02 GMT-0400 (EDT)",
-	"changesRequireBuildTime": "Tue Jun 04 2019 21:23:27 GMT-0400 (EDT)",
+	"changesRequireBuild": true,
+	"time": "Wed Jun 05 2019 12:08:47 GMT-0400 (EDT)",
+	"changesRequireBuildTime": "Wed Jun 05 2019 12:08:47 GMT-0400 (EDT)",
 	"projectFileHash": "14d116f7c380b54d57a36d49b02ab9b9e3869719bb10435812b2e0044a628080"
 }

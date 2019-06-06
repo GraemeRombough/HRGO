@@ -50,6 +50,7 @@ exports.setNotification = function(args){
                     
                     var notificationDate = new Date();
                     notificationDate.setTime(submissionDay.getTime() + daysToMilliseconds(7*z));
+                    notificationDate.setHours(9);
                     var approvalDate = new Date()
                     approvalDate.setTime(notificationDate.getTime() + daysToMilliseconds(2));
                     console.log(notificationDate);
@@ -87,7 +88,14 @@ exports.setNotification = function(args){
                         }
                     } 
                 }
-                setNotification(notID+1, "Les rappels ont été sauvegardés", "Vous avez sauvgardé " + notID + " rappels.", new Date());
+                dialogs.alert({
+                    title: "Les rappels ont été sauvegardés",
+                    message: "Vous avez sauvgardé " + notID + " rappels.",
+                    okButtonText: "Continuez"
+                }).then(function () {
+                    console.log("Dialog closed!");
+                });
+                //setNotification(notID+1, "Les rappels ont été sauvegardés", "Vous avez sauvgardé " + notID + " rappels.", new Date());
             }
         })
     }else{

@@ -51,6 +51,7 @@ exports.setNotification = function(args){
                     
                     var notificationDate = new Date();
                     notificationDate.setTime(submissionDay.getTime() + daysToMilliseconds(7*z));
+                    notificationDate.setHours(9);
                     var approvalDate = new Date()
                     approvalDate.setTime(notificationDate.getTime() + daysToMilliseconds(2));
                     console.log(notificationDate);
@@ -92,7 +93,7 @@ exports.setNotification = function(args){
                 dialogs.alert({
                     title: "Notifications Scheduled",
                     message: "You have successfully scheduled " + notID + " notifications.",
-                    okButtonText: "Okay"
+                    okButtonText: "Continue"
                 }).then(function () {
                     console.log("Dialog closed!");
                 });

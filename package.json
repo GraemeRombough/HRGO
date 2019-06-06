@@ -1,11 +1,14 @@
 {
   "nativescript": {
-    "id": "ca.forces.hrciv.hrgo",
+    "id": {
+      "ios": "ca.forces.hrciv.hrgo",
+      "android": "ca.forces.hrciv.hrgo"
+    },
     "tns-android": {
-      "version": "5.0.0"
+      "version": "1.0.0"
     },
     "tns-ios": {
-      "version": "5.0.0"
+      "version": "1.0.0"
     }
   },
   "description": "ADM(HR-Civ) Mobile Application",
