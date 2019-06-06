@@ -1,3 +1,5 @@
-#include "../internal/nativescript-build.xcconfig"
-CLANG_ENABLE_MODULES = NO;
-CLANG_MODULES_AUTOLINK = NO;
+// to list all installed iOS identities, run:
+//     security find-identity |  sed -n 's/.*\("[^"]*"\).*/\1/p' | grep 'iPhone'
+
+// generic 'iPhone Developer' (no quotes) will match the right Identity with the right Provisioning Profile plus Certificate, based on the app bundle id
+CODE_SIGN_IDENTITY = iPhone Developer
