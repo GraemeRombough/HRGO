@@ -1,8 +1,8 @@
 {
 	"nativePlatformStatus": "3",
 	"appFilesHashes": {
-		"/Users/graemerombough/HRGO/app/.DS_Store": "3d5267692499b5c5b0b2ce3bbfbc4334a53fd9ba",
 		"/Users/graemerombough/HRGO/app/CODE_OF_CONDUCT.md": "3d921a467f0dc791385eb1d5db82d88e11d620e0",
+		"/Users/graemerombough/HRGO/app/.DS_Store": "3d5267692499b5c5b0b2ce3bbfbc4334a53fd9ba",
 		"/Users/graemerombough/HRGO/app/FR_POC-page.js": "76c1078eb1ac2384c6ca605910f9606a71337626",
 		"/Users/graemerombough/HRGO/app/FR_POC-page.xml": "0d5fae8aeeea9a9399323a690b9e18f7c8a02f2f",
 		"/Users/graemerombough/HRGO/app/FR_SJD-page.xml": "9096d6346c43a2a37ea79c34626cccba6924fdfb",
@@ -12,8 +12,8 @@
 		"/Users/graemerombough/HRGO/app/FR_connect-landing-page.xml": "484fefa34beefd737ef315d618175a1331e49110",
 		"/Users/graemerombough/HRGO/app/FR_contact-landing-page.js": "da6453ec36cdf0a17e07a453890c9e241f32efe0",
 		"/Users/graemerombough/HRGO/app/FR_contact-landing-page.xml": "7aa4d1f0839759f8325bc7b9bfc1d3b6e674d9a9",
-		"/Users/graemerombough/HRGO/app/FR_dynamic-article-page.js": "0bbd13d9ccb539f520bd1f9673b55b1c978a697e",
 		"/Users/graemerombough/HRGO/app/FR_dynamic-article-page.xml": "0ba1f4ac4a870d157d4f7b8caaa85fbc31639ad6",
+		"/Users/graemerombough/HRGO/app/FR_dynamic-article-page.js": "0bbd13d9ccb539f520bd1f9673b55b1c978a697e",
 		"/Users/graemerombough/HRGO/app/FR_dynamic-walkthrough-page.js": "3ded3a8a628b51be5882edb2f367ea3108c669b7",
 		"/Users/graemerombough/HRGO/app/FR_dynamic-walkthrough-page.xml": "2b5284a58010bd6eec7ff1d8c5521e81ac983c9f",
 		"/Users/graemerombough/HRGO/app/FR_feedback-page.js": "e4b36616e6a58b5cace029da0b3318ac4837d4e8",
@@ -44,14 +44,14 @@
 		"/Users/graemerombough/HRGO/app/FR_sec34-notifications-page.xml": "8416d267da562b51cdb925de9c9f59ac25715391",
 		"/Users/graemerombough/HRGO/app/FR_student-landing-page.js": "cc751b494615f961596624c419bd126b4060147c",
 		"/Users/graemerombough/HRGO/app/FR_student-landing-page.xml": "060ccf40f10bb2717e8b694a0366a449acae7656",
-		"/Users/graemerombough/HRGO/app/FR_student-onboard-page.js": "bd0816f2af1e3753d96e439b08be97b629c0f027",
 		"/Users/graemerombough/HRGO/app/FR_student-onboard-page.xml": "9e03726a07ed81024eb4ba9a87f28d2fd6f00ec1",
+		"/Users/graemerombough/HRGO/app/FR_student-onboard-page.js": "bd0816f2af1e3753d96e439b08be97b629c0f027",
 		"/Users/graemerombough/HRGO/app/FR_timeliness-utility-page.js": "b565fcb54f05bd2c2224bd681ee0cf7ee90dd246",
 		"/Users/graemerombough/HRGO/app/FR_timeliness-utility-page.xml": "9ce9f791f1c6ebaaa60680dbd8f2fbe3bd97be96",
 		"/Users/graemerombough/HRGO/app/FR_tracking-landing-page.js": "5342fb4eb896136ea5234b8d304d098c0ce75217",
 		"/Users/graemerombough/HRGO/app/FR_tracking-landing-page.xml": "82c2447bb59fbd45a708ccdcc928999353f1779d",
-		"/Users/graemerombough/HRGO/app/FR_understand-pay-page.js": "f515e67335ba40acd95425057db518411c6f41a0",
 		"/Users/graemerombough/HRGO/app/FR_understand-pay-page.xml": "451ea0f5f24a250753520e31e30a3307560cb487",
+		"/Users/graemerombough/HRGO/app/FR_understand-pay-page.js": "f515e67335ba40acd95425057db518411c6f41a0",
 		"/Users/graemerombough/HRGO/app/FR_workdays-utility-page.js": "1541d67725c5af3e40201de68b23d78d4392ce4e",
 		"/Users/graemerombough/HRGO/app/FR_workdays-utility-page.xml": "ec50e1ebcc32cf87efcad826f4012aa25fb6c9ce",
 		"/Users/graemerombough/HRGO/app/LICENSE": "335b9d849600792946ffbd01f3617100fbd6e107",
@@ -135,7 +135,7 @@
 	"release": false,
 	"bundle": false,
 	"changesRequireBuild": true,
-	"time": "Wed Jun 05 2019 21:36:43 GMT-0400 (EDT)",
-	"changesRequireBuildTime": "Wed Jun 05 2019 21:36:43 GMT-0400 (EDT)",
-	"projectFileHash": "058c1afe0da45875f38d7ac59fc9f0358036264f179eb75e1415eb8552d62e4a"
+	"time": "Wed Jun 05 2019 22:18:28 GMT-0400 (EDT)",
+	"changesRequireBuildTime": "Wed Jun 05 2019 22:18:28 GMT-0400 (EDT)",
+	"projectFileHash": "bf5b2410187d1fd008c1b23c36e0b03a6348c06d8ebab1255a25c47fffac8a00"
 }
