@@ -20,6 +20,7 @@
       
         <TextField class="Utility_TextBox" text="{{ workEmail }}" />
         <Button class="Submit_Button_1" text="Enregistrer le profil" tap="saveProfile"/>
+        <Button class="Submit_Button_1" text="Termes et conditions" tap="viewTerms"/>
     </StackLayout>
 </ScrollView>
   </StackLayout>

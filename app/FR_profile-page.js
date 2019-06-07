@@ -48,6 +48,10 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("FR_POC-page");
 }
+exports.viewTerms = function(args){
+    var topmost = frameModule.topmost();
+    topmost.navigate("FR_TOS-page");
+}
 exports.setToEng = function(args){
     var freButton = pageObject.getViewById("FrenchButton");
     args.object.style.backgroundColor = "rgb(0,31,91)";
