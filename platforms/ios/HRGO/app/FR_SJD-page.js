@@ -173,13 +173,14 @@ var createSJDGrid = function(SJD_t, SJD_s, SJD_c, SJD_d, SJD_l){
 };
 var sendSJDLink = function(eventData){
     var workEmail = "";
+    var sjdLink = "https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/" + eventData.object.link;
     if(applicationSettings.hasKey("WorkEmail")){
         workEmail = applicationSettings.getString("WorkEmail");
     }
     if (email.available()){
         email.compose({
             subject: "Le lien " + eventData.object.title,
-            body: eventData.object.link,
+            body: sjdLink,
             to: workEmail
         });
     } else {

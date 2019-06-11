@@ -84,7 +84,7 @@ exports.searchSJD = function(){
     console.log(pageData.get("SearchCriteria"));
     
     if(pageData.get("classCheck") == true && selectedClass[1] != ""){
-        if(pageData.get("titleCheck") == true && pageData.get("SearchCriteria")){
+        if(pageData.get("SearchCriteria") != ""){
             for (i = 0; i < dataBaseReturn.length; i++) {
                 if(selectedClass && dataBaseReturn[i].Classification.toLowerCase().includes(selectedClass[1].toLowerCase()) == true ){
                     if (dataBaseReturn[i].Title.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
@@ -104,7 +104,7 @@ exports.searchSJD = function(){
             }
             displayPOCs(filteredResults);
         }   
-    }else if(pageData.get("titleCheck") == true){
+    }else if(pageData.get("SearchCriteria") != ""){
         for (i = 0; i < dataBaseReturn.length; i++) {
             if (dataBaseReturn[i].Title.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
                 filteredResults.push(dataBaseReturn[i]);
@@ -173,13 +173,14 @@ var createSJDGrid = function(SJD_t, SJD_s, SJD_c, SJD_d, SJD_l){
 };
 var sendSJDLink = function(eventData){
     var workEmail = "";
+    var sjdLink = "https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/" + eventData.object.link;
     if(applicationSettings.hasKey("WorkEmail")){
         workEmail = applicationSettings.getString("WorkEmail");
     }
     if (email.available()){
         email.compose({
             subject: "A link to " + eventData.object.title,
-            body: eventData.object.link,
+            body: sjdLink,
             to: workEmail
         });
     } else {
@@ -192,6 +193,7 @@ exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
+        pageData.set("classCheck", true);
         pageData.set("classIndex", listPicker.selectedIndex);
         //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
         //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);

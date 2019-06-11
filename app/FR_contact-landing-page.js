@@ -73,10 +73,7 @@ exports.goToWalkthrough = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("FR_walkthrough-page");
 };
-exports.goToUtility = function(args){
-    var topmost = frameModule.topmost();
-    topmost.navigate(args.object.pageName);
-};
+
 exports.switchToFrench = function(){
     var topmost = frameModule.topmost();
     var pageDetails = String(topmost.currentPage).split("///");
