@@ -121,17 +121,17 @@ var getFromDatabase = function(){
     var databaseReturn = [];
     var dbRow = {};
 
-    dbRow = {Title:"PSPC Call Center", Phone:"1-888-HRTOPAY", Email:"", Desc:"You can contact the Public Service Pay Center (PSPC) as your first stop for any pay related issues."};
+    dbRow = {Title:"PSPC Call Center", Phone:"1-888-HRTOPAY", Email:"N/A", Desc:"The Client Contact Centre (CCC) is the first point of contact for current and former federal public servants looking for information or help with compensation and benefits enquiries, and for technical issues when using the Compensation Web Applications (CWA) and the Phoenix pay system."};
     databaseReturn.push(dbRow);
-    dbRow = {Title:"HRSS Support Line", Phone:"1-833-747-6363", Email:"", Desc:"The Human Resources Services and Support (HRSS) hotline can be contacted for technical issues related to the HRSS system."};
+    dbRow = {Title:"HRSS Support Line", Phone:"1-833-747-6363", Email:"N/A", Desc:"The Human Resources Services and Support (HRSS) hotline can be contacted for technical issues related to the HRSS system."};
     databaseReturn.push(dbRow);
-    dbRow = {Title:"Section 34 Manager Support Line", Phone:"1-833-747-6363", Email:"", Desc:"If you are a Section 34 Manager experiencing issues with time approval related tasks, agents at this hotline can help walk through your issues."};
+    dbRow = {Title:"Section 34 Manager Support Line", Phone:"1-833-747-6363", Email:"N/A", Desc:"If you are a Section 34 Manager experiencing issues with time approval related tasks, agents at this hotline can help walk through your issues."};
     databaseReturn.push(dbRow);
-    dbRow = {Title:"PSPC Pension Center", Phone:"1-800-561-7930", Email:"", Desc:"PSPC is responsible for all federal pension plans (Public Service, RCMP and Canadian Armed Forces). If you have questions about your pension, contact the Government of Canada Pension Centre"};
+    dbRow = {Title:"PSPC Pension Center", Phone:"1-800-561-7930", Email:"N/A", Desc:"The Government of Canada Pension Centre is the primary office responsible for the administration of the pension plan for Federal Public Service employees, the Public Service Superannuation Act (PSSA)."};
     databaseReturn.push(dbRow);
-    dbRow = {Title:"Employee Assistance Program", Phone:"1-800-268-7708", Email:"", Desc:"EAP offers solutions to both prevent and address the concerns of employers, employees, and immediate family members."};
+    dbRow = {Title:"Employee Assistance Program", Phone:"1-800-268-7708", Email:"N/A", Desc:"EAP offers solutions to both prevent and address the concerns of employers, employees, and immediate family members."};
     databaseReturn.push(dbRow);
-    dbRow ={Title:"Public Services and Procurement Canada: General Inquiries ", Phone: "1-800-926-9105", Email: " questions@tpsgc-pwgsc.gc.ca", Desc:"For questions not answered on our website refer to the contact information below."};
+    dbRow ={Title:"Public Services and Procurement Canada: General Inquiries ", Phone: "1-800-926-9105", Email: "questions@tpsgc-pwgsc.gc.ca", Desc:"For questions not answered on our website refer to the contact information below."};
 
 databaseReturn.push(dbRow);
 

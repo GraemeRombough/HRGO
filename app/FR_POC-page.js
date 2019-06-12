@@ -121,15 +121,15 @@ var getFromDatabase = function(){
     var databaseReturn = [];
     var dbRow = {};
 
-    dbRow = {Title:"Centre de Service de Paye", Phone:"1-888-HRTOPAY", Email:"", Desc:"You can contact the Public Service Pay Center (PSPC) as your first stop for any pay related issues."};
+    dbRow = {Title:"Centre de Service de Paye", Phone:"1-888-HRTOPAY", Email:"N/A", Desc:"Le Centre de contact avec la clientèle (CCC) est le premier point de contact des fonctionnaires fédéraux, actuels et anciens, qui souhaitent obtenir de l’information ou de l’aide concernant des demandes liées à la rémunération et aux avantages sociaux, et pour des problèmes techniques liés aux Applications Web de la rémunération (AWR) et au système de paye Phénix."};
     databaseReturn.push(dbRow);
-    dbRow = {Title:"HRSS Support Line", Phone:"1-833-747-6363", Email:"", Desc:"The Human Resources Services and Support (HRSS) hotline can be contacted for technical issues related to the HRSS system."};
+    dbRow = {Title:"Centre de contact à la clientèle pour le portail SSRH", Phone:"1-833-747-6363", Email:"N/A", Desc:"Les employès et les gestionnaires peuvent communiquer avec le centre de service pour obtenir l'access ou pour naviguer le portail SSRH"};
     databaseReturn.push(dbRow);
-    dbRow = {Title:"Section 34 Manager Support Line", Phone:"1-833-747-6363", Email:"", Desc:"If you are a Section 34 Manager experiencing issues with time approval related tasks, agents at this hotline can help walk through your issues."};
+    //dbRow = {Title:"Section 34 Manager Support Line", Phone:"1-833-747-6363", Email:"N/A", Desc:"If you are a Section 34 Manager experiencing issues with time approval related tasks, agents at this hotline can help walk through your issues."};
+    //databaseReturn.push(dbRow);
+    dbRow = {Title:"Centre des pensions", Phone:"1-800-561-7930", Email:"N/A", Desc:"Le Centre des pensions du gouvernement du Canada est le principal responsable de l'administration du régime de pensions des fonctionnaires fédéraux, conformément à la Loi sur la pension de la fonction publique (LPFP)."};
     databaseReturn.push(dbRow);
-    dbRow = {Title:"PSPC Pension Center", Phone:"1-800-561-7930", Email:"", Desc:"PSPC is responsible for all federal pension plans (Public Service, RCMP and Canadian Armed Forces). If you have questions about your pension, contact the Government of Canada Pension Centre"};
-    databaseReturn.push(dbRow);
-    dbRow = {Title:"Employee Assistance Program", Phone:"1-800-268-7708", Email:"", Desc:"EAP offers solutions to both prevent and address the concerns of employers, employees, and immediate family members."};
+    dbRow = {Title:"Programme d'aide aux employés", Phone:"1-800-268-7708", Email:"N/A", Desc:"Nous offrons des solutions pour répondre aux préoccupations des employeurs, des employés et des membres de la famille immédiate."};
     databaseReturn.push(dbRow);
     dbRow ={Title:"Services publics et Approvisionnement Canada: Demandes de renseignements généraux", Phone: "1-800-926-9105", Email: "questions@tpsgc-pwgsc.gc.ca", Desc:"Si vous ne trouvez pas la réponse à vos questions sur le site Web, vous pouvez envoyer vos demandes et vos questions générales aux coordonnées ci-après."};
 
