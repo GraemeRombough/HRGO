@@ -12,19 +12,19 @@
     <!-- Sections -->
     <Button text="Select a Section" class="Home_Utility_Label" tap="navToggle" value="Section" />
     <StackLayout visibility="{{ Section ? 'visible' : 'collapsed' }}" id="sectionLayout">
-      <Button text="Extra Duty Pay" class="Main_Nav_SubLine" tap="loadRoles"/>
+      
     </StackLayout>
 
   <!-- Items -->
     <Button text="Select an Item" class="Home_Utility_Label" tap="navToggle" value="Item" />
     <StackLayout visibility="{{ Item ? 'visible' : 'collapsed' }}"  id="itemLayout">
-      <Button text="Employee" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
+      
     </StackLayout>
 
   <!-- Descriptions -->
   <Button text="View Description" class="Home_Utility_Label" tap="navToggle" value="Descriptions" />
     <StackLayout class="Article_MainStack" id="descriptionContent" width="100%" orientation="vertical" visibility="{{ Descriptions ? 'visible' : 'collapsed' }}">
-      <Label text="Stuff here" class="Article_Body"/>
+      
     </StackLayout>
 
   </StackLayout>

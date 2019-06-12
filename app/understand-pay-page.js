@@ -1,8 +1,8 @@
-var frameModule = require("ui/frame");
-var view = require("ui/core/view");
-var observable = require("data/observable");
-var buttonModule = require("ui/button");
-const Button = require("tns-core-modules/ui/button/").Button;
+var frameModule = require("tns-core-modules/ui/frame");
+var view = require("tns-core-modules/ui/core/view");
+var observable = require("tns-core-modules/data/observable");
+var buttonModule = require("tns-core-modules/ui/button");
+const Button = require("tns-core-modules/tns-core-modules/ui/button/").Button;
 var pageData = new observable.Observable();
 var selectedSection, selectedItem;
 var pageObject;

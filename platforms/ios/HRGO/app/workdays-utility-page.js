@@ -1,7 +1,7 @@
-var frameModule = require("ui/frame");
-var view = require("ui/core/view");
-var dialogs = require("ui/dialogs");
-var observable = require("data/observable");
+var frameModule = require("tns-core-modules/ui/frame");
+var view = require("tns-core-modules/ui/core/view");
+var dialogs = require("tns-core-modules/ui/dialogs");
+var observable = require("tns-core-modules/data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "YourPayInformation";
 var navList = [];

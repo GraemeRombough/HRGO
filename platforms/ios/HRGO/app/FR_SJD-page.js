@@ -84,7 +84,7 @@ exports.searchSJD = function(){
     console.log(pageData.get("SearchCriteria"));
     
     if(pageData.get("classCheck") == true && selectedClass[1] != ""){
-        if(pageData.get("titleCheck") == true && pageData.get("SearchCriteria")){
+        if(pageData.get("SearchCriteria") != ""){
             for (i = 0; i < dataBaseReturn.length; i++) {
                 if(selectedClass && dataBaseReturn[i].Classification.toLowerCase().includes(selectedClass[1].toLowerCase()) == true ){
                     if (dataBaseReturn[i].Title.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
@@ -104,7 +104,7 @@ exports.searchSJD = function(){
             }
             displayPOCs(filteredResults);
         }   
-    }else if(pageData.get("titleCheck") == true){
+    }else if(pageData.get("SearchCriteria") != ""){
         for (i = 0; i < dataBaseReturn.length; i++) {
             if (dataBaseReturn[i].Title.toLowerCase().includes(pageData.get("SearchCriteria").toLowerCase()) == true ){
                 filteredResults.push(dataBaseReturn[i]);
