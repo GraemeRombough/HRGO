@@ -1,4 +1,7 @@
 {
+	"nativescript-iqkeyboardmanager": {
+		"/Users/graemerombough/HRGO/node_modules/nativescript-iqkeyboardmanager/platforms/ios/Podfile": "5092a1d2ce6bf004814ff8095d297bdcf7a410f7"
+	},
 	"nativescript-local-notifications": {
 		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/LocalNotificationsPlugin.h": "163c778c1cc83960f312ead925e784b977e9d730",
 		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/Notification.h": "bb5585ed8288125b0d2982969650975069cdbc21",
