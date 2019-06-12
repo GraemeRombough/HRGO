@@ -82,13 +82,6 @@
 			name = "tns-core-modules";
 			sourceTree = "<group>";
 		};
-		524F1CF0615E47E8B648DC91 /* TNSNativeSource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = TNSNativeSource;
-			sourceTree = "<group>";
-		};
 		6BD08F4B0FEFF59C7989242B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,8 +97,8 @@
 				858B833018CA111C00AB12DE /* Frameworks */,
 				858B832F18CA111C00AB12DE /* Products */,
 				126B726A45554B389137B9ED /* tns-core-modules */,
-				524F1CF0615E47E8B648DC91 /* TNSNativeSource */,
 				6BD08F4B0FEFF59C7989242B /* Pods */,
+				D41F26E9D9A54CCEA54B6C8A /* TNSNativeSource */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,6 +152,13 @@
 				38B408FB402448A3A5F83F16 /* build.xcconfig */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		D41F26E9D9A54CCEA54B6C8A /* TNSNativeSource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TNSNativeSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,6 +439,8 @@
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 					"\"$(SRCROOT)/../../node_modules/tns-core-modules/platforms/ios/src\"",
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
+					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
+					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HRGO/HRGO-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -465,6 +467,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 					"\"$(SRCROOT)/../../node_modules/tns-core-modules/platforms/ios/src\"",
+					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
+					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HRGO/HRGO-Info.plist";

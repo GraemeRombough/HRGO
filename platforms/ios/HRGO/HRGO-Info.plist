@@ -4,6 +4,13 @@
   <dict>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
+    <key>CFBundleIdentifier</key>
+    <string>ca.forces.hrciv.hrgo</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+      <string>en</string>
+      <string>fr</string>
+    </array>
     <key>CFBundleDisplayName</key>
     <string>${PRODUCT_NAME}</string>
     <key>CFBundleExecutable</key>
@@ -43,8 +50,6 @@
       <string>UIInterfaceOrientationLandscapeLeft</string>
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
-    <key>CFBundleIdentifier</key>
-    <string>ca.forces.hrciv.hrgo</string>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
