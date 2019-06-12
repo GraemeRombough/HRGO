@@ -1,0 +1,28 @@
+{
+	"nativescript-iqkeyboardmanager": {
+		"/Users/graemerombough/HRGO/node_modules/nativescript-iqkeyboardmanager/platforms/ios/Podfile": "5092a1d2ce6bf004814ff8095d297bdcf7a410f7"
+	},
+	"nativescript-local-notifications": {
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/LocalNotificationsPlugin.h": "163c778c1cc83960f312ead925e784b977e9d730",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/Notification.h": "bb5585ed8288125b0d2982969650975069cdbc21",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Headers/NotificationManager.h": "98369ea595cbc9a58137164331dd632f89c34d2b",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Info.plist": "71dbe994a37f4bfb22ae27f7bc595d01787e928e",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/Modules/module.modulemap": "31f6986413efefd63736de3a478a194dbd8dc1c3",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-local-notifications/platforms/ios/LocalNotificationsPlugin.framework/LocalNotificationsPlugin": "69184e091583276ccc0d4eaecd278fe6bbfec25d"
+	},
+	"tns-core-modules": {
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules/platforms/ios/src/NativeScriptEmbedder.h": "61d5332c711cc0ac62e0194e18077d2ff5293b11",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules/platforms/ios/src/NativeScriptEmbedder.m": "95f2f41d1868f418dd79a418c30a1c2ac85829f6",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules/platforms/ios/src/module.modulemap": "be8f57fbde98eb6950cdd245ff5021d7d8aa75e2"
+	},
+	"tns-core-modules-widgets": {
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/TNSLabel.h": "c7c5788d3ea834d96cf8a137cbf0c4ea28fd7829",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/TNSProcess.h": "787f09c57ede174d6323990e6d6e9eaf134da6f0",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/TNSWidgets.h": "f1435d046b4a9dd5d631db5ba5c9ddff04ee4bc3",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/UIImage+TNSBlocks.h": "3b31a5be818e25c142e99f98479c538632d350ae",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/UIView+PassThroughParent.h": "cddc4157f40983b34fcb1d3846666b5ecc5b1ca5",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Info.plist": "dc8fd3b747be7a8137d97e6942de2b2baede4ec1",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Modules/module.modulemap": "00d2220e76eb098f1808eb4e9b5c43ad4cadf1da",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/TNSWidgets": "a39fdc0579b7a1641908db5d17268aac354fc770"
+	}
+}
