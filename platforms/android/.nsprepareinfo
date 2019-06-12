@@ -136,10 +136,10 @@
 		"/Users/graemerombough/HRGO/app/pay-info.js": "b89e4d3940d67065a64cf40ef6e17cac35f7ea9d",
 		"/Users/graemerombough/HRGO/app/promotion-calc-page.js": "c3772ac0f73837d68829baa9586260b69e7b7baa"
 	},
-	"release": true,
+	"release": false,
 	"bundle": false,
 	"changesRequireBuild": true,
-	"time": "Tue Jun 11 2019 23:20:48 GMT-0400 (EDT)",
-	"changesRequireBuildTime": "Tue Jun 11 2019 23:20:48 GMT-0400 (EDT)",
+	"time": "Wed Jun 12 2019 12:42:34 GMT-0400 (EDT)",
+	"changesRequireBuildTime": "Wed Jun 12 2019 12:42:34 GMT-0400 (EDT)",
 	"projectFileHash": "0cc1692f13c3233da45805c6bb705032b76a74f1c5dbc6703013cbe47ff64fc2"
 }
