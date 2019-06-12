@@ -19,7 +19,7 @@ task replaceSettings {
         println "\t Applying settings from $settingsResolvedPath"
         String settingsGradleTemplate = """android {
             defaultConfig {
-                applicationId = "__appId__"
+                applicationId = "ca.forces.hrciv.hrgo"
 
                 if (__minSdkVersion__) {
                     minSdkVersion = __minSdkVersion__

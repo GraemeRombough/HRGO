@@ -1,0 +1,47 @@
+<Page loaded="pageLoaded" navigatingTo="onNavigatingTo" actionBarHidden="true">
+  <ActionBar title="HR GO" class="action-bar"></ActionBar>
+  <GridLayout rows="*,60">
+  <StackLayout row="0" orientation="vertical" width="100%">
+    <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+      <label col="0" row="0" class="Header_Icon" text="&#xe926;"/>
+      <label col="1" row="0" text="DESCRIPTION de POSTE" class="Header_Label"/>
+      <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+    </GridLayout>
+    <StackLayout orientation="vertical" visibility="{{ searchSection ? 'visible' : 'collapsed' }}">
+      <!--Search Area-->
+      <GridLayout columns="*,60" rows="auto" orientation="horizontal">
+        <Label col="0" row="0" text="Classification" class="Article_H2"/>
+        <Switch col="1" row="0" checked="{{ classCheck }}" class="Applicable_Switch"/>
+      </GridLayout>
+      <ListPicker id="classPicker" items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker"/>
+      <GridLayout columns="*,60" rows="auto" orientation="horizontal">
+        <Label col="0" row="0" text="Titre de poste" class="Article_H2"/>
+        <Switch col="1" row="0" checked="{{ titleCheck }}" class="Applicable_Switch"/>
+      </GridLayout>
+      <TextField class="Utility_TextBox" text="{{ SearchCriteria }}" id="SearchBox"/>
+      <Button text="Rechercher - Descriptions de poste" tap="searchSJD" class="Submit_Button_1"/>
+    </StackLayout>
+    <ScrollView orientation="vertical" visibility="{{ contentSection ? 'visible' : 'collapsed' }}">
+    <StackLayout orientation="vertical">
+      <Button text="Saisir de nouveau" tap="showSearch" class="Submit_Button_1"/>
+      <StackLayout id="SJD_List">
+      <!-- Layout for individual POC -->
+      </StackLayout>
+    </StackLayout>
+    </ScrollView>
+  </StackLayout>
+      
+    
+    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+    </StackLayout>
+
+    </GridLayout>
+
+  <!-- Your UI components go here -->
+
+</Page>
