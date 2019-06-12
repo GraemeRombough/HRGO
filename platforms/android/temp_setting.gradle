@@ -1,0 +1,13 @@
+android {
+            defaultConfig {
+                applicationId = "[ios:ca.forces.hrciv.hrgo, android:ca.forces.hrciv.hrgo]"
+
+                if (false) {
+                    minSdkVersion = false
+                }
+
+                if (false) {
+                    targetSdkVersion = false
+                }
+            }
+        }
