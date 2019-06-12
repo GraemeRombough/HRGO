@@ -1,8 +1,0 @@
-use_frameworks!
-
-target "HRGO" do
-# Begin Podfile - /Users/graemerombough/HRGO/node_modules/nativescript-iqkeyboardmanager/platforms/ios/Podfile
-pod 'IQKeyboardManager', '~> 6.2.0'
-
-# End Podfile
-end
