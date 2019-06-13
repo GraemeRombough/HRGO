@@ -12,6 +12,7 @@
 android {  
   defaultConfig {  
     generatedDensities = []
+    applicationId = "ca.forces.hrciv.hrgo"  
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

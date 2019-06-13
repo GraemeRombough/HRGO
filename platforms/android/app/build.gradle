@@ -1,26 +1,29 @@
 /*
-*	Script builds apk in release or debug mode
-*	To run:
-*			gradle assembleRelease -Prelease (release mode)
-*			gradle assembleDebug (debug mode -> default)
-* 	Options:
-*			-Prelease  //this flag will run build in release mode
-*			-PksPath=[path_to_keystore_file]
-*			-PksPassword=[password_for_keystore_file]
-*			-Palias=[alias_to_use_from_keystore_file]
-*			-Ppassword=[password_for_alias]
+*    Script builds apk in release or debug mode
+*    To run:
+*            gradle assembleRelease -Prelease (release mode)
+*            gradle assembleDebug (debug mode -> default)
+*     Options:
+*            -Prelease  //this flag will run build in release mode
+*            -PksPath=[path_to_keystore_file]
+*            -PksPassword=[password_for_keystore_file]
+*            -Palias=[alias_to_use_from_keystore_file]
+*            -Ppassword=[password_for_alias]
 *
-*			-PtargetSdk=[target_sdk]
-*			-PbuildToolsVersion=[build_tools_version]
-*			-PsupportVersion=[support_version]
-*			-PcompileSdk=[compile_sdk_version]
+*            -PtargetSdk=[target_sdk]
+*            -PbuildToolsVersion=[build_tools_version]
+*            -PsupportVersion=[support_version]
+*            -PcompileSdk=[compile_sdk_version]
 */
 
 import groovy.json.JsonSlurper
+import java.nio.file.Files
 import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-
+import java.security.MessageDigest
+import javax.inject.Inject
 apply plugin: "com.android.application"
 
 def onlyX86 = project.hasProperty("onlyX86")
@@ -36,8 +39,6 @@ if (PASSED_TYPINGS_PATH != null) {
     TYPINGS_PATH = PASSED_TYPINGS_PATH
 }
 
-def USER_PROJECT_ROOT = "$rootDir/../.."
-def PLATFORMS_ANDROID = "platforms/android"
 def PACKAGE_JSON = "package.json"
 
 //static binding generator
@@ -59,19 +60,6 @@ def METADATA_OUT_PATH = "$projectDir/src/main/assets/metadata"
 def pluginsJarLibraries = new LinkedList<String>()
 def allJarLibraries = new LinkedList<String>()
 
-// the build script will not work with previous versions of the CLI (3.1 or earlier)
-def dependenciesJson = file("$rootDir/dependencies.json")
-if (!dependenciesJson.exists()) {
-    throw new BuildCancelledException("""
-'dependencies.json' file not found. Check whether the NativeScript CLI has prepared the project beforehand,
-and that your NativeScript version is 3.3, or a more recent one. To build an android project with the current
-version of the {N} CLI install a previous version of the runtime package - 'tns platform add android@3.2'.
-""")
-}
-
-project.ext.extractedDependenciesDir = "${project.buildDir}/exploded-dependencies"
-def nativescriptDependencies = new JsonSlurper().parseText(dependenciesJson.text)
-
 def computeCompileSdkVersion = { -> project.hasProperty("compileSdk") ? compileSdk : 28 }
 def computeTargetSdkVersion = { -> project.hasProperty("targetSdk") ? targetSdk : 28 }
 def computeBuildToolsVersion = { ->
@@ -79,39 +67,93 @@ def computeBuildToolsVersion = { ->
 }
 
 project.ext.selectedBuildType = project.hasProperty("release") ? "release" : "debug"
-project.ext.appResourcesPath = ""
 
+buildscript {
+    // we have moved these initializations here as we need getAppResourcesPath to search for buildscript.gradle files,
+    // but the buildscript is executed before executing anything else from the gradle file
+    def initialize = { ->
+        // the build script will not work with previous versions of the CLI (3.1 or earlier)
+        def dependenciesJson = file("$rootDir/dependencies.json")
+        if (!dependenciesJson.exists()) {
+            throw new BuildCancelledException("""
+'dependencies.json' file not found. Check whether the NativeScript CLI has prepared the project beforehand,
+and that your NativeScript version is 3.3, or a more recent one. To build an android project with the current
+version of the {N} CLI install a previous version of the runtime package - 'tns platform add android@3.2'.
+""")
+        }
+
+        project.ext.extractedDependenciesDir = "${project.buildDir}/exploded-dependencies"
+        project.ext.cleanupAllJarsTimestamp = "${project.buildDir}/cleanupAllJars.timestamp"
+        project.ext.extractAllJarsTimestamp = "${project.buildDir}/extractAllJars.timestamp"
+        project.ext.nativescriptDependencies = new JsonSlurper().parseText(dependenciesJson.text)
+        project.ext.PLATFORMS_ANDROID = "platforms/android"
+        project.ext.USER_PROJECT_ROOT = "$rootDir/../.."
+
+        project.ext.getAppPath = { ->
+            def relativePathToApp = "app"
+            def nsConfigFile = file("$USER_PROJECT_ROOT/nsconfig.json")
+            def nsConfig
+
+            if (nsConfigFile.exists()) {
+                nsConfig = new JsonSlurper().parseText(nsConfigFile.getText("UTF-8"))
+            }
+
+            if (nsConfig != null && nsConfig.appPath != null) {
+                relativePathToApp = nsConfig.appPath
+            }
+
+            project.ext.appPath = java.nio.file.Paths.get(USER_PROJECT_ROOT).resolve(relativePathToApp).toAbsolutePath()
+
+            return project.ext.appPath
+        }
+
+        project.ext.getAppResourcesPath = { ->
+            def relativePathToAppResources
+            def absolutePathToAppResources
+            def nsConfigFile = file("$USER_PROJECT_ROOT/nsconfig.json")
+            def nsConfig
+
+            if (nsConfigFile.exists()) {
+                nsConfig = new JsonSlurper().parseText(nsConfigFile.getText("UTF-8"))
+            }
+
+            if (nsConfig != null && nsConfig.appResourcesPath != null) {
+                relativePathToAppResources = nsConfig.appResourcesPath
+                absolutePathToAppResources = java.nio.file.Paths.get(USER_PROJECT_ROOT).resolve(relativePathToAppResources).toAbsolutePath()
+            } else {
+                absolutePathToAppResources = "${getAppPath()}/App_Resources"
+            }
+
+            project.ext.appResourcesPath = absolutePathToAppResources
+
+            return absolutePathToAppResources
+        }
+    }
+    def applyBuildScriptConfigurations = { ->
+        def absolutePathToAppResources = getAppResourcesPath()
+        def pathToBuildScriptGradle = "$absolutePathToAppResources/Android/buildscript.gradle"
+        def buildScriptGradle = file(pathToBuildScriptGradle)
+        if (buildScriptGradle.exists()) {
+            println "\t + applying user-defined buildscript from ${buildScriptGradle}"
+            apply from: pathToBuildScriptGradle, to: buildscript
+        }
+
+        nativescriptDependencies.each { dep ->
+            def pathToPluginBuildScriptGradle = "$rootDir/${dep.directory}/$PLATFORMS_ANDROID/buildscript.gradle"
+            def pluginBuildScriptGradle = file(pathToPluginBuildScriptGradle)
+            if (pluginBuildScriptGradle.exists()) {
+                println "\t + applying user-defined buildscript from dependency ${pluginBuildScriptGradle}"
+                apply from: pathToPluginBuildScriptGradle, to: buildscript
+            }
+        }
+    }
+
+    initialize()
+    applyBuildScriptConfigurations()
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// CONFIGURATIONS ///////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-
-def getAppResourcesPath = { ->
-    def relativePathToApp = "app"
-    def relativePathToAppResources
-    def absolutePathToAppResources
-    def nsConfigFile = file("$USER_PROJECT_ROOT/nsconfig.json")
-    def nsConfig
-
-    if (nsConfigFile.exists()) {
-        nsConfig = new JsonSlurper().parseText(nsConfigFile.getText("UTF-8"))
-    }
-
-    if(nsConfig != null && nsConfig.appPath != null){
-        relativePathToApp = nsConfig.appPath
-    }
-
-    if(nsConfig != null && nsConfig.appResourcesPath != null ) {
-        relativePathToAppResources = nsConfig.appResourcesPath
-    } else {
-        relativePathToAppResources  = "$relativePathToApp/App_Resources"
-    }
-
-    absolutePathToAppResources = java.nio.file.Paths.get(USER_PROJECT_ROOT).resolve(relativePathToAppResources).toAbsolutePath()
-
-    project.ext.appResourcesPath = absolutePathToAppResources
-
-    return absolutePathToAppResources
-}
 
 def applyBeforePluginGradleConfiguration = { ->
     def appResourcesPath = getAppResourcesPath()
@@ -136,43 +178,42 @@ def applyAppGradleConfiguration = { ->
 }
 
 def applyPluginGradleConfigurations = { ->
-    nativescriptDependencies.each {dep ->
+    nativescriptDependencies.each { dep ->
         def includeGradlePath = "$rootDir/${dep.directory}/$PLATFORMS_ANDROID/include.gradle"
-        if(file(includeGradlePath).exists()) {
+        if (file(includeGradlePath).exists()) {
             apply from: includeGradlePath
         }
     }
 }
 
 def getAppIdentifier = { packageJsonMap ->
-	def appIdentifier = "";
-	if (packageJsonMap && packageJsonMap.nativescript) {
-		appIdentifier = packageJsonMap.nativescript.id;
-		if (!(appIdentifier instanceof String)) {
-			appIdentifier = appIdentifier.android;
-		}
-	}
+    def appIdentifier = ""
+    if (packageJsonMap && packageJsonMap.nativescript) {
+        appIdentifier = packageJsonMap.nativescript.id
+        if (!(appIdentifier instanceof String)) {
+            appIdentifier = appIdentifier.android
+        }
+    }
 
-	return appIdentifier;
+    return appIdentifier
 }
 
 def setAppIdentifier = { ->
-	println "\t + setting applicationId";
-	File packageJsonFile = new File("$rootDir/../../package.json");
+    println "\t + setting applicationId"
+    File packageJsonFile = new File("$USER_PROJECT_ROOT/$PACKAGE_JSON")
 
-	if (packageJsonFile.exists()) {
-		def content = packageJsonFile.getText("UTF-8");
-		def jsonSlurper = new JsonSlurper();
-		def packageJsonMap = jsonSlurper.parseText(content);
-		def appIdentifier = getAppIdentifier(packageJsonMap);
+    if (packageJsonFile.exists()) {
+        def content = packageJsonFile.getText("UTF-8")
+        def jsonSlurper = new JsonSlurper()
+        def packageJsonMap = jsonSlurper.parseText(content)
+        def appIdentifier = getAppIdentifier(packageJsonMap)
 
-		if (appIdentifier) {
-			project.ext.nsApplicationIdentifier = appIdentifier;
-			android.defaultConfig.applicationId = appIdentifier;
-		}
-	}
+        if (appIdentifier) {
+            project.ext.nsApplicationIdentifier = appIdentifier
+            android.defaultConfig.applicationId = appIdentifier
+        }
+    }
 }
-
 
 android {
     compileSdkVersion computeCompileSdkVersion()
@@ -187,12 +228,17 @@ android {
             if (onlyX86) {
                 abiFilters 'x86'
             } else {
-                abiFilters 'x86', 'armeabi-v7a'//, 'arm64-v8a'
+                abiFilters 'x86', 'armeabi-v7a', 'arm64-v8a'
             }
         }
         dexOptions {
             jumboMode = true
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     sourceSets.main {
@@ -228,10 +274,11 @@ android {
 }
 
 def externalRuntimeExists = !findProject(':runtime').is(null)
+def pluginDependencies
 
 repositories {
     // used for local *.AAR files
-    def pluginDependencies = nativescriptDependencies.collect {
+    pluginDependencies = nativescriptDependencies.collect {
         "$rootDir/${it.directory}/$PLATFORMS_ANDROID"
     }
 
@@ -261,32 +308,54 @@ dependencies {
     if (project.hasProperty("supportVersion")) {
         supportVer = supportVersion
     }
+    if (project.hasProperty("useAndroidX") && (useAndroidX || useAndroidX.toBoolean())) {
+        def androidXLegacyVersion = "1.0.0"
+        if (project.hasProperty("androidXLegacy")) {
+            androidXLegacyVersion = androidXLegacy
+        }
 
-    println "Using support library version $supportVer"
+        def androidXAppCompatVersion = "1.1.0-alpha01"
+        if (project.hasProperty("androidXAppCompat")) {
+            androidXAppCompatVersion = androidXAppCompat
+        }
 
-    implementation "com.android.support:multidex:1.0.2"
-    implementation "com.android.support:support-v4:$supportVer"
-    implementation "com.android.support:appcompat-v7:$supportVer"
-    implementation "com.android.support:design:$supportVer"
+        def androidXMaterialVersion = "1.1.0-alpha01"
+        if (project.hasProperty("androidXMaterial")) {
+            androidXMaterialVersion = androidXMaterial
+        }
 
-    def sbgProjectExists = !findProject(':static-binding-generator').is(null)
-    if (sbgProjectExists) {
-        compileOnly project(':static-binding-generator')
-    }
-    def mdgProjectExists = !findProject(':android-metadata-generator').is(null)
-    if (mdgProjectExists) {
-        compileOnly project(':android-metadata-generator')
-    }
-    def dtsgProjectExists = !findProject(':dts-generator').is(null)
-    if (dtsgProjectExists) {
-        compileOnly project(':dts-generator')
+        println "\t + using andorid X library androidx.legacy:legacy-support-v4:$androidXLegacyVersion"
+
+        implementation "androidx.multidex:multidex:2.0.0"
+        implementation "androidx.legacy:legacy-support-v4:$androidXLegacyVersion"
+        implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
+        implementation "com.google.android.material:material:$androidXMaterialVersion"
+    } else {
+        println "\t + using support library version $supportVer"
+
+        implementation "com.android.support:multidex:1.0.2"
+        implementation "com.android.support:support-v4:$supportVer"
+        implementation "com.android.support:appcompat-v7:$supportVer"
+        implementation "com.android.support:design:$supportVer"
     }
 
-    def useV8Symbols = nativescriptDependencies.any {
-        def packageJsonPath = file("$rootDir/${it.directory}/$PACKAGE_JSON")
-        def packageJson = new JsonSlurper().parseText(packageJsonPath.text)
-        return packageJson.nativescript.useV8Symbols
+    def useV8Symbols = false
+
+    def appPackageJsonFile = file("${getAppPath()}/$PACKAGE_JSON")
+    if (appPackageJsonFile.exists()) {
+        def appPackageJson = new JsonSlurper().parseText(appPackageJsonFile.text)
+        useV8Symbols = appPackageJson.android && appPackageJson.android.useV8Symbols
     }
+
+    if (!useV8Symbols) {
+        // check whether any of the dependencies require v8 symbols
+        useV8Symbols = nativescriptDependencies.any {
+            def packageJsonFile = file("$rootDir/${it.directory}/$PACKAGE_JSON")
+            def packageJson = new JsonSlurper().parseText(packageJsonFile.text)
+            return packageJson.nativescript && packageJson.nativescript.useV8Symbols
+        }
+    }
+
     if (!externalRuntimeExists) {
         def runtime = "nativescript-optimized-with-inspector"
 
@@ -301,8 +370,9 @@ dependencies {
         println "\t + adding nativescript runtime package dependency: $runtime"
         project.dependencies.add("implementation", [name: runtime, ext: "aar"])
     } else {
-        implementation project(path: ':runtime', configuration: 'default')
+        implementation project(':runtime')
     }
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -359,9 +429,13 @@ tasks.whenTaskAdded({ org.gradle.api.DefaultTask currentTask ->
         extractAllJars.finalizedBy(collectAllJars)
     }
     if (currentTask =~ /compile.+JavaWithJavac/) {
+        currentTask.dependsOn(makeAndroidXChanges)
         currentTask.dependsOn(runSbg)
         currentTask.finalizedBy(ensureMetadataOutDir)
         ensureMetadataOutDir.finalizedBy(buildMetadata)
+    }
+    if (currentTask =~ /merge.*Assets/) {
+        currentTask.shouldRunAfter(buildMetadata)
     }
     if (currentTask =~ /assemble.*Debug/ || currentTask =~ /assemble.*Release/) {
         currentTask.finalizedBy("validateAppIdMatch")
@@ -373,14 +447,21 @@ tasks.whenTaskAdded({ org.gradle.api.DefaultTask currentTask ->
 ////////////////////////////////////////////////////////////////////////////////////
 
 task runSbg(type: JavaExec) {
+    dependsOn "collectAllJars"
+    if (!findProject(':static-binding-generator').is(null)) {
+        dependsOn ':static-binding-generator:jar'
+    }
+
+    outputs.dir("$OUTPUT_JAVA_DIR/com/tns/gen")
     inputs.dir(INPUT_JS_DIR)
+    inputs.dir(extractedDependenciesDir)
 
     workingDir "$BUILD_TOOLS_PATH"
     main "-jar"
     args "static-binding-generator.jar"
 
     doFirst {
-        new File("$OUTPUT_JAVA_DIR/com/tns/gen").deleteDir();
+        new File("$OUTPUT_JAVA_DIR/com/tns/gen").deleteDir()
     }
 }
 
@@ -391,22 +472,19 @@ task ensureMetadataOutDir {
     }
 }
 
-def explodeAar(File compileDependency, String outputDir) {
+def explodeAar(File compileDependency, File outputDir) {
+    logger.info("explodeAar: Extracting ${compileDependency.path} -> ${outputDir.path}")
+
     if (compileDependency.name.endsWith(".aar")) {
         java.util.jar.JarFile jar = new java.util.jar.JarFile(compileDependency)
         Enumeration enumEntries = jar.entries()
         while (enumEntries.hasMoreElements()) {
             java.util.jar.JarEntry file = (java.util.jar.JarEntry) enumEntries.nextElement()
             if (file.name.endsWith(".jar")) {
-                def f = new File(outputDir, file.name)
-                new File(f.parent).mkdirs()
-                InputStream is = jar.getInputStream(file)
-                FileOutputStream fos = new FileOutputStream(f)
-                while (is.available() > 0) {
-                    fos.write(is.read())
-                }
-                fos.close()
-                is.close()
+                def targetFile = new File(outputDir, file.name)
+                InputStream inputStream = jar.getInputStream(file)
+                new File(targetFile.parent).mkdirs()
+                Files.copy(inputStream, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
             if (file.isDirectory()) {
                 continue
@@ -421,35 +499,118 @@ def explodeAar(File compileDependency, String outputDir) {
     }
 }
 
-task extractAllJars {
-    outputs.dir extractedDependenciesDir
+def md5(String string) {
+    MessageDigest digest = MessageDigest.getInstance("MD5") ;
+    digest.update(string.bytes);
+    return new BigInteger(1, digest.digest()).toString(16).padLeft(32, '0');
+}
 
-    doLast {
-        def buildType = project.selectedBuildType == "release" ? "Release" : "Debug"
-        def iter = []
-        Pattern pattern = Pattern.compile("^(.+)${buildType}CompileClasspath\$")
-        configurations.all{ config ->
-            Matcher matcher = pattern.matcher(config.name)
-            if (matcher.find() || config.name == "${buildType.toLowerCase()}CompileClasspath") {
-                config.resolve().each {
-                    if (!iter.contains(it)) {
-                        iter.push(it)
+class WorkerTask extends DefaultTask {
+    @Inject
+    WorkerExecutor getWorkerExecutor() {
+        throw new UnsupportedOperationException()
+    }
+}
+
+class EmptyRunnable implements Runnable {
+    void run() {
+    }
+}
+
+// Discover all jars and dynamically create tasks for the extraction of each of them
+def allJars = []
+afterEvaluate { project ->
+    def buildType = project.selectedBuildType == "release" ? "Release" : "Debug"
+    def jars = []
+    Pattern pattern = Pattern.compile("^(.+)${buildType}CompileClasspath\$")
+    def artifactType = Attribute.of('artifactType', String)
+    configurations.all { config ->
+        Matcher matcher = pattern.matcher(config.name)
+        if (matcher.find() || config.name == "${buildType.toLowerCase()}CompileClasspath") {
+            config.incoming.artifactView {
+                attributes {
+                    it.attribute(artifactType, 'jar')
+                }
+            }.artifacts.each {
+                def jar = it.file;
+                if (!jars.contains(jar)) {
+                    jars.add(jar)
+                    def destDir = md5(jar.path);
+                    def outputDir = new File(Paths.get(extractedDependenciesDir, destDir).normalize().toString())
+
+                    def taskName = "extract_${jar.name}_to_${destDir}"
+                    logger.debug("Creating dynamic task ${taskName}")
+
+                    // Add discovered jars as dependencies of cleanupAllJars.
+                    // This is cruicial for cloud builds because they are different
+                    // on each incremental build (as each time the gradle user home
+                    // directory is a randomly generated string)
+                    cleanupAllJars.inputs.files jar
+
+                    task "${taskName}" (type: WorkerTask) {
+                        dependsOn cleanupAllJars
+                        extractAllJars.dependsOn it
+
+                        // This dependency seems redundant but probably due to some Gradle issue with workers,
+                        // without it `runSbg` sporadically starts before all extraction tasks have finished and
+                        // fails due to missing JARs
+                        runSbg.dependsOn it
+
+                        inputs.files jar
+                        outputs.dir outputDir
+
+                        doLast {
+                            // Runing in parallel no longer seems to bring any benefit.
+                            // It mattered only when we were extracting JARs from AARs.
+                            // To try it simply remove the following comments.
+                            // workerExecutor.submit(EmptyRunnable.class) {
+                            explodeAar(jar, outputDir)
+                            // }
+                        }
                     }
+                    allJars.add([file: jar, outputDir: outputDir])
                 }
             }
-        }
-
-        def dependencyCounter = 0
-        iter.each {
-            def nextDependency = it
-            def outputDir = java.nio.file.Paths.get(extractedDependenciesDir, "" + dependencyCounter).normalize().toString()
-            explodeAar(nextDependency, outputDir)
-            dependencyCounter++
         }
     }
 }
 
+task cleanupAllJars {
+    // We depend on the list of libs directories that might contain aar or jar files
+    // and on the list of all discovered jars
+    inputs.files(pluginDependencies)
+
+    outputs.files cleanupAllJarsTimestamp
+
+    doLast {
+        def allDests = allJars*.outputDir*.name;
+        def dir = new File(extractedDependenciesDir)
+        if (dir.exists()) {
+            dir.eachDir {
+                // An old directory which is no longer a dependency (e.g. orphaned by a deleted plugin)
+                if (!allDests.contains(it.name)) {
+                    logger.info("Task cleanupAllJars: Deleting orphaned ${it.path}")
+                    org.apache.commons.io.FileUtils.deleteDirectory(it)
+                }
+            }
+        }
+        new File(cleanupAllJarsTimestamp).write ""
+    }
+}
+
+
+// Placeholder task which depends on all dynamically generated extraction tasks
+task extractAllJars {
+    dependsOn cleanupAllJars
+    outputs.files extractAllJarsTimestamp
+
+    doLast {
+        new File(cleanupAllJarsTimestamp).write ""
+    }
+}
+
 task collectAllJars {
+    dependsOn extractAllJars
     description "gathers all paths to jar dependencies before building metadata with them"
 
     def sdkPath = android.sdkDirectory.getAbsolutePath()
@@ -487,6 +648,10 @@ task collectAllJars {
 }
 
 task buildMetadata(type: JavaExec) {
+    if (!findProject(':android-metadata-generator').is(null)) {
+        dependsOn ':android-metadata-generator:jar'
+    }
+
     description "builds metadata with provided jar dependencies"
 
     inputs.files("$MDG_JAVA_DEPENDENCIES")
@@ -526,7 +691,48 @@ task buildMetadata(type: JavaExec) {
     }
 }
 
+task makeAndroidXChanges {
+    if (project.hasProperty("useAndroidX") && (useAndroidX || useAndroidX.toBoolean())) {
+        // code changes
+        def codeTuples = new ArrayList<Tuple2<String, String>>()
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.annotation\\.NonNull', 'androidx.annotation.NonNull'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.v7\\.app\\.AppCompatActivity', 'androidx.appcompat.app.AppCompatActivity'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.v7\\.appcompat\\.R', 'androidx.appcompat.R'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.design\\.widget\\.TabLayout', 'com.google.android.material.tabs.TabLayout'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.v4\\.app\\.ActivityCompat', 'androidx.core.app.ActivityCompat'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.v4\\.app\\.Fragment', 'androidx.fragment.app.Fragment'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.v4\\.view\\.ViewPager', 'androidx.viewpager.widget.ViewPager'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.v7\\.widget\\.Toolbar', 'androidx.appcompat.widget.Toolbar'))
+        codeTuples.add(new Tuple2<String, String>('android\\.support\\.multidex\\.MultiDex', 'androidx.multidex.MultiDex'))
+
+        codeTuples.each { tuple ->
+            ant.replaceregexp(match: tuple.first, replace: tuple.second, flags: 'g', byline: true) {
+                fileset(dir: "$projectDir/src/debug/java/com/tns/", includes: '*.java')
+            }
+            ant.replaceregexp(match: tuple.first, replace: tuple.second, flags: 'g', byline: true) {
+                fileset(dir: "$projectDir/src/main/java/com/tns/", includes: '*.java')
+            }
+        }
+
+        // resource changes
+        def resourceTuples = new ArrayList<Tuple2<String, String>>()
+        resourceTuples.add(new Tuple2<String, String>('android\\.support\\.v7\\.widget\\.Toolbar', 'androidx.appcompat.widget.Toolbar'))
+        resourceTuples.add(new Tuple2<String, String>('android\\.support\\.v4\\.view\\.ViewPager', 'androidx.viewpager.widget.ViewPager'))
+        resourceTuples.add(new Tuple2<String, String>('android\\.support\\.design\\.widget\\.TabLayout', 'com.google.android.material.tabs.TabLayout'))
+
+        resourceTuples.each { tuple ->
+            ant.replaceregexp(match: tuple.first, replace: tuple.second, flags: 'g', byline: true) {
+                fileset(dir: "$projectDir/src/debug/res/layout/", includes: 'error_activity.xml')
+            }
+        }
+    }
+}
+
 task generateTypescriptDefinitions(type: JavaExec) {
+    if (!findProject(':dts-generator').is(null)) {
+        dependsOn ':dts-generator:jar'
+    }
+
     def paramz = new ArrayList<String>()
     def includeDirs = ["com.android.support", "/platforms/" + android.compileSdkVersion]
 
@@ -589,21 +795,21 @@ copyTypings.onlyIf { generateTypescriptDefinitions.didWork }
 generateTypescriptDefinitions.finalizedBy(copyTypings)
 
 task validateAppIdMatch {
-	doLast {
-		def lineSeparator = System.getProperty("line.separator")
+    doLast {
+        def lineSeparator = System.getProperty("line.separator")
 
-		if (project.hasProperty("nsApplicationIdentifier") && !project.hasProperty("release")) {
-			if(project.nsApplicationIdentifier != android.defaultConfig.applicationId) {
-				def errorMessage = "${lineSeparator}WARNING: The Application identifier is different from the one inside \"package.json\" file.$lineSeparator" +
-					"NativeScript CLI might not work properly.$lineSeparator" +
-					"Remove applicationId from app.gradle and update the \"nativescript.id\" in package.json.$lineSeparator" +
-					"Actual: ${android.defaultConfig.applicationId}$lineSeparator" +
-					"Expected(from \"package.json\"): ${project.nsApplicationIdentifier}$lineSeparator";
+        if (project.hasProperty("nsApplicationIdentifier") && !project.hasProperty("release")) {
+            if (project.nsApplicationIdentifier != android.defaultConfig.applicationId) {
+                def errorMessage = "${lineSeparator}WARNING: The Application identifier is different from the one inside \"package.json\" file.$lineSeparator" +
+                        "NativeScript CLI might not work properly.$lineSeparator" +
+                        "Remove applicationId from app.gradle and update the \"nativescript.id\" in package.json.$lineSeparator" +
+                        "Actual: ${android.defaultConfig.applicationId}$lineSeparator" +
+                        "Expected(from \"package.json\"): ${project.nsApplicationIdentifier}$lineSeparator"
 
-				logger.error(errorMessage)
-			}
-		}
-	}
+                logger.error(errorMessage)
+            }
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

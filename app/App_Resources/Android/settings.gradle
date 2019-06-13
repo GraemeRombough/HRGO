@@ -13,7 +13,7 @@ task replaceSettings {
 
     def settingsJsonFile = file(pathToSettingsJson);
     def settingsResolvedPath = settingsJsonFile.getAbsolutePath();
-
+//applicationId = "__appId__"
     if(settingsJsonFile.exists())
     {
         println "\t Applying settings from $settingsResolvedPath"

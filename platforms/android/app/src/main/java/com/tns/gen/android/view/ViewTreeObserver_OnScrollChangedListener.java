@@ -5,14 +5,24 @@
  */
 package com.tns.gen.android.view;
 
-public class ViewTreeObserver_OnScrollChangedListener implements android.view.ViewTreeObserver.OnScrollChangedListener {
-	public ViewTreeObserver_OnScrollChangedListener() {
-		com.tns.Runtime.initInstance(this);
-	}
+public class ViewTreeObserver_OnScrollChangedListener extends java.lang.Object
+    implements com.tns.NativeScriptHashCodeProvider,
+        android.view.ViewTreeObserver.OnScrollChangedListener {
+  public ViewTreeObserver_OnScrollChangedListener() {
+    super();
+    com.tns.Runtime.initInstance(this);
+  }
 
-	public void onScrollChanged()  {
-		java.lang.Object[] args = null;
-		com.tns.Runtime.callJSMethod(this, "onScrollChanged", void.class, args);
-	}
+  public void onScrollChanged() {
+    java.lang.Object[] args = new java.lang.Object[0];
+    com.tns.Runtime.callJSMethod(this, "onScrollChanged", void.class, args);
+  }
 
+  public int hashCode__super() {
+    return super.hashCode();
+  }
+
+  public boolean equals__super(java.lang.Object other) {
+    return super.equals(other);
+  }
 }

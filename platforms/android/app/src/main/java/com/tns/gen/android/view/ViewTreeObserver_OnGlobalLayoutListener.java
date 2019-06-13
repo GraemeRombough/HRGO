@@ -5,14 +5,24 @@
  */
 package com.tns.gen.android.view;
 
-public class ViewTreeObserver_OnGlobalLayoutListener implements android.view.ViewTreeObserver.OnGlobalLayoutListener {
-	public ViewTreeObserver_OnGlobalLayoutListener() {
-		com.tns.Runtime.initInstance(this);
-	}
+public class ViewTreeObserver_OnGlobalLayoutListener extends java.lang.Object
+    implements com.tns.NativeScriptHashCodeProvider,
+        android.view.ViewTreeObserver.OnGlobalLayoutListener {
+  public ViewTreeObserver_OnGlobalLayoutListener() {
+    super();
+    com.tns.Runtime.initInstance(this);
+  }
 
-	public void onGlobalLayout()  {
-		java.lang.Object[] args = null;
-		com.tns.Runtime.callJSMethod(this, "onGlobalLayout", void.class, args);
-	}
+  public void onGlobalLayout() {
+    java.lang.Object[] args = new java.lang.Object[0];
+    com.tns.Runtime.callJSMethod(this, "onGlobalLayout", void.class, args);
+  }
 
+  public int hashCode__super() {
+    return super.hashCode();
+  }
+
+  public boolean equals__super(java.lang.Object other) {
+    return super.equals(other);
+  }
 }
