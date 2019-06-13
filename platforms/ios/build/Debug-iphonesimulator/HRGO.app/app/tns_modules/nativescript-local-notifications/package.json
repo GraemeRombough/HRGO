@@ -1,4 +1,10 @@
 {
+  "_args": [
+    [
+      "nativescript-local-notifications@3.1.2",
+      "/Users/graemerombough/HRGO"
+    ]
+  ],
   "_from": "nativescript-local-notifications@3.1.2",
   "_id": "nativescript-local-notifications@3.1.2",
   "_inBundle": false,
@@ -16,12 +22,10 @@
     "fetchSpec": "3.1.2"
   },
   "_requiredBy": [
-    "#USER",
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/nativescript-local-notifications/-/nativescript-local-notifications-3.1.2.tgz",
-  "_shasum": "2af99388a0776752a3078ae0f83a6e51ecc779e7",
-  "_spec": "nativescript-local-notifications@3.1.2",
+  "_spec": "3.1.2",
   "_where": "/Users/graemerombough/HRGO",
   "author": {
     "name": "Eddy Verbruggen",
@@ -30,14 +34,12 @@
   "bugs": {
     "url": "https://github.com/eddyverbruggen/nativescript-local-notifications/issues"
   },
-  "bundleDependencies": false,
   "contributors": [
     {
       "name": "Dani Gámez Franco",
       "url": "https://github.com/Danziger"
     }
   ],
-  "deprecated": false,
   "description": "The Local Notifications plugin allows your app to show notifications when the app is not running. Just like remote push notifications, but a few orders of magnitude easier to set up.",
   "devDependencies": {
     "nativescript-dev-typescript": "~0.7.4",

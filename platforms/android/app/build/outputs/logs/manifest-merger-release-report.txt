@@ -10,7 +10,7 @@ MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/ca
 MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/099738438885dd2751e2261ce5cc5bc4/AndroidManifest.xml:17:1-22:12
 MERGED from [:nativescript-optimized:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/6639a177af069bd357cb26a3e6ab543f/AndroidManifest.xml:2:1-11:12
 MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a9566b4254947e8a76ad4f3177b8ae2b/AndroidManifest.xml:2:1-36:12
-MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/ac56b4e53fa8344f1241b8ac7a6e9f88/AndroidManifest.xml:2:1-14:12
+MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/251981459f8bccccbd5617587c05c72e/AndroidManifest.xml:2:1-14:12
 MERGED from [com.android.support:support-media-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/f80793b296f80205948eed9fe11c8121/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/d125d843d0e587ee3769bb06e2c26eb4/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a3a4923d55e5bf193b5f1b829fb959a7/AndroidManifest.xml:17:1-22:12
@@ -83,8 +83,8 @@ MERGED from [:nativescript-optimized:] /Users/graemerombough/.gradle/caches/tran
 MERGED from [:nativescript-optimized:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/6639a177af069bd357cb26a3e6ab543f/AndroidManifest.xml:7:5-9:41
 MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a9566b4254947e8a76ad4f3177b8ae2b/AndroidManifest.xml:7:5-9:41
 MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a9566b4254947e8a76ad4f3177b8ae2b/AndroidManifest.xml:7:5-9:41
-MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/ac56b4e53fa8344f1241b8ac7a6e9f88/AndroidManifest.xml:7:5-9:41
-MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/ac56b4e53fa8344f1241b8ac7a6e9f88/AndroidManifest.xml:7:5-9:41
+MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/251981459f8bccccbd5617587c05c72e/AndroidManifest.xml:7:5-9:41
+MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/251981459f8bccccbd5617587c05c72e/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:support-media-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/f80793b296f80205948eed9fe11c8121/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-media-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/f80793b296f80205948eed9fe11c8121/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/d125d843d0e587ee3769bb06e2c26eb4/AndroidManifest.xml:20:5-44
@@ -171,8 +171,8 @@ MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/ca
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/396e3bc22f700e8a35f3a7e49aa26b31/AndroidManifest.xml:22:5-20
 MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a9566b4254947e8a76ad4f3177b8ae2b/AndroidManifest.xml:14:5-34:19
 MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a9566b4254947e8a76ad4f3177b8ae2b/AndroidManifest.xml:14:5-34:19
-MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/ac56b4e53fa8344f1241b8ac7a6e9f88/AndroidManifest.xml:11:5-12:19
-MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/ac56b4e53fa8344f1241b8ac7a6e9f88/AndroidManifest.xml:11:5-12:19
+MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/251981459f8bccccbd5617587c05c72e/AndroidManifest.xml:11:5-12:19
+MERGED from [:widgets-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/251981459f8bccccbd5617587c05c72e/AndroidManifest.xml:11:5-12:19
 MERGED from [com.android.support:support-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/c55e0bcc98b2ccfd1baf817929f2a91f/AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/c55e0bcc98b2ccfd1baf817929f2a91f/AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/73eaa6f521c380a404bed4142b780bb4/AndroidManifest.xml:22:5-23:19

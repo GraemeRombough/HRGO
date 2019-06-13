@@ -264,6 +264,8 @@ exports.androidOffscreenTabLimitProperty = new view_1.Property({
 exports.androidOffscreenTabLimitProperty.register(TabViewBase);
 exports.androidTabsPositionProperty = new view_1.Property({ name: "androidTabsPosition", defaultValue: "top" });
 exports.androidTabsPositionProperty.register(TabViewBase);
+exports.androidSwipeEnabledProperty = new view_1.Property({ name: "androidSwipeEnabled", defaultValue: true, valueConverter: view_1.booleanConverter });
+exports.androidSwipeEnabledProperty.register(TabViewBase);
 exports.tabTextFontSizeProperty = new view_1.CssProperty({ name: "tabTextFontSize", cssName: "tab-text-font-size", valueConverter: function (v) { return parseFloat(v); } });
 exports.tabTextFontSizeProperty.register(view_1.Style);
 exports.tabTextColorProperty = new view_1.CssProperty({ name: "tabTextColor", cssName: "tab-text-color", equalityComparer: view_1.Color.equals, valueConverter: function (v) { return new view_1.Color(v); } });

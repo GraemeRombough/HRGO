@@ -5,8 +5,7 @@
  */
 package com.tns;
 
-@com.tns.JavaScriptImplementation(
-    javaScriptFile = "./tns_modules/tns-core-modules/ui/frame/activity.js")
+@com.tns.JavaScriptImplementation(javaScriptFile = "./vendor.js")
 public class NativeScriptActivity extends android.support.v7.app.AppCompatActivity
     implements com.tns.NativeScriptHashCodeProvider {
   public NativeScriptActivity() {
@@ -18,6 +17,11 @@ public class NativeScriptActivity extends android.support.v7.app.AppCompatActivi
     java.lang.Object[] args = new java.lang.Object[1];
     args[0] = param_0;
     com.tns.Runtime.callJSMethod(this, "onCreate", void.class, args);
+  }
+
+  protected void onPostResume() {
+    java.lang.Object[] args = new java.lang.Object[0];
+    com.tns.Runtime.callJSMethod(this, "onPostResume", void.class, args);
   }
 
   protected void onStart() {

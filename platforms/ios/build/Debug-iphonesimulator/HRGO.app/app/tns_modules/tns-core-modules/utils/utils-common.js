@@ -1,5 +1,10 @@
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 var types = require("./types");
+var mainthread_helper_1 = require("./mainthread-helper");
+__export(require("./mainthread-helper"));
 exports.RESOURCE_PREFIX = "res://";
 exports.FILE_PREFIX = "file:///";
 function escapeRegexSymbols(source) {
@@ -9,10 +14,7 @@ function escapeRegexSymbols(source) {
 exports.escapeRegexSymbols = escapeRegexSymbols;
 function convertString(value) {
     var result;
-    if (!types.isString(value)) {
-        result = value;
-    }
-    else if (value.trim() === "") {
+    if (!types.isString(value) || value.trim() === "") {
         result = value;
     }
     else {
@@ -30,6 +32,11 @@ function convertString(value) {
     return result;
 }
 exports.convertString = convertString;
+function getModuleName(path) {
+    var moduleName = path.replace("./", "");
+    return moduleName.substring(0, moduleName.lastIndexOf("."));
+}
+exports.getModuleName = getModuleName;
 var layout;
 (function (layout) {
     var MODE_SHIFT = 30;
@@ -146,4 +153,21 @@ function eliminateDuplicates(arr) {
     return Array.from(new Set(arr));
 }
 exports.eliminateDuplicates = eliminateDuplicates;
+function executeOnMainThread(func) {
+    if (mainthread_helper_1.isMainThread()) {
+        return func();
+    }
+    else {
+        mainthread_helper_1.dispatchToMainThread(func);
+    }
+}
+exports.executeOnMainThread = executeOnMainThread;
+function mainThreadify(func) {
+    return function () {
+        var _this = this;
+        var argsToPass = arguments;
+        executeOnMainThread(function () { return func.apply(_this, argsToPass); });
+    };
+}
+exports.mainThreadify = mainThreadify;
 //# sourceMappingURL=utils-common.js.map

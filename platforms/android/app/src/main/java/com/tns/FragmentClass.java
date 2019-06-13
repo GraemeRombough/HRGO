@@ -5,13 +5,22 @@
  */
 package com.tns;
 
-@com.tns.JavaScriptImplementation(
-    javaScriptFile = "./tns_modules/tns-core-modules/ui/frame/fragment.js")
-public class FragmentClass extends android.support.v4.app.Fragment
+@com.tns.JavaScriptImplementation(javaScriptFile = "./vendor.js")
+public class FragmentClass extends org.nativescript.widgets.FragmentBase
     implements com.tns.NativeScriptHashCodeProvider {
   public FragmentClass() {
     super();
     com.tns.Runtime.initInstance(this);
+  }
+
+  public android.animation.Animator onCreateAnimator(int param_0, boolean param_1, int param_2) {
+    java.lang.Object[] args = new java.lang.Object[3];
+    args[0] = param_0;
+    args[1] = param_1;
+    args[2] = param_2;
+    return (android.animation.Animator)
+        com.tns.Runtime.callJSMethod(
+            this, "onCreateAnimator", android.animation.Animator.class, args);
   }
 
   public java.lang.String toString() {
@@ -24,16 +33,6 @@ public class FragmentClass extends android.support.v4.app.Fragment
     java.lang.Object[] args = new java.lang.Object[1];
     args[0] = param_0;
     com.tns.Runtime.callJSMethod(this, "onHiddenChanged", void.class, args);
-  }
-
-  public android.animation.Animator onCreateAnimator(int param_0, boolean param_1, int param_2) {
-    java.lang.Object[] args = new java.lang.Object[3];
-    args[0] = param_0;
-    args[1] = param_1;
-    args[2] = param_2;
-    return (android.animation.Animator)
-        com.tns.Runtime.callJSMethod(
-            this, "onCreateAnimator", android.animation.Animator.class, args);
   }
 
   public void onCreate(android.os.Bundle param_0) {

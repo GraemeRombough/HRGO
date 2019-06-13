@@ -44,6 +44,7 @@ var layout;
 var ios;
 (function (ios) {
     function getter(_this, property) {
+        console.log("utils.ios.getter() is deprecated; use the respective native property instead");
         if (typeof property === "function") {
             return property.call(_this);
         }
@@ -71,13 +72,13 @@ var ios;
         collections.nsArrayToJSArray = nsArrayToJSArray;
     })(collections = ios.collections || (ios.collections = {}));
     function isLandscape() {
-        var device = getter(UIDevice, UIDevice.currentDevice);
-        var statusBarOrientation = getter(UIApplication, UIApplication.sharedApplication).statusBarOrientation;
+        var device = UIDevice.currentDevice;
+        var statusBarOrientation = UIApplication.sharedApplication.statusBarOrientation;
         var isStatusBarOrientationLandscape = isOrientationLandscape(statusBarOrientation);
         return isOrientationLandscape(device.orientation) || isStatusBarOrientationLandscape;
     }
     ios.isLandscape = isLandscape;
-    ios.MajorVersion = NSString.stringWithString(getter(UIDevice, UIDevice.currentDevice).systemVersion).intValue;
+    ios.MajorVersion = NSString.stringWithString(UIDevice.currentDevice.systemVersion).intValue;
     function openFile(filePath) {
         try {
             var appPath = getCurrentAppPath();
@@ -121,7 +122,6 @@ var ios;
             return getVisibleViewController(rootViewController.visibleViewController);
         }
         if (rootViewController.isKindOfClass(UITabBarController.class())) {
-            var selectedTab = rootViewController.selectedViewController;
             return getVisibleViewController(rootViewController);
         }
         return rootViewController;
@@ -132,11 +132,15 @@ function GC() {
     __collect();
 }
 exports.GC = GC;
+function releaseNativeObject(object) {
+    __releaseNativeCounterpart(object);
+}
+exports.releaseNativeObject = releaseNativeObject;
 function openUrl(location) {
     try {
         var url = NSURL.URLWithString(location.trim());
-        if (ios.getter(UIApplication, UIApplication.sharedApplication).canOpenURL(url)) {
-            return ios.getter(UIApplication, UIApplication.sharedApplication).openURL(url);
+        if (UIApplication.sharedApplication.canOpenURL(url)) {
+            return UIApplication.sharedApplication.openURL(url);
         }
     }
     catch (e) {
@@ -151,7 +155,7 @@ var UIDocumentInteractionControllerDelegateImpl = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     UIDocumentInteractionControllerDelegateImpl.prototype.getViewController = function () {
-        var app = ios.getter(UIApplication, UIApplication.sharedApplication);
+        var app = UIApplication.sharedApplication;
         return app.keyWindow.rootViewController;
     };
     UIDocumentInteractionControllerDelegateImpl.prototype.documentInteractionControllerViewControllerForPreview = function (controller) {
@@ -166,5 +170,5 @@ var UIDocumentInteractionControllerDelegateImpl = (function (_super) {
     UIDocumentInteractionControllerDelegateImpl.ObjCProtocols = [UIDocumentInteractionControllerDelegate];
     return UIDocumentInteractionControllerDelegateImpl;
 }(NSObject));
-mainScreenScale = ios.getter(UIScreen, UIScreen.mainScreen).scale;
+mainScreenScale = UIScreen.mainScreen.scale;
 //# sourceMappingURL=utils.js.map

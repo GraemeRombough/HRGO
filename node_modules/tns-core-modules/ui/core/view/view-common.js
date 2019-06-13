@@ -23,6 +23,15 @@ function CSSType(type) {
     };
 }
 exports.CSSType = CSSType;
+function viewMatchesModuleContext(view, context, types) {
+    return context &&
+        view._moduleName &&
+        context.type &&
+        types.some(function (type) { return type === context.type; }) &&
+        context.path &&
+        context.path.includes(view._moduleName);
+}
+exports.viewMatchesModuleContext = viewMatchesModuleContext;
 function PseudoClassHandler() {
     var pseudoClasses = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -70,6 +79,13 @@ var ViewCommon = (function (_super) {
     ViewCommon.prototype.addCssFile = function (cssFileName) {
         this._updateStyleScope(cssFileName);
     };
+    ViewCommon.prototype.changeCssFile = function (cssFileName) {
+        var scope = this._styleScope;
+        if (scope && cssFileName) {
+            scope.changeCssFile(cssFileName);
+            this._onCssStateChange();
+        }
+    };
     ViewCommon.prototype._updateStyleScope = function (cssFileName, cssString, css) {
         var scope = this._styleScope;
         if (!scope) {
@@ -93,6 +109,35 @@ var ViewCommon = (function (_super) {
         else if (css !== undefined) {
             scope.css = css;
         }
+    };
+    ViewCommon.prototype._onLivesync = function (context) {
+        if (view_base_1.traceEnabled()) {
+            view_base_1.traceWrite(this + "._onLivesync(" + JSON.stringify(context) + ")", view_base_1.traceCategories.Livesync);
+        }
+        if (this._handleLivesync(context)) {
+            return true;
+        }
+        var handled = false;
+        this.eachChildView(function (child) {
+            if (child._onLivesync(context)) {
+                handled = true;
+                return false;
+            }
+        });
+        return handled;
+    };
+    ViewCommon.prototype._handleLivesync = function (context) {
+        if (view_base_1.traceEnabled()) {
+            view_base_1.traceWrite(this + "._handleLivesync(" + JSON.stringify(context) + ")", view_base_1.traceCategories.Livesync);
+        }
+        if (viewMatchesModuleContext(this, context, ["style"])) {
+            if (view_base_1.traceEnabled()) {
+                view_base_1.traceWrite("Change Handled: Changing CSS for " + this, view_base_1.traceCategories.Livesync);
+            }
+            this.changeCssFile(context.path);
+            return true;
+        }
+        return false;
     };
     ViewCommon.prototype._setupAsRootView = function (context) {
         _super.prototype._setupAsRootView.call(this, context);
@@ -168,33 +213,48 @@ var ViewCommon = (function (_super) {
             this._disconnectGestureObservers(arg);
         }
     };
-    ViewCommon.prototype._onLivesync = function () {
-        exports._rootModalViews.forEach(function (v) { return v.closeModal(); });
-        exports._rootModalViews.length = 0;
-        return false;
-    };
     ViewCommon.prototype.onBackPressed = function () {
         return false;
     };
     ViewCommon.prototype._getFragmentManager = function () {
         return undefined;
     };
-    ViewCommon.prototype.showModal = function () {
-        if (arguments.length === 0) {
+    ViewCommon.prototype.getModalOptions = function (args) {
+        if (args.length === 0) {
             throw new Error("showModal without parameters is deprecated. Please call showModal on a view instance instead.");
         }
         else {
-            var firstAgrument = arguments[0];
-            var context_1 = arguments[1];
-            var closeCallback = arguments[2];
-            var fullscreen = arguments[3];
-            var animated = arguments[4];
-            var stretched = arguments[5];
-            var view = firstAgrument instanceof ViewCommon
-                ? firstAgrument : builder_1.createViewFromEntry({ moduleName: firstAgrument });
-            view._showNativeModalView(this, context_1, closeCallback, fullscreen, animated, stretched);
-            return view;
+            var options = null;
+            if (args.length === 2) {
+                options = args[1];
+            }
+            else {
+                if (args[0] instanceof ViewCommon) {
+                    console.log("showModal(view: ViewBase, context: any, closeCallback: Function, fullscreen?: boolean, animated?: boolean, stretched?: boolean) " +
+                        "is deprecated. Use showModal(view: ViewBase, modalOptions: ShowModalOptions) instead.");
+                }
+                else {
+                    console.log("showModal(moduleName: string, context: any, closeCallback: Function, fullscreen?: boolean, animated?: boolean, stretched?: boolean) " +
+                        "is deprecated. Use showModal(moduleName: string, modalOptions: ShowModalOptions) instead.");
+                }
+                options = {
+                    context: args[1],
+                    closeCallback: args[2],
+                    fullscreen: args[3],
+                    animated: args[4],
+                    stretched: args[5]
+                };
+            }
+            var firstArgument = args[0];
+            var view = firstArgument instanceof ViewCommon
+                ? firstArgument : builder_1.createViewFromEntry({ moduleName: firstArgument });
+            return { view: view, options: options };
         }
+    };
+    ViewCommon.prototype.showModal = function () {
+        var _a = this.getModalOptions(arguments), view = _a.view, options = _a.options;
+        view._showNativeModalView(this, options);
+        return view;
     };
     ViewCommon.prototype.closeModal = function () {
         var args = [];
@@ -219,29 +279,33 @@ var ViewCommon = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ViewCommon.prototype._showNativeModalView = function (parent, context, closeCallback, fullscreen, animated, stretched) {
+    ViewCommon.prototype._showNativeModalView = function (parent, options) {
         exports._rootModalViews.push(this);
         parent._modal = this;
         this._modalParent = parent;
-        this._modalContext = context;
+        this._modalContext = options.context;
         var that = this;
         this._closeModalCallback = function () {
+            var originalArgs = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                originalArgs[_i] = arguments[_i];
+            }
             if (that._closeModalCallback) {
                 var modalIndex = exports._rootModalViews.indexOf(that);
                 exports._rootModalViews.splice(modalIndex);
-                that._hideNativeModalView(parent);
                 that._modalParent = null;
                 that._modalContext = null;
                 that._closeModalCallback = null;
                 that._dialogClosed();
                 parent._modal = null;
-                if (typeof closeCallback === "function") {
-                    closeCallback.apply(undefined, arguments);
-                }
+                var whenClosedCallback = function () {
+                    if (typeof options.closeCallback === "function") {
+                        options.closeCallback.apply(undefined, originalArgs);
+                    }
+                };
+                that._hideNativeModalView(parent, whenClosedCallback);
             }
         };
-    };
-    ViewCommon.prototype._hideNativeModalView = function (parent) {
     };
     ViewCommon.prototype._raiseLayoutChangedEvent = function () {
         var args = {
@@ -469,6 +533,36 @@ var ViewCommon = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ViewCommon.prototype, "backgroundSize", {
+        get: function () {
+            return this.style.backgroundSize;
+        },
+        set: function (value) {
+            this.style.backgroundSize = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ViewCommon.prototype, "backgroundPosition", {
+        get: function () {
+            return this.style.backgroundPosition;
+        },
+        set: function (value) {
+            this.style.backgroundPosition = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ViewCommon.prototype, "backgroundRepeat", {
+        get: function () {
+            return this.style.backgroundRepeat;
+        },
+        set: function (value) {
+            this.style.backgroundRepeat = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ViewCommon.prototype, "minWidth", {
         get: function () {
             return this.style.minWidth;
@@ -645,6 +739,26 @@ var ViewCommon = (function (_super) {
         },
         set: function (value) {
             this.style.scaleY = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ViewCommon.prototype, "androidElevation", {
+        get: function () {
+            return this.style.androidElevation;
+        },
+        set: function (value) {
+            this.style.androidElevation = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ViewCommon.prototype, "androidDynamicElevationOffset", {
+        get: function () {
+            return this.style.androidDynamicElevationOffset;
+        },
+        set: function (value) {
+            this.style.androidDynamicElevationOffset = value;
         },
         enumerable: true,
         configurable: true
@@ -992,4 +1106,6 @@ exports.isUserInteractionEnabledProperty = new view_base_1.Property({ name: "isU
 exports.isUserInteractionEnabledProperty.register(ViewCommon);
 exports.iosOverflowSafeAreaProperty = new view_base_1.Property({ name: "iosOverflowSafeArea", defaultValue: false, valueConverter: view_base_1.booleanConverter });
 exports.iosOverflowSafeAreaProperty.register(ViewCommon);
+exports.iosOverflowSafeAreaEnabledProperty = new view_base_1.InheritedProperty({ name: "iosOverflowSafeAreaEnabled", defaultValue: true, valueConverter: view_base_1.booleanConverter });
+exports.iosOverflowSafeAreaEnabledProperty.register(ViewCommon);
 //# sourceMappingURL=view-common.js.map

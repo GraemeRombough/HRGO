@@ -965,4 +965,8 @@ exports.visibilityProperty = new properties_1.CssProperty({
     }
 });
 exports.visibilityProperty.register(properties_1.Style);
+exports.androidElevationProperty = new properties_1.CssProperty({ name: "androidElevation", cssName: "android-elevation", valueConverter: parseFloat });
+exports.androidElevationProperty.register(properties_1.Style);
+exports.androidDynamicElevationOffsetProperty = new properties_1.CssProperty({ name: "androidDynamicElevationOffset", cssName: "android-dynamic-elevation-offset", valueConverter: parseFloat });
+exports.androidDynamicElevationOffsetProperty.register(properties_1.Style);
 //# sourceMappingURL=style-properties.js.map

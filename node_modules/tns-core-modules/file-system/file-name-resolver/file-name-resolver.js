@@ -149,9 +149,10 @@ function _findFileMatch(path, ext, candidates, context) {
 exports._findFileMatch = _findFileMatch;
 function checkQualifiers(qualifiers, context) {
     var result = 0;
+    var value;
     for (var i = 0; i < qualifiers.length; i++) {
         if (qualifiers[i]) {
-            var value = checkQualifier(qualifiers[i], context);
+            value = checkQualifier(qualifiers[i], context);
             if (value < 0) {
                 return -1;
             }
@@ -161,9 +162,10 @@ function checkQualifiers(qualifiers, context) {
     return result;
 }
 function checkQualifier(value, context) {
+    var result;
     for (var i = 0; i < supportedQualifiers.length; i++) {
         if (supportedQualifiers[i].isMatch(value)) {
-            var result = supportedQualifiers[i].getMatchValue(value, context);
+            result = supportedQualifiers[i].getMatchValue(value, context);
             if (result > 0) {
                 result += (supportedQualifiers.length - i) * PRIORITY_STEP;
             }

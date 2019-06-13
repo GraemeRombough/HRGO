@@ -3,7 +3,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var date_picker_common_1 = require("./date-picker-common");
-var utils_1 = require("../../utils/utils");
 __export(require("./date-picker-common"));
 var DatePicker = (function (_super) {
     __extends(DatePicker, _super);
@@ -43,11 +42,11 @@ var DatePicker = (function (_super) {
     };
     DatePicker.prototype[date_picker_common_1.dateProperty.setNative] = function (value) {
         var picker = this.nativeViewProtected;
-        var comps = utils_1.ios.getter(NSCalendar, NSCalendar.currentCalendar).componentsFromDate(4 | 8 | 16, picker.date);
+        var comps = NSCalendar.currentCalendar.componentsFromDate(4 | 8 | 16, picker.date);
         comps.year = value.getFullYear();
         comps.month = value.getMonth() + 1;
         comps.day = value.getDate();
-        picker.setDateAnimated(utils_1.ios.getter(NSCalendar, NSCalendar.currentCalendar).dateFromComponents(comps), false);
+        picker.setDateAnimated(NSCalendar.currentCalendar.dateFromComponents(comps), false);
     };
     DatePicker.prototype[date_picker_common_1.maxDateProperty.getDefault] = function () {
         return this.nativeViewProtected.maximumDate;
@@ -86,7 +85,7 @@ var UIDatePickerChangeHandlerImpl = (function (_super) {
         return impl;
     };
     UIDatePickerChangeHandlerImpl.prototype.valueChanged = function (sender) {
-        var comps = utils_1.ios.getter(NSCalendar, NSCalendar.currentCalendar).componentsFromDate(4 | 8 | 16, sender.date);
+        var comps = NSCalendar.currentCalendar.componentsFromDate(4 | 8 | 16, sender.date);
         var owner = this._owner.get();
         if (!owner) {
             return;

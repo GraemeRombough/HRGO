@@ -127,8 +127,7 @@ var XmlParser = (function () {
                 attributes = undefined;
             }
             if (attributes) {
-                var key;
-                for (key in attributes) {
+                for (var key in attributes) {
                     if (attributes.hasOwnProperty(key)) {
                         attributes[key] = XmlParser._dereferenceEntities(attributes[key]);
                     }
@@ -199,15 +198,17 @@ var XmlParser = (function () {
         if (!attributes) {
             return stackEntry;
         }
+        var attributeName;
+        var namespacePrefix;
         for (var key in attributes) {
             if (!attributes.hasOwnProperty(key)) {
                 continue;
             }
-            var attributeName = key;
+            attributeName = key;
             if (attributeName.indexOf("xmlns") !== 0) {
                 continue;
             }
-            var namespacePrefix = "";
+            namespacePrefix = "";
             if (attributeName.indexOf(":") !== -1) {
                 namespacePrefix = attributeName.split(":")[1];
             }
@@ -226,9 +227,8 @@ var XmlParser = (function () {
         else {
             result.name = fullName;
         }
-        var i;
         var stackEntry;
-        for (i = this._namespaceStack.length - 1; i >= 0; i--) {
+        for (var i = this._namespaceStack.length - 1; i >= 0; i--) {
             stackEntry = this._namespaceStack[i];
             for (var key in stackEntry) {
                 if (!stackEntry.hasOwnProperty(key)) {

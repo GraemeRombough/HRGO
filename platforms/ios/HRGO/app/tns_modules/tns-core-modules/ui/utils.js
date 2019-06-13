@@ -1,6 +1,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils = require("../utils/utils");
-var getter = utils.ios.getter;
 var ios;
 (function (ios) {
     function getActualHeight(view) {
@@ -11,7 +10,7 @@ var ios;
     }
     ios.getActualHeight = getActualHeight;
     function getStatusBarHeight(viewController) {
-        var app = getter(UIApplication, UIApplication.sharedApplication);
+        var app = UIApplication.sharedApplication;
         if (!app || app.statusBarHidden) {
             return 0;
         }

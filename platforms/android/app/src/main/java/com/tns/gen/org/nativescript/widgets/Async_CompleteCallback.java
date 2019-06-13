@@ -20,6 +20,13 @@ public class Async_CompleteCallback extends java.lang.Object
     com.tns.Runtime.callJSMethod(this, "onComplete", void.class, args);
   }
 
+  public void onError(java.lang.String param_0, java.lang.Object param_1) {
+    java.lang.Object[] args = new java.lang.Object[2];
+    args[0] = param_0;
+    args[1] = param_1;
+    com.tns.Runtime.callJSMethod(this, "onError", void.class, args);
+  }
+
   public int hashCode__super() {
     return super.hashCode();
   }

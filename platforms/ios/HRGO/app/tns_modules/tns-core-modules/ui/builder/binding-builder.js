@@ -27,8 +27,7 @@ function isNamedParam(value) {
     return false;
 }
 function areNamedParams(params) {
-    var i;
-    for (i = 0; i < params.length; i++) {
+    for (var i = 0; i < params.length; i++) {
         if (isNamedParam(params[i])) {
             return true;
         }
@@ -65,9 +64,9 @@ function getPropertyNameValuePair(param, knownOptions, callback) {
 }
 function parseNamedProperties(parameterList, knownOptions, callback) {
     var result = {};
-    var i;
-    for (i = 0; i < parameterList.length; i++) {
-        var nameValuePair = getPropertyNameValuePair(parameterList[i], knownOptions, callback);
+    var nameValuePair;
+    for (var i = 0; i < parameterList.length; i++) {
+        nameValuePair = getPropertyNameValuePair(parameterList[i], knownOptions, callback);
         if (nameValuePair) {
             result[nameValuePair[namedParamConstants.propName]] = nameValuePair[namedParamConstants.propValue];
         }
@@ -76,11 +75,11 @@ function parseNamedProperties(parameterList, knownOptions, callback) {
 }
 function getParamsArray(value) {
     var result = [];
-    var i;
     var skipComma = 0;
     var indexReached = 0;
-    var singleQuoteBlock, doubleQuoteBlock = false;
-    for (i = 0; i < value.length; i++) {
+    var singleQuoteBlock = false;
+    var doubleQuoteBlock = false;
+    for (var i = 0; i < value.length; i++) {
         if (value[i] === "\"") {
             doubleQuoteBlock = !doubleQuoteBlock;
         }
@@ -120,7 +119,7 @@ function getBindingOptions(name, value) {
     if (!areNamedParams(params)) {
         if (params.length === 1) {
             var trimmedValue = params[0].trim();
-            var sourceProp;
+            var sourceProp = void 0;
             if (isExpression(trimmedValue)) {
                 sourceProp = bindingConstants.bindingValueKey;
                 namedParams.push(bindingConstants.expression + " = " + trimmedValue);

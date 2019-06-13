@@ -3,7 +3,6 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var segmented_bar_common_1 = require("./segmented-bar-common");
-var utils_1 = require("../../utils/utils");
 __export(require("./segmented-bar-common"));
 var SegmentedBarItem = (function (_super) {
     __extends(SegmentedBarItem, _super);
@@ -90,7 +89,7 @@ var SegmentedBar = (function (_super) {
         return null;
     };
     SegmentedBar.prototype[segmented_bar_common_1.fontInternalProperty.setNative] = function (value) {
-        var font = value ? value.getUIFont(UIFont.systemFontOfSize(utils_1.ios.getter(UIFont, UIFont.labelFontSize))) : null;
+        var font = value ? value.getUIFont(UIFont.systemFontOfSize(UIFont.labelFontSize)) : null;
         var bar = this.ios;
         var currentAttrs = bar.titleTextAttributesForState(0);
         var attrs = currentAttrs ? currentAttrs.mutableCopy() : NSMutableDictionary.new();

@@ -8,7 +8,7 @@ var utils_1 = require("../../utils/utils");
 var image_source_1 = require("../../image-source");
 var css_value_1 = require("../../css-value");
 __export(require("./background-common"));
-var clearCGColor = utils_1.ios.getter(UIColor, UIColor.clearColor).CGColor;
+var clearCGColor = UIColor.clearColor.CGColor;
 var symbolUrl = Symbol("backgroundImageUrl");
 var ios;
 (function (ios) {

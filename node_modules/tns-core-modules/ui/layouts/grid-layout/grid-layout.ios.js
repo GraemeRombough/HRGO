@@ -106,6 +106,9 @@ var GridLayout = (function (_super) {
         this.helper.init();
         this.eachLayoutChild(function (child, last) {
             var measureSpecs = _this.map.get(child);
+            if (!measureSpecs) {
+                return;
+            }
             _this.updateMeasureSpecs(child, measureSpecs);
             _this.helper.addMeasureSpec(measureSpecs);
         });

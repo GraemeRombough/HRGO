@@ -67,11 +67,7 @@ var Repeater = (function (_super) {
     };
     Object.defineProperty(Repeater.prototype, "_childrenCount", {
         get: function () {
-            var count = 0;
-            if (this.itemsLayout) {
-                count++;
-            }
-            return count;
+            return this.itemsLayout ? 1 : 0;
         },
         enumerable: true,
         configurable: true

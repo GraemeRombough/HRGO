@@ -132,6 +132,17 @@ var ActionBar = (function (_super) {
         this.measure(widthSpec, heightSpec);
         this.layout(0, 0, width, height, false);
     };
+    ActionBar.prototype._getIconRenderingMode = function () {
+        switch (this.iosIconRenderingMode) {
+            case "alwaysOriginal":
+                return 1;
+            case "alwaysTemplate":
+                return 2;
+            case "automatic":
+            default:
+                return 1;
+        }
+    };
     ActionBar.prototype.update = function () {
         var page = this.page;
         if (!page || !page.frame) {
@@ -228,7 +239,8 @@ var ActionBar = (function (_super) {
         }
         else if (item.icon) {
             var img = loadActionIconFromFileOrResource(item.icon);
-            barButtonItem = UIBarButtonItem.alloc().initWithImageStyleTargetAction(img, 0, tapHandler, "tap");
+            var image = img.imageWithRenderingMode(this._getIconRenderingMode());
+            barButtonItem = UIBarButtonItem.alloc().initWithImageStyleTargetAction(image, 0, tapHandler, "tap");
         }
         else {
             barButtonItem = UIBarButtonItem.alloc().initWithTitleStyleTargetAction(item.text + "", 0, tapHandler, "tap");
@@ -241,18 +253,23 @@ var ActionBar = (function (_super) {
         return barButtonItem;
     };
     ActionBar.prototype.updateColors = function (navBar) {
-        var _a;
         var color = this.color;
+        this.setColor(navBar, color);
+        var bgColor = this.backgroundColor;
+        navBar.barTintColor = bgColor ? bgColor.ios : null;
+    };
+    ActionBar.prototype.setColor = function (navBar, color) {
+        var _a, _b;
         if (color) {
             navBar.titleTextAttributes = (_a = {}, _a[NSForegroundColorAttributeName] = color.ios, _a);
+            navBar.largeTitleTextAttributes = (_b = {}, _b[NSForegroundColorAttributeName] = color.ios, _b);
             navBar.tintColor = color.ios;
         }
         else {
             navBar.titleTextAttributes = null;
+            navBar.largeTitleTextAttributes = null;
             navBar.tintColor = null;
         }
-        var bgColor = this.backgroundColor;
-        navBar.barTintColor = bgColor ? bgColor.ios : null;
     };
     ActionBar.prototype._onTitlePropertyChanged = function () {
         var page = this.page;
@@ -331,16 +348,8 @@ var ActionBar = (function (_super) {
         return null;
     };
     ActionBar.prototype[action_bar_common_1.colorProperty.setNative] = function (color) {
-        var _a;
         var navBar = this.navBar;
-        if (color) {
-            navBar.tintColor = color.ios;
-            navBar.titleTextAttributes = (_a = {}, _a[NSForegroundColorAttributeName] = color.ios, _a);
-        }
-        else {
-            navBar.tintColor = null;
-            navBar.titleTextAttributes = null;
-        }
+        this.setColor(navBar, color);
     };
     ActionBar.prototype[action_bar_common_1.backgroundColorProperty.getDefault] = function () {
         return null;
@@ -362,6 +371,12 @@ var ActionBar = (function (_super) {
         if (navBar) {
             this.updateFlatness(navBar);
         }
+    };
+    ActionBar.prototype[action_bar_common_1.iosIconRenderingModeProperty.getDefault] = function () {
+        return "alwaysOriginal";
+    };
+    ActionBar.prototype[action_bar_common_1.iosIconRenderingModeProperty.setNative] = function (value) {
+        this.update();
     };
     return ActionBar;
 }(action_bar_common_1.ActionBarBase));

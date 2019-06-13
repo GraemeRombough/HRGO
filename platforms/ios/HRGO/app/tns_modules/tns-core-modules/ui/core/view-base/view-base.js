@@ -756,7 +756,7 @@ exports.classNameProperty = new properties_1.Property({
     valueChanged: function (view, oldValue, newValue) {
         var classes = view.cssClasses;
         classes.clear();
-        if (typeof newValue === "string") {
+        if (typeof newValue === "string" && newValue !== "") {
             newValue.split(" ").forEach(function (c) { return classes.add(c); });
         }
         view._onCssStateChange();

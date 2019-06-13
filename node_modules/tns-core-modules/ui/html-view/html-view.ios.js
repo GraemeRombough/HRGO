@@ -15,7 +15,7 @@ var HtmlView = (function (_super) {
         view.editable = false;
         view.selectable = true;
         view.userInteractionEnabled = true;
-        view.dataDetectorTypes = 18446744073709552000;
+        view.dataDetectorTypes = -1;
         return view;
     };
     Object.defineProperty(HtmlView.prototype, "ios", {

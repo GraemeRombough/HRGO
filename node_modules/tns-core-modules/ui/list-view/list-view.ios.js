@@ -7,14 +7,12 @@ var stack_layout_1 = require("../layouts/stack-layout");
 var proxy_view_container_1 = require("../proxy-view-container");
 var profiling_1 = require("../../profiling");
 var trace = require("../../trace");
-var utils_1 = require("../../utils/utils");
 __export(require("./list-view-common"));
 var ITEMLOADING = list_view_common_1.ListViewBase.itemLoadingEvent;
 var LOADMOREITEMS = list_view_common_1.ListViewBase.loadMoreItemsEvent;
 var ITEMTAP = list_view_common_1.ListViewBase.itemTapEvent;
 var DEFAULT_HEIGHT = 44;
 var infinity = list_view_common_1.layout.makeMeasureSpec(0, list_view_common_1.layout.UNSPECIFIED);
-var majorVersion = utils_1.ios.MajorVersion;
 var ListViewCell = (function (_super) {
     __extends(ListViewCell, _super);
     function ListViewCell() {
@@ -76,6 +74,7 @@ var DataSource = (function (_super) {
                 var width = list_view_common_1.layout.getMeasureSpecSize(owner.widthMeasureSpec);
                 var rowHeight = owner._effectiveRowHeight;
                 var cellHeight = rowHeight > 0 ? rowHeight : owner.getHeight(indexPath.row);
+                cellView.iosOverflowSafeAreaEnabled = false;
                 list_view_common_1.View.layoutChild(owner, cellView, 0, 0, width, cellHeight);
             }
         }
@@ -330,6 +329,7 @@ var ListView = (function (_super) {
             var cellHeight = rowHeight > 0 ? rowHeight : _this.getHeight(childView._listViewItemIndex);
             if (cellHeight) {
                 var width = list_view_common_1.layout.getMeasureSpecSize(_this.widthMeasureSpec);
+                childView.iosOverflowSafeAreaEnabled = false;
                 list_view_common_1.View.layoutChild(_this, childView, 0, 0, width, cellHeight);
             }
         });

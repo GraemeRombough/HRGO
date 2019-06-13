@@ -21,8 +21,8 @@
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/TNSWidgets.h": "f1435d046b4a9dd5d631db5ba5c9ddff04ee4bc3",
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/UIImage+TNSBlocks.h": "3b31a5be818e25c142e99f98479c538632d350ae",
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/UIView+PassThroughParent.h": "cddc4157f40983b34fcb1d3846666b5ecc5b1ca5",
-		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Info.plist": "dc8fd3b747be7a8137d97e6942de2b2baede4ec1",
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Info.plist": "e6c4b9015b3db318650e0edca4077cedd7fc2253",
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Modules/module.modulemap": "00d2220e76eb098f1808eb4e9b5c43ad4cadf1da",
-		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/TNSWidgets": "a39fdc0579b7a1641908db5d17268aac354fc770"
+		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/TNSWidgets": "27b1981ec33f61aa4f7013e1535d183b0e208966"
 	}
 }

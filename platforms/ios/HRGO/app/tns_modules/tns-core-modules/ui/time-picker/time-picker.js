@@ -3,17 +3,15 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var time_picker_common_1 = require("./time-picker-common");
-var utils_1 = require("../../utils/utils");
-var getter = utils_1.ios.getter;
 __export(require("./time-picker-common"));
 function getDate(hour, minute) {
     var components = NSDateComponents.alloc().init();
     components.hour = hour;
     components.minute = minute;
-    return getter(NSCalendar, NSCalendar.currentCalendar).dateFromComponents(components);
+    return NSCalendar.currentCalendar.dateFromComponents(components);
 }
 function getComponents(date) {
-    return getter(NSCalendar, NSCalendar.currentCalendar).componentsFromDate(32 | 64, date);
+    return NSCalendar.currentCalendar.componentsFromDate(32 | 64, date);
 }
 var TimePicker = (function (_super) {
     __extends(TimePicker, _super);

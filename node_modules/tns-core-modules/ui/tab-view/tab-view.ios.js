@@ -23,6 +23,10 @@ var UITabBarControllerImpl = (function (_super) {
         handler._owner = owner;
         return handler;
     };
+    UITabBarControllerImpl.prototype.viewDidLoad = function () {
+        _super.prototype.viewDidLoad.call(this);
+        this.extendedLayoutIncludesOpaqueBars = true;
+    };
     UITabBarControllerImpl.prototype.viewWillAppear = function (animated) {
         _super.prototype.viewWillAppear.call(this, animated);
         var owner = this._owner.get();
@@ -78,6 +82,9 @@ var UITabBarControllerDelegateImpl = (function (_super) {
         if (owner) {
             var backToMoreWillBeVisible = false;
             owner._handleTwoNavigationBars(backToMoreWillBeVisible);
+        }
+        if (tabBarController.selectedViewController === viewController) {
+            return false;
         }
         tabBarController._willSelectViewController = viewController;
         return true;
@@ -480,7 +487,7 @@ function getTitleAttributesForStates(tabView) {
         result.normalState[UITextAttributeTextColor] = textColor;
     }
     var tabSelectedItemTextColor = tabView.style.selectedTabTextColor;
-    var selectedTextColor = tabItemTextColor instanceof tab_view_common_1.Color ? tabSelectedItemTextColor.ios : null;
+    var selectedTextColor = tabSelectedItemTextColor instanceof tab_view_common_1.Color ? tabSelectedItemTextColor.ios : null;
     result.selectedState = (_b = {}, _b[NSFontAttributeName] = font, _b);
     if (selectedTextColor) {
         result.selectedState[UITextAttributeTextColor] = selectedTextColor;

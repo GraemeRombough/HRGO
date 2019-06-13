@@ -192,6 +192,7 @@ var colors;
     colors[colors["plum"] = 4292714717] = "plum";
     colors[colors["powderblue"] = 4289781990] = "powderblue";
     colors[colors["purple"] = 4286578816] = "purple";
+    colors[colors["rebeccapurple"] = 4284887961] = "rebeccapurple";
     colors[colors["red"] = 4294901760] = "red";
     colors[colors["rosybrown"] = 4290547599] = "rosybrown";
     colors[colors["royalblue"] = 4282477025] = "royalblue";
@@ -490,8 +491,8 @@ function parseArgumentsList(text, start, argument) {
     if (closingBracket) {
         return { start: start, end: end, value: value };
     }
-    for (var index = 0; true; index++) {
-        var arg = argument(text, end, index);
+    for (var index_1 = 0; true; index_1++) {
+        var arg = argument(text, end, index_1);
         if (!arg) {
             return null;
         }

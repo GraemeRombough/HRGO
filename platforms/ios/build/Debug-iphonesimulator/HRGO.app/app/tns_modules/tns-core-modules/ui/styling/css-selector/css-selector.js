@@ -323,15 +323,15 @@ var Selector = (function (_super) {
             return mayMatch;
         }
         for (var i = 0; i < this.groups.length; i++) {
-            var group = this.groups[i];
-            if (!group.dynamic) {
+            var group_1 = this.groups[i];
+            if (!group_1.dynamic) {
                 continue;
             }
             var bound = bounds[i];
             var node_1 = bound.left;
             do {
-                if (group.mayMatch(node_1)) {
-                    group.trackChanges(node_1, map);
+                if (group_1.mayMatch(node_1)) {
+                    group_1.trackChanges(node_1, map);
                 }
             } while ((node_1 !== bound.right) && (node_1 = node_1.parent));
         }
@@ -431,9 +431,11 @@ function createSelectorFromAst(ast) {
     }
     else {
         var simpleSelectorSequences = [];
+        var simpleSelectorSequence = void 0;
+        var combinator = void 0;
         for (var i = 0; i < ast.length; i++) {
-            var simpleSelectorSequence = createSimpleSelectorSequenceFromAst(ast[i][0]);
-            var combinator = ast[i][1];
+            simpleSelectorSequence = createSimpleSelectorSequenceFromAst(ast[i][0]);
+            combinator = ast[i][1];
             if (combinator) {
                 simpleSelectorSequence.combinator = combinator;
             }

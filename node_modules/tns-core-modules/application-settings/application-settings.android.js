@@ -76,9 +76,10 @@ function clear() {
     sharedPreferences.edit().clear().apply();
 }
 exports.clear = clear;
-exports.flush = function () {
+function flush() {
     return sharedPreferences.edit().commit();
-};
+}
+exports.flush = flush;
 function getAllKeys() {
     var mappedPreferences = sharedPreferences.getAll();
     var iterator = mappedPreferences.keySet().iterator();

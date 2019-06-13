@@ -6,7 +6,7 @@ var layout_base_1 = require("../layout-base");
 __export(require("../layout-base"));
 function validateArgs(element) {
     if (!element) {
-        throw new Error("element cannot be null or undefinied.");
+        throw new Error("element cannot be null or undefined.");
     }
     return element;
 }

@@ -104,7 +104,7 @@ function install() {
             var timer = require("timer");
             var dialogs = require("ui/dialogs");
             var xhr = require("xhr");
-            var fetch = require("fetch");
+            var fetch_1 = require("fetch");
             snapshotGlobals = snapshotGlobals || {
                 setTimeout: timer.setTimeout,
                 clearTimeout: timer.clearTimeout,
@@ -117,10 +117,10 @@ function install() {
                 action: dialogs.action,
                 XMLHttpRequest: xhr.XMLHttpRequest,
                 FormData: xhr.FormData,
-                fetch: fetch.fetch,
-                Headers: fetch.Headers,
-                Request: fetch.Request,
-                Response: fetch.Response,
+                fetch: fetch_1.fetch,
+                Headers: fetch_1.Headers,
+                Request: fetch_1.Request,
+                Response: fetch_1.Response,
             };
         }
         var consoleModule = require("console").Console;
@@ -149,14 +149,14 @@ exports.install = install;
 install();
 function Deprecated(target, key, descriptor) {
     if (descriptor) {
-        var originalMethod = descriptor.value;
+        var originalMethod_1 = descriptor.value;
         descriptor.value = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
             console.log(key.toString() + " is deprecated");
-            return originalMethod.apply(this, args);
+            return originalMethod_1.apply(this, args);
         };
         return descriptor;
     }
@@ -169,14 +169,14 @@ exports.Deprecated = Deprecated;
 global.Deprecated = Deprecated;
 function Experimental(target, key, descriptor) {
     if (descriptor) {
-        var originalMethod = descriptor.value;
+        var originalMethod_2 = descriptor.value;
         descriptor.value = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
             console.log(key.toString() + " is experimental");
-            return originalMethod.apply(this, args);
+            return originalMethod_2.apply(this, args);
         };
         return descriptor;
     }

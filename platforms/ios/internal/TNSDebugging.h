@@ -235,7 +235,6 @@ TNSCreateInspectorServer(TNSInspectorFrontendConnectedHandler connectedHandler,
       }
     });
     dispatch_source_set_cancel_handler(listenSource, ^{
-      isWaitingForDebugger = NO;
       listenSource = nil;
       close(listenSocket);
     });
@@ -374,25 +373,18 @@ static void TNSEnableRemoteInspector(int argc, char** argv,
               });
           CFRunLoopWakeUp(runloop);
       }
-      NSArray* inspectorRunloopModes =
-          @[NSRunLoopCommonModes, TNSInspectorRunLoopMode];
       return ^(NSString* message, NSError* error) {
         if (message) {
-            CFRunLoopRef runloop = CFRunLoopGetMain();
-            CFRunLoopPerformBlock(
-                runloop, (__bridge CFTypeRef)(inspectorRunloopModes), ^{
-                  // Keep a working copy for calling into the VM after releasing inspectorLock
-                  TNSRuntimeInspector* tempInspector = nil;
-                  @synchronized(inspectorLock()) {
-                      tempInspector = inspector;
-                  }
+            // Keep a working copy for calling into the VM after releasing inspectorLock
+            TNSRuntimeInspector* tempInspector = nil;
+            @synchronized(inspectorLock()) {
+                tempInspector = inspector;
+            }
 
-                  if (tempInspector) {
-                      // NSLog(@"NativeScript Debugger receiving: %@", message);
-                      [tempInspector dispatchMessage:message];
-                  }
-                });
-            CFRunLoopWakeUp(runloop);
+            if (tempInspector) {
+                // NSLog(@"NativeScript Debugger receiving: %@", message);
+                [tempInspector dispatchMessage:message];
+            }
         } else {
             clearInspector();
 
@@ -441,18 +433,16 @@ static void TNSEnableRemoteInspector(int argc, char** argv,
     notify_register_dispatch(
         NOTIFICATION("AttachRequest"), &attachRequestSubscription,
         dispatch_get_main_queue(), ^(int token) {
-          // Remove any existing frontend connections
-          clearInspector();
-
-          if (!listenSource) {
-              listenSource = TNSCreateInspectorServer(
-                  connectionHandler, ioErrorHandler, clearInspector);
-          }
+          clear();
+          listenSource = TNSCreateInspectorServer(
+              connectionHandler, ioErrorHandler, clearInspector);
 
           LOG_DEBUGGER_PORT;
           notify_post(NOTIFICATION("ReadyForAttach"));
         });
 
+    // TODO: remove the AttachAvailabilityQuery, AlreadyConnected, ReadyForAttach and
+    // AttachAvailable notifications as starting from CLI 5.1.1 they are not used anymore.
     int attachAvailabilityQuerySubscription;
     notify_register_dispatch(NOTIFICATION("AttachAvailabilityQuery"),
                              &attachAvailabilityQuerySubscription,

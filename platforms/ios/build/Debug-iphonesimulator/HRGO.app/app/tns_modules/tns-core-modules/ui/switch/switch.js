@@ -85,6 +85,15 @@ var Switch = (function (_super) {
     };
     Switch.prototype[switch_common_1.backgroundInternalProperty.setNative] = function (value) {
     };
+    Switch.prototype[switch_common_1.offBackgroundColorProperty.getDefault] = function () {
+        return this.nativeViewProtected.backgroundColor;
+    };
+    Switch.prototype[switch_common_1.offBackgroundColorProperty.setNative] = function (value) {
+        var nativeValue = value instanceof switch_common_1.Color ? value.ios : value;
+        this.nativeViewProtected.tintColor = nativeValue;
+        this.nativeViewProtected.backgroundColor = nativeValue;
+        this.nativeViewProtected.layer.cornerRadius = this.nativeViewProtected.frame.size.height / 2;
+    };
     return Switch;
 }(switch_common_1.SwitchBase));
 exports.Switch = Switch;

@@ -7,7 +7,14 @@ var view_1 = require("../core/view");
 var builder_1 = require("../builder");
 var profiling_1 = require("../../profiling");
 var frame_stack_1 = require("./frame-stack");
+var utils_1 = require("../../utils/utils");
 __export(require("../core/view"));
+var NavigationType;
+(function (NavigationType) {
+    NavigationType[NavigationType["back"] = 0] = "back";
+    NavigationType[NavigationType["forward"] = 1] = "forward";
+    NavigationType[NavigationType["replace"] = 2] = "replace";
+})(NavigationType = exports.NavigationType || (exports.NavigationType = {}));
 function buildEntryFromArgs(arg) {
     var entry;
     if (typeof arg === "string") {
@@ -48,7 +55,8 @@ var FrameBase = (function (_super) {
         var previousForwardNotInBackstack = false;
         this._navigationQueue.forEach(function (item) {
             var entry = item.entry;
-            if (item.isBackNavigation) {
+            var isBackNavigation = item.navigationType === NavigationType.back;
+            if (isBackNavigation) {
                 previousForwardNotInBackstack = false;
                 if (!entry) {
                     backstack--;
@@ -95,7 +103,8 @@ var FrameBase = (function (_super) {
         }
         var navigationContext = {
             entry: backstackEntry,
-            isBackNavigation: true
+            isBackNavigation: true,
+            navigationType: NavigationType.back
         };
         this._navigationQueue.push(navigationContext);
         this._processNextNavigationEntry();
@@ -126,7 +135,8 @@ var FrameBase = (function (_super) {
         };
         var navigationContext = {
             entry: backstackEntry,
-            isBackNavigation: false
+            isBackNavigation: false,
+            navigationType: NavigationType.forward
         };
         this._navigationQueue.push(navigationContext);
         this._processNextNavigationEntry();
@@ -134,21 +144,24 @@ var FrameBase = (function (_super) {
     FrameBase.prototype.isCurrent = function (entry) {
         return this._currentEntry === entry;
     };
-    FrameBase.prototype.setCurrent = function (entry, isBack) {
+    FrameBase.prototype.setCurrent = function (entry, navigationType) {
         var newPage = entry.resolvedPage;
         if (!newPage.frame) {
             this._addView(newPage);
             newPage._frame = this;
         }
         this._currentEntry = entry;
+        var isBack = navigationType === NavigationType.back;
         if (isBack) {
             this._pushInFrameStack();
         }
         newPage.onNavigatedTo(isBack);
-        this._executingEntry = null;
+        this._executingContext = null;
     };
-    FrameBase.prototype._updateBackstack = function (entry, isBack) {
+    FrameBase.prototype._updateBackstack = function (entry, navigationType) {
         var _this = this;
+        var isBack = navigationType === NavigationType.back;
+        var isReplace = navigationType === NavigationType.replace;
         this.raiseCurrentPageNavigatedEvents(isBack);
         var current = this._currentEntry;
         if (isBack) {
@@ -156,7 +169,7 @@ var FrameBase = (function (_super) {
             this._backStack.splice(index_2 + 1).forEach(function (e) { return _this._removeEntry(e); });
             this._backStack.pop();
         }
-        else {
+        else if (!isReplace) {
             if (entry.entry.clearHistory) {
                 this._backStack.forEach(function (e) { return _this._removeEntry(e); });
                 this._backStack.length = 0;
@@ -229,12 +242,13 @@ var FrameBase = (function (_super) {
     FrameBase.prototype._updateActionBar = function (page, disableNavBarAnimation) {
     };
     FrameBase.prototype._processNextNavigationEntry = function () {
-        if (!this.isLoaded || this._executingEntry) {
+        if (!this.isLoaded || this._executingContext) {
             return;
         }
         if (this._navigationQueue.length > 0) {
             var navigationContext = this._navigationQueue[0];
-            if (navigationContext.isBackNavigation) {
+            var isBackNavigation = navigationContext.navigationType === NavigationType.back;
+            if (isBackNavigation) {
                 this.performGoBack(navigationContext);
             }
             else {
@@ -243,10 +257,11 @@ var FrameBase = (function (_super) {
         }
     };
     FrameBase.prototype.performNavigation = function (navigationContext) {
-        var navContext = navigationContext.entry;
-        this._executingEntry = navContext;
-        this._onNavigatingTo(navContext, navigationContext.isBackNavigation);
-        this._navigateCore(navContext);
+        this._executingContext = navigationContext;
+        var backstackEntry = navigationContext.entry;
+        var isBackNavigation = navigationContext.navigationType === NavigationType.back;
+        this._onNavigatingTo(backstackEntry, isBackNavigation);
+        this._navigateCore(backstackEntry);
     };
     FrameBase.prototype.performGoBack = function (navigationContext) {
         var backstackEntry = navigationContext.entry;
@@ -255,7 +270,7 @@ var FrameBase = (function (_super) {
             backstackEntry = backstack[backstack.length - 1];
             navigationContext.entry = backstackEntry;
         }
-        this._executingEntry = backstackEntry;
+        this._executingContext = navigationContext;
         this._onNavigatingTo(backstackEntry, true);
         this._goBackCore(backstackEntry);
     };
@@ -349,8 +364,8 @@ var FrameBase = (function (_super) {
         this._removeFromFrameStack();
     };
     FrameBase.prototype._onRootViewReset = function () {
-        this._removeFromFrameStack();
         _super.prototype._onRootViewReset.call(this);
+        this._removeFromFrameStack();
     };
     Object.defineProperty(FrameBase.prototype, "_childrenCount", {
         get: function () {
@@ -438,8 +453,31 @@ var FrameBase = (function (_super) {
         }
         return result;
     };
-    FrameBase.prototype._onLivesync = function () {
-        _super.prototype._onLivesync.call(this);
+    FrameBase.prototype._onLivesync = function (context) {
+        if (_super.prototype._onLivesync.call(this, context)) {
+            return true;
+        }
+        if (!context) {
+            return this.legacyLivesync();
+        }
+        return false;
+    };
+    FrameBase.prototype._handleLivesync = function (context) {
+        if (_super.prototype._handleLivesync.call(this, context)) {
+            return true;
+        }
+        if (this.currentPage &&
+            view_common_1.viewMatchesModuleContext(this.currentPage, context, ["markup", "script"])) {
+            view_1.traceWrite("Change Handled: Replacing page " + context.path, view_1.traceCategories.Livesync);
+            this.replacePage(context);
+            return true;
+        }
+        return false;
+    };
+    FrameBase.prototype.legacyLivesync = function () {
+        if (view_1.traceEnabled()) {
+            view_1.traceWrite(this + "._onLivesync()", view_1.traceCategories.Livesync);
+        }
         if (!this._currentEntry || !this._currentEntry.entry) {
             return false;
         }
@@ -460,6 +498,25 @@ var FrameBase = (function (_super) {
         }
         this.navigate(newEntry);
         return true;
+    };
+    FrameBase.prototype.replacePage = function (context) {
+        var currentBackstackEntry = this._currentEntry;
+        var contextModuleName = utils_1.getModuleName(context.path);
+        var newPage = builder_1.createViewFromEntry({ moduleName: contextModuleName });
+        var newBackstackEntry = {
+            entry: currentBackstackEntry.entry,
+            resolvedPage: newPage,
+            navDepth: currentBackstackEntry.navDepth,
+            fragmentTag: currentBackstackEntry.fragmentTag,
+            frameId: currentBackstackEntry.frameId
+        };
+        var navigationContext = {
+            entry: newBackstackEntry,
+            isBackNavigation: false,
+            navigationType: NavigationType.replace
+        };
+        this._navigationQueue.push(navigationContext);
+        this._processNextNavigationEntry();
     };
     var FrameBase_1;
     FrameBase.androidOptionSelectedEvent = "optionSelected";

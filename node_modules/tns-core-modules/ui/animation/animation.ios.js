@@ -4,9 +4,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var animation_common_1 = require("./animation-common");
 var style_properties_1 = require("../styling/style-properties");
-var utils_1 = require("../../utils/utils");
 __export(require("./animation-common"));
-var getter = utils_1.ios.getter;
 var _transform = "_transform";
 var _skip = "_skip";
 var FLT_MAX = 340282346638528859811704183484516925440.000000;
@@ -221,7 +219,7 @@ var Animation = (function (_super) {
                 };
                 originalValue = nativeView.layer.backgroundColor;
                 if (nativeView instanceof UILabel) {
-                    nativeView.setValueForKey(getter(UIColor, UIColor.clearColor), "backgroundColor");
+                    nativeView.setValueForKey(UIColor.clearColor, "backgroundColor");
                 }
                 value = value.CGColor;
                 break;

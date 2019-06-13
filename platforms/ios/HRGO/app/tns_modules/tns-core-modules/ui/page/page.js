@@ -2,6 +2,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+var frame_common_1 = require("../frame/frame-common");
 var view_1 = require("../core/view");
 var page_common_1 = require("./page-common");
 var profiling_1 = require("../../profiling");
@@ -9,21 +10,26 @@ var utils_1 = require("../../utils/utils");
 __export(require("./page-common"));
 var ENTRY = "_entry";
 var DELEGATE = "_delegate";
+var TRANSITION = "_transition";
+var NON_ANIMATED_TRANSITION = "non-animated";
 var majorVersion = utils_1.ios.MajorVersion;
 function isBackNavigationTo(page, entry) {
     var frame = page.frame;
     if (!frame) {
         return false;
     }
+    var navigationContext = frame._executingContext || { navigationType: frame_common_1.NavigationType.back };
+    var isReplace = navigationContext.navigationType === frame_common_1.NavigationType.replace;
+    if (isReplace) {
+        return false;
+    }
     if (frame.navigationQueueIsEmpty()) {
         return true;
     }
-    else {
-        var navigationQueue = frame._navigationQueue;
-        for (var i = 0; i < navigationQueue.length; i++) {
-            if (navigationQueue[i].entry === entry) {
-                return navigationQueue[i].isBackNavigation;
-            }
+    var navigationQueue = frame._navigationQueue;
+    for (var i = 0; i < navigationQueue.length; i++) {
+        if (navigationQueue[i].entry === entry) {
+            return navigationQueue[i].navigationType === frame_common_1.NavigationType.back;
         }
     }
     return false;
@@ -49,6 +55,10 @@ var UIViewControllerImpl = (function (_super) {
         var controller = UIViewControllerImpl.new();
         controller._owner = owner;
         return controller;
+    };
+    UIViewControllerImpl.prototype.viewDidLoad = function () {
+        _super.prototype.viewDidLoad.call(this);
+        this.extendedLayoutIncludesOpaqueBars = true;
     };
     UIViewControllerImpl.prototype.viewWillAppear = function (animated) {
         _super.prototype.viewWillAppear.call(this, animated);
@@ -90,14 +100,21 @@ var UIViewControllerImpl = (function (_super) {
         var frame = navigationController ? navigationController.owner : null;
         if (!owner._presentedViewController && frame) {
             var newEntry = this[ENTRY];
-            var isBack = void 0;
-            if (frame.currentPage === owner && frame._navigationQueue.length === 0) {
-                isBack = false;
+            var navigationContext = frame._executingContext || { navigationType: frame_common_1.NavigationType.back };
+            var isReplace = navigationContext.navigationType === frame_common_1.NavigationType.replace;
+            frame.setCurrent(newEntry, navigationContext.navigationType);
+            if (isReplace) {
+                var controller = newEntry.resolvedPage.ios;
+                if (controller) {
+                    var animated_1 = frame._getIsAnimatedNavigation(newEntry.entry);
+                    if (animated_1) {
+                        controller[TRANSITION] = frame._getNavigationTransition(newEntry.entry);
+                    }
+                    else {
+                        controller[TRANSITION] = { name: NON_ANIMATED_TRANSITION };
+                    }
+                }
             }
-            else {
-                isBack = isBackNavigationTo(owner, newEntry);
-            }
-            frame.setCurrent(newEntry, isBack);
             frame.ios.controller.delegate = this[DELEGATE];
             frame._processNavigationQueue(owner);
             if (frame.canGoBack()) {
@@ -123,7 +140,7 @@ var UIViewControllerImpl = (function (_super) {
         }
         var frame = owner.frame;
         var tab = this.tabBarController;
-        if (!owner._presentedViewController && !this.presentingViewController && frame && frame.currentPage === owner) {
+        if (owner.onNavigatingFrom && !owner._presentedViewController && !this.presentingViewController && frame && frame.currentPage === owner) {
             var willSelectViewController = tab && tab._willSelectViewController;
             if (!willSelectViewController
                 || willSelectViewController === tab.selectedViewController) {
@@ -270,9 +287,6 @@ var Page = (function (_super) {
         var childTop = 0 + insets.top;
         var childRight = right - insets.right;
         var childBottom = bottom - insets.bottom;
-        if (majorVersion >= 11 && this.actionBar.flat) {
-            childBottom -= top;
-        }
         page_common_1.View.layoutChild(this, this.layoutView, childLeft, childTop, childRight, childBottom);
     };
     Page.prototype._addViewToNativeVisualTree = function (child, atIndex) {

@@ -48,6 +48,24 @@ var Switch = (function (_super) {
         nativeView.listener.owner = null;
         _super.prototype.disposeNativeView.call(this);
     };
+    Switch.prototype.setNativeBackgroundColor = function (value) {
+        if (value instanceof switch_common_1.Color) {
+            this.nativeViewProtected.getTrackDrawable().setColorFilter(value.android, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        else {
+            this.nativeViewProtected.getTrackDrawable().clearColorFilter();
+        }
+    };
+    Switch.prototype._onCheckedPropertyChanged = function (newValue) {
+        if (this.offBackgroundColor) {
+            if (!newValue) {
+                this.setNativeBackgroundColor(this.offBackgroundColor);
+            }
+            else {
+                this.setNativeBackgroundColor(this.backgroundColor);
+            }
+        }
+    };
     Switch.prototype[switch_common_1.checkedProperty.getDefault] = function () {
         return false;
     };
@@ -69,17 +87,22 @@ var Switch = (function (_super) {
         return -1;
     };
     Switch.prototype[switch_common_1.backgroundColorProperty.setNative] = function (value) {
-        if (value instanceof switch_common_1.Color) {
-            this.nativeViewProtected.getTrackDrawable().setColorFilter(value.android, android.graphics.PorterDuff.Mode.SRC_IN);
-        }
-        else {
-            this.nativeViewProtected.getTrackDrawable().clearColorFilter();
+        if (!this.offBackgroundColor || this.checked) {
+            this.setNativeBackgroundColor(value);
         }
     };
     Switch.prototype[switch_common_1.backgroundInternalProperty.getDefault] = function () {
         return null;
     };
     Switch.prototype[switch_common_1.backgroundInternalProperty.setNative] = function (value) {
+    };
+    Switch.prototype[switch_common_1.offBackgroundColorProperty.getDefault] = function () {
+        return -1;
+    };
+    Switch.prototype[switch_common_1.offBackgroundColorProperty.setNative] = function (value) {
+        if (!this.checked) {
+            this.setNativeBackgroundColor(value);
+        }
     };
     return Switch;
 }(switch_common_1.SwitchBase));
