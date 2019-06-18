@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleIdentifier</key>
+    <string>ca.forces.hrciv.hrgo</string>
+    <key>en,fr</key>
+    <string>CFBundleDisplayName</string>
+    <key>${PRODUCT_NAME}</key>
+    <string>CFBundlePackageType</string>
+    <key>${EXECUTABLE_NAME}</key>
+    <string>CFBundleInfoDictionaryVersion</string>
+    <key>6.0</key>
+    <string>CFBundleName</string>
+    <key>APPL</key>
+    <string>CFBundleShortVersionString</string>
+    <key>1.01</key>
+    <string>CFBundleSignature</string>
+    <key>????</key>
+    <string>CFBundleVersion</string>
+    <key>1.0</key>
+    <string>LSRequiresIPhoneOS</string>
+    <key>true</key>
+    <string>UIRequiredDeviceCapabilities</string>
+    <key>LaunchScreen</key>
+    <string>UIRequiresFullScreen</string>
+    <key>armv7</key>
+    <string>UISupportedInterfaceOrientations</string>
+    <key>UIInterfaceOrientationLandscapeLeft,UIInterfaceOrientationLandscapeRight,UIInterfaceOrientationPortrait</key>
+    <string>UISupportedInterfaceOrientations~ipad</string>
+    <key>CFBundleVersion</key>
+    <string/>
+    <key>CFBundleShortVersionString</key>
+    <string/>
+    <key>UISupportedInterfaceOrientations</key>
+    <array/>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array/>
+  </dict>
+</plist>

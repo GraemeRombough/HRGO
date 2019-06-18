@@ -1,0 +1,73 @@
+{
+  "_args": [
+    [
+      "nativescript-email@1.5.3",
+      "/Users/graemerombough/HRGO"
+    ]
+  ],
+  "_from": "nativescript-email@1.5.3",
+  "_id": "nativescript-email@1.5.3",
+  "_inBundle": false,
+  "_integrity": "sha512-5Od/DpYips8NfHq1xY58qAvGwjDQR+AKeRNkIza6MDvGVT+m418CuviGj99dTpVfTI+NcEU2VilccStUXDHkdw==",
+  "_location": "/nativescript-email",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "nativescript-email@1.5.3",
+    "name": "nativescript-email",
+    "escapedName": "nativescript-email",
+    "rawSpec": "1.5.3",
+    "saveSpec": null,
+    "fetchSpec": "1.5.3"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-email/-/nativescript-email-1.5.3.tgz",
+  "_spec": "1.5.3",
+  "_where": "/Users/graemerombough/HRGO",
+  "author": {
+    "name": "Eddy Verbruggen",
+    "email": "eddyverbruggen@gmail.com",
+    "url": "https://github.com/EddyVerbruggen"
+  },
+  "bugs": {
+    "url": "https://github.com/eddyverbruggen/nativescript-email/issues"
+  },
+  "contributors": [
+    {
+      "name": "Brad Martin",
+      "email": "bradwaynemartin@gmail.com",
+      "url": "https://github.com/BradMartin"
+    }
+  ],
+  "description": "Email plugin for your NativeScript app",
+  "homepage": "https://github.com/eddyverbruggen/nativescript-email",
+  "keywords": [
+    "ecosystem:NativeScript",
+    "NativeScript",
+    "Mail",
+    "Email",
+    "E-mail",
+    "Draft",
+    "Compose",
+    "MailComposer",
+    "Attachment"
+  ],
+  "license": "MIT",
+  "main": "email",
+  "name": "nativescript-email",
+  "nativescript": {
+    "platforms": {
+      "ios": "2.3.0",
+      "android": "2.3.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddyVerbruggen/nativescript-email.git"
+  },
+  "typings": "index.d.ts",
+  "version": "1.5.3"
+}
