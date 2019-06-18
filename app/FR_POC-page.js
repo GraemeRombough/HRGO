@@ -218,11 +218,13 @@ var callPOC = function(eventData){
 };
 var emailPOC = function(eventData){
     console.log(eventData.object.email);
+    var toAddress = [];
+    toAddress.push(eventData.object.email);
     if (email.available()){
         email.compose({
             subject: "",
             body: "",
-            to: eventData.object.email
+            to: toAddress
         });
     } else {
         console.log("Email Not Available");

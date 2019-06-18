@@ -73,9 +73,17 @@ exports.setToFre = function(args){
     topmost.navigate("FR_profile-page");
 }
 exports.saveProfile = function(){
-    if(pageData.get("workEmail")){
+    //if(pageData.get("workEmail")){
         applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
-    }
+        dialogs.alert({
+            title: "Settings",
+            message: "Your settings have been saved.",
+            okButtonText: "Continue"
+        }).then(function () {
+            console.log("Dialog closed!");
+        });
+        //alert("Your settings have been saved.");
+    //}
 };
 var checkLanguage = function(){   
     if(applicationSettings.hasKey("PreferredLanguage")){

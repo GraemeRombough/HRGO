@@ -48,7 +48,7 @@ exports.onClassListPickerLoaded = function(args){
         //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
         //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
         selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
-        selectedStep = null;
+        selectedStep = [1,"1"];
         loadSteps(listPicker.selectedValue,args);
         //pageData.set("SubstantiveStep", true);
         //pageData.set("SubstantiveClass", false); 
@@ -71,7 +71,7 @@ exports.onStepListPickerLoaded = function(args){
 exports.getSalaryInfo = function(args){
     //pageData.set("showInfo", true);
     //args.object.bindingContext = pageData;
-    console.log("getSalaryInfo");
+    console.log("getSalaryInfo | " + selectedClass[1] + selectedStep[1]);
     
     pageData.set("infoVisible", false);
     if(selectedClass != null && selectedStep !=null){
@@ -100,8 +100,8 @@ var loadSteps = function(selection,inputArg){
     }
     //console.log(`steps: ${steps.length}`);
     console.log(`steps: ${numOfSteps}`);
-    pageData.stepItems = steps;
-    pageData.stepIndex = 1;
+    pageData.set("stepItems", steps);
+    pageData.set("stepIndex", 1);
 
 };
 exports.resetSelections = function(args){

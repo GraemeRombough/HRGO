@@ -12,26 +12,24 @@
     <!-- PROCESS -->
     <Button text="Select a Process" class="Home_Utility_Label" tap="navToggle" value="Process" />
     <StackLayout visibility="{{ Process ? 'visible' : 'collapsed' }}" id="processesLayout">
-      <Button text="Extra Duty Pay" class="Main_Nav_SubLine" tap="loadRoles"/>
+      <!-- <Button text="Extra Duty Pay" class="Main_Nav_SubLine" tap="loadRoles"/>
       <Button text="Pay Issue Escalation" class="Main_Nav_SubLine" tap="loadRoles"/>
-      <Button text="Military Section 34 Time Submission" class="Main_Nav_SubLine" tap="loadRoles"/>
+      <Button text="Military Section 34 Time Submission" class="Main_Nav_SubLine" tap="loadRoles"/> -->
     </StackLayout>
 
   <!-- ROLES -->
     <Button text="Select a Role" class="Home_Utility_Label" tap="navToggle" value="Roles" />
     <StackLayout visibility="{{ Roles ? 'visible' : 'collapsed' }}"  id="rolesLayout">
-      <Button text="Employee" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
+      <!-- <Button text="Employee" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
       <Button text="Section 34 Manager" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
       <Button text="DND Compensation" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
-      <Button text="Public Service Pay Center" class="Main_Nav_SubLine" tap="loadResponsibilities"/>
+      <Button text="Public Service Pay Center" class="Main_Nav_SubLine" tap="loadResponsibilities"/> -->
     </StackLayout>
 
   <!-- Responsibilities -->
   <Button text="View Responsibilities" class="Home_Utility_Label" tap="navToggle" value="Responsibilities" />
     <StackLayout class="Article_MainStack" id="responsibilityContent" width="100%" orientation="vertical" visibility="{{ Responsibilities ? 'visible' : 'collapsed' }}">
-      <Label text="Stuff here" class="Article_Body"/>
-      <Label text="Stuff here" class="Article_Body"/>
-      <Label text="Stuff here" class="Article_Body"/>
+     
     </StackLayout>
 
   </StackLayout>

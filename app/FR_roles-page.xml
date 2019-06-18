@@ -24,9 +24,7 @@
   <!-- Responsibilities -->
   <Button text="Voir les responsabilités" class="Home_Utility_Label" tap="navToggle" value="Responsibilities" />
     <StackLayout class="Article_MainStack" id="responsibilityContent" width="100%" orientation="vertical" visibility="{{ Responsibilities ? 'visible' : 'collapsed' }}">
-      <Label text="Stuff here" class="Article_Body"/>
-      <Label text="Stuff here" class="Article_Body"/>
-      <Label text="Stuff here" class="Article_Body"/>
+      
     </StackLayout>
 
   </StackLayout>

@@ -74,12 +74,18 @@ exports.setToFre = function(args){
     applicationSettings.setString("PreferredLanguage", "French");
 }
 exports.saveProfile = function(){
-    
-    
-    
-    if(pageData.get("workEmail")){
+     
+    //if(pageData.get("workEmail")){
         applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
-    }
+        dialogs.alert({
+            title: "Paramètres",
+            message: "Vos paramètres sont sauvegardés",
+            okButtonText: "Continuez"
+        }).then(function () {
+            console.log("Dialog closed!");
+        });
+        //alert("Vos paramètres sont sauvegardés.");
+    //}
 };
 var checkLanguage = function(){   
     if(applicationSettings.hasKey("PreferredLanguage")){

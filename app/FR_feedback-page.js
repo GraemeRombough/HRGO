@@ -66,7 +66,7 @@ exports.sendEmail = function(args){
     var eBody = `Page: ${feedbackPage.PageName}, Date: ${TODAY} -- `;
     eBody += pageData.get("feedbackBody");
     var toAddress = [];
-    toAddress.push("admhrciv@gmail.com");
+    toAddress.push("HRGO-GORH@forces.gc.ca");
     if(eSubject){
         if (email.available()){
             email.compose({
