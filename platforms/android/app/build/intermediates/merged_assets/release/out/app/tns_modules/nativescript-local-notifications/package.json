@@ -1,0 +1,97 @@
+{
+  "_args": [
+    [
+      "nativescript-local-notifications@3.1.2",
+      "/Users/graemerombough/HRGO"
+    ]
+  ],
+  "_from": "nativescript-local-notifications@3.1.2",
+  "_id": "nativescript-local-notifications@3.1.2",
+  "_inBundle": false,
+  "_integrity": "sha512-bXL71G5u9f3fegHoUiZ5JfuDQTkzcndgIPJRbI9MKz4lvkcvLCyf2sc7YdRPw9Dqov1bT7lnhyA8nrIYaVEE0A==",
+  "_location": "/nativescript-local-notifications",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "nativescript-local-notifications@3.1.2",
+    "name": "nativescript-local-notifications",
+    "escapedName": "nativescript-local-notifications",
+    "rawSpec": "3.1.2",
+    "saveSpec": null,
+    "fetchSpec": "3.1.2"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-local-notifications/-/nativescript-local-notifications-3.1.2.tgz",
+  "_spec": "3.1.2",
+  "_where": "/Users/graemerombough/HRGO",
+  "author": {
+    "name": "Eddy Verbruggen",
+    "url": "https://github.com/EddyVerbruggen/"
+  },
+  "bugs": {
+    "url": "https://github.com/eddyverbruggen/nativescript-local-notifications/issues"
+  },
+  "contributors": [
+    {
+      "name": "Dani Gámez Franco",
+      "url": "https://github.com/Danziger"
+    }
+  ],
+  "description": "The Local Notifications plugin allows your app to show notifications when the app is not running. Just like remote push notifications, but a few orders of magnitude easier to set up.",
+  "devDependencies": {
+    "nativescript-dev-typescript": "~0.7.4",
+    "tns-core-modules": "~5.1.0",
+    "tns-platform-declarations": "next",
+    "tslint": "^5.10.0",
+    "typescript": "~2.8.4"
+  },
+  "homepage": "https://github.com/eddyverbruggen/nativescript-local-notifications",
+  "keywords": [
+    "ecosystem:NativeScript",
+    "NativeScript",
+    "Alarm",
+    "Notification",
+    "Local Notification"
+  ],
+  "license": "MIT",
+  "main": "local-notifications",
+  "name": "nativescript-local-notifications",
+  "nativescript": {
+    "platforms": {
+      "android": "2.3.0",
+      "ios": "2.3.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eddyverbruggen/nativescript-local-notifications.git"
+  },
+  "scripts": {
+    "build": "npm i && tsc --skipLibCheck",
+    "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
+    "demo-ng.android": "npm run build && cd ../demo-ng && tns run android --syncAllFiles",
+    "demo-ng.ios": "npm run build && cd ../demo-ng && tns run ios --syncAllFiles",
+    "demo-vue.android": "npm run build && cd ../demo-vue && tns run android --bundle --syncAllFiles",
+    "demo-vue.ios": "npm run build && cd ../demo-vue && tns run ios --bundle --syncAllFiles",
+    "demo.android": "npm run build && cd ../demo && tns run android --syncAllFiles",
+    "demo.ios": "npm run build && cd ../demo && tns run ios --syncAllFiles",
+    "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-mapbox && cd ../src",
+    "generate.typings.ios": "cd ../demo && TNS_DEBUG_METADATA_PATH=\"$(pwd)/metadata\" tns build ios && TNS_TYPESCRIPT_DECLARATIONS_PATH=\"$(pwd)/typings\" tns build ios && echo 'Now look for your library typings in demo/typings!'",
+    "plugin.link": "npm link && cd ../demo && npm link nativescript-mapbox && cd ../src",
+    "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-mapbox && tns plugin add ../src && tns install",
+    "prepublishOnly": "npm run build",
+    "setup": "npm run build && cd ../demo && npm i",
+    "setupandinstall": "npm i && cd ../demo && npm i && cd ../src && npm run build && cd ../demo && tns plugin add ../src && cd ../src",
+    "test": "npm run tslint && npm run tslint.demo && cd ../demo && tns build ios && tns build android",
+    "test.android": "cd ../demo && tns test android --justlaunch",
+    "test.ios": "cd ../demo && tns test ios --emulator",
+    "test.ios.device": "cd ../demo && tns test ios",
+    "tslint": "tslint --config '../tslint.json' '*.ts' --exclude '**/node_modules/**'",
+    "tslint.demo": "tslint --config '../tslint.json' '../demo/app/*.ts' --exclude '**/node_modules/**'"
+  },
+  "typings": "index.d.ts",
+  "version": "3.1.2"
+}

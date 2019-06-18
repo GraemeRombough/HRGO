@@ -5,7 +5,8 @@
  */
 package com.tns;
 
-@com.tns.JavaScriptImplementation(javaScriptFile = "./vendor.js")
+@com.tns.JavaScriptImplementation(
+    javaScriptFile = "./tns_modules/tns-core-modules/ui/frame/activity.js")
 public class NativeScriptActivity extends android.support.v7.app.AppCompatActivity
     implements com.tns.NativeScriptHashCodeProvider {
   public NativeScriptActivity() {

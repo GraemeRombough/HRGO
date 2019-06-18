@@ -1,5 +1,5 @@
 {
-    "main": "starter",
-    "name": "nativescript-template-tutorial",
-    "version": "4.0.0"
+  "main": "app.js",
+  "name": "nativescript-template-tutorial",
+  "version": "4.0.0"
 }

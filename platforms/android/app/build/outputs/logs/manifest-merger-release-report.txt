@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
 MERGED from [com.android.support:support-v4:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/457deb2f19e03ee640d1ef2204249841/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/b3194abdeade70a036a25f60696255ec/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/396e3bc22f700e8a35f3a7e49aa26b31/AndroidManifest.xml:17:1-24:12
@@ -40,37 +40,37 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/graemerombough/.grad
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/c524ba93ef2ef3b5ef3098c0c2b20bd5/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/148cfa604b3597a560742fdb96125602/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/6283abb083184f1aceb068791db6212a/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
 	package
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:3:2-32
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:3:64-94
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:2-27
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:3:123-151
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:3:5-63
 	android:versionCode
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:4:2-29
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:3:95-122
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 supports-screens
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:7:2-11:33
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:4:5-139
 	android:largeScreens
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:10:3-30
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:4:80-107
 	android:smallScreens
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:8:3-30
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:4:23-50
 	android:normalScreens
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:9:3-31
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:4:51-79
 	android:xlargeScreens
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:11:3-31
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:4:108-136
 uses-sdk
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:5-74
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:5-74
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:5-74
 MERGED from [com.android.support:support-v4:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/457deb2f19e03ee640d1ef2204249841/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-v4:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/457deb2f19e03ee640d1ef2204249841/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:multidex:1.0.2] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/b3194abdeade70a036a25f60696255ec/AndroidManifest.xml:20:5-43
@@ -143,30 +143,30 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/graemerombough/.
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/148cfa604b3597a560742fdb96125602/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/6283abb083184f1aceb068791db6212a/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/6283abb083184f1aceb068791db6212a/AndroidManifest.xml:20:5-44
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
-INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:2-15:34
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:5-74
+INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:5-74
 	android:targetSdkVersion
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:15:3-32
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:42-71
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:14:3-29
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:5:15-41
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:17:2-76
-	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:17:19-74
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:18:2-77
-	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:18:19-75
 uses-permission#android.permission.INTERNET
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:19:2-63
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:6:5-67
 	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:19:19-61
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:8:22-78
 application
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:21:2-42:16
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:9:5-18:19
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/396e3bc22f700e8a35f3a7e49aa26b31/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/396e3bc22f700e8a35f3a7e49aa26b31/AndroidManifest.xml:22:5-20
 MERGED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a9566b4254947e8a76ad4f3177b8ae2b/AndroidManifest.xml:14:5-34:19
@@ -180,45 +180,45 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/graemerombou
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/c55e0bcc98b2ccfd1baf817929f2a91f/AndroidManifest.xml:22:18-91
 	android:label
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:25:3-35
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:9:122-154
 	android:icon
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:24:3-32
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:9:92-121
 	android:allowBackup
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:23:3-29
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:9:65-91
 	android:theme
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:26:3-34
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:9:155-186
 	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:22:3-38
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:9:18-64
 activity#com.tns.NativeScriptActivity
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:28:3-40:14
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:10:9-16:20
 	android:label
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:30:4-49
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:10:63-108
 	android:configChanges
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:31:4-65
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:10:109-170
 	android:theme
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:32:4-44
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:10:171-211
 	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:29:4-47
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:10:19-62
 meta-data#SET_THEME_ON_LAUNCH
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:34:4-87
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:11:13-96
 	android:resource
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:34:50-84
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:11:59-93
 	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:34:15-49
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:11:24-58
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:36:4-39:20
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:12:13-15:29
 action#android.intent.action.MAIN
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:37:5-57
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:17-69
 	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:37:13-54
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:13:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:38:5-65
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:14:17-77
 	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:38:15-62
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:14:27-74
 activity#com.tns.ErrorReportActivity
-ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:41:3-57
+ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:17:9-64
 	android:name
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:41:13-55
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:17:19-61
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
 ADDED from [:app-release:] /Users/graemerombough/.gradle/caches/transforms-2/files-2.1/a9566b4254947e8a76ad4f3177b8ae2b/AndroidManifest.xml:11:5-81
 	android:name

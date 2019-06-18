@@ -22,5 +22,6 @@
   "devDependencies": {
     "nativescript-dev-webpack": "~0.18.0"
   },
-  "readme": "NativeScript Application"
+  "readme": "NativeScript Application",
+  "author": "Forces/ADM(HR-Civ)"
 }

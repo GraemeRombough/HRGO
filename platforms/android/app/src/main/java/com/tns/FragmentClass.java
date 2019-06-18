@@ -5,7 +5,8 @@
  */
 package com.tns;
 
-@com.tns.JavaScriptImplementation(javaScriptFile = "./vendor.js")
+@com.tns.JavaScriptImplementation(
+    javaScriptFile = "./tns_modules/tns-core-modules/ui/frame/fragment.js")
 public class FragmentClass extends org.nativescript.widgets.FragmentBase
     implements com.tns.NativeScriptHashCodeProvider {
   public FragmentClass() {
