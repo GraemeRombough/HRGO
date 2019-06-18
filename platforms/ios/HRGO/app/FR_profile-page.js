@@ -79,7 +79,7 @@ exports.saveProfile = function(){
         applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
         dialogs.alert({
             title: "Paramètres",
-            message: "Vos paramètres sont sauvegardés",
+            message: "Vos paramètres ont été sauvegardés",
             okButtonText: "Continuez"
         }).then(function () {
             console.log("Dialog closed!");

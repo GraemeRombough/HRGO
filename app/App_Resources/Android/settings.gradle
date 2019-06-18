@@ -13,13 +13,13 @@ task replaceSettings {
 
     def settingsJsonFile = file(pathToSettingsJson);
     def settingsResolvedPath = settingsJsonFile.getAbsolutePath();
-//applicationId = "__appId__"
+
     if(settingsJsonFile.exists())
     {
         println "\t Applying settings from $settingsResolvedPath"
         String settingsGradleTemplate = """android {
             defaultConfig {
-                applicationId = "ca.forces.hrciv.hrgo"
+                applicationId = "__appId__"
 
                 if (__minSdkVersion__) {
                     minSdkVersion = __minSdkVersion__
