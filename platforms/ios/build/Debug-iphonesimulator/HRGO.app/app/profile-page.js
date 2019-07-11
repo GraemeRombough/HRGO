@@ -65,16 +65,23 @@ exports.setToFre = function(args){
     var engButton = pageObject.getViewById("EnglishButton");
     args.object.style.backgroundColor = "rgb(0,31,91)";
     args.object.style.color = "#FFF";
+
     engButton.style.backgroundColor = "#DDD";
     engButton.style.color = "#222";
     applicationSettings.setString("PreferredLanguage", "French");
-    exports.saveProfile();
+    //exports.saveProfile();
     var topmost = frameModule.topmost();
     topmost.navigate("FR_profile-page");
 }
 exports.saveProfile = function(){
-    //if(pageData.get("workEmail")){
-        applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
+    console.log(pageData.get("workEmail"));
+    if(pageData.get("workEmail" != "")){    
+    applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
+    }else{
+        if(applicationSettings.hasKey("WorkEmail") == true){
+        applicationSettings.remove("WorkEmail");
+        }
+    }
         dialogs.alert({
             title: "Settings",
             message: "Your settings have been saved.",

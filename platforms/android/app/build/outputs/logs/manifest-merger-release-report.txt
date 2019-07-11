@@ -48,7 +48,7 @@ INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidM
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:3:123-151
+		ADDED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml:3:123-150
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/graemerombough/HRGO/platforms/android/app/src/main/AndroidManifest.xml
 	xmlns:android

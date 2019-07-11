@@ -8,6 +8,7 @@ button{
     padding: 0px;
     height:auto;
     vertical-align: middle;
+    
 }
 .Submit_Button_1{
     width: 80%;
@@ -90,6 +91,7 @@ button{
     padding-top:10%;
     text-align: center;
     background-color: #DDD;
+    border-color: #DDD;
     white-space: normal;
 }
 .action-bar{

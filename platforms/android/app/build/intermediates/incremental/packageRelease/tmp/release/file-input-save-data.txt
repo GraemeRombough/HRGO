@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jun 17 22:09:59 EDT 2019
+#Fri Jun 21 13:59:07 EDT 2019
 739.baseType=DIRECTORY
 38.path=app/tns_modules/tns-core-modules/ui/dialogs/dialogs.js
 429.baseType=DIRECTORY

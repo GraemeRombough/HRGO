@@ -61,7 +61,7 @@ exports.setToEng = function(args){
     freButton.style.color = "#222";
     applicationSettings.setString("PreferredLanguage", "English");
 
-    exports.saveProfile();
+    //exports.saveProfile();
     var topmost = frameModule.topmost();
     topmost.navigate("profile-page");
 }
@@ -74,9 +74,15 @@ exports.setToFre = function(args){
     applicationSettings.setString("PreferredLanguage", "French");
 }
 exports.saveProfile = function(){
-     
+     console.log(pageData.get("workEmail"));
     //if(pageData.get("workEmail")){
-        applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
+        if(pageData.get("workEmail" != "")){    
+            applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
+            }else{
+                if(applicationSettings.hasKey("WorkEmail") == true){
+                applicationSettings.remove("WorkEmail");
+                }
+            }
         dialogs.alert({
             title: "Paramètres",
             message: "Vos paramètres ont été sauvegardés",
