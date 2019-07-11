@@ -12,12 +12,20 @@
         "directory": "../../node_modules/nativescript-local-notifications"
     },
     {
+        "name": "nativescript-phone",
+        "directory": "../../node_modules/nativescript-phone"
+    },
+    {
         "name": "nativescript-theme-core",
         "directory": "../../node_modules/nativescript-theme-core"
     },
     {
         "name": "tns-core-modules",
         "directory": "../../node_modules/tns-core-modules"
+    },
+    {
+        "name": "nativescript-permissions",
+        "directory": "../../node_modules/nativescript-permissions"
     },
     {
         "name": "tns-core-modules-widgets",

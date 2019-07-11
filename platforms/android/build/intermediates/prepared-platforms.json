@@ -3,8 +3,10 @@
     "nativescript-email": true,
     "nativescript-iqkeyboardmanager": true,
     "nativescript-local-notifications": true,
+    "nativescript-phone": true,
     "nativescript-theme-core": true,
     "tns-core-modules": true,
+    "nativescript-permissions": true,
     "tns-core-modules-widgets": true,
     "tslib": true
 }

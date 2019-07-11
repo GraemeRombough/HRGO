@@ -9,6 +9,7 @@ const Button = require("tns-core-modules/ui/button/").Button;
 const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
 var pageData = new observable.Observable();
 const email = require("nativescript-email");
+var phone = require("nativescript-phone");
 
 exports.pageLoaded = function(args) {
    
@@ -215,6 +216,8 @@ databaseReturn.push(dbRow);
 
 var callPOC = function(eventData){
     console.log(eventData.object.phone);
+    phone.dial(eventData.object.phone,true);
+
 };
 var emailPOC = function(eventData){
     console.log(eventData.object.email);

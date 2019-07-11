@@ -62,7 +62,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		qZJjGiVqZ6n3ndCfigYG+neaDGg=
+		L9Ra8fSl5d8SRwDpZW1ft7xLBCY=
 		</data>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager</key>
 		<data>
@@ -186,7 +186,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		RZ4Zj4SogLP1+vOmb0wyT/ipVe8=
+		JHEH0+UxeWj2ThvFKgrRl51x89A=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -254,7 +254,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		GdUUD40o7HemNPIm3TzJ7mq7fUY=
+		ArfkgGIxsN1ikOfWwKkZvj5K+bM=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -262,7 +262,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		43Y1Ha+lzVLHUDlyGa23jevq8Fo=
+		NAURuuLWAIEdPShKOGgohAPUEDs=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -410,7 +410,7 @@
 		</data>
 		<key>app/FR_profile-page.js</key>
 		<data>
-		7d7noQJUDs5//Xh+vCGdGPd/QAE=
+		ZDNPqseNKirehvrUP3c4FoR8LEE=
 		</data>
 		<key>app/FR_profile-page.xml</key>
 		<data>
@@ -502,7 +502,7 @@
 		</data>
 		<key>app/POC-page.js</key>
 		<data>
-		4GyugM9MVuEtPqsyiP3Pgjv+5NI=
+		JMndF4QspFCnhnHUVeDqm28qRaU=
 		</data>
 		<key>app/POC-page.xml</key>
 		<data>
@@ -702,7 +702,7 @@
 		</data>
 		<key>app/profile-page.js</key>
 		<data>
-		thd4jJTg6QN+OB7VWsUNlLxZqtQ=
+		mrtkGsKeQur4/Kx8npiyOxTysSw=
 		</data>
 		<key>app/profile-page.xml</key>
 		<data>
@@ -2271,6 +2271,34 @@
 		<key>app/tns_modules/nativescript-local-notifications/package.json</key>
 		<data>
 		7LXKCfe2bBK6h136IQd4fKdeZV4=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/LICENSE</key>
+		<data>
+		7rkd0q4rYK3SlRUt7yGK7k1g+ZU=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/README.md</key>
+		<data>
+		ZbOnMz41INddJVboLGQshT9o+bw=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/package.json</key>
+		<data>
+		le0GU/nGSch1z6wdcHHO/q2gdjY=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/permissions.js</key>
+		<data>
+		jJ6pD624dsp+RevcpPa3Ar6JLHI=
+		</data>
+		<key>app/tns_modules/nativescript-phone/index.js</key>
+		<data>
+		56W4jPh4Vgro3DF4AmhQdLkVdxo=
+		</data>
+		<key>app/tns_modules/nativescript-phone/package.json</key>
+		<data>
+		VAu6xU6T1o+gfmx1ogBUnAwqWT8=
+		</data>
+		<key>app/tns_modules/nativescript-phone/scripts/build-native.js</key>
+		<data>
+		6aeM/Yn8LEwWXNEMNEIhVJMjjUY=
 		</data>
 		<key>app/tns_modules/nativescript-theme-core/css/aqua.css</key>
 		<data>
@@ -3938,11 +3966,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qZJjGiVqZ6n3ndCfigYG+neaDGg=
+			L9Ra8fSl5d8SRwDpZW1ft7xLBCY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Y4vlZyik3L7F0PuA68TcizKBJ0GHCyxvreEYEQ817So=
+			nCXJRZ7IAM/7u4r65QVRMH3zDlL3JGNAJeooaXl1P/s=
 			</data>
 		</dict>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager</key>
@@ -4455,11 +4483,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GdUUD40o7HemNPIm3TzJ7mq7fUY=
+			ArfkgGIxsN1ikOfWwKkZvj5K+bM=
 			</data>
 			<key>hash2</key>
 			<data>
-			x2l61S1hiSyV14ht4O5cG6uFeRlx/1aUjOJdNQjH9uk=
+			6hQS817bNvu5JS1wpG/qkQiI9YB74ATsR5HqfdyHEO0=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -4477,11 +4505,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			43Y1Ha+lzVLHUDlyGa23jevq8Fo=
+			NAURuuLWAIEdPShKOGgohAPUEDs=
 			</data>
 			<key>hash2</key>
 			<data>
-			T7ThNEhvPhDhBm+fsxpgFPhY4+hgETOMzY38aj0WKAw=
+			wsxOTat1YF1voveTxlhg5l/fLB+YOVUZTgXUO/fY6nI=
 			</data>
 		</dict>
 		<key>app/CODE_OF_CONDUCT.md</key>
@@ -4873,11 +4901,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7d7noQJUDs5//Xh+vCGdGPd/QAE=
+			ZDNPqseNKirehvrUP3c4FoR8LEE=
 			</data>
 			<key>hash2</key>
 			<data>
-			tG6VyJk6yO+0xDMVuE+ruHutgHfar43v5tBXOqD5eKo=
+			jbUVgPUmwlCuyhAsAY+kw2lkNGuAhREhBTOjpej91dU=
 			</data>
 		</dict>
 		<key>app/FR_profile-page.xml</key>
@@ -5126,11 +5154,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4GyugM9MVuEtPqsyiP3Pgjv+5NI=
+			JMndF4QspFCnhnHUVeDqm28qRaU=
 			</data>
 			<key>hash2</key>
 			<data>
-			sBu7MvCe2oPZMMjeqSKO2GYRrPyGIUlLxp8Nc79Kl/g=
+			Ht+cgX1I8rgoe4jKha+65IundhHHoIr1vnvm77ftf10=
 			</data>
 		</dict>
 		<key>app/POC-page.xml</key>
@@ -5676,11 +5704,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			thd4jJTg6QN+OB7VWsUNlLxZqtQ=
+			mrtkGsKeQur4/Kx8npiyOxTysSw=
 			</data>
 			<key>hash2</key>
 			<data>
-			MGXFulxRukZUxPyWcKURznvue5QJ89NdcxhRteGh0RM=
+			WuT45ZkKQCwmGpusEfY+j81unHgShw/JaPlnoEh3Qq4=
 			</data>
 		</dict>
 		<key>app/profile-page.xml</key>
@@ -9993,6 +10021,83 @@
 			<key>hash2</key>
 			<data>
 			HseOIKOvik8QUyaw9TvqMklo0pJ0AsfI0uA9TuQFKFQ=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/LICENSE</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7rkd0q4rYK3SlRUt7yGK7k1g+ZU=
+			</data>
+			<key>hash2</key>
+			<data>
+			R+g/WVCFSYtAOUi/R9EsdMo3J0M/4xEB3zhJuWGF+IM=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/README.md</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZbOnMz41INddJVboLGQshT9o+bw=
+			</data>
+			<key>hash2</key>
+			<data>
+			XFiajKOMiZR2eFHRlFZSDv32ngR/mey8EaX+TZMoNuE=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			le0GU/nGSch1z6wdcHHO/q2gdjY=
+			</data>
+			<key>hash2</key>
+			<data>
+			pvVLndXVfPZ8veh1a86iDwRgpEfnZzEABeMl3Zl+f08=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/permissions.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			jJ6pD624dsp+RevcpPa3Ar6JLHI=
+			</data>
+			<key>hash2</key>
+			<data>
+			91hyhH2G5KOTZmtW12abkLLuIRhAUp0nV3AVqvA6M60=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-phone/index.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			56W4jPh4Vgro3DF4AmhQdLkVdxo=
+			</data>
+			<key>hash2</key>
+			<data>
+			JH8bT0q1WWzJ86ASW38rPreVKTlMYaHmNQgy3ZIrCe8=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-phone/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VAu6xU6T1o+gfmx1ogBUnAwqWT8=
+			</data>
+			<key>hash2</key>
+			<data>
+			TY1BAyLaCFG0/LOzLwWshu5zh6eFslDNp8YeVeghQHs=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-phone/scripts/build-native.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6aeM/Yn8LEwWXNEMNEIhVJMjjUY=
+			</data>
+			<key>hash2</key>
+			<data>
+			Y5fvcM7LFji7bb9AH84ZpKLys06hW4bVS7KAKSAY+T0=
 			</data>
 		</dict>
 		<key>app/tns_modules/nativescript-theme-core/css/aqua.css</key>

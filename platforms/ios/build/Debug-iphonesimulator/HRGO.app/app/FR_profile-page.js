@@ -76,7 +76,7 @@ exports.setToFre = function(args){
 exports.saveProfile = function(){
      console.log(pageData.get("workEmail"));
     //if(pageData.get("workEmail")){
-        if(pageData.get("workEmail" != "")){    
+        if(pageData.get("workEmail") != ""){    
             applicationSettings.setString("WorkEmail", pageData.get("workEmail"));
             }else{
                 if(applicationSettings.hasKey("WorkEmail") == true){
@@ -110,6 +110,7 @@ var checkLanguage = function(){
     }
     
     if(applicationSettings.hasKey("WorkEmail")){
+        console.log(applicationSettings.hasKey("WorkEmail"));
         pageData.set("workEmail", applicationSettings.getString("WorkEmail"));
     }
 };

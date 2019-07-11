@@ -57,7 +57,10 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/app.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/promotion-calc-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/leave-tracking-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-phone/index.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-phone/scripts/build-native.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-email/email.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-permissions/permissions.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-iqkeyboardmanager/iqkeyboardmanager.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/globals/globals.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/globals/ts-helpers.js

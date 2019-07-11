@@ -1,0 +1,35 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+	package
+		ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:70-115
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+		ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+		ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:1-4:12
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.CALL_PHONE
+ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:3:3-66
+	android:name
+		ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml:3:20-64
+uses-sdk
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+		ADDED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml
+		INJECTED from /Users/graemerombough/HRGO/platforms/tempPlugin/nativescript_phone/src/main/AndroidManifest.xml

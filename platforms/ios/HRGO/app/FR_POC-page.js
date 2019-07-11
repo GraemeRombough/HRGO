@@ -9,6 +9,7 @@ const Button = require("tns-core-modules/ui/button/").Button;
 const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
 var pageData = new observable.Observable();
 const email = require("nativescript-email");
+var phone = require("nativescript-phone");
 
 exports.pageLoaded = function(args) {
    
@@ -84,34 +85,40 @@ var createPOCGrid = function(POC_t, POC_p, POC_e, POC_d){
 
     POCTitle.text = POC_t;
     POCTitle.className = "POC_H1";
-    POCPhone.text = "Téléphone: " + POC_p;
-    POCPhone.className = "POC_Phone";
-    POCPhone.phone = POC_p;
-    POCEmail.text = "Courriel: " + POC_e;
-    POCEmail.className = "POC_Phone";
-    POCEmail.email = POC_e;
     POCDesc.text = "Description: " + POC_d;
     POCDesc.className = "POC_Body";
+    POCPhone.text = POC_p;
+    //POCPhone.className = "POC_Phone";
+    POCPhone.className = "Submit_Button_1";
+    POCPhone.phone = POC_p;
+    POCEmail.text = POC_e;
+    //POCEmail.className = "POC_Phone";
+    POCEmail.className = "Submit_Button_1";
+    POCEmail.email = POC_e;
+    
 
     POCPhone.on(buttonModule.Button.tapEvent, callPOC, this);
     POCEmail.on(buttonModule.Button.tapEvent, emailPOC, this);
 
     layout.GridLayout.setRow(POCTitle, 0);
-    layout.GridLayout.setRow(POCPhone, 1);
-    layout.GridLayout.setRow(POCEmail, 2);
-    layout.GridLayout.setRow(POCDesc, 3);
+    layout.GridLayout.setRow(POCDesc, 1);
+    if(POCPhone.phone !="N/A"){layout.GridLayout.setRow(POCPhone, 2);}
+    if(POCEmail.email != "N/A"){layout.GridLayout.setRow(POCEmail, 3);}
+    
     gridLayout.addChild(POCTitle);
-    gridLayout.addChild(POCPhone);
-    gridLayout.addChild(POCEmail);
     gridLayout.addChild(POCDesc);
+    if(POCPhone.phone !="N/A"){gridLayout.addChild(POCPhone);}
+    if(POCEmail.email != "N/A"){gridLayout.addChild(POCEmail);}
+    
     var titleRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
     var phoneRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
     var emailRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
     var descRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
     gridLayout.addRow(titleRow);
-    gridLayout.addRow(phoneRow);
-    gridLayout.addRow(emailRow);
     gridLayout.addRow(descRow);
+    if(POCPhone.phone !="N/A"){gridLayout.addRow(phoneRow);}
+    if(POCEmail.email != "N/A"){gridLayout.addRow(emailRow);}
+    
     gridLayout.className = "POC_Grid";
 
     return gridLayout;
@@ -135,7 +142,7 @@ var getFromDatabase = function(){
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Système de gestion d'apprentissage RAD: Bureau d'aide", Phone: "1-844-750-1643 ", Email: "DLN-RAD@FORCES.GC.CA", Desc:"Il s’agit d’un environnement ministériel qui permet de gérer, de développer et de donner de l’instruction en ligne, tout en fournissant à l’Équipe de la Défense un environnement propice à l’éducation permanente et à la mise en commun du savoir."};
+dbRow ={Title:"Système de gestion d'apprentissage RAD: Bureau d'aide", Phone: "1-844-750-1643", Email: "DLN-RAD@FORCES.GC.CA", Desc:"Il s’agit d’un environnement ministériel qui permet de gérer, de développer et de donner de l’instruction en ligne, tout en fournissant à l’Équipe de la Défense un environnement propice à l’éducation permanente et à la mise en commun du savoir."};
 
 databaseReturn.push(dbRow);
 
@@ -143,23 +150,23 @@ dbRow ={Title:"Centre de contact avec la clientèle de SPAC (Employés du Gouver
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Demandes de renseignements sur l'impôt des particuliers", Phone: "1-800-959-7383 ", Email: "N/A", Desc:"Composez ce numéro pour obtenir des renseignements sur l'impôt pour les particuliers, les fiducies, l'impôt international et les non-résidents, notamment les déclarations de revenus, les acomptes provisionnels et les REER, ou pour obtenir nos formulaires et publications."};
+dbRow ={Title:"Demandes de renseignements sur l'impôt des particuliers", Phone: "1-800-959-7383", Email: "N/A", Desc:"Composez ce numéro pour obtenir des renseignements sur l'impôt pour les particuliers, les fiducies, l'impôt international et les non-résidents, notamment les déclarations de revenus, les acomptes provisionnels et les REER, ou pour obtenir nos formulaires et publications."};
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Demandes de renseignements sur les prestations", Phone: "1-800-387-1193 ", Email: "N/A", Desc:"Composez ce numéro pour obtenir des renseignements sur l’allocation canadienne pour enfants (ACE), le crédit pour la TPS/TVH et les programmes provinciaux et territoriaux connexes, ainsi que la prestation pour enfants handicapés."};
+dbRow ={Title:"Demandes de renseignements sur les prestations", Phone: "1-800-387-1193", Email: "N/A", Desc:"Composez ce numéro pour obtenir des renseignements sur l’allocation canadienne pour enfants (ACE), le crédit pour la TPS/TVH et les programmes provinciaux et territoriaux connexes, ainsi que la prestation pour enfants handicapés."};
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Programmes provinciaux pour l'Ontario (PPO)", Phone: "1-877-627-6664 ", Email: "N/A", Desc:"Composez ce numéro pour vos demandes de renseignements au sujet du versement de la prestation trillium de l'Ontario (PTO) — incluant le crédit de la taxe de vente de l'Ontario (CTVO), le paiement pour le crédit d'impôt de l'Ontario pour les coûts d'énergie et l'impôt foncier (CIOCEIF) et le paiement pour le crédit pour les coûts d'énergie dans le Nord de l'Ontario (CCENO) — le paiement de la subvention aux personnes âgées propriétaires pour l'impôt foncier de l'Ontario (SPAPIFO) et la prestation de transition à la taxe de vente de l'Ontario (PTTVO)."};
+dbRow ={Title:"Programmes provinciaux pour l'Ontario (PPO)", Phone: "1-877-627-6664", Email: "N/A", Desc:"Composez ce numéro pour vos demandes de renseignements au sujet du versement de la prestation trillium de l'Ontario (PTO) — incluant le crédit de la taxe de vente de l'Ontario (CTVO), le paiement pour le crédit d'impôt de l'Ontario pour les coûts d'énergie et l'impôt foncier (CIOCEIF) et le paiement pour le crédit pour les coûts d'énergie dans le Nord de l'Ontario (CCENO) — le paiement de la subvention aux personnes âgées propriétaires pour l'impôt foncier de l'Ontario (SPAPIFO) et la prestation de transition à la taxe de vente de l'Ontario (PTTVO)."};
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"SERT (Système électronique de renseignements par téléphone)", Phone: "1-800-267-6999 ", Email: "N/A", Desc:"Ce service automatisé fournit des renseignements aux particuliers et aux entreprises."};
+dbRow ={Title:"SERT (Système électronique de renseignements par téléphone)", Phone: "1-800-267-6999", Email: "N/A", Desc:"Ce service automatisé fournit des renseignements aux particuliers et aux entreprises."};
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Revenu Québec", Phone: "1 800 267-6299 ", Email: "N/A", Desc:"Renseignements généraux, Impôt, Votre dossier fiscal, Changement d'adresse, Avis de cotisation, Dépôt direct Programme d'accompagnement pour les particuliers en affaires."};
+dbRow ={Title:"Revenu Québec", Phone: "1-800-267-6299 ", Email: "N/A", Desc:"Renseignements généraux, Impôt, Votre dossier fiscal, Changement d'adresse, Avis de cotisation, Dépôt direct Programme d'accompagnement pour les particuliers en affaires."};
 
 databaseReturn.push(dbRow);
 
@@ -175,11 +182,11 @@ dbRow ={Title:"Programme de la gestion des collectivités", Phone: "613-901-6652
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Centre d’intervention sur l’inconduite sexuelle", Phone: "1-844-750-1648    24/7 line", Email: "DND.SMRC-CIIS.MDN@forces.gc.ca", Desc:"Contacter un conseiller du Centre d’intervention sur l’inconduite sexuelle (CIIS), accéder à des ressources pour les dirigeants, et apprendre comment reconnaître les comportements sexuels inappropriés."};
+dbRow ={Title:"Centre d’intervention sur l’inconduite sexuelle", Phone: "1-844-750-1648", Email: "DND.SMRC-CIIS.MDN@forces.gc.ca", Desc:"Contacter un conseiller du Centre d’intervention sur l’inconduite sexuelle (CIIS), accéder à des ressources pour les dirigeants, et apprendre comment reconnaître les comportements sexuels inappropriés."};
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Gestion intégrée des conflits et des plaintes", Phone: "Marc Potvin             (613) 944-6189", Email: "marc.potvin@forces.gc.ca ", Desc:"Le centre de services de gestion des conflits et des plaintes (SGCP) de votre région vous fournira du soutien si vous souhaitez déposer une plainte officielle ou si vous faites face à un conflit. "};
+dbRow ={Title:"Gestion intégrée des conflits et des plaintes", Phone: "613-944-6189", Email: "marc.potvin@forces.gc.ca ", Desc:"Le centre de services de gestion des conflits et des plaintes (SGCP) de votre région vous fournira du soutien si vous souhaitez déposer une plainte officielle ou si vous faites face à un conflit. "};
 
 databaseReturn.push(dbRow);
 
@@ -187,7 +194,7 @@ dbRow ={Title:"Commission canadienne des droits ", Phone: "1-888-214-1090", Emai
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"centre de services de gestion des conflits et des plaintes", Phone: " 1-833-328-3351", Email: "N/A", Desc:"Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP)."};
+dbRow ={Title:"centre de services de gestion des conflits et des plaintes", Phone: "1-833-328-3351", Email: "N/A", Desc:"Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP)."};
 
 databaseReturn.push(dbRow);
 
@@ -215,6 +222,7 @@ databaseReturn.push(dbRow);
 
 var callPOC = function(eventData){
     console.log(eventData.object.phone);
+    phone.dial(eventData.object.phone,true);
 };
 var emailPOC = function(eventData){
     console.log(eventData.object.email);

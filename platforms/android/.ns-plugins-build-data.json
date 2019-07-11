@@ -5,5 +5,9 @@
 	},
 	"tns-core-modules-widgets": {
 		"/Users/graemerombough/HRGO/node_modules/tns-core-modules-widgets/platforms/android/widgets-release.aar": "c92d106c6a3eb2882f7f0e2b8a11918ac125bb63"
+	},
+	"nativescript-phone": {
+		"/Users/graemerombough/HRGO/node_modules/nativescript-phone/platforms/android/AndroidManifest.xml": "34b32ea103c3f5a5860804455685785bef9e3e95",
+		"/Users/graemerombough/HRGO/node_modules/nativescript-phone/platforms/android/nativescript_phone.aar": "5c37c3bc133595db0f12d2affbb715d1ed37c51b"
 	}
 }
