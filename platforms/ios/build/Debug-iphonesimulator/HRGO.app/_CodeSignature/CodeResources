@@ -274,7 +274,7 @@
 		</data>
 		<key>app/FR_POC-page.js</key>
 		<data>
-		054AkiTJVw5LSsN4YYWDZEO2Cd8=
+		OBpgtqmH9qltR7a4crC4FArP2G8=
 		</data>
 		<key>app/FR_POC-page.xml</key>
 		<data>
@@ -502,7 +502,7 @@
 		</data>
 		<key>app/POC-page.js</key>
 		<data>
-		JMndF4QspFCnhnHUVeDqm28qRaU=
+		5oMuUGBubguUgIh/N75vQH4qE9U=
 		</data>
 		<key>app/POC-page.xml</key>
 		<data>
@@ -582,7 +582,7 @@
 		</data>
 		<key>app/feedback-page.js</key>
 		<data>
-		Ab46pB0IcHcLN0ju+RF/aH1vCrU=
+		5dbLexTInhV/PiXc+/F4D0DwtT8=
 		</data>
 		<key>app/feedback-page.xml</key>
 		<data>
@@ -2219,6 +2219,26 @@
 		<key>app/tns_modules/moment/src/moment.js</key>
 		<data>
 		whcBikTplo4kKRmbjfEqrEbLtPY=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/.npmignore</key>
+		<data>
+		WiIvfbwWZIJgGSlzlxDyVb+aUo4=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/LICENSE</key>
+		<data>
+		8Qg+SqR9Y8ZlF6UtwC1KD4m1KC0=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/README.md</key>
+		<data>
+		0nxlJMzEmJzAZ1knG4BNccWsssw=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/clipboard.js</key>
+		<data>
+		6bMCUs+P9wcY5aJWtY+GXbh0ZUg=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/package.json</key>
+		<data>
+		bGxovEieVSVP+njJzMPdRFAG/SQ=
 		</data>
 		<key>app/tns_modules/nativescript-email/LICENSE</key>
 		<data>
@@ -4527,11 +4547,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			054AkiTJVw5LSsN4YYWDZEO2Cd8=
+			OBpgtqmH9qltR7a4crC4FArP2G8=
 			</data>
 			<key>hash2</key>
 			<data>
-			TYOxRY/eKpyc6PngHUlRqX9HF9RVmnz5GWt1lGTIaos=
+			nsSAc1kY1hoH+JsIdlyQxXhdfoa4fVETz4dOUbrIGA4=
 			</data>
 		</dict>
 		<key>app/FR_POC-page.xml</key>
@@ -5154,11 +5174,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JMndF4QspFCnhnHUVeDqm28qRaU=
+			5oMuUGBubguUgIh/N75vQH4qE9U=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ht+cgX1I8rgoe4jKha+65IundhHHoIr1vnvm77ftf10=
+			VYAWGQ9TQUeEHtUTh8lTrhro+4X5nHDYEedfUWKfhC4=
 			</data>
 		</dict>
 		<key>app/POC-page.xml</key>
@@ -5374,11 +5394,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Ab46pB0IcHcLN0ju+RF/aH1vCrU=
+			5dbLexTInhV/PiXc+/F4D0DwtT8=
 			</data>
 			<key>hash2</key>
 			<data>
-			UPAPaU2yopmWcOQq8dAWEChahJX104VNiADz+kaeYTo=
+			w5pqymZBqQ2KivRav5oN0POQWyzwTASNvojy9bLhjpw=
 			</data>
 		</dict>
 		<key>app/feedback-page.xml</key>
@@ -9878,6 +9898,61 @@
 			<key>hash2</key>
 			<data>
 			DmriPsrJlqxsg/zu0b0cgJ3mFXH01coDGNo/Asa95Ww=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/.npmignore</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WiIvfbwWZIJgGSlzlxDyVb+aUo4=
+			</data>
+			<key>hash2</key>
+			<data>
+			eUlJWxQxOrQvDlmQ0y59sZOFLjqFJZbHCcjNiIOYaJY=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/LICENSE</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8Qg+SqR9Y8ZlF6UtwC1KD4m1KC0=
+			</data>
+			<key>hash2</key>
+			<data>
+			Yrm5Ms9e/9CX3mdfZgTwXcH6V1U61eJTgVY8DNmpIrQ=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/README.md</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0nxlJMzEmJzAZ1knG4BNccWsssw=
+			</data>
+			<key>hash2</key>
+			<data>
+			dipQO/MyhPJa2eCvw63I7p0AScpSyDrIFGDAHNbK++k=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/clipboard.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6bMCUs+P9wcY5aJWtY+GXbh0ZUg=
+			</data>
+			<key>hash2</key>
+			<data>
+			C/2a/TCbwV8xewljUCm9jegHz5M7UzDgdEm4lyNG2YM=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			bGxovEieVSVP+njJzMPdRFAG/SQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			U+x9in50CE9u4dSA7kWOvM+xcnyGfNd8hoLWm150SAU=
 			</data>
 		</dict>
 		<key>app/tns_modules/nativescript-email/LICENSE</key>

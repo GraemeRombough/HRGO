@@ -3,9 +3,11 @@ var view = require("ui/core/view");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
 var pageObject;
+var dialogs = require("ui/dialogs");
 const Label = require("tns-core-modules/ui/label/").Label;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 const email = require("nativescript-email");
+var clipboard = require("nativescript-clipboard");
 var feedbackPage;
 
 
@@ -68,7 +70,7 @@ exports.sendEmail = function(args){
     var toAddress = [];
     toAddress.push("HRGO-GORH@forces.gc.ca");
     if(eSubject){
-        if (email.available()){
+        if (email.available() == true){
             email.compose({
                 subject: eSubject,
                 body: eBody,
@@ -76,6 +78,13 @@ exports.sendEmail = function(args){
             });
         } else {
             console.log("Email Not Available");
+            clipboard.setText(`Send To: HRGO-GORH@forces.gc.ca \nSubject: HRGO Feedback Submission \nBody: ${eBody}`).then(function() {
+                console.log("OK, copied to the clipboard");
+            })
+            dialogs.alert({
+                title: "Email Not Available",
+                message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.  Please send feedback to HRGO-GORH@forces.gc.ca (can be found in copied message)",
+                okButtonText: "Continue"});
         }
     } else {
         console.log("Subject field blank");

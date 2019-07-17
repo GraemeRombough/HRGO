@@ -6,6 +6,8 @@ var pageObject;
 const Label = require("tns-core-modules/ui/label/").Label;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 const email = require("nativescript-email");
+var clipboard = require("nativescript-clipboard");
+var dialogs = require("ui/dialogs");
 var feedbackPage;
 
 
@@ -68,7 +70,7 @@ exports.sendEmail = function(args){
     var toAddress = [];
     toAddress.push("HRGO-GORH@forces.gc.ca");
     if(eSubject){
-        if (email.available()){
+        if (email.available() == true){
             email.compose({
                 subject: eSubject,
                 body: eBody,
@@ -76,6 +78,13 @@ exports.sendEmail = function(args){
             });
         } else {
             console.log("Email Not Available");
+            clipboard.setText(`Envoyez à: HRGO-GORH@forces.gc.ca \nSujet: Commentaires de GORH \nCommentaires: ${eBody}`).then(function() {
+                console.log("OK, copied to the clipboard");
+            })
+            dialogs.alert({
+                title: "Courriel n'est pas disponible",
+                message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.  S'il vous plait, Envoyez à HRGO-GORH@forces.gc.ca (trouvez l'address dans le message copié)",
+                okButtonText: "Continuez"});
         }
     } else {
         console.log("Subject field blank");
