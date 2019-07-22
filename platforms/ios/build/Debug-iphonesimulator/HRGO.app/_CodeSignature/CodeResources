@@ -62,7 +62,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		L9Ra8fSl5d8SRwDpZW1ft7xLBCY=
+		FWVJ2moYQDYpbDbk+XxmLH5gWH8=
 		</data>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager</key>
 		<data>
@@ -186,7 +186,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		JHEH0+UxeWj2ThvFKgrRl51x89A=
+		c6t9pl52r2r9SJ1twtVOMHJMcAI=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -254,7 +254,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		ArfkgGIxsN1ikOfWwKkZvj5K+bM=
+		BRK00BbCGyyLqK/LNA8pdEJOyyU=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -262,7 +262,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		NAURuuLWAIEdPShKOGgohAPUEDs=
+		THu3L3SyAWw9nB7rPL5JOjIi6KE=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -328,6 +328,14 @@
 		<data>
 		C6H0rEqHDRV9T3uMqqhfvDFjmtY=
 		</data>
+		<key>app/FR_dynamic-notification-page.js</key>
+		<data>
+		PyCUxMdt5SyAjjVmZJ5AGV7HDvE=
+		</data>
+		<key>app/FR_dynamic-notification-page.xml</key>
+		<data>
+		73WijstkYSlxGgiIQYwGcp3nYKo=
+		</data>
 		<key>app/FR_dynamic-walkthrough-page.js</key>
 		<data>
 		Pe06imKLUb5Ygu2y82fqMQjGabc=
@@ -338,7 +346,7 @@
 		</data>
 		<key>app/FR_feedback-page.js</key>
 		<data>
-		dN8y/xiWNPEoRGoEwAh5s95tETM=
+		Opxe6FiUIp4dLgDByWdVhjOr0AU=
 		</data>
 		<key>app/FR_feedback-page.xml</key>
 		<data>
@@ -374,7 +382,7 @@
 		</data>
 		<key>app/FR_main-page.xml</key>
 		<data>
-		Oeo10iqLlkOSSxikWAg8jhiKDxU=
+		6Rs8SYQfEUvyv39CZtR896CfswY=
 		</data>
 		<key>app/FR_my-team.js</key>
 		<data>
@@ -488,6 +496,14 @@
 		<data>
 		RR6g9fJKJQdTUg4x4wozB1YMtIc=
 		</data>
+		<key>app/FR_whats-new-page.js</key>
+		<data>
+		q3mlQBULeG2P/nWe04Sn1/pl2IY=
+		</data>
+		<key>app/FR_whats-new-page.xml</key>
+		<data>
+		+Awc7seoI4r/t7yGRjT59n2uPQA=
+		</data>
 		<key>app/FR_workdays-utility-page.js</key>
 		<data>
 		FUHWdyXFrz5AIB3miyPXjUOSzk4=
@@ -572,6 +588,14 @@
 		<data>
 		C6H0rEqHDRV9T3uMqqhfvDFjmtY=
 		</data>
+		<key>app/dynamic-notification-page.js</key>
+		<data>
+		CouscO7emOTKcsAu6IMVJU0l1mU=
+		</data>
+		<key>app/dynamic-notification-page.xml</key>
+		<data>
+		73WijstkYSlxGgiIQYwGcp3nYKo=
+		</data>
 		<key>app/dynamic-walkthrough-page.js</key>
 		<data>
 		Pe06imKLUb5Ygu2y82fqMQjGabc=
@@ -582,7 +606,7 @@
 		</data>
 		<key>app/feedback-page.js</key>
 		<data>
-		5dbLexTInhV/PiXc+/F4D0DwtT8=
+		k93QqKx+HIhl3bBLUZe1rjna2t4=
 		</data>
 		<key>app/feedback-page.xml</key>
 		<data>
@@ -662,7 +686,7 @@
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		QGgt5A8qYo4Fkv3+kVE7BadMqu8=
+		lWOCY+8kleV8uCx+QaCwgxk9U6Y=
 		</data>
 		<key>app/my-team.js</key>
 		<data>
@@ -3804,6 +3828,18 @@
 		<data>
 		4xGkYIdub9H46/KkcU//H+6GU6k=
 		</data>
+		<key>app/whats-new-page.1.xml</key>
+		<data>
+		pTrWm1xkefEfzgfTc9u6lrtD9HI=
+		</data>
+		<key>app/whats-new-page.js</key>
+		<data>
+		nl35W5r6NE80k96WpKGueYKmTLY=
+		</data>
+		<key>app/whats-new-page.xml</key>
+		<data>
+		FvXMlFJeYtvT7JSWrBcUrfeZB4U=
+		</data>
 		<key>app/workdays-utility-page.js</key>
 		<data>
 		Ny6Dc8FQvgpxRknxbnm6PHGORgg=
@@ -3986,11 +4022,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			L9Ra8fSl5d8SRwDpZW1ft7xLBCY=
+			FWVJ2moYQDYpbDbk+XxmLH5gWH8=
 			</data>
 			<key>hash2</key>
 			<data>
-			nCXJRZ7IAM/7u4r65QVRMH3zDlL3JGNAJeooaXl1P/s=
+			wNEk1Lne1mdo9qPNvj+tSLPwTTRglcMDGr5NEVjVQl8=
 			</data>
 		</dict>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager</key>
@@ -4503,11 +4539,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ArfkgGIxsN1ikOfWwKkZvj5K+bM=
+			BRK00BbCGyyLqK/LNA8pdEJOyyU=
 			</data>
 			<key>hash2</key>
 			<data>
-			6hQS817bNvu5JS1wpG/qkQiI9YB74ATsR5HqfdyHEO0=
+			sO73Ei6J9tn3j2hru6S8bMeNIdMuYsrMh+jRreIF5qk=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -4525,11 +4561,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NAURuuLWAIEdPShKOGgohAPUEDs=
+			THu3L3SyAWw9nB7rPL5JOjIi6KE=
 			</data>
 			<key>hash2</key>
 			<data>
-			wsxOTat1YF1voveTxlhg5l/fLB+YOVUZTgXUO/fY6nI=
+			CxK7fBwDS7VtzfY2UyQZrsRLTkJ/6AXl9H6iJk6t87A=
 			</data>
 		</dict>
 		<key>app/CODE_OF_CONDUCT.md</key>
@@ -4697,6 +4733,28 @@
 			qjYAKZfr4W9prfjEd8SLmDqZNXuO2MU6RDzgCIaehxM=
 			</data>
 		</dict>
+		<key>app/FR_dynamic-notification-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PyCUxMdt5SyAjjVmZJ5AGV7HDvE=
+			</data>
+			<key>hash2</key>
+			<data>
+			YUj4whOjw2d9uPRw9qNYGdjDMGlkaCl6rzAWfaMb8jI=
+			</data>
+		</dict>
+		<key>app/FR_dynamic-notification-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			73WijstkYSlxGgiIQYwGcp3nYKo=
+			</data>
+			<key>hash2</key>
+			<data>
+			IGJolxKg7Xnn72uTqMgAuGiBjJja/cJ9CVXrbxrgrSE=
+			</data>
+		</dict>
 		<key>app/FR_dynamic-walkthrough-page.js</key>
 		<dict>
 			<key>hash</key>
@@ -4723,11 +4781,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dN8y/xiWNPEoRGoEwAh5s95tETM=
+			Opxe6FiUIp4dLgDByWdVhjOr0AU=
 			</data>
 			<key>hash2</key>
 			<data>
-			h9kyG6sJaMBYcHbPyOP+H7NWLh36VgnZ+qqGa5FB1Vg=
+			2+DKlxpHrcia134178wPD+5xui1MSlD0npxMwBRYgHg=
 			</data>
 		</dict>
 		<key>app/FR_feedback-page.xml</key>
@@ -4822,11 +4880,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Oeo10iqLlkOSSxikWAg8jhiKDxU=
+			6Rs8SYQfEUvyv39CZtR896CfswY=
 			</data>
 			<key>hash2</key>
 			<data>
-			BW3a5kHh7PD926TgmZpHDW+uoHKI111YOeWMzaWMRJE=
+			CUuWH9gcGbqZk+uiHkVycItM4zVTUYWM/RWKPJBiQP4=
 			</data>
 		</dict>
 		<key>app/FR_my-team.js</key>
@@ -5137,6 +5195,28 @@
 			UilsGpulAkIL+4Zsl+P850OdVStauCzxSF5zLdKR+Cg=
 			</data>
 		</dict>
+		<key>app/FR_whats-new-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			q3mlQBULeG2P/nWe04Sn1/pl2IY=
+			</data>
+			<key>hash2</key>
+			<data>
+			2BxO9pYS/1pcJdfJaiuQfuy346FHQCoioPuaEhTmxO8=
+			</data>
+		</dict>
+		<key>app/FR_whats-new-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+Awc7seoI4r/t7yGRjT59n2uPQA=
+			</data>
+			<key>hash2</key>
+			<data>
+			7A+mVDguOtTL4k7acQLdNpQeih1CdgaMXFFgWc4uEQU=
+			</data>
+		</dict>
 		<key>app/FR_workdays-utility-page.js</key>
 		<dict>
 			<key>hash</key>
@@ -5368,6 +5448,28 @@
 			qjYAKZfr4W9prfjEd8SLmDqZNXuO2MU6RDzgCIaehxM=
 			</data>
 		</dict>
+		<key>app/dynamic-notification-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CouscO7emOTKcsAu6IMVJU0l1mU=
+			</data>
+			<key>hash2</key>
+			<data>
+			HjC9F41SxKSvcmDPPYvisWn08SFvga0GTPZV/NAwbhQ=
+			</data>
+		</dict>
+		<key>app/dynamic-notification-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			73WijstkYSlxGgiIQYwGcp3nYKo=
+			</data>
+			<key>hash2</key>
+			<data>
+			IGJolxKg7Xnn72uTqMgAuGiBjJja/cJ9CVXrbxrgrSE=
+			</data>
+		</dict>
 		<key>app/dynamic-walkthrough-page.js</key>
 		<dict>
 			<key>hash</key>
@@ -5394,11 +5496,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5dbLexTInhV/PiXc+/F4D0DwtT8=
+			k93QqKx+HIhl3bBLUZe1rjna2t4=
 			</data>
 			<key>hash2</key>
 			<data>
-			w5pqymZBqQ2KivRav5oN0POQWyzwTASNvojy9bLhjpw=
+			qJh0sI4sTP5/llG0WBvnGIisE7TdgNJsRItmUhzsjxE=
 			</data>
 		</dict>
 		<key>app/feedback-page.xml</key>
@@ -5614,11 +5716,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QGgt5A8qYo4Fkv3+kVE7BadMqu8=
+			lWOCY+8kleV8uCx+QaCwgxk9U6Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			SVctIAdWfjjcj84uYDMVIkMjQgvpd62tNbRhd9+rQmM=
+			cxW60EUDbgbeFIc7Bn2zRz66+RNxVe0TU/N7vpx8+04=
 			</data>
 		</dict>
 		<key>app/my-team.js</key>
@@ -14254,6 +14356,39 @@
 			<key>hash2</key>
 			<data>
 			kUr/2AtyBmqVBpTcDB+YP6GJfJq3/+/SsF0yFUdlZAE=
+			</data>
+		</dict>
+		<key>app/whats-new-page.1.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			pTrWm1xkefEfzgfTc9u6lrtD9HI=
+			</data>
+			<key>hash2</key>
+			<data>
+			CtFsc4bLkk/x1JPRk0UOHk6h5iecV83sjNKy65IWyMk=
+			</data>
+		</dict>
+		<key>app/whats-new-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nl35W5r6NE80k96WpKGueYKmTLY=
+			</data>
+			<key>hash2</key>
+			<data>
+			N/swWUWBUEbXOUGVv2NiqTzjWCfxA0T3QVC061Is7rk=
+			</data>
+		</dict>
+		<key>app/whats-new-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FvXMlFJeYtvT7JSWrBcUrfeZB4U=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZlvokDU2AtI6D0lf5PCZFUvqIRFdb+8cAn2oBiux2TE=
 			</data>
 		</dict>
 		<key>app/workdays-utility-page.js</key>

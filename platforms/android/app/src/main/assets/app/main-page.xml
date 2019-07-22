@@ -19,6 +19,7 @@
         <Button class="Submit_Button_1" col="0" row="2" text="English" tap="setToEng" id="EnglishButton"/>
         <Button class="Submit_Button_1" col="1" row="2" text="Français" tap="setToFre" id="FrenchButton"/>
       </GridLayout>
+
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
             <Button row="0" class="Home_Nav_Icon" text="&#xe93b;" tap="goToUtility" pageName="pay-landing-page"/>
@@ -49,6 +50,13 @@
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
             <Button row="0" class="Home_Nav_Icon" text="&#xe923;" tap="goToUtility" pageName="contact-landing-page"/>
             <Button row="1" class="Home_Nav_Label" text="CONTACT" tap="goToUtility" pageName="contact-landing-page"/>
+          </GridLayout>
+        </StackLayout>   
+
+        <StackLayout orientation="horizontal" class="Home_Nav_Row">
+          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
+            <Button row="0" class="Home_Nav_Icon" text="&#xea07;" tap="goToUtility" pageName="whats-new-page"/>
+            <Button row="1" class="Home_Nav_Label" text="WHAT'S NEW" tap="goToUtility" pageName="whats-new-landing-page"/>
           </GridLayout>
         </StackLayout>   
 

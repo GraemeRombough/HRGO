@@ -1,5 +1,9 @@
 [
     {
+        "name": "nativescript-clipboard",
+        "directory": "../../node_modules/nativescript-clipboard"
+    },
+    {
         "name": "nativescript-email",
         "directory": "../../node_modules/nativescript-email"
     },

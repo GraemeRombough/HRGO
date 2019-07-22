@@ -1,5 +1,6 @@
 {
     "moment": true,
+    "nativescript-clipboard": true,
     "nativescript-email": true,
     "nativescript-iqkeyboardmanager": true,
     "nativescript-local-notifications": true,

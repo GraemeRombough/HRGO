@@ -62,7 +62,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		NFSjaW17UyZNiIfvHMG3U5UkO9A=
+		+YZnZ51myJkP5c6q35TDzY2wQMs=
 		</data>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager</key>
 		<data>
@@ -186,7 +186,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		LyYdun0FwoRhNWrSeFYivRVMJUw=
+		3dU2+DShDKc92MuejC1HcR6wBi0=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -254,7 +254,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		2kjOshnNBkDM1EmZF2qA1bTwCRQ=
+		T4N8nR9NWVaVZOoyguNElM2efQU=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -262,7 +262,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		yXfNAj6XBknJLcRdULU+rBIXjGU=
+		4ljbwWJNm1rij2YQWBWrjyl3/Wc=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -274,7 +274,7 @@
 		</data>
 		<key>app/FR_POC-page.js</key>
 		<data>
-		054AkiTJVw5LSsN4YYWDZEO2Cd8=
+		OBpgtqmH9qltR7a4crC4FArP2G8=
 		</data>
 		<key>app/FR_POC-page.xml</key>
 		<data>
@@ -328,6 +328,14 @@
 		<data>
 		C6H0rEqHDRV9T3uMqqhfvDFjmtY=
 		</data>
+		<key>app/FR_dynamic-notification-page.js</key>
+		<data>
+		PyCUxMdt5SyAjjVmZJ5AGV7HDvE=
+		</data>
+		<key>app/FR_dynamic-notification-page.xml</key>
+		<data>
+		73WijstkYSlxGgiIQYwGcp3nYKo=
+		</data>
 		<key>app/FR_dynamic-walkthrough-page.js</key>
 		<data>
 		Pe06imKLUb5Ygu2y82fqMQjGabc=
@@ -338,7 +346,7 @@
 		</data>
 		<key>app/FR_feedback-page.js</key>
 		<data>
-		dN8y/xiWNPEoRGoEwAh5s95tETM=
+		Opxe6FiUIp4dLgDByWdVhjOr0AU=
 		</data>
 		<key>app/FR_feedback-page.xml</key>
 		<data>
@@ -374,7 +382,7 @@
 		</data>
 		<key>app/FR_main-page.xml</key>
 		<data>
-		Oeo10iqLlkOSSxikWAg8jhiKDxU=
+		6Rs8SYQfEUvyv39CZtR896CfswY=
 		</data>
 		<key>app/FR_my-team.js</key>
 		<data>
@@ -488,6 +496,14 @@
 		<data>
 		RR6g9fJKJQdTUg4x4wozB1YMtIc=
 		</data>
+		<key>app/FR_whats-new-page.js</key>
+		<data>
+		q3mlQBULeG2P/nWe04Sn1/pl2IY=
+		</data>
+		<key>app/FR_whats-new-page.xml</key>
+		<data>
+		+Awc7seoI4r/t7yGRjT59n2uPQA=
+		</data>
 		<key>app/FR_workdays-utility-page.js</key>
 		<data>
 		FUHWdyXFrz5AIB3miyPXjUOSzk4=
@@ -502,7 +518,7 @@
 		</data>
 		<key>app/POC-page.js</key>
 		<data>
-		4GyugM9MVuEtPqsyiP3Pgjv+5NI=
+		5oMuUGBubguUgIh/N75vQH4qE9U=
 		</data>
 		<key>app/POC-page.xml</key>
 		<data>
@@ -572,6 +588,14 @@
 		<data>
 		C6H0rEqHDRV9T3uMqqhfvDFjmtY=
 		</data>
+		<key>app/dynamic-notification-page.js</key>
+		<data>
+		CouscO7emOTKcsAu6IMVJU0l1mU=
+		</data>
+		<key>app/dynamic-notification-page.xml</key>
+		<data>
+		73WijstkYSlxGgiIQYwGcp3nYKo=
+		</data>
 		<key>app/dynamic-walkthrough-page.js</key>
 		<data>
 		Pe06imKLUb5Ygu2y82fqMQjGabc=
@@ -582,7 +606,7 @@
 		</data>
 		<key>app/feedback-page.js</key>
 		<data>
-		Ab46pB0IcHcLN0ju+RF/aH1vCrU=
+		k93QqKx+HIhl3bBLUZe1rjna2t4=
 		</data>
 		<key>app/feedback-page.xml</key>
 		<data>
@@ -662,7 +686,7 @@
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
-		QGgt5A8qYo4Fkv3+kVE7BadMqu8=
+		lWOCY+8kleV8uCx+QaCwgxk9U6Y=
 		</data>
 		<key>app/my-team.js</key>
 		<data>
@@ -2216,6 +2240,26 @@
 		<data>
 		whcBikTplo4kKRmbjfEqrEbLtPY=
 		</data>
+		<key>app/tns_modules/nativescript-clipboard/.npmignore</key>
+		<data>
+		WiIvfbwWZIJgGSlzlxDyVb+aUo4=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/LICENSE</key>
+		<data>
+		8Qg+SqR9Y8ZlF6UtwC1KD4m1KC0=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/README.md</key>
+		<data>
+		0nxlJMzEmJzAZ1knG4BNccWsssw=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/clipboard.js</key>
+		<data>
+		6bMCUs+P9wcY5aJWtY+GXbh0ZUg=
+		</data>
+		<key>app/tns_modules/nativescript-clipboard/package.json</key>
+		<data>
+		bGxovEieVSVP+njJzMPdRFAG/SQ=
+		</data>
 		<key>app/tns_modules/nativescript-email/LICENSE</key>
 		<data>
 		8Qg+SqR9Y8ZlF6UtwC1KD4m1KC0=
@@ -2267,6 +2311,34 @@
 		<key>app/tns_modules/nativescript-local-notifications/package.json</key>
 		<data>
 		7LXKCfe2bBK6h136IQd4fKdeZV4=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/LICENSE</key>
+		<data>
+		7rkd0q4rYK3SlRUt7yGK7k1g+ZU=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/README.md</key>
+		<data>
+		ZbOnMz41INddJVboLGQshT9o+bw=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/package.json</key>
+		<data>
+		le0GU/nGSch1z6wdcHHO/q2gdjY=
+		</data>
+		<key>app/tns_modules/nativescript-permissions/permissions.js</key>
+		<data>
+		jJ6pD624dsp+RevcpPa3Ar6JLHI=
+		</data>
+		<key>app/tns_modules/nativescript-phone/index.js</key>
+		<data>
+		56W4jPh4Vgro3DF4AmhQdLkVdxo=
+		</data>
+		<key>app/tns_modules/nativescript-phone/package.json</key>
+		<data>
+		VAu6xU6T1o+gfmx1ogBUnAwqWT8=
+		</data>
+		<key>app/tns_modules/nativescript-phone/scripts/build-native.js</key>
+		<data>
+		6aeM/Yn8LEwWXNEMNEIhVJMjjUY=
 		</data>
 		<key>app/tns_modules/nativescript-theme-core/css/aqua.css</key>
 		<data>
@@ -3752,6 +3824,14 @@
 		<data>
 		4xGkYIdub9H46/KkcU//H+6GU6k=
 		</data>
+		<key>app/whats-new-page.js</key>
+		<data>
+		nl35W5r6NE80k96WpKGueYKmTLY=
+		</data>
+		<key>app/whats-new-page.xml</key>
+		<data>
+		FvXMlFJeYtvT7JSWrBcUrfeZB4U=
+		</data>
 		<key>app/workdays-utility-page.js</key>
 		<data>
 		Ny6Dc8FQvgpxRknxbnm6PHGORgg=
@@ -3934,11 +4014,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NFSjaW17UyZNiIfvHMG3U5UkO9A=
+			+YZnZ51myJkP5c6q35TDzY2wQMs=
 			</data>
 			<key>hash2</key>
 			<data>
-			i2RYsz+RvJSyBtkJ2Fl/2FArc5IlNJu3jGsi1W2Zj7A=
+			NRwrFmy9bahsHhnah7mpY7A5k65F3aAj8RwShOeX5N4=
 			</data>
 		</dict>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager</key>
@@ -4451,11 +4531,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2kjOshnNBkDM1EmZF2qA1bTwCRQ=
+			T4N8nR9NWVaVZOoyguNElM2efQU=
 			</data>
 			<key>hash2</key>
 			<data>
-			gRis4pYdijN7uoitMKmJ9wMj2hqqLr18I/Bppbhkvmg=
+			vQBTEIG4fmN+J5FugnQGc/QUaF2nBfmhsovBNa3N1+s=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -4473,11 +4553,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yXfNAj6XBknJLcRdULU+rBIXjGU=
+			4ljbwWJNm1rij2YQWBWrjyl3/Wc=
 			</data>
 			<key>hash2</key>
 			<data>
-			8MutG8rUojTFA8m28Ukzlu0uHXiFSCQIZPbh1QYPtCg=
+			9y9mBO+E65eUVkcFBC1DlwOYUIoqPxP17occ2sNqJhY=
 			</data>
 		</dict>
 		<key>app/CODE_OF_CONDUCT.md</key>
@@ -4495,11 +4575,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			054AkiTJVw5LSsN4YYWDZEO2Cd8=
+			OBpgtqmH9qltR7a4crC4FArP2G8=
 			</data>
 			<key>hash2</key>
 			<data>
-			TYOxRY/eKpyc6PngHUlRqX9HF9RVmnz5GWt1lGTIaos=
+			nsSAc1kY1hoH+JsIdlyQxXhdfoa4fVETz4dOUbrIGA4=
 			</data>
 		</dict>
 		<key>app/FR_POC-page.xml</key>
@@ -4645,6 +4725,28 @@
 			qjYAKZfr4W9prfjEd8SLmDqZNXuO2MU6RDzgCIaehxM=
 			</data>
 		</dict>
+		<key>app/FR_dynamic-notification-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PyCUxMdt5SyAjjVmZJ5AGV7HDvE=
+			</data>
+			<key>hash2</key>
+			<data>
+			YUj4whOjw2d9uPRw9qNYGdjDMGlkaCl6rzAWfaMb8jI=
+			</data>
+		</dict>
+		<key>app/FR_dynamic-notification-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			73WijstkYSlxGgiIQYwGcp3nYKo=
+			</data>
+			<key>hash2</key>
+			<data>
+			IGJolxKg7Xnn72uTqMgAuGiBjJja/cJ9CVXrbxrgrSE=
+			</data>
+		</dict>
 		<key>app/FR_dynamic-walkthrough-page.js</key>
 		<dict>
 			<key>hash</key>
@@ -4671,11 +4773,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dN8y/xiWNPEoRGoEwAh5s95tETM=
+			Opxe6FiUIp4dLgDByWdVhjOr0AU=
 			</data>
 			<key>hash2</key>
 			<data>
-			h9kyG6sJaMBYcHbPyOP+H7NWLh36VgnZ+qqGa5FB1Vg=
+			2+DKlxpHrcia134178wPD+5xui1MSlD0npxMwBRYgHg=
 			</data>
 		</dict>
 		<key>app/FR_feedback-page.xml</key>
@@ -4770,11 +4872,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Oeo10iqLlkOSSxikWAg8jhiKDxU=
+			6Rs8SYQfEUvyv39CZtR896CfswY=
 			</data>
 			<key>hash2</key>
 			<data>
-			BW3a5kHh7PD926TgmZpHDW+uoHKI111YOeWMzaWMRJE=
+			CUuWH9gcGbqZk+uiHkVycItM4zVTUYWM/RWKPJBiQP4=
 			</data>
 		</dict>
 		<key>app/FR_my-team.js</key>
@@ -5085,6 +5187,28 @@
 			UilsGpulAkIL+4Zsl+P850OdVStauCzxSF5zLdKR+Cg=
 			</data>
 		</dict>
+		<key>app/FR_whats-new-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			q3mlQBULeG2P/nWe04Sn1/pl2IY=
+			</data>
+			<key>hash2</key>
+			<data>
+			2BxO9pYS/1pcJdfJaiuQfuy346FHQCoioPuaEhTmxO8=
+			</data>
+		</dict>
+		<key>app/FR_whats-new-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+Awc7seoI4r/t7yGRjT59n2uPQA=
+			</data>
+			<key>hash2</key>
+			<data>
+			7A+mVDguOtTL4k7acQLdNpQeih1CdgaMXFFgWc4uEQU=
+			</data>
+		</dict>
 		<key>app/FR_workdays-utility-page.js</key>
 		<dict>
 			<key>hash</key>
@@ -5122,11 +5246,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4GyugM9MVuEtPqsyiP3Pgjv+5NI=
+			5oMuUGBubguUgIh/N75vQH4qE9U=
 			</data>
 			<key>hash2</key>
 			<data>
-			sBu7MvCe2oPZMMjeqSKO2GYRrPyGIUlLxp8Nc79Kl/g=
+			VYAWGQ9TQUeEHtUTh8lTrhro+4X5nHDYEedfUWKfhC4=
 			</data>
 		</dict>
 		<key>app/POC-page.xml</key>
@@ -5316,6 +5440,28 @@
 			qjYAKZfr4W9prfjEd8SLmDqZNXuO2MU6RDzgCIaehxM=
 			</data>
 		</dict>
+		<key>app/dynamic-notification-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CouscO7emOTKcsAu6IMVJU0l1mU=
+			</data>
+			<key>hash2</key>
+			<data>
+			HjC9F41SxKSvcmDPPYvisWn08SFvga0GTPZV/NAwbhQ=
+			</data>
+		</dict>
+		<key>app/dynamic-notification-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			73WijstkYSlxGgiIQYwGcp3nYKo=
+			</data>
+			<key>hash2</key>
+			<data>
+			IGJolxKg7Xnn72uTqMgAuGiBjJja/cJ9CVXrbxrgrSE=
+			</data>
+		</dict>
 		<key>app/dynamic-walkthrough-page.js</key>
 		<dict>
 			<key>hash</key>
@@ -5342,11 +5488,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Ab46pB0IcHcLN0ju+RF/aH1vCrU=
+			k93QqKx+HIhl3bBLUZe1rjna2t4=
 			</data>
 			<key>hash2</key>
 			<data>
-			UPAPaU2yopmWcOQq8dAWEChahJX104VNiADz+kaeYTo=
+			qJh0sI4sTP5/llG0WBvnGIisE7TdgNJsRItmUhzsjxE=
 			</data>
 		</dict>
 		<key>app/feedback-page.xml</key>
@@ -5562,11 +5708,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QGgt5A8qYo4Fkv3+kVE7BadMqu8=
+			lWOCY+8kleV8uCx+QaCwgxk9U6Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			SVctIAdWfjjcj84uYDMVIkMjQgvpd62tNbRhd9+rQmM=
+			cxW60EUDbgbeFIc7Bn2zRz66+RNxVe0TU/N7vpx8+04=
 			</data>
 		</dict>
 		<key>app/my-team.js</key>
@@ -9837,6 +9983,61 @@
 			DmriPsrJlqxsg/zu0b0cgJ3mFXH01coDGNo/Asa95Ww=
 			</data>
 		</dict>
+		<key>app/tns_modules/nativescript-clipboard/.npmignore</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WiIvfbwWZIJgGSlzlxDyVb+aUo4=
+			</data>
+			<key>hash2</key>
+			<data>
+			eUlJWxQxOrQvDlmQ0y59sZOFLjqFJZbHCcjNiIOYaJY=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/LICENSE</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8Qg+SqR9Y8ZlF6UtwC1KD4m1KC0=
+			</data>
+			<key>hash2</key>
+			<data>
+			Yrm5Ms9e/9CX3mdfZgTwXcH6V1U61eJTgVY8DNmpIrQ=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/README.md</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0nxlJMzEmJzAZ1knG4BNccWsssw=
+			</data>
+			<key>hash2</key>
+			<data>
+			dipQO/MyhPJa2eCvw63I7p0AScpSyDrIFGDAHNbK++k=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/clipboard.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6bMCUs+P9wcY5aJWtY+GXbh0ZUg=
+			</data>
+			<key>hash2</key>
+			<data>
+			C/2a/TCbwV8xewljUCm9jegHz5M7UzDgdEm4lyNG2YM=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-clipboard/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			bGxovEieVSVP+njJzMPdRFAG/SQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			U+x9in50CE9u4dSA7kWOvM+xcnyGfNd8hoLWm150SAU=
+			</data>
+		</dict>
 		<key>app/tns_modules/nativescript-email/LICENSE</key>
 		<dict>
 			<key>hash</key>
@@ -9978,6 +10179,83 @@
 			<key>hash2</key>
 			<data>
 			HseOIKOvik8QUyaw9TvqMklo0pJ0AsfI0uA9TuQFKFQ=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/LICENSE</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7rkd0q4rYK3SlRUt7yGK7k1g+ZU=
+			</data>
+			<key>hash2</key>
+			<data>
+			R+g/WVCFSYtAOUi/R9EsdMo3J0M/4xEB3zhJuWGF+IM=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/README.md</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZbOnMz41INddJVboLGQshT9o+bw=
+			</data>
+			<key>hash2</key>
+			<data>
+			XFiajKOMiZR2eFHRlFZSDv32ngR/mey8EaX+TZMoNuE=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			le0GU/nGSch1z6wdcHHO/q2gdjY=
+			</data>
+			<key>hash2</key>
+			<data>
+			pvVLndXVfPZ8veh1a86iDwRgpEfnZzEABeMl3Zl+f08=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-permissions/permissions.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			jJ6pD624dsp+RevcpPa3Ar6JLHI=
+			</data>
+			<key>hash2</key>
+			<data>
+			91hyhH2G5KOTZmtW12abkLLuIRhAUp0nV3AVqvA6M60=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-phone/index.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			56W4jPh4Vgro3DF4AmhQdLkVdxo=
+			</data>
+			<key>hash2</key>
+			<data>
+			JH8bT0q1WWzJ86ASW38rPreVKTlMYaHmNQgy3ZIrCe8=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-phone/package.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VAu6xU6T1o+gfmx1ogBUnAwqWT8=
+			</data>
+			<key>hash2</key>
+			<data>
+			TY1BAyLaCFG0/LOzLwWshu5zh6eFslDNp8YeVeghQHs=
+			</data>
+		</dict>
+		<key>app/tns_modules/nativescript-phone/scripts/build-native.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6aeM/Yn8LEwWXNEMNEIhVJMjjUY=
+			</data>
+			<key>hash2</key>
+			<data>
+			Y5fvcM7LFji7bb9AH84ZpKLys06hW4bVS7KAKSAY+T0=
 			</data>
 		</dict>
 		<key>app/tns_modules/nativescript-theme-core/css/aqua.css</key>
@@ -14059,6 +14337,28 @@
 			<key>hash2</key>
 			<data>
 			kUr/2AtyBmqVBpTcDB+YP6GJfJq3/+/SsF0yFUdlZAE=
+			</data>
+		</dict>
+		<key>app/whats-new-page.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			nl35W5r6NE80k96WpKGueYKmTLY=
+			</data>
+			<key>hash2</key>
+			<data>
+			N/swWUWBUEbXOUGVv2NiqTzjWCfxA0T3QVC061Is7rk=
+			</data>
+		</dict>
+		<key>app/whats-new-page.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FvXMlFJeYtvT7JSWrBcUrfeZB4U=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZlvokDU2AtI6D0lf5PCZFUvqIRFdb+8cAn2oBiux2TE=
 			</data>
 		</dict>
 		<key>app/workdays-utility-page.js</key>

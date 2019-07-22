@@ -21,6 +21,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-article-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_search-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_roles-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/whats-new-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/connect-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_pay-info.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_timeliness-utility-page.js
@@ -31,6 +32,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_lookup-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/TOS-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_student-landing-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_dynamic-notification-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/contact-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_calculators-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_POC-page.js
@@ -49,6 +51,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_connect-landing-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_profile-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_dynamic-article-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_whats-new-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_TOS-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/pay-info.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_sec34-notifications-page.js
@@ -57,6 +60,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/app.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/promotion-calc-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/leave-tracking-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-clipboard/clipboard.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-phone/index.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-phone/scripts/build-native.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-email/email.js
@@ -217,3 +221,4 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/console/console.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-local-notifications/local-notifications.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/tns_modules/nativescript-local-notifications/local-notifications-common.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-notification-page.js
