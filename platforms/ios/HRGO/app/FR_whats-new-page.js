@@ -24,15 +24,15 @@ exports.goToUtility = function(args){
 exports.goToWorkingDay = function(args){
     var topmost = frameModule.topmost();
     console.log(args.object.pageName);
-    topmost.navigate("workdays-utility-page");
+    topmost.navigate("FR_workdays-utility-page");
 };
 exports.goToSalary = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("pay-info");
+    topmost.navigate("FR_pay-info");
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 };
 exports.goBack = function(args){
@@ -41,7 +41,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -51,7 +51,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -61,11 +61,11 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 exports.goToArticle = function(args){
     var navigationOptions={
-        moduleName:'dynamic-article-page',
+        moduleName:'FR_dynamic-article-page',
         context:{Language: "ENG",
                 ArticleID: args.object.id,
                 ArticleTitle: args.object.text
@@ -77,7 +77,7 @@ exports.goToArticle = function(args){
 };
 exports.goToWalkthrough = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("walkthrough-page");
+    topmost.navigate("FR_walkthrough-page");
 };
 exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
@@ -85,7 +85,7 @@ exports.goToUtility = function(args){
 };
 var goToNotification = function(args){
     var navigationOptions={
-        moduleName:'dynamic-notification-page',
+        moduleName:'FR_dynamic-notification-page',
         context:{Language: "ENG",
                 ArticleID: args.object.id,
                 ArticleTitle: args.object.text
@@ -110,6 +110,7 @@ exports.navToggle = function(args){
 };
 var displayNotifications = function(){
     var notificationList = getNotificationList();
+    console.log(notificationList.length);
     var TODAY = new Date();
     var notificationStack = pageObject.getViewById("NewsList");
     notificationStack.removeChildren();
@@ -131,9 +132,9 @@ var displayNotifications = function(){
 var getNotificationList = function(){
     var navItem = {};
     var navList = [];
-    navItem = {title:"Phoenix Compensation Agreement", ref:"1", publishDate:"July 23, 2019 07:00:00"};
+    navItem = {title:"Entente d’indemnisation liée à Phénix", ref:"1", publishDate:"July 23, 2019 07:00:00"};
     navList.push(navItem);
-    navItem = {title:"Statement from the Department of National Defence and the Canadian Armed Forces", ref:"2", publishDate:"July 18, 2019 05:00:00"};
+    navItem = {title:"Déclaration du ministère de la Défense nationale et des Forces armées canadiennes", ref:"2", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
     //console.log(navList[0].title);
     return navList;

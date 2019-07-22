@@ -5,7 +5,7 @@ var pageData = new observable.Observable();
 var subNavTitle = "YourPayInformation";
 var buttonModule = require("tns-core-modules/ui/button");
 const Button = require("tns-core-modules/ui/button/").Button;
-var navList = [];
+
 
 exports.pageLoaded = function(args) {
     //pageData.set(subNavTitle, true);
@@ -130,7 +130,8 @@ var displayNotifications = function(){
 }
 var getNotificationList = function(){
     var navItem = {};
-    navItem = {title:"Phoenix Compensation Agreement", ref:"1", publishDate:"July 21, 2019 07:00:00"};
+    var navList = [];
+    navItem = {title:"Phoenix Compensation Agreement", ref:"1", publishDate:"July 23, 2019 07:00:00"};
     navList.push(navItem);
     navItem = {title:"Statement from the Department of National Defence and the Canadian Armed Forces", ref:"2", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);

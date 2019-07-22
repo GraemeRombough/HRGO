@@ -4,13 +4,12 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="WHAT'S NEW" class="Header_Label"/>
+      <label col="1" row="0" text="NOUVELLES" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
     <ScrollView>
     <StackLayout orientation="vertical" id="NewsList">
-        <Button class="Main_Nav_SubLine" text="Phoenix Compensation Agreement" id="1" tap="goToNotification"/>
-        <Button class="Main_Nav_SubLine" text="New Surprise Announcement" id="2" tap="goToNotification"/>
+        
     </StackLayout>
     </ScrollView>
   </StackLayout>

@@ -41,6 +41,13 @@
             <Button row="0" class="Home_Nav_Icon" text="&#xe923;" tap="goToUtility" pageName="contact-landing-page"/>
             <Button row="1" class="Home_Nav_Label" text="CONTACTS" tap="goToUtility" pageName="contact-landing-page"/>
           </GridLayout>
+        </StackLayout>  
+
+        <StackLayout orientation="horizontal" class="Home_Nav_Row">
+          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
+            <Button row="0" class="Home_Nav_Icon" text="&#xea07;" tap="goToUtility" pageName="whats-new-page"/>
+            <Button row="1" class="Home_Nav_Label" text="NOUVELLES" tap="goToUtility" pageName="whats-new-landing-page"/>
+          </GridLayout>
         </StackLayout>   
 
       </StackLayout>
