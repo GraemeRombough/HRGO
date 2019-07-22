@@ -10,7 +10,6 @@
     </GridLayout>
       <ScrollView orientation="vertical">
       <StackLayout class="Article_MainStack" id="articleContent" width="100%" orientation="vertical">
-
       </StackLayout>
       </ScrollView>
 

@@ -130,9 +130,9 @@ var displayNotifications = function(){
 }
 var getNotificationList = function(){
     var navItem = {};
-    navItem = {title:"Phoenix Compensation Agreement", ref:"1", publishDate:"July 18, 2019 05:00:00"};
+    navItem = {title:"Phoenix Compensation Agreement", ref:"1", publishDate:"July 21, 2019 07:00:00"};
     navList.push(navItem);
-    navItem = {title:"New Notification", ref:"2", publishDate:"July 19, 2019 05:00:00"};
+    navItem = {title:"Statement from the Department of National Defence and the Canadian Armed Forces", ref:"2", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
     //console.log(navList[0].title);
     return navList;
