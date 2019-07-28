@@ -110,7 +110,6 @@ var createArticle = function()
     contentStack.orientation = "vertical";
     contentStack.row = 0;
     
-
     var headerLabel = new Label();
     headerLabel.text = articleReference.ArticleTitle;
     headerLabel.className = "HeaderLabel";
@@ -127,7 +126,6 @@ var createArticle = function()
         var currentHTML;
         articleItemSplit = articleComponents[z].split("*>");
         var articleLabel = new Label();
-        //LabelArray.push(new Label());
         var textString = "";
         if(articleItemSplit[0] == "Article_List"){
             textString = "\u2022 ";
@@ -138,51 +136,23 @@ var createArticle = function()
         if(textString.includes("::external::")){
             var textWithExternal = textString.split("::external::");
             console.log("TextWithExternal: " + textWithExternal.length);
-            var inlineStyles = `style=""`;
-            
             var htmlString = `<div class="${articleItemSplit[0]}">`;
             for(i=0; i < textWithExternal.length; i++){
                 if(textWithExternal[i].includes("||")){
                     var linkText = textWithExternal[i].split("||");
-                    
-                   // console.log(linkText[1]);
-                    
-                    //labelSpan.text = `<a href="google.com> link here </a>`;
-                    htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;
-                    //labelSpan.text = "<a href='http://google.com'>Hello World</a>";
-                    
+                    htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;      
                 }else{
                     
                     htmlString += `${textWithExternal[i]}`;
                 }
             }
             articleLabel.className = articleItemSplit[0];
-            
-            //newFormattedText.className = articleItemSplit[0];
             var htmlParagraph = new HtmlView();
-            //htmlParagraph.className = "Article_Body";
             htmlString += "</div>";
             totalHTML += htmlString;
-            //htmlParagraph.html = htmlString;
-            //articleSlide.addChild(articleLabel);
-            //articleSlide.addChild(newFormattedText);
-            //webView.src = "<html><body>" + htmlString + "</body></html>";
-            //__articleSlide.addChild(webView);
-
-            //__articleSlide.addChild(htmlParagraph);
-            
-            //console.log(htmlString);
         }else{
-            //articleLabel.className = articleItemSplit[0];
-            //articleLabel.text = textString;
-            totalHTML += `<div class="${articleItemSplit[0]}">${textString}</div>`;
-            //__articleSlide.addChild(articleLabel);
-            
-        }
-        //totalHTML += `<div class="${articleItemSplit[0]}">${articleItemSplit[1]}</div>`;
-        
-        
-        
+            totalHTML += `<div class="${articleItemSplit[0]}">${textString}</div>`;   
+        }    
     }
     totalHTML += footerHTML;
     console.log(totalHTML);
