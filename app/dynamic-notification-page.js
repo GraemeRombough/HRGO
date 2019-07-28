@@ -11,6 +11,7 @@ const FormattedString = require("tns-core-modules/text/formatted-string").Format
 const Span = require("tns-core-modules/text/span").Span;
 const pageData = new observable.Observable();
 const HtmlView = require("tns-core-modules/ui/html-view").HtmlView;
+const webViewModule = require("tns-core-modules/ui/web-view");
 var articleReference;
 var pageObject;
 
@@ -84,6 +85,20 @@ var getArticleText = function(aID, aLang)
 }
 var createArticle = function()
 {   
+
+    //STYLE HTML STRINGS
+    var bodyStyle = `.Article_Body{ height:auto; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 25px; margin-right: 25px; margin-top: 28px; margin-bottom:14px; padding-bottom:0px; white-space: normal; color: #333;}`;
+    var h1Style = `.Article_H1{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
+    var h2Style = `.Article_H2{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
+    var h3Style = `.Article_H3{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 25px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
+    var noteStyle = `.Article_Note{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; font-style: italic; margin-left: 25px; margin-right: 25px; margin-top: 5px; margin-bottom:5px; white-space: normal; color: #333;}`;
+    var listStyle = `.Article_List{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 50px; margin-right: 25px; margin-top: 18px; margin-bottom:5px; white-space: normal; color: #333;}`;
+    var allStyles = bodyStyle + h1Style + h2Style + h3Style + noteStyle + listStyle;
+    var headerHTML = `<html><head><style>${allStyles}</style></head><body>`;
+    var footerHTML = "</body></html>"
+    var totalHTML;
+    totalHTML = headerHTML;
+    var webView = new webViewModule.WebView();
     const contentStack = new StackLayout();
     const myScroller = new ScrollView();
     const articleStack = new StackLayout();
@@ -107,10 +122,9 @@ var createArticle = function()
 
     var articleComponents = curArticleText.Text.split("<*");
     var articleSlide = pageObject.getViewById("articleContent");
-    articleSlide.removeChildren();
+    //articleSlide.removeChildren();
     for (z=0; z<articleComponents.length; z++){
-        
-        
+        var currentHTML;
         articleItemSplit = articleComponents[z].split("*>");
         var articleLabel = new Label();
         //LabelArray.push(new Label());
@@ -122,52 +136,57 @@ var createArticle = function()
             textString += articleItemSplit[1]
         }
         if(textString.includes("::external::")){
-            var newFormattedText = new FormattedString();
-//label.formattedText = formattedStringLabel;
             var textWithExternal = textString.split("::external::");
             console.log("TextWithExternal: " + textWithExternal.length);
-            var inlineStyles = `style="height:auto; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 25px; margin-right: 25px; margin-top: 28px; margin-bottom:14px; padding-bottom:0px; white-space: normal; color: #333;"`;
+            var inlineStyles = `style=""`;
             
-            var htmlString = `<div ${inlineStyles}>`;
+            var htmlString = `<div class="${articleItemSplit[0]}">`;
             for(i=0; i < textWithExternal.length; i++){
                 if(textWithExternal[i].includes("||")){
                     var linkText = textWithExternal[i].split("||");
-                    var labelSpan = new Span();
+                    
                    // console.log(linkText[1]);
-                    labelSpan.text = linkText[0];
+                    
                     //labelSpan.text = `<a href="google.com> link here </a>`;
                     htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;
                     //labelSpan.text = "<a href='http://google.com'>Hello World</a>";
-                    labelSpan.url = linkText[1];
-                    labelSpan.style.color = "rgb(0,31,91)";
-                    newFormattedText.spans.push(labelSpan);
+                    
                 }else{
-                    var labelSpan = new Span();
-                    labelSpan.text = textWithExternal[i];
-                    newFormattedText.spans.push(labelSpan);
+                    
                     htmlString += `${textWithExternal[i]}`;
                 }
             }
             articleLabel.className = articleItemSplit[0];
-            articleLabel.formattedText = newFormattedText;
+            
             //newFormattedText.className = articleItemSplit[0];
             var htmlParagraph = new HtmlView();
             //htmlParagraph.className = "Article_Body";
             htmlString += "</div>";
-
-            htmlParagraph.html = htmlString;
+            totalHTML += htmlString;
+            //htmlParagraph.html = htmlString;
             //articleSlide.addChild(articleLabel);
             //articleSlide.addChild(newFormattedText);
-            articleSlide.addChild(htmlParagraph);
+            //webView.src = "<html><body>" + htmlString + "</body></html>";
+            //__articleSlide.addChild(webView);
+
+            //__articleSlide.addChild(htmlParagraph);
             
             //console.log(htmlString);
         }else{
-            articleLabel.className = articleItemSplit[0];
-            articleLabel.text = textString;
-            articleSlide.addChild(articleLabel);
+            //articleLabel.className = articleItemSplit[0];
+            //articleLabel.text = textString;
+            totalHTML += `<div class="${articleItemSplit[0]}">${textString}</div>`;
+            //__articleSlide.addChild(articleLabel);
+            
         }
+        //totalHTML += `<div class="${articleItemSplit[0]}">${articleItemSplit[1]}</div>`;
+        
+        
         
     }
+    totalHTML += footerHTML;
+    console.log(totalHTML);
+    pageData.set("ArticleHTML", totalHTML);
     pageData.set("HeaderTitle", curArticleText.Title);
 
 }
