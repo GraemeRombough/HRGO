@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Jul 28 22:26:02 EDT 2019
+#Mon Jul 29 08:43:35 EDT 2019
 739.baseType=DIRECTORY
 38.path=app/tns_modules/moment/src/locale/it.js
 429.baseType=DIRECTORY
@@ -763,7 +763,7 @@
 777.path=app/FR_profile-page.xml
 898.base=/Users/graemerombough/HRGO/platforms/android/app/build/intermediates/merged_assets/release/out
 601.set=ASSET
-692.path=app/tns_modules/moment/locale/es.js
+692.path=app/dynamic-video-page.js
 210.path=app/tns_modules/moment/src/locale/fi.js
 235.set=ASSET
 137.baseType=DIRECTORY
@@ -1451,7 +1451,7 @@
 636.set=ASSET
 263.path=app/tns_modules/moment/src/lib/moment/format.js
 128.set=ASSET
-826.path=app/FR_dynamic-video-page.js
+826.path=app/tns_modules/moment/src/locale/gd.js
 765.set=ASSET
 894.set=ASSET
 90.path=app/tns_modules/nativescript-theme-core/scss/_forms.scss
@@ -2735,7 +2735,7 @@ count=901
 778.path=app/FR_SJD-page.xml
 899.base=/Users/graemerombough/HRGO/platforms/android/app/build/intermediates/merged_assets/release/out
 611.set=ASSET
-693.path=app/dynamic-video-page.js
+693.path=app/tns_modules/moment/locale/es.js
 211.path=app/FR_calculators-landing-page.xml
 245.set=ASSET
 374.set=ASSET
@@ -3077,7 +3077,7 @@ count=901
 626.set=ASSET
 262.path=app/tns_modules/moment/locale/nl-be.js
 118.set=ASSET
-825.path=app/tns_modules/moment/src/locale/gd.js
+825.path=app/FR_dynamic-video-page.js
 755.set=ASSET
 884.set=ASSET
 697.base=/Users/graemerombough/HRGO/platforms/android/app/build/intermediates/merged_assets/release/out
