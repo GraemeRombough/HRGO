@@ -62,6 +62,18 @@ exports.goToArticle = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate(navigationOptions);
 };
+exports.goToVideo = function(args){
+    var navigationOptions={
+        moduleName:'dynamic-video-page',
+        context:{Language: "ENG",
+                ArticleID: args.object.id,
+                ArticleTitle: args.object.text
+                }
+            }
+    console.log(args.object.id);
+    var topmost = frameModule.topmost();
+    topmost.navigate(navigationOptions);
+};
 exports.goToWalkthrough = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("dynamic-walkthrough-page");

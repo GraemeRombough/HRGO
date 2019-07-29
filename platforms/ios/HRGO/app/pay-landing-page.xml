@@ -37,6 +37,17 @@
         <Button class="Main_Nav_SubLine" id="20" text="Leave with Income Averaging" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="21" text="Pre-retirement Transition Leave" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
 
+      <Button class="Sub_Nav_Line" text="HRSS Videos" tap="navToggle" value="Videos"/>
+        <Button class="Main_Nav_SubLine" id="1" text="Sign in and registration process" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="2" text="Submitting a par via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="3" text="Submitting a bulk par via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="4" text="Submitting a phoneix feedback form via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="5" text="Escalating a pay issue via the hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="6" text="Submitting an access timekeeper via the hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="7" text="Submitting other requests via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="8" text="Submitting a pri creation verification request" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" id="9" text="Tracking the progress of a pay related case via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>  
+      
       <Button class="Sub_Nav_Line" text="Utilities" tap="navToggle" value="Utilities"/>
         <Button class="Main_Nav_SubLine" text="Calculate Gross Pay" pageName="pay-info" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Calculate Promotion Step" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
