@@ -12,6 +12,8 @@ const webViewModule = require("tns-core-modules/ui/web-view");
 const pageData = new observable.Observable();
 var articleReference;
 var pageObject;
+const email = require("nativescript-email");
+var phone = require("nativescript-phone");
 
 exports.pageLoaded = function(args) {
     const page = args.object;
@@ -81,43 +83,42 @@ var getArticleText = function(aID, aLang)
     return articleReturn;
     //return articleText;
 }
+exports.onLoadStarted = function(args){
+    checkURL = args.url.split(":");
+    if(checkURL.length > 1){
+        if(checkURL[0] == "mailto"){
+            console.log(checkURL[1]);
+            emailLink(checkURL[1]);
+            args.object.stopLoading();
+        }else if(checkURL[0] == "tel"){
+            console.log(checkURL[1]);
+            callLink(checkURL[1]);
+            args.object.stopLoading();
+        }
+        console.log(args.url);
+    }
+}
+var callLink = function(phoneNumber){
+    console.log("call number:" + phoneNumber);
+    phone.dial(phoneNumber,true);
+
+};
+var emailLink = function(emailText){
+    console.log("send email to:" + emailText);
+    var toAddress = [];
+    toAddress.push(emailText);
+    if (email.available()){
+        email.compose({
+            subject: "",
+            body: "",
+            to: toAddress
+        });
+    } else {
+        console.log("Email Not Available");
+    }
+};
 var createArticle = function()
 {   
-    /* const contentStack = new StackLayout();
-    const myScroller = new ScrollView();
-    const articleStack = new StackLayout();
-    // Set the orientation property
-    articleStack.orientation = "vertical";
-    articleStack.col = 1;
-    articleStack.className = "Article_MainStack";
-    contentStack.orientation = "vertical";
-    contentStack.row = 0;
-    var headerLabel = new Label();
-    headerLabel.text = articleReference.ArticleTitle;
-    headerLabel.className = "HeaderLabel";
-    var LabelArray = [];
-    console.log("Create Article: ");   
-    var curArticleText = getArticleText(articleReference.ArticleID);
-    var articleItemSplit;
-    var articleComponents = curArticleText.Text.split("<*");
-    var articleSlide = pageObject.getViewById("articleContent");
-    articleSlide.removeChildren();
-    for (z=0; z<articleComponents.length; z++){
-        articleItemSplit = articleComponents[z].split("*>");
-        var articleLabel = new Label();
-        //LabelArray.push(new Label());
-        var textString = "";
-        if(articleItemSplit[0] == "Article_List"){
-            textString = "\u2022 ";
-        }
-        if(articleItemSplit[1]){
-            textString += articleItemSplit[1]
-        }
-        articleLabel.className = articleItemSplit[0];
-        articleLabel.text = textString;
-        articleSlide.addChild(articleLabel);
-    }
-    pageData.set("HeaderTitle", curArticleText.Title); */
     var bodyStyle = `.Article_Body{ height:auto; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 25px; margin-right: 25px; margin-top: 28px; margin-bottom:14px; padding-bottom:0px; white-space: normal; color: #333;}`;
     var h1Style = `.Article_H1{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
     var h2Style = `.Article_H2{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
@@ -171,7 +172,7 @@ var createArticle = function()
             for(i=0; i < textWithExternal.length; i++){
                 if(textWithExternal[i].includes("||")){
                     var linkText = textWithExternal[i].split("||");
-                    htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;      
+                    htmlString += `<a href="${linkText[1]}" data-rel="external">${linkText[0]}</a>`;      
                 }else{
                     
                     htmlString += `${textWithExternal[i]}`;
@@ -253,7 +254,7 @@ var getFromDatabase = function(){
     contentData.push(returnedItem);
 
     //STUDENT PRE-ONBOARDING
-    returnedItem = {Ref:"22", BusinessLine:"Students", Category:"Student Onboarding", Title:"Student Pre-Onboarding", Type:"Article", Content:"<*Article_H1*>Student Pre-Onboarding <*Article_Body*>We want to help make your onboarding experience a positive one! Before you start your student employment at the Department of National Defence (DND), please ensure that you take the time to review the information below so that you are prepared for your first day of work.  <*Article_H2*>Read about who we are<*Article_List*>Go to the ::external::About Us||http://www.forces.gc.ca/en/about-us.page::external:: page to read about the Defence Team’s vision and organizational priorities.  <*Article_H2*>Familiarize yourself with the organizational structure at DND, Military ranks<*Article_List*>Go to the ::external::About Organizational Structure||http://www.forces.gc.ca/en/about-org-structure/index.page::external:: page to read about DND’s high-level reporting structure. <*Article_List*>Go to the ::external::Rank Appointment Insignia page||http://www.forces.gc.ca/en/honours-history-badges-insignia/rank.page::external:: to read about the ranks within the Canadian Armed Forces (CAF). <*Article_H2*>Familiarize yourself with the Student Rates of Pay<*Article_List*>Students are paid in accordance with the ::external::Terms and Conditions of Employment for Students||https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=12583::external:: (::external::Student Rates of Pay||https://www.canada.ca/en/treasury-board-secretariat/services/pay/rates-pay/student-rates-pay-effective-january-1-2014.html::external::). Payday is every two weeks, falling on Wednesdays, so you can expect to get paid four weeks from the date your employment starts (as we are paid in arrears). <*Article_List*>In lieu of vacation, students are entitled to vacation pay, equal to four per cent of their total regular and overtime earnings.<*Article_H2*>Read and complete all forms provided by your manager and/or Human Resources (HR)<*Article_List*>Letter of Offer<*Article_List*>Direct Deposit Form<*Article_List*>Tax Forms (Federal and Provincial)<*Article_List*>Employee Questionnaire Form<*Article_List*>Political Activities and You! Brochure<*Article_List*>DND and CF Code of Values and Ethics Brochure<*Article_List*>DND/CAF Self-Identification Form<*Article_H2*>Prepare for your first day of work<*Article_Body*>If your manager hasn’t contacted you, contact them to confirm your start date, expected time of arrival, work location, transportation options/parking, what to do when you arrive, etc. <*Article_List*>Be prepared to talk to your manager about your role and expectations and any workplace accommodations that are needed; come prepared with any questions you might have, as your manager/supervisor will be setting some time aside to review your Letter of Offer and other HR documents with you.<*Article_List*>Note that your manager will determine your hours of work, work breaks and the way your attendance will be recorded. This discussion will also cover procedures regarding overtime, leave requests and reporting in when you are unable to come to work.<*Article_H2*>Prepare to bring with you<*Article_Body*>A valid piece of government-issued photo ID (i.e. Driver’s License, Passport, etc.) in order to receive a temporary building pass.<*Article_Body*>Your signed Letter of Offer and any other any other information requested by your manager. <*Article_H2*>At DND<*Article_Body*>At DND, you will have access to a helpful Student Onboarding Program to assist you in becoming familiar with your new work environment. More information will be provided to you upon your arrival. We encourage you to take advantage of the onboarding tools and resources to better understand your new role and ensure that you enjoy your work experience with us.<*Article_Body*>For any questions please contact the ::external::DND Student Onboarding team.||mailto:DNDOnboarding-Acceuiletint%C3%A9grationduMDN@forces.gc.ca::external::"};
+    returnedItem = {Ref:"22", BusinessLine:"Students", Category:"Student Onboarding", Title:"Student Pre-Onboarding", Type:"Article", Content:"<*Article_H1*>Student Pre-Onboarding <*Article_Body*>We want to help make your onboarding experience a positive one! Before you start your student employment at the Department of National Defence (DND), please ensure that you take the time to review the information below so that you are prepared for your first day of work.  <*Article_H2*>Read about who we are<*Article_List*>Go to the ::external::About Us||http://www.forces.gc.ca/en/about-us.page::external:: page to read about the Defence Team’s vision and organizational priorities.  <*Article_H2*>Familiarize yourself with the organizational structure at DND, Military ranks<*Article_List*>Go to the ::external::About Organizational Structure||http://www.forces.gc.ca/en/about-org-structure/index.page::external:: page to read about DND’s high-level reporting structure. <*Article_List*>Go to the ::external::Rank Appointment Insignia page||http://www.forces.gc.ca/en/honours-history-badges-insignia/rank.page::external:: to read about the ranks within the Canadian Armed Forces (CAF). <*Article_H2*>Familiarize yourself with the Student Rates of Pay<*Article_List*>Students are paid in accordance with the ::external::Terms and Conditions of Employment for Students||https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=12583::external:: (::external::Student Rates of Pay||https://www.canada.ca/en/treasury-board-secretariat/services/pay/rates-pay/student-rates-pay-effective-january-1-2014.html::external::). Payday is every two weeks, falling on Wednesdays, so you can expect to get paid four weeks from the date your employment starts (as we are paid in arrears). <*Article_List*>In lieu of vacation, students are entitled to vacation pay, equal to four per cent of their total regular and overtime earnings.<*Article_H2*>Read and complete all forms provided by your manager and/or Human Resources (HR)<*Article_List*>Letter of Offer<*Article_List*>Direct Deposit Form<*Article_List*>Tax Forms (Federal and Provincial)<*Article_List*>Employee Questionnaire Form<*Article_List*>Political Activities and You! Brochure<*Article_List*>DND and CF Code of Values and Ethics Brochure<*Article_List*>DND/CAF Self-Identification Form<*Article_H2*>Prepare for your first day of work<*Article_Body*>If your manager hasn’t contacted you, contact them to confirm your start date, expected time of arrival, work location, transportation options/parking, what to do when you arrive, etc. <*Article_List*>Be prepared to talk to your manager about your role and expectations and any workplace accommodations that are needed; come prepared with any questions you might have, as your manager/supervisor will be setting some time aside to review your Letter of Offer and other HR documents with you.<*Article_List*>Note that your manager will determine your hours of work, work breaks and the way your attendance will be recorded. This discussion will also cover procedures regarding overtime, leave requests and reporting in when you are unable to come to work.<*Article_H2*>Prepare to bring with you<*Article_Body*>A valid piece of government-issued photo ID (i.e. Driver’s License, Passport, etc.) in order to receive a temporary building pass.<*Article_Body*>Your signed Letter of Offer and any other any other information requested by your manager. <*Article_H2*>At DND<*Article_Body*>At DND, you will have access to a helpful Student Onboarding Program to assist you in becoming familiar with your new work environment. More information will be provided to you upon your arrival. We encourage you to take advantage of the onboarding tools and resources to better understand your new role and ensure that you enjoy your work experience with us.<*Article_Body*>For any questions please contact the ::external::DND Student Onboarding team.||mailto:DNDOnboarding-AcceuiletintégrationduMDN@forces.gc.ca::external::"};
     contentData.push(returnedItem);
 
 

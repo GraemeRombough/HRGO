@@ -9,8 +9,8 @@
     </GridLayout>
     <ScrollView>
     <StackLayout orientation="vertical" id="NewsList">
-        <Button class="Main_Nav_SubLine" text="Phoenix Compensation Agreement" id="1" tap="goToNotification"/>
-        <Button class="Main_Nav_SubLine" text="New Surprise Announcement" id="2" tap="goToNotification"/>
+        <!-- <Button class="Main_Nav_SubLine" text="Phoenix Compensation Agreement" id="1" tap="goToNotification"/>
+        <Button class="Main_Nav_SubLine" text="New Surprise Announcement" id="2" tap="goToNotification"/> -->
     </StackLayout>
     </ScrollView>
   </StackLayout>

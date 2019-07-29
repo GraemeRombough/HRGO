@@ -94,7 +94,7 @@
 				858B832F18CA111C00AB12DE /* Products */,
 				989F7CCDFAA14C468614436D /* tns-core-modules */,
 				60AB936CF3E75A1FB6936948 /* Pods */,
-				9A1F5417BAE8457FBAACF2B4 /* TNSNativeSource */,
+				500E3CC8D3734024BE2D826F /* TNSNativeSource */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,7 +166,7 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		9A1F5417BAE8457FBAACF2B4 /* TNSNativeSource */ = {
+		500E3CC8D3734024BE2D826F /* TNSNativeSource */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -459,6 +459,7 @@
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 					"\"$(SRCROOT)/../../node_modules/tns-core-modules/platforms/ios/src\"",
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
+					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HRGO/HRGO-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -486,6 +487,7 @@
 					"$(SRCROOT)/internal",
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 					"\"$(SRCROOT)/../../node_modules/tns-core-modules/platforms/ios/src\"",
+					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 					"\"$(SRCROOT)/../../app/App_Resources/iOS/src\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/HRGO/HRGO-Info.plist";

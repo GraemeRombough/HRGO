@@ -12,6 +12,8 @@ const webViewModule = require("tns-core-modules/ui/web-view");
 const pageData = new observable.Observable();
 var articleReference;
 var pageObject;
+const email = require("nativescript-email");
+var phone = require("nativescript-phone");
 
 exports.pageLoaded = function(args) {
     const page = args.object;
@@ -81,6 +83,40 @@ var getArticleText = function(aID, aLang)
     return articleReturn;
     //return articleText;
 }
+exports.onLoadStarted = function(args){
+    checkURL = args.url.split(":");
+    if(checkURL.length > 1){
+        if(checkURL[0] == "mailto"){
+            console.log(checkURL[1]);
+            emailLink(checkURL[1])
+            args.object.stopLoading();
+        }else if(checkURL[0] == "tel"){
+            console.log(checkURL[1]);
+            callLink(checkURL[1])
+            args.object.stopLoading();
+        }
+        console.log(args.url);
+    }
+}
+var callLink = function(phoneNumber){
+    console.log("call number:" + phoneNumber);
+    phone.dial(phoneNumber,true);
+
+};
+var emailLink = function(emailText){
+    console.log("send email to:" + emailText);
+    var toAddress = [];
+    toAddress.push(emailText);
+    if (email.available()){
+        email.compose({
+            subject: "",
+            body: "",
+            to: toAddress
+        });
+    } else {
+        console.log("Email Not Available");
+    }
+};
 var createArticle = function()
 {   
     /* const contentStack = new StackLayout();

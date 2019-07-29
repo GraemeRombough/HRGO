@@ -28,6 +28,18 @@ exports.footer3 = function(){
     topmost.navigate("FR_profile-page");
     
 }
+exports.goToVideo = function(args){
+    var navigationOptions={
+        moduleName:'FR_dynamic-video-page',
+        context:{Language: "ENG",
+                ArticleID: args.object.id,
+                ArticleTitle: args.object.text
+                }
+            }
+    console.log(args.object.id);
+    var topmost = frameModule.topmost();
+    topmost.navigate(navigationOptions);
+};
 exports.footer4 = function(){
     console.log("Go To Feedback");
     var topmost = frameModule.topmost();
