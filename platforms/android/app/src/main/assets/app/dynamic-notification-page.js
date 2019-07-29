@@ -140,7 +140,7 @@ var createArticle = function()
             for(i=0; i < textWithExternal.length; i++){
                 if(textWithExternal[i].includes("||")){
                     var linkText = textWithExternal[i].split("||");
-                    htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;      
+                    htmlString += `<a href="${linkText[1]}" data-rel="external">${linkText[0]}</a>`;      
                 }else{
                     
                     htmlString += `${textWithExternal[i]}`;

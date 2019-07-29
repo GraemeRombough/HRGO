@@ -148,7 +148,7 @@ var createArticle = function()
                    // console.log(linkText[1]);
                     
                     //labelSpan.text = `<a href="google.com> link here </a>`;
-                    htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;
+                    htmlString += `<a href="${linkText[1]}" data-rel="external">${linkText[0]}</a>`;
                     //labelSpan.text = "<a href='http://google.com'>Hello World</a>";
                     
                 }else{
