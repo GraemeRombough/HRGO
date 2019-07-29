@@ -27,11 +27,11 @@ exports.pageLoaded = function(args) {
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("landing-page");
+    topmost.navigate("FR_landing-page");
 }
 exports.goToHome = function(eventData){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate("FR_main-page");
     
 }
 exports.goBack = function(args){
@@ -40,7 +40,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate("FR_profile-page");
     
 }
 exports.footer4 = function(){
@@ -50,7 +50,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:'FR_feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -60,7 +60,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
+    topmost.navigate("FR_POC-page");
 }
 var getArticleText = function(aID, aLang)
 {
@@ -90,12 +90,14 @@ exports.onLoadStarted = function(args){
     if(checkURL.length > 1){
         if(checkURL[0] == "mailto"){
             console.log(checkURL[1]);
-            emailLink(checkURL[1])
             args.object.stopLoading();
+            emailLink(checkURL[1]);
+            
         }else if(checkURL[0] == "tel"){
             console.log(checkURL[1]);
-            callLink(checkURL[1])
             args.object.stopLoading();
+            callLink(checkURL[1]);
+            
         }
         console.log(args.url);
     }
@@ -235,6 +237,9 @@ var getFromDatabase = function(){
     contentData.push(returnedItem); 
     returnedItem = {Ref:"2", BusinessLine:"Labour Relations", Category:"DM/CDS", Title:"Déclaration du ministère de la Défense nationale et des Forces armées canadiennes", Type:"Notification", PublishDate:"July 19, 2019 05:00:00", Content:"<*Article_H1*>Message de la SM, et du CEMD : Recours collectifs pour inconduite sexuelle dans les FAC et au MDN<*Article_Note*>Le 19 juillet, 2019<*Article_Body*>Le gouvernement du Canada a accepté le règlement de plusieurs recours collectifs traitant de l’inconduite sexuelle, lesquels ont été déposés au nom de membres actuels et anciens des Forces armées canadiennes (FAC).<*Article_Body*>Le règlement proposé touche les membres actuels et anciens des FAC, les employés du ministère de la Défense nationale (MDN) et les employés des fonds non publics (FNP), Forces canadiennes, qui ont été victimes d’inconduite sexuelle – entre autres, de harcèlement sexuel, d’agression sexuelle ou de discrimination fondée sur le sexe, le genre, l’identité de genre ou l’orientation sexuelle – dans le cadre de leur service militaire ou emploi civil. Pour vous renseigner davantage sur les recours collectifs et connaître l’incidence que pourrait avoir sur vous le règlement proposé, visitez le site Web sur les recours collectifs concernant l’inconduite sexuelle au sein des FAC et du MDN, à l’adresse ::external::fac-mdn-recourscollectifinconduitesexuelle.com||http://fac-mdn-recourscollectifinconduitesexuelle.com/::external:: ou appelez au ::external::1-888-626-2611||tel:1-888-626-2611::external::.<*Article_Body*>En notre qualité de hauts dirigeants, rien ne nous importe plus que la création d’un milieu de travail dans lequel vous vous sentez en sécurité, respecté et inclus. Depuis le lancement de l’opération HONOUR il y a quatre ans, nous avons amorcé la création d’un changement de culture durable, lequel comprend non seulement un mandat, mais également un mouvement. Nous écoutons les personnes qui ont été victimes de diverses formes d’inconduite sexuelle et tirons des leçons d’elles, tout en continuant de faire évoluer nos politiques et nos programmes. Nous sommes résolus à établir des mesures de prévention efficaces, ainsi qu’à comprendre pourquoi les incidents d’inconduite sexuelle se produisent. Nous souhaitons remédier à l’inconduite sexuelle de façon appropriée en offrant aux victimes un soutien compatissant. Cet objectif est au cœur des efforts que nous déployons.<*Article_Body*>Ce changement de culture met non seulement l’accent sur les FAC, mais également sur l’Équipe de la Défense et notre milieu de travail. Nous travaillons à bâtir un avenir meilleur pour l’ensemble des membres de l’Équipe de la Défense. Pour ce faire, nous offrons aux membres des FAC du soutien axé sur les victimes par l’intermédiaire du Centre d’intervention sur l’inconduite sexuelle et nous mettons des programmes de mieux-être et d’aide à la disposition du personnel du MDN et des FNP. Si vous avez été victime d’inconduite sexuelle, nous vous incitons à tirer parti des ressources énoncées à la fin du présent message, ainsi qu’à signaler les incidents, de sorte que nous puissions vous appuyer.<*Article_Body*>Le succès de l’Équipe de la Défense et la réalisation de la mission des FAC reposent sur la confiance inébranlable et le travail d’équipe des membres de notre personnel, militaires comme civils, peu importe leur genre ou leurs antécédents. À toutes les personnes qui ont eu le courage de se manifester dans le cadre de ces recours collectifs – ainsi qu’aux personnes qui le feront à l’avenir – nous regrettons sincèrement que vous ayez été victime d’inconduite sexuelle dans notre milieu de travail. Le règlement prévoit le versement d’une indemnité financière, la prise de mesures stratégiques singulières ayant pour objet de faire progresser les initiatives axées sur le changement de culture qui sont déjà en cours, de même que la création de possibilités pour ces personnes de faire connaître les expériences qu’elles ont vécues, au moyen de séances d’échange réparateur et de consultations. Sachez qu’en faisant part de vos expériences, vous ouvrez la voie et vous nous aidez à entraîner un véritable changement durable."};
     contentData.push(returnedItem);
+    returnedItem = {Ref:"3", BusinessLine:"Labour Relations", Category:"DM/CDS", Title:"CFAC-MDN Recours Collectif Inconduite Sexuelle", Type:"Notification", PublishDate:"July 19, 2019 05:00:00", Content:`<*Article_H1*>FAC-MDN Recours Collectif Inconduite Sexuelle<*Article_Note*>Le 19 juillet, 2019<*Article_H3*>Mise à jour importante<*Article_Note*>L'audience d'approbation à la Cour fédérale à Ottawa, au 90, rue Sparks, les 19 et 20 septembre 2019, à 10 h. <*Article_Note*>Dans les présentes, le genre masculin est utilisé pour alléger le texte et s’entend de toutes les personnes.<*Article_H2*>Intro​du​ction<*Article_Body*>Êtes-vous un membre ou un ancien membre des Forces armées canadiennes, ou un employé ou un ancien employé du ministère de la Défense nationale (MDN) ou du Personnel des fonds non publics, Forces canadiennes (PFNP)?<*Article_Body*>Avez-vous vécu du harcèlement sexuel, une agression sexuelle ou de la discrimination fondée sur votre sexe, votre genre, votre identité de genre ou votre orientation sexuelle en lien avec le service militaire ou en lien avec l'emploi au sein du MDN ou du PFNP?<*Article_Body*>Il y a un règlement proposé entre le gouvernement du Canada et certains membres et anciens membres des Forces armées canadiennes (« FAC »), et les employés et anciens employés du ministère de la Défense nationale (« MDN ») ou du Personnel des fonds non publics, Forces canadiennes (« PFNP ») qui ont vécu du harcèlement sexuel, une agression sexuelle ou de la discrimination fondée sur le sexe, le genre, l'identité de genre ou l'orientation sexuelle (« Inconduite sexuelle ») en lien avec le service militaire ou en lien avec l'emploi au sein du MDN ou du PFNP.<*Article_Body*>De plus amples renseignements sur le règlement proposé est disponible dans l'avis approuvé par la cour.  Une copie de l'avis est disponible ::external::ici||https://www.classaction.deloitte.ca/fr-ca/Documents/CAF%20DND%20Misconduct/L%E2%80%99avis%20approuv%C3%A9%20par%20la%20cour.pdf::external::. Une copie de l'entente de règlement définitive se trouve à l'adresse ici.<*Article_Body*>Si vous appuyez le règlement proposé, ou si vous vous opposez au règlement proposé, vous pouvez soumettre un Formulaire de participation. Le Formulaire de participation se trouve à l'adresse ::external::ici||https://www.classaction.deloitte.ca/fr-ca/Documents/CAF%20DND%20Misconduct/Formulaire%20de%20Participation.pdf::external::. Vous devez envoyer ce formulaire par la poste à FAC MDN Recours Collectif Inconduite Sexuelle a/s Deloitte, Centre Baie Adélaïde, Tour Est, 8 rue Adelaide Ouest, Toronto, ON M5H 0A9 ou par courriel à facmdninconduite@deloitte.ca et il doit être reçu ou oblitéré au plus tard le 30 août 2019.<*Article_Body*>Vous n'avez pas besoin de soumettre un Formulaire de participation pour profiter des avantages du règlement proposé. Si le règlement proposé est approuvé par la Cour fédérale, de plus amples renseignements seront disponibles pour expliquer comment bénéficier des avantages du règlement.<*Article_H2*>Contactez-nous​<*Article_Body*>Si vous avez des questions concernant l’administration du règlement, les coordonnées de l’administrateur intérimaire sont:<*Article_Body*>FAC MDN Recours Collectif Inconduite Sexuelle<br>a/s Deloitte<br>a/s Deloitte<br>Centre Baie Adélaïde, Tour Est<br>8 rue Adelaide Ouest<br>Toronto ON, M5H 0A9<br>Téléphone: ::external::1-888-626-2611||tel:1-888-626-2611::external::<br>Courriel: ::external::facmdninconduite@deloitte.ca||mailto:facmdninconduite@deloitte.ca::external::`};
+    contentData.push(returnedItem);
+    //
        
     
     return contentData;

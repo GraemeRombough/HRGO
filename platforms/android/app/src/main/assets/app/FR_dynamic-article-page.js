@@ -88,11 +88,11 @@ exports.onLoadStarted = function(args){
     if(checkURL.length > 1){
         if(checkURL[0] == "mailto"){
             console.log(checkURL[1]);
-            emailLink(checkURL[1])
+            emailLink(checkURL[1]);
             args.object.stopLoading();
         }else if(checkURL[0] == "tel"){
             console.log(checkURL[1]);
-            callLink(checkURL[1])
+            callLink(checkURL[1]);
             args.object.stopLoading();
         }
         console.log(args.url);

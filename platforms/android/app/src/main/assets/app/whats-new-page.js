@@ -135,6 +135,7 @@ var getNotificationList = function(){
     navList.push(navItem);
     navItem = {title:"Statement from the Department of National Defence and the Canadian Armed Forces", ref:"2", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
-    //console.log(navList[0].title);
+    navItem = {title:"CAF-DND Sexual Misconduct Class Action", ref:"3", publishDate:"July 18, 2019 05:00:00"};
+    navList.push(navItem);
     return navList;
 }

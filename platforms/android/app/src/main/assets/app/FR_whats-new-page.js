@@ -136,6 +136,8 @@ var getNotificationList = function(){
     navList.push(navItem);
     navItem = {title:"Déclaration du ministère de la Défense nationale et des Forces armées canadiennes", ref:"2", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
+    navItem = {title:"CFAC-MDN Recours Collectif Inconduite Sexuelle", ref:"3", publishDate:"July 18, 2019 05:00:00"};
+    navList.push(navItem);
     //console.log(navList[0].title);
     return navList;
 }
