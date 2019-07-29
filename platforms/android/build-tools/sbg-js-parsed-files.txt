@@ -27,6 +27,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_timeliness-utility-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_main-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/understand-pay-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_dynamic-video-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/sec34-notifications-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/my-team.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_lookup-landing-page.js
@@ -45,6 +46,7 @@
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_promotion-calc-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/search-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/workdays-utility-page.js
+/Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/dynamic-video-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/SJD-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/overtime-tracking-page.js
 /Users/graemerombough/HRGO/platforms/android/app/src/main/assets/app/FR_my-team.js

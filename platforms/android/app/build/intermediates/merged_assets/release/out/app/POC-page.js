@@ -186,15 +186,15 @@ dbRow ={Title:"Sexual Misconduct Response Centre - Counsellor", Phone: "1-844-75
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Integrated Conflict and Complaint Management", Phone: "(613) 944-6189", Email: "marc.potvin@forces.gc.ca ", Desc:"Your local Conflict and Complaint Management Services (CCMS) centre will provide you with support if you would like to submit a formal complaint or are dealing with conflict."};
+//dbRow ={Title:"Integrated Conflict and Complaint Management", Phone: "(613) 944-6189", Email: "marc.potvin@forces.gc.ca ", Desc:"Your local Conflict and Complaint Management Services (CCMS) centre will provide you with support if you would like to submit a formal complaint or are dealing with conflict."};
 
-databaseReturn.push(dbRow);
+//databaseReturn.push(dbRow);
 
 dbRow ={Title:"Canadian Human Rights Commission", Phone: "1-888-214-1090", Email: "info.com@chrc-ccdp.gc.ca", Desc:"Human rights laws protect people in Canada from discrimination based on grounds such as race, sex, religion or disability."};
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Conflict and Complaint Management Services centre", Phone: " 1-833-328-3351", Email: "N/A", Desc:"If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program."};
+dbRow ={Title:"Conflict and Complaint Management Services centre", Phone: " 1-833-328-3351", Email: "ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca", Desc:"If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program."};
 
 databaseReturn.push(dbRow);
 

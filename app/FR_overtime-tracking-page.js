@@ -19,7 +19,7 @@ exports.pageLoaded = function(args) {
     const TODAY = new Date();
     pageObject = page;
     page.bindingContext = pageData;
-    pageData.set("date", TODAY);
+    pageData.set("submitDate", TODAY);
     pageData.set("AddTime", false);
     getOvertime();
     displayOvertime();

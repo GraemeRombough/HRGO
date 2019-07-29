@@ -186,15 +186,15 @@ dbRow ={Title:"Centre d’intervention sur l’inconduite sexuelle", Phone: "1-8
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"Gestion intégrée des conflits et des plaintes", Phone: "613-944-6189", Email: "marc.potvin@forces.gc.ca ", Desc:"Le centre de services de gestion des conflits et des plaintes (SGCP) de votre région vous fournira du soutien si vous souhaitez déposer une plainte officielle ou si vous faites face à un conflit. "};
+//dbRow ={Title:"Gestion intégrée des conflits et des plaintes", Phone: "613-944-6189", Email: "marc.potvin@forces.gc.ca ", Desc:"Le centre de services de gestion des conflits et des plaintes (SGCP) de votre région vous fournira du soutien si vous souhaitez déposer une plainte officielle ou si vous faites face à un conflit. "};
 
-databaseReturn.push(dbRow);
+//databaseReturn.push(dbRow);
 
 dbRow ={Title:"Commission canadienne des droits ", Phone: "1-888-214-1090", Email: "info.com@chrc-ccdp.gc.ca", Desc:"Au Canada, vous avez le droit de vivre libre de discrimination. Les lois vous protègent de la discrimination en raison des motifs tels que la race, le sexe, la religion ou une déficience."};
 
 databaseReturn.push(dbRow);
 
-dbRow ={Title:"centre de services de gestion des conflits et des plaintes", Phone: "1-833-328-3351", Email: "N/A", Desc:"Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP)."};
+dbRow ={Title:"Centre de services de gestion des conflits et des plaintes", Phone: "1-833-328-3351", Email: "ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca", Desc:"Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP)."};
 
 databaseReturn.push(dbRow);
 

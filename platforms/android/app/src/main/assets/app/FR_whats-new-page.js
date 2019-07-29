@@ -24,15 +24,15 @@ exports.goToUtility = function(args){
 exports.goToWorkingDay = function(args){
     var topmost = frameModule.topmost();
     console.log(args.object.pageName);
-    topmost.navigate("FR_workdays-utility-page");
+    topmost.navigate("workdays-utility-page");
 };
 exports.goToSalary = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_pay-info");
+    topmost.navigate("pay-info");
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_main-page");
+    topmost.navigate("main-page");
     
 };
 exports.goBack = function(args){
@@ -41,7 +41,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_profile-page");
+    topmost.navigate("profile-page");
     
 }
 exports.footer4 = function(){
@@ -51,7 +51,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'FR_feedback-page',
+        moduleName:'feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY
@@ -61,11 +61,11 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_POC-page");
+    topmost.navigate("POC-page");
 }
 exports.goToArticle = function(args){
     var navigationOptions={
-        moduleName:'FR_dynamic-article-page',
+        moduleName:'dynamic-article-page',
         context:{Language: "ENG",
                 ArticleID: args.object.id,
                 ArticleTitle: args.object.text
@@ -77,7 +77,7 @@ exports.goToArticle = function(args){
 };
 exports.goToWalkthrough = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_walkthrough-page");
+    topmost.navigate("walkthrough-page");
 };
 exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
@@ -110,7 +110,6 @@ exports.navToggle = function(args){
 };
 var displayNotifications = function(){
     var notificationList = getNotificationList();
-    console.log(notificationList.length);
     var TODAY = new Date();
     var notificationStack = pageObject.getViewById("NewsList");
     notificationStack.removeChildren();
@@ -125,6 +124,7 @@ var displayNotifications = function(){
             newsButton.id = notificationList[i].ref;
             newsButton.on(buttonModule.Button.tapEvent, goToNotification, this);
             notificationStack.addChild(newsButton);
+            console.log(newsButton.id);
             
         }
     }

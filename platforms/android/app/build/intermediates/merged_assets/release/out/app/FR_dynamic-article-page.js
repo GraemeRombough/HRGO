@@ -7,6 +7,8 @@ const Button = require("tns-core-modules/ui/button/").Button;
 var buttonModule = require("ui/button");
 const observable = require("data/observable");
 const ActionBar = require("tns-core-modules/ui/action-bar/").ActionBar;
+const HtmlView = require("tns-core-modules/ui/html-view").HtmlView;
+const webViewModule = require("tns-core-modules/ui/web-view");
 const pageData = new observable.Observable();
 var articleReference;
 var pageObject;
@@ -81,6 +83,53 @@ var getArticleText = function(aID, aLang)
 }
 var createArticle = function()
 {   
+    /* const contentStack = new StackLayout();
+    const myScroller = new ScrollView();
+    const articleStack = new StackLayout();
+    // Set the orientation property
+    articleStack.orientation = "vertical";
+    articleStack.col = 1;
+    articleStack.className = "Article_MainStack";
+    contentStack.orientation = "vertical";
+    contentStack.row = 0;
+    var headerLabel = new Label();
+    headerLabel.text = articleReference.ArticleTitle;
+    headerLabel.className = "HeaderLabel";
+    var LabelArray = [];
+    console.log("Create Article: ");   
+    var curArticleText = getArticleText(articleReference.ArticleID);
+    var articleItemSplit;
+    var articleComponents = curArticleText.Text.split("<*");
+    var articleSlide = pageObject.getViewById("articleContent");
+    articleSlide.removeChildren();
+    for (z=0; z<articleComponents.length; z++){
+        articleItemSplit = articleComponents[z].split("*>");
+        var articleLabel = new Label();
+        //LabelArray.push(new Label());
+        var textString = "";
+        if(articleItemSplit[0] == "Article_List"){
+            textString = "\u2022 ";
+        }
+        if(articleItemSplit[1]){
+            textString += articleItemSplit[1]
+        }
+        articleLabel.className = articleItemSplit[0];
+        articleLabel.text = textString;
+        articleSlide.addChild(articleLabel);
+    }
+    pageData.set("HeaderTitle", curArticleText.Title); */
+    var bodyStyle = `.Article_Body{ height:auto; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 25px; margin-right: 25px; margin-top: 28px; margin-bottom:14px; padding-bottom:0px; white-space: normal; color: #333;}`;
+    var h1Style = `.Article_H1{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
+    var h2Style = `.Article_H2{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
+    var h3Style = `.Article_H3{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 25px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
+    var noteStyle = `.Article_Note{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; font-style: italic; margin-left: 25px; margin-right: 25px; margin-top: 5px; margin-bottom:5px; white-space: normal; color: #333;}`;
+    var listStyle = `.Article_List{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 50px; margin-right: 25px; margin-top: 18px; margin-bottom:5px; white-space: normal; color: #333;}`;
+    var allStyles = bodyStyle + h1Style + h2Style + h3Style + noteStyle + listStyle;
+    var headerHTML = `<html><head><style>${allStyles}</style></head><body>`;
+    var footerHTML = "</body></html>"
+    var totalHTML;
+    totalHTML = headerHTML;
+    var webView = new webViewModule.WebView();
     const contentStack = new StackLayout();
     const myScroller = new ScrollView();
     const articleStack = new StackLayout();
@@ -92,7 +141,6 @@ var createArticle = function()
     contentStack.orientation = "vertical";
     contentStack.row = 0;
     
-
     var headerLabel = new Label();
     headerLabel.text = articleReference.ArticleTitle;
     headerLabel.className = "HeaderLabel";
@@ -104,13 +152,11 @@ var createArticle = function()
 
     var articleComponents = curArticleText.Text.split("<*");
     var articleSlide = pageObject.getViewById("articleContent");
-    articleSlide.removeChildren();
+    //articleSlide.removeChildren();
     for (z=0; z<articleComponents.length; z++){
-        
-        
+        var currentHTML;
         articleItemSplit = articleComponents[z].split("*>");
         var articleLabel = new Label();
-        //LabelArray.push(new Label());
         var textString = "";
         if(articleItemSplit[0] == "Article_List"){
             textString = "\u2022 ";
@@ -118,11 +164,30 @@ var createArticle = function()
         if(articleItemSplit[1]){
             textString += articleItemSplit[1]
         }
-        
-        articleLabel.className = articleItemSplit[0];
-        articleLabel.text = textString;
-        articleSlide.addChild(articleLabel);
+        if(textString.includes("::external::")){
+            var textWithExternal = textString.split("::external::");
+            console.log("TextWithExternal: " + textWithExternal.length);
+            var htmlString = `<div class="${articleItemSplit[0]}">`;
+            for(i=0; i < textWithExternal.length; i++){
+                if(textWithExternal[i].includes("||")){
+                    var linkText = textWithExternal[i].split("||");
+                    htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;      
+                }else{
+                    
+                    htmlString += `${textWithExternal[i]}`;
+                }
+            }
+            articleLabel.className = articleItemSplit[0];
+            var htmlParagraph = new HtmlView();
+            htmlString += "</div>";
+            totalHTML += htmlString;
+        }else{
+            totalHTML += `<div class="${articleItemSplit[0]}">${textString}</div>`;   
+        }    
     }
+    totalHTML += footerHTML;
+    console.log(totalHTML);
+    pageData.set("ArticleHTML", totalHTML);
     pageData.set("HeaderTitle", curArticleText.Title);
 
 }
@@ -172,6 +237,10 @@ var getFromDatabase = function(){
     returnedItem = {Ref:"20", BusinessLine:"Pay", Category:"Congés", Title:"Congé avec étalement du revenu", Type:"Article", Content:"<*Article_H1*>Congé avec étalement du revenu<*Article_Body*>Un congé avec étalement du revenu permet aux employés admissibles de réduire le nombre de semaines de travail effectuées au cours d’une période de 12 mois en prenant un congé non payé d’une durée pouvant aller de cinq semaines à trois mois.<*Article_Body*>La rémunération de l’employé est réduite et étalée sur la période de 12 mois afin de tenir compte de la présence réduite au travail. Les prestations de retraite et les avantages sociaux, ainsi que les cotisations, sont les mêmes qu’avant l’entente.<*Article_List*>Une fois le congé approuvé, le gestionnaire doit soumettre la demande dans le système Services et soutien en ressources humaines afin que la source fiable puisse envoyer le formulaire ainsi qu’une demande d’intervention de paye au Centre des services de paye.<*Article_H2*>Fonctionnement<*Article_Body*>La politique s’applique à tous les employés représentés par tous les syndicats, ainsi qu’aux employés non représentés et exemptés.<*Article_Body*>Le congé proprement dit peut être pris en deux périodes à l’intérieur des 12 mois. Chaque période doit durer au moins cinq semaines, et la somme des deux périodes ne doit pas dépasser trois mois. Bien qu’il reçoit un revenu tout au long de la période de 12 mois, l’employé est réputé être en congé non payé les jours non travaillés."};
     contentData.push(returnedItem);
     returnedItem = {Ref:"21", BusinessLine:"Pay", Category:"Congés", Title:"Congé de transition à la retraite", Type:"Article", Content:"<*Article_H1*>Congé de transition à la retraite<*Article_Body*>Il s’agit de modalités de travail spéciales en vertu desquelles les employés admissibles qui sont à moins de deux ans de leur retraite ont le droit de réduire leur semaine de travail jusqu’à concurrence de 40 p. 100. Pour les employés à temps plein, cela équivaut à 2 jours par tranche de cinq jours de travail.<*Article_H2*>Comment présenter une demande<*Article_H2*>Fonctionnement<*Article_Body*>La rémunération de l’employé est rajustée pour tenir compte de la semaine de travail réduite, mais le niveau de participation aux régimes de pension et d’avantages sociaux (y compris les cotisations payables) demeure inchangé. L’employé demeure assujetti à la convention collective ou aux conditions d’emploi (CE) applicables, et sa situation d’emploi (temps plein/temps partiel) demeure la même."};
+    contentData.push(returnedItem);
+
+    //STUDENT PRE-ONBOARDING
+    returnedItem = {Ref:"22", BusinessLine:"Students", Category:"Student Onboarding", Title:"Avant l’accueil et l’intégration des étudiants", Type:"Article", Content:"<*Article_H1*>Avant l’accueil et l’intégration des étudiants <*Article_Body*>Nous voulons aider à faire de votre processus d’intégration une expérience positive!  Avant de commencer votre emploi au Ministère de la Défense nationale (MDN), veuillez-vous assurer de prendre le temps de passer en revue les renseignements ci-dessous afin de vous préparer à votre première journée de travail.  <*Article_H2*>Renseignez-vous sur qui nous sommes<*Article_List*>Allez à la page ::external::À propos de nous||http://www.forces.gc.ca/fr/a-propos-de-nous.page::external:: pour vous renseigner sur l’Équipe de la Défense et les priorités organisationnelles.  <*Article_H2*>Familiarisez-vous avec la structure organisationnelle du MDN, les grades et les insignes des FAC<*Article_List*>Accédez à la page ::external::À propos – Structure de l’organisation||http://www.forces.gc.ca/fr/a-propos-structure-org/index.page::external:: pour vous renseigner sur la structure hiérarchique de haut niveau du MDN. <*Article_List*>Accédez à la page ::external::Grades et nomination||https://www.canada.ca/fr/ministere-defense-nationale/services/histoire-militaire/histoire-patrimoine/insignes-drapeaux/grades/insignes-grade-fonction.html::external pour vous renseigner sur les grades au sein des Forces armées canadiennes (FAC). <*Article_H2*>Familiarisez-vous aux Conditions d’emploi des étudiants<*Article_List*>Les étudiants sont payés conformément aux ::external::Conditions d’emploi pour les étudiants||https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=12583::external:: (taux de rémunération des étudiants). Le jour de rémunération est toutes les deux semaines, le mercredi, et vous pouvez vous attendre à être payé trois à quatre semaines à compter de la date de début de votre emploi (::external::car nous sommes payés à terme échu||https://www.canada.ca/fr/secretariat-conseil-tresor/services/remuneration/taux-remuneration/taux-remuneration-etudiants.html::external::).<*Article_List*>À défaut d’un congé, les étudiants ont droit à une indemnité de congé équivalant à quatre pour cent de leurs gains pour les heures normales de travail et les heures supplémentaires.<*Article_H2*>Lisez et remplissez tous les formulaires fournis par votre gestionnaire ou les Ressources humaines (RH)<*Article_List*>Lettre d’offre<*Article_List*>Formulaire de dépôt direct<*Article_List*>Formulaires d’impôt (fédéral et provincial)<*Article_List*>Questionnaire de l’employé<*Article_List*>Brochure Les activités politiques et vous!<*Article_List*>Brochure Code de valeurs et d’éthique du MDN et des FC<*Article_List*>Formulaire d’auto-identification du MDN/des FC<*Article_H2*>Préparez-vous pour votre premier jour de travail<*Article_Body*>Si votre gestionnaire n’a pas communiqué avec vous, veuillez communiquer avec lui ou avec elle pour confirmer la date et l’heure prévue d’arrivée, le lieu de travail, les options de transport ou de stationnement, ce qu’il faut faire lorsque vous arrivez, etc. <*Article_List*>Soyez prêt à discuter avec votre gestionnaire de votre rôle et de vos attentes, des heures de travail et des pauses, des mesures d’adaptation en milieu de travail nécessaires, ainsi que de la rémunération. Préparez vos questions puisque votre gestionnaire se réservera du temps pour passer en revue votre lettre d’offre et d’autres documents associés aux RH avec vous.<*Article_List*>Renseignez-vous au sujet du code vestimentaire, de la langue de travail (y compris la désignation de votre unité de travail) et des autres attentes culturelles en milieu de travail. <*Article_H2*>Ce que vous devez apporter<*Article_Body*>Pièce d’identité valide avec photo émise par le gouvernement (c.-à-d. permis de conduire, passeport, etc.) pour obtenir un laissez-passer temporaire.<*Article_Body*>La lettre d’offre et tout autre formulaire, tel qu’indiqué par votre gestionnaire. <*Article_H2*>Au MDN<*Article_Body*>Au MDN, vous aurez accès au Programme d’accueil et d’intégration des étudiants, qui vous aidera à prendre connaissance de votre nouvel environnement de travail. De plus amples renseignements vous seront fournis à votre arrivée. Nous vous encourageons à tirer profit des renseignements et des outils offerts concernant l’accueil et l’intégration afin de bien comprendre votre rôle et de vous assurer de vivre une expérience de travail positive parmi nous.<*Article_Body*>Si vous avez des questions, veuillez communiquer avec ::external::l’Équipe d’accueil et d’intégration des étudiants du MDN.||mailto:DNDOnboarding-AcceuiletintégrationduMDN@forces.gc.ca::external::"};
     contentData.push(returnedItem);
 
     return contentData;
