@@ -21,10 +21,10 @@
       <Button class="Sub_Nav_Line" text="FAQ d’étudiants" tap="navToggle" value="FAQ"/>
         <Button class="Main_Nav_SubLine" id="16" text="FAQ - PFETE" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="17" text="FAQ - Embauche d’un(e) ancien(ne) étudiant(e)" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
-      <!--
-      <Button class="Sub_Nav_Line" text="Utilities" tap="navToggle" value="Utilities"/>
-        <Button class="Main_Nav_SubLine" text="Student Onboarding" pageName="student-onboard-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
--->
+      
+      <Button class="Sub_Nav_Line" text="L’accueil et l’intégration des étudiants" tap="navToggle" value="Onboarding"/>
+        <Button class="Main_Nav_SubLine" id="22" text="Avant l’accueil et l’intégration des étudiants" tap="goToArticle" visibility="{{ Onboarding ? 'visible' : 'collapsed' }}"/>
+ 
     
     </StackLayout>
     </ScrollView>

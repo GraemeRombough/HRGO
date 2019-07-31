@@ -22,9 +22,9 @@
         <Button class="Main_Nav_SubLine" id="16" text="FAQs - FSWEP" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="17" text="FAQs - Hiring a Former Student" tap="goToArticle" visibility="{{ FAQ ? 'visible' : 'collapsed' }}"/>
       
-      <!-- <Button class="Sub_Nav_Line" text="Utilities" tap="navToggle" value="Utilities"/>
-        <Button class="Main_Nav_SubLine" text="Student Onboarding" pageName="student-onboard-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
- -->
+      <Button class="Sub_Nav_Line" text="Student Onboarding" tap="navToggle" value="Onboarding"/>
+        <Button class="Main_Nav_SubLine" id="22" text="Student Pre-Onboarding" tap="goToArticle" visibility="{{ Onboarding ? 'visible' : 'collapsed' }}"/>
+ 
     
     </StackLayout>
     </ScrollView>
