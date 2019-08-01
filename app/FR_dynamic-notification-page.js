@@ -67,6 +67,7 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("FR_POC-page");
 }
+
 var getArticleText = function(aID, aLang)
 {
     //.findIndex(value)
@@ -132,6 +133,7 @@ exports.onWebViewLoaded = function(webargs) {
 }
 
 exports.onLoadStarted = function(args){
+    console.log("onLoadStarted ****************************************************************");
     checkURL = args.url.split(":");
     if(checkURL.length > 1){
         if(checkURL[0] == "mailto"){
@@ -143,10 +145,15 @@ exports.onLoadStarted = function(args){
             console.log(checkURL[1]);
             args.object.stopLoading();
             callLink(checkURL[1]); 
-        } else if(checkURL[0] == "copy"){
+        }else if(checkURL[0] == "copy"){
             console.log(checkURL[1]);
             args.object.stopLoading();
+            args.object.goBack();
             copyToClipboard(args.url.substring(5));  
+        } else if( checkURL[0].startsWith("http") || checkURL[0] == "https") {
+            args.object.stopLoading();
+            utils.openUrl(checkURL[0] + ":" + checkURL[1]);
+            args.object.goBack();
         }
         console.log(args.url);
     }
