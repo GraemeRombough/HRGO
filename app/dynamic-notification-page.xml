@@ -10,8 +10,7 @@
     </GridLayout>
     
       <ScrollView orientation="vertical">
-      <StackLayout class="Article_MainStack" id="articleContent" width="100%" height="100%" orientation="vertical"> 
-        
+      <StackLayout class="Article_MainStack" id="articleContent" width="100%" height="100%" orientation="vertical">
         <WebView loaded="onWebViewLoaded" loadStarted="onLoadStarted" minHeight="250" height="100%" id="myWebView" src="{{ ArticleHTML }}" />  
       </StackLayout>
       </ScrollView>
