@@ -98,11 +98,11 @@ var getArticleText = function(aID, aLang)
 exports.onWebViewLoaded = function(webargs) {
     console.log( "onWebViewLoaded ************************************************************" );
 
-    const webview = webargs.object;
+    const webviewfr = webargs.object;
 
     if ( platformModule.isAndroid ) {
         
-        var TNSWebViewClient = android.webkit.WebViewClient.extend({
+        var TNSWebViewClientFR = android.webkit.WebViewClient.extend({
             shouldOverrideUrlLoading: function(view, webResourceRequest) {
                 if (webResourceRequest != null) {
                     var urlString   = String( webResourceRequest.getUrl());
@@ -128,7 +128,7 @@ exports.onWebViewLoaded = function(webargs) {
             }
         });
 
-        webview.android.setWebViewClient(new TNSWebViewClient());
+        webviewfr.android.setWebViewClient(new TNSWebViewClientFR());
     }
 }
 
