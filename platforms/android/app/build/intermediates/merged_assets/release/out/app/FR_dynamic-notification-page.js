@@ -118,9 +118,9 @@ var copyToClipboard = function(clipboardText){
                 console.log("OK, copied to the clipboard");
             })
             dialogs.alert({
-                title: "Link Copied",
-                message: "HR GO cannot open this link.  The link has been copied to your clipboard.",
-                okButtonText: "Continue"});
+                title: "Lien a été copié",//link copied
+                message: "RH GO ne peut pas ouvrir ce lien.  Le lien a été copié.", //HR GO cannot open this link.  The link has been copied to your clipboard
+                okButtonText: "OK"});
 }
 var emailLink = function(emailText){
     console.log("send email to:" + emailText);

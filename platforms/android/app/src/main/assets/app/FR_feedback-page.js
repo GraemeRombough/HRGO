@@ -84,7 +84,7 @@ exports.sendEmail = function(args){
             dialogs.alert({
                 title: "Courriel n'est pas disponible",
                 message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.  S'il vous plait, Envoyez à HRGO-GORH@forces.gc.ca (trouvez l'address dans le message copié)",
-                okButtonText: "Continuez"});
+                okButtonText: "OK"});
         }
     } else {
         console.log("Subject field blank");
