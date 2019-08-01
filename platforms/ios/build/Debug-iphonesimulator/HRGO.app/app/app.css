@@ -1,0 +1,527 @@
+@import "~nativescript-theme-core/css/core.light.css";
+button{
+    background-color: #FFF;
+    border-color: transparent;
+    border-width: 1px;
+    box-shadow: none;
+    margin: 0px;
+    padding: 0px;
+    height:auto;
+    vertical-align: middle;
+    
+}
+.Submit_Button_1{
+    width: 80%;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top:28px;
+    margin-bottom:28px;  
+    color: #222;
+    white-space: normal;
+    padding-left: 30px;
+    background-color: #DDD;
+    font-size: 24px;
+    border-radius: 15%;
+    text-align: center;
+
+}
+.Submit_Button_2{
+    padding:8px;
+    padding-left: 14px;
+    padding-right:14px;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #222;
+    white-space: normal;
+    background-color: #DDD;
+    font-size: 16px;
+    border-radius: 15%;
+    text-align: center;
+}
+.Back_Button{
+    font-family: "icomoon"; 
+    border-radius: 15%;
+    background-color: rgb(0,31,91);
+    font-size: 22px;
+    text-align: center;
+    color: rgb(220,170,0);
+}
+
+.Home_Checkbox{
+    width:75px;
+    height:75px;
+    font-size:20px;
+    text-align: center;
+    border:2px;
+    padding: 0px 0px 0px 0px;
+    border-color: #222;
+    font-family: "icomoon";
+    background-color:#FFF;
+    color: #222;
+    margin: 4px 4px 4px 4px;
+
+}
+.Home_Nav_Row{
+    padding-bottom:10%;
+    padding-top:10%;
+}
+.Home_Nav_Grid{
+    padding-top:10%;
+    padding-bottom: 10%;
+    border-radius: 15%;
+    background-color: #DDD;
+    text-align: center;
+    margin-left: 10%;
+    width: 35%;
+    height: auto;
+}
+.Home_Nav_Icon{
+    font-family: "icomoon"; 
+    font-size: 60px;
+    width:100%;
+    text-align: center;
+    background-color: #DDD;
+    color: rgb(220,170,0);
+}
+.Home_Nav_Label{
+    color: #000;
+    text-align: center;
+    width:100%;
+    padding-top:10%;
+    text-align: center;
+    background-color: #DDD;
+    border-color: #DDD;
+    white-space: normal;
+}
+.action-bar{
+    text-align: center;
+}
+.Home_NavButton{
+    margin:5px;
+    width:33%;
+    color: #444;
+}
+.Home_NavLabel{
+    margin:5px;
+    width:33%;
+    color: #444;
+    white-space: normal;
+    text-align: center;
+    background-color: #FFF;
+}
+.Home_NavIcon{
+    font-family: "icomoon"; 
+    font-size: 60pt;
+    background-color: #FFF;
+}
+.Home_Utility_Button{
+    background-color: #DDD;
+}
+.Home_Utility_Icon{
+    font-family: "icomoon"; 
+    font-size: 36px;
+    background-color: #DDD;
+    text-align: center;
+    color: rgb(0,31,91);
+}
+.Home_Utility_Label{
+    margin:5px;
+    color: rgb(0,31,91);
+    white-space: normal;
+    text-align: left;
+    padding-left: 15px;
+    background-color: #DDD;
+    font-size: 26px;
+}
+.Main_Nav_SubLine{
+    margin:0px;
+    color: #222;
+    white-space: normal;
+    border-bottom-color: #DDD;
+    padding-top:8px;
+    padding-bottom:8px;
+    border-bottom-width: 1px;
+    padding-left: 40px;
+    text-align: left;
+    background-color: #FFF;
+    font-size: 18px;
+}
+
+.Sub_Nav_Line{
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top:10px;  
+    color: #222;
+    white-space: normal;
+    text-align: left;
+    padding-left: 30px;
+    background-color: #DDD;
+    font-size: 20px;
+}
+.Home_Utility_Row{
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-left-width: 10px;
+    border-left-color:  rgb(0,31,91);
+    
+    background-color: #DDD;
+    margin-top:10px;  
+}
+.HeaderLabel{
+    border-bottom-width: 6px;
+    border-bottom-color: rgb(220,170,0);
+    
+    font-size:22px;
+    vertical-align: middle;
+    color: #FFF;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 0;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    /*background-color: rgb(0,31,91);*/
+    background-color: rgb(0,31,91);
+    font-weight: 700;
+}
+.Header_Label{
+    font-size:18px;
+    vertical-align: middle;
+}
+.Header_Icon{
+    font-family: "icomoon"; 
+    font-size: 22px;
+    text-align: center;
+    vertical-align:middle;
+    color: rgb(220,170,0);
+}
+.Landing_Nav{
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 5px;
+}
+.Landing_SubNav_Compensation{
+    /*visibility: collapse;*/
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18pt;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 35px;
+
+}
+
+.FooterNav{
+    border-top-width: 6px;
+    padding-top:15px;
+    padding-bottom:15px;
+    border-top-color: rgb(220,170,0);
+    background-color: rgb(0,31,91);
+}
+.Footer_NavIcon{
+    color: #FFF;
+    font-family: "icomoon";
+    font-size: 30px;
+    background-color: rgb(0,31,91);
+}
+.Footer_NavIcon_Image{
+    color:rgb(220,170,0);
+    width:30px;
+}
+
+.SearchBar{
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(0,31,91);
+    font-size:24pt;
+    text-align: left;
+}
+.SearchBar_Text{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-align: left;
+    width:100%;
+    color: #333;
+}
+.SearchBar_Button{
+    font-family: "icomoon"; 
+    font-size: 20pt; 
+    margin-left:25px;
+    margin-right: 5px;
+    background-color: #FFF;
+    color: rgb(0,31,91);
+}
+.Applicable_Switch{
+    font-size: 20pt; 
+    margin-left:25px;
+    margin-right: 5px;
+    text-align: right;
+}
+/* ARTICLE STYLES*/
+.Article_MainStack{
+    overflow: auto;
+    width: 100%;
+}
+.Article_H1{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 28px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+    margin-left: 14px;
+    margin-bottom:11.5px;
+    margin-top: 38px;
+    white-space: normal;
+
+}
+.Article_H2{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+    margin-left: 14px;
+    margin-bottom:11.5px;
+    margin-top: 38px;
+    white-space: normal;
+}
+.Article_H3{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+    margin-left: 25px;
+    margin-bottom:11.5px;
+    margin-top: 38px;
+    white-space: normal;
+}
+.Article_Body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 28px;
+    margin-bottom:14px;
+    padding-top:0px;
+    white-space: normal;
+    color: #333;
+}
+.Article_Note{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 5px;
+    margin-bottom:5px;
+    white-space: normal;
+    color: #333;
+}
+.Article_List{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin-left: 50px;
+    margin-right: 25px;
+    margin-top: 18px;
+    margin-bottom:5px;
+    white-space: normal;
+    color: #333;
+}
+.Walkthrough_Slide{
+    width: 800px;
+}
+.Walkthrough_Image{
+    width:100%;
+}
+.DayCalc_SectionTitle{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 26px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 38px;
+    color: #333;
+    margin-top: 38px;
+    white-space: normal;
+    text-align: center;
+}
+.DayCalc_SubmitButton{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: rgb(0,31,91);
+    margin-bottom:36px;
+    margin-top: 36px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-color: rgb(0,31,91);
+}
+.DayCalc_TextField{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #222;
+    border-width: 2px;
+    border-width: 2px;
+    border-color: #222;
+    text-align: center;
+    width: 33%;
+}
+.DayCalc_StartDate{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #333;
+    margin-top: 28px;
+    white-space: normal;
+    text-align: center;
+}
+/* POC Classes */
+.POC_Grid{
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(0,31,91);
+}
+.POC_Phone{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 15px;
+    margin-top: 5px;
+    margin-bottom:5px;
+    white-space: normal;
+    color: #333;
+    text-align: left;
+}
+.POC_H1{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: rgb(0,31,91);
+    margin-left: 5px;
+    margin-bottom:11.5px;
+    margin-top: 5px;
+    white-space: normal;
+}
+.POC_Body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 25px;
+    margin-top: 5px;
+    margin-bottom:14px;
+    white-space: normal;
+    color: #333;
+}
+.POC_Icon{
+    font-family: "icomoon"; 
+    font-size: 22px;
+    color: rgb(0,31,91);
+    text-align: right;
+    margin-right: 15px;
+}
+.Walkthrough_NavButton{
+    background-color: #FFF;
+    color: rgb(0,31,91);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.Utility_TextBox{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    width: 90%;
+    color: #222;
+    border-width: 3px;
+    border-color: #222;
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.Utility_LongText{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    width: 90%;
+    height: 320px;
+    color: #222;
+    border-width: 3px;
+    border-color: #222;
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.Utility_MyTeam_TeamList{
+    padding-left: 48px;
+}
+.Utility_MyTeam_TeamName{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: normal;
+    color: #222;
+}
+.Utility_MyTeam_TeamEmail{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    white-space: normal;
+    color: #222;
+}
+.Utility_SmallButton{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(0,31,91);
+    margin-bottom:14px;
+    margin-top: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-color: rgb(0,31,91);
+}
+.Utility_TableText_1{
+    font-size: 16px;
+    color: #222;
+    text-align:center;
+}
+.Utility_TableText_1L{
+    font-size: 16px;
+    color: #222;
+    padding-left:40px;
+    text-align:left;
+}
+.Utility_TableText_1R{
+    font-size: 16px;
+    color: #222;
+    padding-right:40px;
+    text-align:right;
+}
+.Utility_TableTextInput_1R{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #222;
+    border-width: 2px;
+    border-width: 2px;
+    border-color: #222;
+    margin-top:4px;
+    margin-bottom:4px;
+    text-align: center;
+    width: 100%;
+}
+/* Your CSS goes here */

@@ -1,0 +1,105 @@
+{
+  "_from": "nativescript-phone@1.4.0",
+  "_id": "nativescript-phone@1.4.0",
+  "_inBundle": false,
+  "_integrity": "sha512-vHQvE+n9loyZRyGgu73jNaJEnNWLF9OgBoy6RSBoxRl7jOp9eoZaLo6dRn5m+L1KWLQ5gQ2nrYceJmi8v//zrw==",
+  "_location": "/nativescript-phone",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "nativescript-phone@1.4.0",
+    "name": "nativescript-phone",
+    "escapedName": "nativescript-phone",
+    "rawSpec": "1.4.0",
+    "saveSpec": null,
+    "fetchSpec": "1.4.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nativescript-phone/-/nativescript-phone-1.4.0.tgz",
+  "_shasum": "6979b9b6700d9610f924a67aca8a07c9284ff6b2",
+  "_spec": "nativescript-phone@1.4.0",
+  "_where": "/Users/graemerombough/HRGO",
+  "author": {
+    "name": "Mike Sywensky",
+    "email": "michael.sywensky@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/msywensky/nativescript-phone/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Brad Martin",
+      "email": "bradwaynemartin@gmail.com",
+      "url": "https://github.com/bradmartin"
+    },
+    {
+      "name": "Witold Czaplewski",
+      "url": "https://github.com/witi83"
+    }
+  ],
+  "dependencies": {
+    "nativescript-permissions": "1.2.3"
+  },
+  "deprecated": false,
+  "description": "NativeScript plugin to use the device phone and SMS features for Android and iOS",
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.3",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.6.2",
+    "semver": "^5.5.0",
+    "tns-core-modules": "^4.2.1",
+    "tns-platform-declarations": "^4.2.1",
+    "typescript": "~2.8.2"
+  },
+  "homepage": "https://github.com/msywensky/nativescript-phone",
+  "keywords": [
+    "NativeScript",
+    "Phone",
+    "SMS",
+    "android",
+    "ios"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/msywensky/nativescript-phone/blob/master/LICENSE"
+  },
+  "lint-staged": {
+    "*.ts, *.js, *.css, *.scss, *.md": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "main": "index",
+  "name": "nativescript-phone",
+  "nativescript": {
+    "platforms": {
+      "android": "1.0.0",
+      "ios": "1.0.0"
+    },
+    "tns-ios": {
+      "version": "4.3.0-2018-10-05-115910-01"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msywensky/nativescript-phone.git"
+  },
+  "scripts": {
+    "build.native": "node scripts/build-native.js",
+    "demo.android": "cd ../demo && tns run android --syncAllFiles",
+    "demo.ios": "cd ../demo && tns run ios --syncAllFiles",
+    "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
+    "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-phone && cd ../src",
+    "plugin.prepare": "npm run build.native && cd ../demo && tns plugin remove nativescript-phone && tns plugin add ../src",
+    "precommit": "lint-staged"
+  },
+  "typings": "index.d.ts",
+  "version": "1.4.0"
+}
