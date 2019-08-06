@@ -138,85 +138,45 @@ var getFromDatabase = function(){
     databaseReturn.push(dbRow);
     dbRow = {Title:"Employee Assistance Program", Phone:"1-800-268-7708", Email:"N/A", Desc:"EAP offers solutions to both prevent and address the concerns of employers, employees, and immediate family members."};
     databaseReturn.push(dbRow);
-    dbRow ={Title:"Public Services and Procurement Canada: General Inquiries ", Phone: "1-800-926-9105", Email: "questions@tpsgc-pwgsc.gc.ca", Desc:"For questions not answered on our website refer to the contact information below."};
+    dbRow ={Title:"Public Services and Procurement Canada: General Inquiries ", Phone:"1-800-926-9105", Email:"questions@tpsgc-pwgsc.gc.ca", Desc:"For questions not answered on our website refer to the contact information below."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"DLN Learning Management System: Help Desk ", Phone:"1-844-750-1643", Email:"DLN-RAD@FORCES.GC.CA", Desc:"The DLN is an enterprise environment for managing, developing and delivering on-line training, as well as for providing the Defence Team with an environment favourable to continuous learning and the sharing of knowledge."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"PSPC Client Contact Centre (Government of Canada Employees)", Phone:"1-855-686-4729", Email:"N/A", Desc:"Friendly and knowledgeable operators can answer general questions related to employee pay enquiries."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Individual tax enquiries", Phone:"1-800-959-8281", Email:"N/A", Desc:"Call this number for tax information for individuals, trusts, international tax and non-residents, including personal income tax returns, instalments, and RRSPs or to get our forms and publications"};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Benefit enquiries (CRA Child and family benefits)", Phone:"1-800-387-1193", Email:"N/A", Desc:"Call this number for information on the Canada child benefit (CCB), the GST/HST credit, and related provincial and territorial programs, as well as the child disability benefit."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Provincial programs for Ontario (PPO)", Phone:"1-877-627-6645", Email:"N/A", Desc:"Call this number for enquiries related to the Ontario trillium benefit (OTB) payment—includes the Ontario sales tax credit (OSTC), the Ontario energy and property tax credit (OEPTC), and the Northern Ontario energy credit (NOEC)—the Ontario senior homeowners' property tax grant (OSHPTG) payment,and the Ontario sales tax transition benefit (OSTTB)."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"TIPS (Tax Information Phone Service)", Phone:"1-800-267-6999", Email:"N/A", Desc:"This automated phone service provides information to individuals and businesses."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Revenu Québec", Phone:"1-800-267-6299", Email:"N/A", Desc:"General information, Income tax, Your tax file, Change of address, Notice of assessment, Direct deposit ,Assistance program for individuals in business"};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Learning and Career Centres (LCCs) - Talent Management for the NCR", Phone:"1-613-901-6310", Email:"P-OTG.LCCTraining@intern.mil.ca", Desc:"Our highly skilled Learning Advisors provide Learning and Career Advisory services through group settings or classroom sessions."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Awards & Recognition", Phone:"1-613-901-7322", Email:"Awards-Recompenses@forces.gc.ca", Desc:"Discover the variety of awards available to the HR-Civ team and how you can recognize your colleagues for performance excellence."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Community Management Program", Phone:"1-613-901-6652", Email:"P-OTG.CommunityMgmt@intern.mil.ca", Desc:"Our goal is to provide a positive employee experience for our Workforce which is achieved by applying elements of Diversity & Inclusion, Total Health, and clarity of organizational vision and individual expectations (through Community Management, Organizational Learning, etc.)"};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Sexual Misconduct Response Centre - Counsellor", Phone:"1-844-750-1648", Email:"DND.SMRC-CIIS.MDN@forces.gc.ca", Desc:"Contact a Sexual Misconduct Response Centre (SMRC) counsellor, access resources for leadership, and learn about how to recognize harmful and inappropriate sexual behaviour"};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Canadian Human Rights Commission", Phone:"1-888-214-1090", Email:"info.com@chrc-ccdp.gc.ca", Desc:"Human rights laws protect people in Canada from discrimination based on grounds such as race, sex, religion or disability."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Conflict and Complaint Management Services centre", Phone:"1-833-328-3351", Email:"ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca", Desc:"If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Office of Disability Management", Phone:"1-833-893-3388", Email:"Disability_Management-Gestion_Invalidite@forces.gc.ca", Desc:"The Office of Disability Management (ODM) was created to be an impartial, collaborative and inclusive group that supports employees and supervisors/managers dealing with disability-related matter due to illness, impairment and injury."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Mental Health & Wellbeing", Phone:"N/A", Email:"P-OTG.Wellbeing@intern.mil.ca", Desc:" The Mental Health and Well-Being Corporate Office supports the health and well-being of employees and provides access to tools, resources and services to assist organizations in building a safe, supportive and respectful work environment."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Sun Life Financial - Public Service Health Care Plan (PSHCP)", Phone:"1-888-757-7427", Email:"can_ottawaservice@sunlife.com", Desc:"Have your PSHCP contract number (055555) and certificate number available to help us assist you with your questions about your group benefits (e.g. drug, medical)."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Sun Life Financial - Pensioners’ Dental Services Plan (PDSP)", Phone:"1-888-757-7427" , Email:"can_ottawaservice@sunlife.com", Desc:"Have your PDSP contract number (025555) and certificate number available to help us assist you with your questions about your group benefits."};
+    databaseReturn.push(dbRow);
+    dbRow ={Title:"Great-West Life - Public Service Dental Care Plan", Phone:"1-855-415-4414", Email:"N/A", Desc:""};
+    databaseReturn.push(dbRow);
 
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"DLN Learning Management System: Help Desk ", Phone: "1-844-750-1643 ", Email: " DLN-RAD@FORCES.GC.CA", Desc:"The DLN is an enterprise environment for managing, developing and delivering on-line training, as well as for providing the Defence Team with an environment favourable to continuous learning and the sharing of knowledge."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"PSPC Client Contact Centre (Government of Canada Employees)", Phone: "1-855-686-4729", Email: "N/A", Desc:"Friendly and knowledgeable operators can answer general questions related to employee pay enquiries."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Individual tax enquiries", Phone: "1-800-959-8281 ", Email: "N/A", Desc:"Call this number for tax information for individuals, trusts, international tax and non-residents, including personal income tax returns, instalments, and RRSPs or to get our forms and publications"};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Benefit enquiries (CRA Child and family benefits)", Phone: "1-800-387-1193 ", Email: "N/A", Desc:"Call this number for information on the Canada child benefit (CCB), the GST/HST credit, and related provincial and territorial programs, as well as the child disability benefit."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Provincial programs for Ontario (PPO)", Phone: "1-877-627-6645 ", Email: "N/A", Desc:"Call this number for enquiries related to the Ontario trillium benefit (OTB) payment—includes the Ontario sales tax credit (OSTC), the Ontario energy and property tax credit (OEPTC), and the Northern Ontario energy credit (NOEC)—the Ontario senior homeowners' property tax grant (OSHPTG) payment,and the Ontario sales tax transition benefit (OSTTB)."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"TIPS (Tax Information Phone Service)", Phone: "1-800-267-6999 ", Email: "N/A", Desc:"This automated phone service provides information to individuals and businesses."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Revenu Québec", Phone: "1 800 267-6299 ", Email: "N/A", Desc:"General information, Income tax, Your tax file, Change of address, Notice of assessment, Direct deposit ,Assistance program for individuals in business"};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Learning and Career Centres (LCCs) - Talent Management for the NCR", Phone: "Julie Faubert, Team Leader 613-901-6310    ", Email: "P-OTG.LCCTraining@intern.mil.ca", Desc:"Our highly skilled Learning Advisors provide Learning and Career Advisory services through group settings or classroom sessions."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Awards & Recognition", Phone: "613-901-7322", Email: "Awards-Recompenses@forces.gc.ca", Desc:"Discover the variety of awards available to the HR-Civ team and how you can recognize your colleagues for performance excellence."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Community Management Program", Phone: "613-901-6652", Email: "P-OTG.CommunityMgmt@intern.mil.ca", Desc:"Our goal is to provide a positive employee experience for our Workforce which is achieved by applying elements of Diversity & Inclusion, Total Health, and clarity of organizational vision and individual expectations (through Community Management, Organizational Learning, etc.)"};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Sexual Misconduct Response Centre - Counsellor", Phone: "1-844-750-1648", Email: "DND.SMRC-CIIS.MDN@forces.gc.ca", Desc:"Contact a Sexual Misconduct Response Centre (SMRC) counsellor, access resources for leadership, and learn about how to recognize harmful and inappropriate sexual behaviour"};
-
-databaseReturn.push(dbRow);
-
-//dbRow ={Title:"Integrated Conflict and Complaint Management", Phone: "(613) 944-6189", Email: "marc.potvin@forces.gc.ca ", Desc:"Your local Conflict and Complaint Management Services (CCMS) centre will provide you with support if you would like to submit a formal complaint or are dealing with conflict."};
-
-//databaseReturn.push(dbRow);
-
-dbRow ={Title:"Canadian Human Rights Commission", Phone: "1-888-214-1090", Email: "info.com@chrc-ccdp.gc.ca", Desc:"Human rights laws protect people in Canada from discrimination based on grounds such as race, sex, religion or disability."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Conflict and Complaint Management Services centre", Phone: " 1-833-328-3351", Email: "ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca", Desc:"If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Office of Disability Management", Phone: "1-833-893-3388 ", Email: "Disability_Management-Gestion_Invalidite@forces.gc.ca", Desc:"The Office of Disability Management (ODM) was created to be an impartial, collaborative and inclusive group that supports employees and supervisors/managers dealing with disability-related matter due to illness, impairment and injury."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Mental Health & Wellbeing", Phone: "N/A", Email: "P-OTG.Wellbeing@intern.mil.ca", Desc:" The Mental Health and Well-Being Corporate Office supports the health and well-being of employees and provides access to tools, resources and services to assist organizations in building a safe, supportive and respectful work environment."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Sun Life Financial - Public Service Health Care Plan (PSHCP)", Phone: "1-888-757-7427 ", Email: "can_ottawaservice@sunlife.com", Desc:"Have your PSHCP contract number (055555) and certificate number available to help us assist you with your questions about your group benefits (e.g. drug, medical)."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Sun Life Financial - Pensioners’ Dental Services Plan (PDSP)", Phone: "1-888-757-7427" , Email: "can_ottawaservice@sunlife.com", Desc:"Have your PDSP contract number (025555) and certificate number available to help us assist you with your questions about your group benefits."};
-
-databaseReturn.push(dbRow);
-
-dbRow ={Title:"Great-West Life - Public Service Dental Care Plan", Phone: " 1 855 415 4414", Email: "N/A", Desc:""};
-
-databaseReturn.push(dbRow);
     return databaseReturn;
 };
 
