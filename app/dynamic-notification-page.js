@@ -1,26 +1,10 @@
 var frameModule = require("ui/frame");
-const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
-const ScrollView = require("tns-core-modules/ui/scroll-view/").ScrollView;
-const Label = require("tns-core-modules/ui/label/").Label;
-const layout = require("tns-core-modules/ui/layouts/grid-layout");
-const Button = require("tns-core-modules/ui/button/").Button;
-var buttonModule = require("ui/button");
 const observable = require("data/observable");
-const ActionBar = require("tns-core-modules/ui/action-bar/").ActionBar;
-const FormattedString = require("tns-core-modules/text/formatted-string").FormattedString;
-const Span = require("tns-core-modules/text/span").Span;
 const pageData = new observable.Observable();
-const HtmlView = require("tns-core-modules/ui/html-view").HtmlView;
-const webViewModule = require("tns-core-modules/ui/web-view");
 var articleReference;
-var pageObject;
-const email = require("nativescript-email");
-var phone = require("nativescript-phone");
-var clipboard = require("nativescript-clipboard");
-var dialogs = require("ui/dialogs");
 
-var utils = require("utils/utils");
-const platformModule    = require("tns-core-modules/platform");
+const webViewEvents = require( "./utilities/WebViewExtender");
+const htmlBuilder = require( "./utilities/HTMLBuilder");
 
 exports.pageLoaded = function(args) {
     const page = args.object;
@@ -28,7 +12,11 @@ exports.pageLoaded = function(args) {
     articleReference=page.navigationContext;
     pageObject = page;
     page.bindingContext = pageData;
-    createArticle();
+    
+    // With Firebase, the data retrieval will be asynchronous, so that will need to be accounted for.
+    var articleData = getArticleText( articleReference.ArticleID );
+    pageData.set("ArticleHTML", htmlBuilder.buildHTML( articleData.Text ));
+    pageData.set("HeaderTitle", articleData.Title);
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -95,175 +83,10 @@ var getArticleText = function(aID, aLang)
 
 // This should prevent the page from loading new http and https links, then send the link to be opened by the default app
 // Unlike the documentation I found, the second parameter for shouldOverrideUrlLoading is not giving a string object.  It is giving a WebResourceRequest object.
-exports.onWebViewLoaded = function(webargs) {
-    console.log( "onWebViewLoaded ************************************************************" );
+exports.onWebViewLoaded = webViewEvents.onWebViewLoaded;
 
-    const webview = webargs.object;
+exports.onLoadStarted = webViewEvents.onLoadStarted;
 
-    if ( platformModule.isAndroid ) {
-        
-        var TNSWebViewClient = android.webkit.WebViewClient.extend({
-            shouldOverrideUrlLoading: function(view, webResourceRequest) {
-                if (webResourceRequest != null) {
-                    var urlString   = String( webResourceRequest.getUrl());
-                    console.log( urlString );
-                    if( urlString.startsWith("http://") || urlString.startsWith("https://") ) {
-                        utils.openUrl( urlString );
-                        return true;
-                    } else if( urlString.startsWith( "mailto:")) {
-                        emailLink( urlString.substr( 7));
-                        return true;
-                    } else if( urlString.startsWith( "tel:")) {
-                        callLink( urlString.substr( 4));
-                        return true;
-                    } else if( urlString.startsWith( "copy:")) {
-                        copyToClipboard( urlString.substr( 5));
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-        });
-
-        webview.android.setWebViewClient(new TNSWebViewClient());
-    }
-}
-
-exports.onLoadStarted = function(args){
-    console.log("onLoadStarted ****************************************************************");
-    checkURL = args.url.split(":");
-    if(checkURL.length > 1){
-        if(checkURL[0] == "mailto"){
-            console.log(checkURL[1]);
-            args.object.stopLoading();
-            emailLink(checkURL[1]);
-            
-        }else if(checkURL[0] == "tel"){
-            console.log(checkURL[1]);
-            args.object.stopLoading();
-            callLink(checkURL[1]);  
-        }else if(checkURL[0] == "copy"){
-            console.log(checkURL[1]);
-            args.object.stopLoading();
-            args.object.goBack();
-            copyToClipboard(args.url.substring(5));
-        } else if( checkURL[0].startsWith("http") || checkURL[0] == "https") {
-            args.object.stopLoading();
-            utils.openUrl(checkURL[0] + ":" + checkURL[1]);
-            args.object.goBack();
-        }
-        console.log(args.url);
-    }
-}
-var callLink = function(phoneNumber){
-    console.log("call number:" + phoneNumber);
-    phone.dial(phoneNumber,true);
-
-};
-var copyToClipboard = function(clipboardText){
-    console.log("copied to clipboard" + clipboardText);
-            clipboard.setText(clipboardText).then(function() {
-                console.log("OK, copied to the clipboard");
-            })
-            dialogs.alert({
-                title: "Link Copied",
-                message: "HR GO cannot open this link.  The link has been copied to your clipboard.",
-                okButtonText: "Continue"});
-}
-var emailLink = function(emailText){
-    console.log("send email to:" + emailText);
-    var toAddress = [];
-    toAddress.push(emailText);
-    if (email.available()){
-        email.compose({
-            subject: "",
-            body: "",
-            to: toAddress
-        });
-    } else {
-        console.log("Email Not Available");
-    }
-};
-var createArticle = function()
-{   
-
-    //STYLE HTML STRINGS
-    var bodyStyle = `.Article_Body{ height:auto; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 25px; margin-right: 25px; margin-top: 28px; margin-bottom:14px; padding-bottom:0px; white-space: normal; color: #333;}`;
-    var h1Style = `.Article_H1{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
-    var h2Style = `.Article_H2{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
-    var h3Style = `.Article_H3{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 25px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
-    var noteStyle = `.Article_Note{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; font-style: italic; margin-left: 25px; margin-right: 25px; margin-top: 5px; margin-bottom:5px; white-space: normal; color: #333;}`;
-    var listStyle = `.Article_List{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 50px; margin-right: 25px; margin-top: 18px; margin-bottom:5px; white-space: normal; color: #333;}`;
-    var allStyles = bodyStyle + h1Style + h2Style + h3Style + noteStyle + listStyle;
-    var headerHTML = `<html><head><style>${allStyles}</style></head><body>`;
-    var footerHTML = "</body></html>"
-    var totalHTML;
-    totalHTML = headerHTML;
-    var webView = new webViewModule.WebView();
-    const contentStack = new StackLayout();
-    const myScroller = new ScrollView();
-    const articleStack = new StackLayout();
-    // Set the orientation property
-    articleStack.orientation = "vertical";
-    articleStack.col = 1;
-    articleStack.className = "Article_MainStack";
-
-    contentStack.orientation = "vertical";
-    contentStack.row = 0;
-    
-    var headerLabel = new Label();
-    headerLabel.text = articleReference.ArticleTitle;
-    headerLabel.className = "HeaderLabel";
-
-    var LabelArray = [];
-    console.log("Create Article: ");   
-    var curArticleText = getArticleText(articleReference.ArticleID);
-    var articleItemSplit;
-
-    var articleComponents = curArticleText.Text.split("<*");
-    var articleSlide = pageObject.getViewById("articleContent");
-    //articleSlide.removeChildren();
-    for (z=0; z<articleComponents.length; z++){
-        var currentHTML;
-        articleItemSplit = articleComponents[z].split("*>");
-        var articleLabel = new Label();
-        var textString = "";
-        if(articleItemSplit[0] == "Article_List"){
-            textString = "\u2022 ";
-        }
-        if(articleItemSplit[1]){
-            textString += articleItemSplit[1]
-        }
-        if(textString.includes("::external::")){
-            var textWithExternal = textString.split("::external::");
-            console.log("TextWithExternal: " + textWithExternal.length);
-            var htmlString = `<div class="${articleItemSplit[0]}">`;
-            for(i=0; i < textWithExternal.length; i++){
-                if(textWithExternal[i].includes("||")){
-                    var linkText = textWithExternal[i].split("||");
-                    htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;      
-                }else{
-                    
-                    htmlString += `${textWithExternal[i]}`;
-                }
-            }
-            articleLabel.className = articleItemSplit[0];
-            var htmlParagraph = new HtmlView();
-            htmlString += "</div>";
-            totalHTML += htmlString;
-        }else{
-            totalHTML += `<div class="${articleItemSplit[0]}">${textString}</div>`;   
-        }    
-    }
-    totalHTML += footerHTML;
-    //console.log(totalHTML);
-    pageData.set("ArticleHTML", totalHTML);
-    pageData.set("HeaderTitle", curArticleText.Title);
-
-}
 var getFromDatabase = function(){
     //returnedItem = {Ref:"", BusinessLine:"", Category:"", Title:"", Type:"", Content:""};
     var returnedItem;
@@ -275,9 +98,6 @@ var getFromDatabase = function(){
     contentData.push(returnedItem);
     returnedItem = {Ref:"3", BusinessLine:"Labour Relations", Category:"DM/CDS", Title:"CAF-DND Sexual Misconduct Class Action", Type:"Notification", PublishDate:"July 19, 2019 05:00:00", Content:`<*Article_H1*>CAF-DND Sexual Misconduct Class Action<*Article_Note*>July 19, 2019<*Article_H3*>Important Update<*Article_Note*>The hearing to approve the proposed settlement agreement is scheduled for September 19 and 20, 2019 at 10:00am at the Federal Court in Ottawa, 90 Sparks Street.<*Article_H2*>Intro​du​ction<*Article_Body*>Are you a current or former member of the Canadian Armed Forces, or a current or former employee of the Department of National Defence or Staff of the Non-Public Funds, Canadian Forces?<*Article_Body*>Have you experienced sexual harassment, sexual assault or discrimination based on your sex, gender, gender identity or sexual orientation in connection with your military service or DND or SNPF employment?<*Article_Body*>There is a proposed settlement between the Canadian Federal Government and certain current and former members the Canadian Armed Forces ("CAF"), and current and former employees of the Department of National Defence ("DND") and/or Staff of the Non-Public Funds, Canadian Forces ("SNPF") who experienced sexual harassment, sexual assault or discrimination based on sex, gender, gender identity or sexual orientation ("Sexual Misconduct") in connection with their military service and/or employment with the DND/SNPF.<*Article_Body*>More information about the proposed settlement is available in the court-approved notice. A copy of the notice is available ::external::here||https://www.classaction.deloitte.ca/en-ca/Pages/CAF-DNDsexualmisconductclassaction.aspx#head-Court%20Documents::external::. A copy of the Final Settlement Agreement is available ::external::here||https://www.classaction.deloitte.ca/en-ca/Pages/CAF-DNDsexualmisconductclassaction.aspx#head-Court%20Documents::external::.<*Article_Body*>If you support the proposed settlement or if you object to the proposed settlement, you can submit a Participation Form. The Participation Form can be found ::external::here||https://www.classaction.deloitte.ca/en-ca/Pages/CAF-DNDsexualmisconductclassaction.aspx#head-Court%20Documents::external::. You must mail this Form to CAF DND Sexual Misconduct Class Action c/o Deloitte, Bay Adelaide Centre, East Tower, 8 Adelaide Street West, Toronto, ON M5H 0A9, or email it to cafdndmisconduct@deloitte.ca and it must be received or postmarked no later than August 30, 2019.<*Article_Body*>You do not need to submit a Participation Form to share in the benefits of the proposed settlement. If the proposed settlement is approved by the Federal Court, more information will be available explaining how to obtain benefits from the settlement.<*Article_H2*>Contact Us​<*Article_Body*>If you have further questions regarding the administration of the Settlement, please contact the Interim Administrator at:<*Article_Body*>CAF DND Sexual Misconduct Class Action <br>c/o Deloitte <br>Bay Adelaide Centre, East Tower <br>8 Adelaide Street West, Toronto ON  M5H 0A9 <br>Telephone: ::external::1-888-626-2611||tel:1-888-626-2611::external:: <br>Email: ::external::cafdndmisconduct@deloitte.ca||mailto:cafdndmisconduct@deloitte.ca::external::`};
     contentData.push(returnedItem);
-
-    // 
-       
     
     return contentData;
 }

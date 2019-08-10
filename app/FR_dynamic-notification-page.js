@@ -1,26 +1,10 @@
 var frameModule = require("ui/frame");
-const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
-const ScrollView = require("tns-core-modules/ui/scroll-view/").ScrollView;
-const Label = require("tns-core-modules/ui/label/").Label;
-const layout = require("tns-core-modules/ui/layouts/grid-layout");
-const Button = require("tns-core-modules/ui/button/").Button;
-var buttonModule = require("ui/button");
 const observable = require("data/observable");
-const ActionBar = require("tns-core-modules/ui/action-bar/").ActionBar;
-const FormattedString = require("tns-core-modules/text/formatted-string").FormattedString;
-const Span = require("tns-core-modules/text/span").Span;
 const pageData = new observable.Observable();
-const HtmlView = require("tns-core-modules/ui/html-view").HtmlView;
-const webViewModule = require("tns-core-modules/ui/web-view");
 var articleReference;
-var pageObject;
-const email = require("nativescript-email");
-var phone = require("nativescript-phone");
-var clipboard = require("nativescript-clipboard");
-var dialogs = require("ui/dialogs");
 
-var utils = require("utils/utils");
-const platformModule    = require("tns-core-modules/platform");
+const webViewEvents = require( "./utilities/WebViewExtender");
+const htmlBuilder = require( "./utilities/HTMLBuilder");
 
 exports.pageLoaded = function(args) {
     const page = args.object;
@@ -28,7 +12,11 @@ exports.pageLoaded = function(args) {
     articleReference=page.navigationContext;
     pageObject = page;
     page.bindingContext = pageData;
-    createArticle();
+    
+    // With Firebase, the data retrieval will be asynchronous, so that will need to be accounted for.
+    var articleData = getArticleText( articleReference.ArticleID );
+    pageData.set("ArticleHTML", htmlBuilder.buildHTML( articleData.Text ));
+    pageData.set("HeaderTitle", articleData.Title);
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -95,205 +83,10 @@ var getArticleText = function(aID, aLang)
 
 // This should prevent the page from loading new http and https links, then send the link to be opened by the default app
 // Unlike the documentation I found, the second parameter for shouldOverrideUrlLoading is not giving a string object.  It is giving a WebResourceRequest object.
-exports.onWebViewLoaded = function(webargs) {
-    console.log( "onWebViewLoaded ************************************************************" );
+exports.onWebViewLoaded = webViewEvents.onWebViewLoaded;
 
-    const webviewfr = webargs.object;
+exports.onLoadStarted = webViewEvents.onLoadStarted;
 
-    if ( platformModule.isAndroid ) {
-        
-        var TNSWebViewClientFR = android.webkit.WebViewClient.extend({
-            shouldOverrideUrlLoading: function(view, webResourceRequest) {
-                if (webResourceRequest != null) {
-                    var urlString   = String( webResourceRequest.getUrl());
-                    console.log( urlString );
-                    if( urlString.startsWith("http://") || urlString.startsWith("https://") ) {
-                        utils.openUrl( urlString );
-                        return true;
-                    } else if( urlString.startsWith( "mailto:")) {
-                        emailLink( urlString.substr( 7));
-                        return true;
-                    } else if( urlString.startsWith( "tel:")) {
-                        callLink( urlString.substr( 4));
-                        return true;
-                    } else if( urlString.startsWith( "copy:")) {
-                        copyToClipboard( urlString.substr( 5));
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-        });
-
-        webviewfr.android.setWebViewClient(new TNSWebViewClientFR());
-    }
-}
-
-exports.onLoadStarted = function(args){
-    console.log("onLoadStarted ****************************************************************");
-    checkURL = args.url.split(":");
-    if(checkURL.length > 1){
-        if(checkURL[0] == "mailto"){
-            console.log(checkURL[1]);
-            args.object.stopLoading();
-            emailLink(checkURL[1]);
-            
-        }else if(checkURL[0] == "tel"){
-            console.log(checkURL[1]);
-            args.object.stopLoading();
-            callLink(checkURL[1]); 
-        }else if(checkURL[0] == "copy"){
-            console.log(checkURL[1]);
-            args.object.stopLoading();
-            args.object.goBack();
-            copyToClipboard(args.url.substring(5));  
-        } else if( checkURL[0].startsWith("http") || checkURL[0] == "https") {
-            args.object.stopLoading();
-            utils.openUrl(checkURL[0] + ":" + checkURL[1]);
-            args.object.goBack();
-        }
-        console.log(args.url);
-    }
-}
-var callLink = function(phoneNumber){
-    console.log("call number:" + phoneNumber);
-    phone.dial(phoneNumber,true);
-
-};
-var copyToClipboard = function(clipboardText){
-    console.log("copied to clipboard" + clipboardText);
-            clipboard.setText(clipboardText).then(function() {
-                console.log("OK, copied to the clipboard");
-            })
-            dialogs.alert({
-                title: "Lien a été copié",//link copied
-                message: "RH GO ne peut pas ouvrir ce lien.  Le lien a été copié.", //HR GO cannot open this link.  The link has been copied to your clipboard
-                okButtonText: "OK"});
-}
-var emailLink = function(emailText){
-    console.log("send email to:" + emailText);
-    var toAddress = [];
-    toAddress.push(emailText);
-    if (email.available()){
-        email.compose({
-            subject: "",
-            body: "",
-            to: toAddress
-        });
-    } else {
-        console.log("Email Not Available");
-    }
-};
-var createArticle = function()
-{   
-
-    //STYLE HTML STRINGS
-    var bodyStyle = `.Article_Body{ height:auto; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 25px; margin-right: 25px; margin-top: 28px; margin-bottom:14px; padding-bottom:0px; white-space: normal; color: #333;}`;
-    var h1Style = `.Article_H1{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
-    var h2Style = `.Article_H2{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 14px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
-    var h3Style = `.Article_H3{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 20px; line-height: 1.1; font-weight: 700; margin-bottom: 10px; color: #333; margin-left: 25px; margin-bottom:11.5px; margin-top: 38px; white-space: normal;}`;
-    var noteStyle = `.Article_Note{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; font-style: italic; margin-left: 25px; margin-right: 25px; margin-top: 5px; margin-bottom:5px; white-space: normal; color: #333;}`;
-    var listStyle = `.Article_List{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; margin-left: 50px; margin-right: 25px; margin-top: 18px; margin-bottom:5px; white-space: normal; color: #333;}`;
-    var allStyles = bodyStyle + h1Style + h2Style + h3Style + noteStyle + listStyle;
-    var headerHTML = `<html><head><style>${allStyles}</style></head><body>`;
-    var footerHTML = "</body></html>"
-    var totalHTML;
-    totalHTML = headerHTML;
-    var webView = new webViewModule.WebView();
-    const contentStack = new StackLayout();
-    const myScroller = new ScrollView();
-    const articleStack = new StackLayout();
-    // Set the orientation property
-    articleStack.orientation = "vertical";
-    articleStack.col = 1;
-    articleStack.className = "Article_MainStack";
-
-    contentStack.orientation = "vertical";
-    contentStack.row = 0;
-    
-
-    var headerLabel = new Label();
-    headerLabel.text = articleReference.ArticleTitle;
-    headerLabel.className = "HeaderLabel";
-
-    var LabelArray = [];
-    console.log("Create Article: ");   
-    var curArticleText = getArticleText(articleReference.ArticleID);
-    var articleItemSplit;
-
-    var articleComponents = curArticleText.Text.split("<*");
-    var articleSlide = pageObject.getViewById("articleContent");
-    //articleSlide.removeChildren();
-    for (z=0; z<articleComponents.length; z++){
-        var currentHTML;
-        articleItemSplit = articleComponents[z].split("*>");
-        var articleLabel = new Label();
-        //LabelArray.push(new Label());
-        var textString = "";
-        if(articleItemSplit[0] == "Article_List"){
-            textString = "\u2022 ";
-        }
-        if(articleItemSplit[1]){
-            textString += articleItemSplit[1]
-        }
-        if(textString.includes("::external::")){
-            var textWithExternal = textString.split("::external::");
-            console.log("TextWithExternal: " + textWithExternal.length);
-            var inlineStyles = `style=""`;
-            
-            var htmlString = `<div class="${articleItemSplit[0]}">`;
-            for(i=0; i < textWithExternal.length; i++){
-                if(textWithExternal[i].includes("||")){
-                    var linkText = textWithExternal[i].split("||");
-                    
-                   // console.log(linkText[1]);
-                    
-                    //labelSpan.text = `<a href="google.com> link here </a>`;
-                    htmlString += `<a href="${linkText[1]}" data-rel="external">${linkText[0]}</a>`;
-                    //labelSpan.text = "<a href='http://google.com'>Hello World</a>";
-                    
-                }else{
-                    
-                    htmlString += `${textWithExternal[i]}`;
-                }
-            }
-            articleLabel.className = articleItemSplit[0];
-            
-            //newFormattedText.className = articleItemSplit[0];
-            var htmlParagraph = new HtmlView();
-            //htmlParagraph.className = "Article_Body";
-            htmlString += "</div>";
-            totalHTML += htmlString;
-            //htmlParagraph.html = htmlString;
-            //articleSlide.addChild(articleLabel);
-            //articleSlide.addChild(newFormattedText);
-            //webView.src = "<html><body>" + htmlString + "</body></html>";
-            //__articleSlide.addChild(webView);
-
-            //__articleSlide.addChild(htmlParagraph);
-            
-            //console.log(htmlString);
-        }else{
-            //articleLabel.className = articleItemSplit[0];
-            //articleLabel.text = textString;
-            totalHTML += `<div class="${articleItemSplit[0]}">${textString}</div>`;
-            //__articleSlide.addChild(articleLabel);
-            
-        }
-        //totalHTML += `<div class="${articleItemSplit[0]}">${articleItemSplit[1]}</div>`;
-        
-        
-        
-    }
-    totalHTML += footerHTML;
-    console.log(totalHTML);
-    pageData.set("ArticleHTML", totalHTML);
-    pageData.set("HeaderTitle", curArticleText.Title);
-
-}
 var getFromDatabase = function(){
     //returnedItem = {Ref:"", BusinessLine:"", Category:"", Title:"", Type:"", Content:""};
     var returnedItem;

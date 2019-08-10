@@ -24,8 +24,11 @@ exports.buildHTML = function(codedString)
 
     var articleComponents = curArticleText.split("<*");
 
-    for (z=0; z<articleComponents.length; z++){
-        articleItemSplit = articleComponents[z].split("*>");
+    var articleItem = 0;
+    var anchorItem  = 0;
+
+    for( articleItem=0 ; articleItem < articleComponents.length ; articleItem++ ) {
+        articleItemSplit = articleComponents[articleItem].split("*>");
         var articleSectionString = "";
         if(articleItemSplit[0] == "Article_List"){
             articleSectionString = "\u2022 ";
@@ -42,13 +45,13 @@ exports.buildHTML = function(codedString)
             var textWithExternal = articleSectionString.split("::external::");
             console.log("TextWithExternal: " + textWithExternal.length);
             var htmlString = "";
-            for(i=0; i < textWithExternal.length; i++){
-                if(textWithExternal[i].includes("||")){
-                    var linkText = textWithExternal[i].split("||");
+            for( anchorItem=0; anchorItem < textWithExternal.length; anchorItem++){
+                if(textWithExternal[anchorItem].includes("||")){
+                    var linkText = textWithExternal[anchorItem].split("||");
                     htmlString += `<a href="${linkText[1]}">${linkText[0]}</a>`;
                 }else{
                     
-                    htmlString += `${textWithExternal[i]}`;
+                    htmlString += `${textWithExternal[anchorItem]}`;
                 }
             }
             
@@ -61,9 +64,9 @@ exports.buildHTML = function(codedString)
             var textWithExternal = articleSectionString.split("::contact::");
             console.log("TextWithContact: " + textWithExternal.length);
             var htmlString = "";
-            for(i=0; i < textWithExternal.length; i++){
-                if(textWithExternal[i].includes("||")){
-                    var linkText = textWithExternal[i].split("||");
+            for( anchorItem=0; anchorItem < textWithExternal.length; anchorItem++){
+                if(textWithExternal[anchorItem].includes("||")){
+                    var linkText = textWithExternal[anchorItem].split("||");
                     var icon ="";
                     if( linkText[1].startsWith("http://") || linkText[1].startsWith("https://") ) {
                         icon ="./images/web.png";
@@ -75,7 +78,7 @@ exports.buildHTML = function(codedString)
                     htmlString += `<div><img src="${icon}" style="vertical-align: middle;"><span style="vertical-align: middle;"><a href="${linkText[1]}" style="margin-left: 5px;">${linkText[0]}</a></span></div>`;
                 }else{
                     
-                    htmlString += `${textWithExternal[i]}`;
+                    htmlString += `${textWithExternal[anchorItem]}`;
                 }
             }
             
