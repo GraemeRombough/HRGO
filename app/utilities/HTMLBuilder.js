@@ -85,7 +85,11 @@ exports.buildHTML = function(codedString)
             articleSectionString    = htmlString;
         }
 
-        totalHTML += `<div class="${articleItemSplit[0]}">${articleSectionString}</div>`;
+        if( articleItemSplit[0] != "Override") {
+            totalHTML += `<div class="${articleItemSplit[0]}">${articleSectionString}</div>`;
+        } else {
+            totalHTML += articleSectionString;
+        }
     }
     totalHTML += footerHTML;
     
