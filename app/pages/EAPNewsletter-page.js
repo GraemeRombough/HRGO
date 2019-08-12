@@ -55,7 +55,10 @@ exports.onWVSwipe = function(event) {
     }
 };
 
-exports.onWebViewLoaded = webViewEvents.onWebViewLoaded;
+exports.onWebViewLoaded = function(webargs) {
+    webargs.enableZoom  = true;
+    webViewEvents.onWebViewLoaded(webargs);
+}
 
 exports.onLoadStarted = webViewEvents.onLoadStarted;
 
