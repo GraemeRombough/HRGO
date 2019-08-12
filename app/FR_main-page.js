@@ -13,7 +13,7 @@ exports.goToLanding = function(){
 }
 exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_" + args.object.pageName);
+    topmost.navigate( args.object.pageName);
 };
 exports.goBack = function(args){
     const thisPage = args.object.page;

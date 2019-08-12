@@ -111,6 +111,23 @@ exports.setToFre = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("FR_main-page");
 }
+
+exports.setLanguage = function(args) {
+    console.log( "args = " + args.object.data );
+    
+    args.object.style.backgroundColor = "rgb(0,31,91)";
+    args.object.style.color = "#FFF";
+
+    applicationSettings.setString("PreferredLanguage", args.object.data);
+
+    var topmost = frameModule.topmost();
+    if( args.object.data == "French" ) {
+        topmost.navigate("FR_main-page");
+    } else {
+        topmost.navigate("main-page");
+    }
+}
+
 exports.searchLanding = function(){
     var searchField = page.getViewById("SearchBox").text;
     

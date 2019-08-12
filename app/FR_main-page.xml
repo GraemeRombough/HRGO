@@ -7,48 +7,52 @@
       <label col="1" row="0" text="ACCUEIL" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
-      <ScrollView>
+      <ScrollView height="100%">
 
       <StackLayout orientation="vertical">
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe93b;" tap="goToUtility" pageName="pay-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="PAIE" tap="goToUtility" pageName="pay-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe9da;" tap="goToUtility" pageName="pages/EAPNewsletter-page"/>
+            <Button row="1" class="Home_Nav_Label" text="EAP Newsletter" tap="goToUtility" pageName="pages/EAPNewsletter-page"/>
           </GridLayout>
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe940;" tap="goToUtility" pageName="calculators-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="CALCULATEURS" tap="goToUtility" pageName="calculators-landing-page"/>
-          </GridLayout>
-        </StackLayout> 
-
-        <StackLayout orientation="horizontal" class="Home_Nav_Row">
-          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe972;" tap="goToUtility" pageName="student-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="ÉTUDIANTS" tap="goToUtility" pageName="student-landing-page"/>
-          </GridLayout>
-          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe9b8;" tap="goToUtility" pageName="tracking-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="SUIVIS" tap="goToUtility" pageName="tracking-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xea07;" tap="goToUtility" pageName="FR_whats-new-page"/>
+            <Button row="1" class="Home_Nav_Label" text="NOUVELLES" tap="goToUtility" pageName="FR_whats-new-page"/>
           </GridLayout>
         </StackLayout> 
 
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe926;" tap="goToUtility" pageName="lookup-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="CONSULTATION" tap="goToUtility" pageName="lookup-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe93b;" tap="goToUtility" pageName="FR_pay-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="PAIE" tap="goToUtility" pageName="FR_pay-landing-page"/>
           </GridLayout>
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xe923;" tap="goToUtility" pageName="contact-landing-page"/>
-            <Button row="1" class="Home_Nav_Label" text="CONTACTS" tap="goToUtility" pageName="contact-landing-page"/>
+            <Button row="0" class="Home_Nav_Icon" text="&#xe940;" tap="goToUtility" pageName="FR_calculators-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="CALCULATEURS" tap="goToUtility" pageName="FR_calculators-landing-page"/>
+          </GridLayout>
+        </StackLayout> 
+
+        <StackLayout orientation="horizontal" class="Home_Nav_Row">
+          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
+            <Button row="0" class="Home_Nav_Icon" text="&#xe972;" tap="goToUtility" pageName="FR_student-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="ÉTUDIANTS" tap="goToUtility" pageName="FR_student-landing-page"/>
+          </GridLayout>
+          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
+            <Button row="0" class="Home_Nav_Icon" text="&#xe9b8;" tap="goToUtility" pageName="FR_tracking-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="SUIVIS" tap="goToUtility" pageName="FR_tracking-landing-page"/>
+          </GridLayout>
+        </StackLayout> 
+
+        <StackLayout orientation="horizontal" class="Home_Nav_Row">
+          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
+            <Button row="0" class="Home_Nav_Icon" text="&#xe926;" tap="goToUtility" pageName="FR_lookup-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="CONSULTATION" tap="goToUtility" pageName="FR_lookup-landing-page"/>
+          </GridLayout>
+          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
+            <Button row="0" class="Home_Nav_Icon" text="&#xe923;" tap="goToUtility" pageName="FR_contact-landing-page"/>
+            <Button row="1" class="Home_Nav_Label" text="CONTACTS" tap="goToUtility" pageName="FR_contact-landing-page"/>
           </GridLayout>
         </StackLayout>  
-
-        <StackLayout orientation="horizontal" class="Home_Nav_Row">
-          <GridLayout class="Home_Nav_Grid" rows="auto, auto">
-            <Button row="0" class="Home_Nav_Icon" text="&#xea07;" tap="goToUtility" pageName="whats-new-page"/>
-            <Button row="1" class="Home_Nav_Label" text="NOUVELLES" tap="goToUtility" pageName="whats-new-page"/>
-          </GridLayout>
-        </StackLayout>   
 
       </StackLayout>
 
