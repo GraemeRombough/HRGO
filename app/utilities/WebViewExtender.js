@@ -92,7 +92,9 @@ exports.onWebViewLoaded = function(webargs) {
         webview.android.setOnCreateContextMenuListener(myListener);
 
         webview.android.setWebViewClient(new LinkOverrideWebViewClient());
-        webview.android.getSettings().setBuiltInZoomControls(false);
+        webview.android.getSettings().setBuiltInZoomControls(true);
+        webview.android.getSettings().setDisplayZoomControls(false);
+        webview.android.getSettings().setSupportZoom(true);
     } else {
         // TODO: figure out how to perform the overrides on iOS
         //webview.ios.
