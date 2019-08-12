@@ -10,7 +10,7 @@
     <ScrollView>
     <StackLayout orientation="vertical">
       <Button class="Sub_Nav_Line" text="Membres de l'équipe" tap="navToggle" value="TeamContact"/>
-        <Button class="Main_Nav_SubLine" text="Contacter l'équipe" pageName="my-team" tap="goToUtility" visibility="{{ TeamContact ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Contacter l'équipe" pageName="FR_my-team" tap="goToUtility" visibility="{{ TeamContact ? 'visible' : 'collapsed' }}"/>
       <Button class="Sub_Nav_Line" text="Tous les contacts" tap="navToggle" value="POC"/>
         <Button class="Main_Nav_SubLine" text="Contacts des RH" pageName="POC-page" tap="goToUtility" visibility="{{ POC ? 'visible' : 'collapsed' }}"/>
     </StackLayout>

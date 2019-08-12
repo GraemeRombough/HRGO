@@ -45,7 +45,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_POC-page");
+    topmost.navigate("POC-page");
 }
 exports.goToHome = function(){
     var topmost = frameModule.topmost();

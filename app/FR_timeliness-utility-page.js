@@ -56,7 +56,7 @@ exports.footer4 = function(){
 }
 exports.footer5 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_POC-page");
+    topmost.navigate("POC-page");
 }
 var calculateSection34Timeliness = function(workDate, isPayWeek){
     //Sunday = 0 m1, t2, w3, t4, f5, s6
