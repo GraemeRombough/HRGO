@@ -47,6 +47,14 @@ exports.onSwipe3 = function(args) {
     console.log("onSwipe3");
 };
 
+exports.onWVSwipe = function(event) {
+    if( event.direction == 1 ) {
+        console.log("onWVSwipe: " + event.direction);
+        const thisPage = event.object.page;
+        thisPage.frame.goBack();
+    }
+};
+
 exports.onWebViewLoaded = webViewEvents.onWebViewLoaded;
 
 exports.onLoadStarted = webViewEvents.onLoadStarted;
