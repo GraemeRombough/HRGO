@@ -1,26 +1,9 @@
 <Page loaded="pageLoaded" actionBarHidden="false">
     <Page.ActionBar>
         <ActionBar title="{{ actionBarTitle }}" style="background-color: #3C5AFD; color: white; weight: bold; font-size: 20pt; horizontal-align: center;">
-            <ActionItem icon="res://navigation/menu" 
-                android:visibility="collapsed" 
-                tap="showSideDrawer"
-                ios.position="left">
-            </ActionItem>
         <Label class="action-bar-title" text="{{ actionBarTitle }}"></Label>
-            <android>
-                <NavigationButton android.systemIcon="res://navigation/menu" tap="showSideDrawer" />
-            </android>
-            <ios>
-                <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
-            </ios>
-            <android>
-                <NavigationButton icon="~/images/phone.png" tap="showSideDrawer" />
-            </android>
-            <ios>
-                <ActionItem icon="res://ic_menu" ios.position="right" tap="showSideDrawer" />
-            </ios>
             <ActionItem tap="goBack"
-                ios.systemIcon="9" ios.position="right"
+                ios.systemIcon="8" ios.position="right"
                 android.systemIcon="ic_menu_back" android.position="actionBar"></ActionItem>
         </ActionBar>
     </Page.ActionBar>
