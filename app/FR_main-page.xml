@@ -13,7 +13,7 @@
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
             <Button row="0" class="Home_Nav_Icon" text="&#xe9da;" tap="goToUtility" pageName="pages/EAPNewsletter-page"/>
-            <Button row="1" class="Home_Nav_Label" text="EAP Newsletter" tap="goToUtility" pageName="pages/EAPNewsletter-page"/>
+            <Button row="1" class="Home_Nav_Label" text="EAP Bulletin" tap="goToUtility" pageName="pages/EAPNewsletter-page"/>
           </GridLayout>
           <GridLayout class="Home_Nav_Grid" rows="auto, auto">
             <Button row="0" class="Home_Nav_Icon" text="&#xea07;" tap="goToUtility" pageName="FR_whats-new-page"/>
