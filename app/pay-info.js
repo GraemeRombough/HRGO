@@ -2,111 +2,96 @@ var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
-var selectedClass, selectedStep;
 var classDD;
-var classSteps;
 var pageObject;
-const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
-var pageVM;
 var subNavTitle = "YourPayInformation";
-var lastTimer = {id: null, value: -1};
+var payData;
 
 exports.onNavigatingTo = function(args){
-    selectedClass = null;
-    selectedStep = null;
     classDD = getClassList();
-    classSteps = getStepCount();
-    //const classifications = getClassList();
-    var steps = [1];
     const page = args.object;
     pageObject = page;
     pageData = fromObject({
         classItems: classDD,
-        classIndex: 1,
-        stepItems: steps,
-        stepIndex:1,
+        levelItems: classDD[0].levelData,
+        stepItems: classDD[0].levelData[0].stepData,
+        classSelectionIndex: 0,
+        levelSelectionIndex: 0,
+        stepIndex:0,
         infoVisible: true,
         salaryVisible: false,
         SubstantiveClass: true,
         SubstantiveStep: false
-    }); 
+    });
+    payData = classDD[0].levelData[0].stepData[0];
     page.bindingContext = pageData;
-    
-    
-}
+};
+
 exports.pageLoaded = function(args) {
     
     console.log(pageData.get("infoVisible"));
     
 };
+
 exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
-        vm.set("classIndex", listPicker.selectedIndex);
-        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
-        selectedClass = [listPicker.selectedIndex, listPicker.selectedValue];
-        selectedStep = [1,"1"];
-        loadSteps(listPicker.selectedValue,args);
-        //pageData.set("SubstantiveStep", true);
-        //pageData.set("SubstantiveClass", false); 
-    });
-}
+        vm.set("classSelectionIndex", listPicker.selectedIndex);
 
-exports.onStepListPickerLoaded = function(args){
+        loadLevels(listPicker.selectedValue,args);
+    });
+};
+
+exports.onLevelListPickerLoaded = function(args){
+    const listPicker = args.object;
+    const vm = listPicker.page.bindingContext;
+    listPicker.on("selectedIndexChange", (lpargs) => {
+        vm.set("levelSelectionIndex", listPicker.selectedIndex);
+
+        loadSteps(listPicker.selectedValue,args);
+    });
+};
+
+exports.onStepListPickerLoaded = function(args) {
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
         vm.set("stepIndex", listPicker.selectedIndex);
-        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
-        selectedStep = [listPicker.selectedIndex, listPicker.selectedValue];
-        
-        
-        //loadSteps(listPicker.selectedValue,args);
+
+        payData = listPicker.selectedValue;
     });
-}
-exports.getSalaryInfo = function(args){
-    //pageData.set("showInfo", true);
-    //args.object.bindingContext = pageData;
-    console.log("getSalaryInfo | " + selectedClass[1] + selectedStep[1]);
-    
-    pageData.set("infoVisible", false);
-    if(selectedClass != null && selectedStep !=null){
-        var salaryData = returnSalary(selectedClass[1], selectedStep[1]);
-        pageData.set("annualRate", "$" + Math.round(salaryData.annually * 100 + Number.EPSILON ) / 100);
-        pageData.set("biweeklyRate", "$" + Math.round(salaryData.biweekly * 100 + Number.EPSILON ) / 100);
-        pageData.set("dailyRate", "$" + Math.round(salaryData.daily * 100 + Number.EPSILON ) / 100);
-        pageData.set("hourlyRate", "$" + Math.round(salaryData.hourly * 100 + Number.EPSILON ) / 100);
-        pageData.set("overtime1Rate", "$" + Math.round((salaryData.hourly * 1.5) * 100 + Number.EPSILON ) / 100);
+};
+
+exports.getSalaryInfo = function(args) {
+    if( payData != null ) {
+        pageData.set("infoVisible", false);
+        pageData.set("annualRate", "$" + Math.round(payData.annually * 100 + Number.EPSILON ) / 100);
+        pageData.set("biweeklyRate", "$" + Math.round(payData.biweekly * 100 + Number.EPSILON ) / 100);
+        pageData.set("dailyRate", "$" + Math.round(payData.daily * 100 + Number.EPSILON ) / 100);
+        pageData.set("hourlyRate", "$" + Math.round(payData.hourly * 100 + Number.EPSILON ) / 100);
+        pageData.set("overtime1Rate", "$" + Math.round((payData.hourly * 1.5) * 100 + Number.EPSILON ) / 100);
         pageData.set("salaryVisible", true);
     }
 };
-var loadSteps = function(selection,inputArg){
-    console.log(`loadSteps selectedClass = ${selectedClass}`);
-    var numOfSteps;
-    var steps = [];
-    console.log(classSteps.length);
-    for(x=0; x < classSteps.length; x++){
-        if(classSteps[x].class == selectedClass[1]){
-            numOfSteps = classSteps[x].steps;   
-        }
-    }
 
-    for(i = 0; i < numOfSteps; i++){
-        steps.push(i+1);
-    }
-    //console.log(`steps: ${steps.length}`);
-    console.log(`steps: ${numOfSteps}`);
-    pageData.set("stepItems", steps);
-    pageData.set("stepIndex", 1);
+// When a list is loaded, load the next list down as well and select the first item.
+var loadLevels = function(selection,inputArg) {
+    pageData.set("levelItems" , selection);
+    pageData.set("levelSelectionIndex", 0);
 
+    loadSteps(selection[0].stepData,inputArg);
 };
-exports.resetSelections = function(args){
-    selectedClass = null;
-    selectedStep = null;
+
+var loadSteps = function(selection,inputArg) {
+    pageData.set("stepItems", selection);
+    pageData.set("stepIndex", 0);
+
+    payData = selection[0];
+};
+
+exports.resetSelections = function(args) {
     pageData.set("annualRate", "");
     pageData.set("biweeklyRate", "");
     pageData.set("dailyRate", "");
@@ -115,10 +100,11 @@ exports.resetSelections = function(args){
     pageData.set("infoVisible", true);
     pageData.set("salaryVisible", false);
 }
+
 exports.getCalculatedInfo = function(){
     var overtimeCalc, hourlyCalc, dailyCalc, biweeklyCalc, annuallyCalc;
     var totalValue = 0;
-    var salaryData = returnSalary(selectedClass[1], selectedStep[1]);
+    var salaryData = payData;
     if(pageData.get("overtime1Number")){
         overtimeCalc = pageData.get("overtime1Number");
         totalValue += overtimeCalc * salaryData.hourly * 1.5;
@@ -186,53 +172,88 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
 }
-var getClassList = function(){
+
+/*
+    Turn the classifications list into a tree.
+    This structure will be used to populate the appropriate lists and serve up the salary data.
+    The data is grouped by Class, then Rank in the class, then Step in the rank.
+    If the list was {"CS 03", 1, financialInfo1}, {"CS 03", 2, financialInfo2}, {"CS 03", 3, financialInfo3}, {"CS 04", 1, financialInfo4} then the tree would be
+        CS
+         +- 03
+         |   + {1, financialInfo1}
+         |   + {2, financialInfo2}
+         |   + {3, financialInfo3}
+         |
+         +-04
+             + {1, financialInfo4}
+
+    This will allow for classification selection to be much easier on the user.
+*/
+var getClassList = function() {
     var databasePull = getFromDataBase();
-    var classList = [];
-    var itemIsDuplicate = false;
-    for(i = 0; i < databasePull.length; i++){
-        itemIsDuplicate = false;
-        for(x = 0; x < classList.length; x++){
-            if (databasePull[i].classCode == classList[x]){
-                itemIsDuplicate = true;
-            }
+
+    var previousClass   = "";
+    var previousLevel   = "";
+
+    var classList       = [];
+    var recordIndex     = 0;
+    var splitChar       = " ";
+    var classAndLevel   = "";
+
+    var classIndex      = -1;
+    var levelIndex      = -1;
+
+    for( recordIndex = 0 ; recordIndex < databasePull.length ; recordIndex++ ) {
+        if( databasePull[recordIndex].classCode.includes(" ")) {
+            splitChar       = " ";
+        } else if( databasePull[recordIndex].classCode.includes("-")) {
+            splitChar       = "-";
+        } else {
+            databasePull[recordIndex].classCode = databasePull[recordIndex].classCode + "- ";
+            splitChar       = splitChar + "-";
         }
-        if (itemIsDuplicate == false){
-            classList.push(databasePull[i].classCode);
-            //console.log(databasePull[i].classCode);
+
+        classAndLevel   = databasePull[recordIndex].classCode.split(splitChar);
+        if( classAndLevel[ 0 ] != previousClass ) {
+            // add a new entry to class list, start a new level list, start a new step list
+            previousClass   = classAndLevel[ 0 ];
+            previousLevel   = classAndLevel[ 1 ];
+            var classObject = fromObject({
+                classCode: previousClass,
+                levelData: []
+            });
+            classList.push( classObject );
+            classIndex++;
+            levelIndex  = 0;
+            var levelObject = fromObject({
+                levelCode: previousLevel,
+                stepData: []
+            });
+            classList[classIndex].levelData.push( levelObject );
+        } else if( classAndLevel[ 1 ] != previousLevel ) {
+            // add a new entry to the current level list, start a new step list
+            previousLevel   = classAndLevel[ 1 ];
+            levelIndex++;
+            var levelObject = fromObject({
+                levelCode: previousLevel,
+                stepData: []
+            });
+            classList[classIndex].levelData.push( levelObject );
         }
+        // push the step data onto the tree
+        var stepObject  = fromObject({
+            step: databasePull[recordIndex].step,
+            hourly: databasePull[recordIndex].hourly, 
+            daily: databasePull[recordIndex].daily, 
+            biweekly: databasePull[recordIndex].biweekly, 
+            annually: databasePull[recordIndex].annually
+        });
+        classList[classIndex].levelData[levelIndex].stepData.push( stepObject );
     }
+
     return classList;
-}
-var getStepCount = function(){
-    var databaseReturn = getFromDataBase();
-    var numOfSteps = 0;
-    var returnClassSteps = [];
-    
-    for(i = 0; i < classDD.length; i++){
-        numOfSteps = 0;
-        var stepItem = {};
-        for(x=0; x < databaseReturn.length; x++){
-            if (classDD[i] == databaseReturn[x].classCode){
-                numOfSteps++;
-            }
-        }
-        stepItem = {class:classDD[i], steps:numOfSteps};
-        returnClassSteps.push(stepItem);
-        //console.log("class: " + classDD[i] +  "steps: " + numOfSteps);
-    }
-    return returnClassSteps;
-}
-var returnSalary = function(selectedClassX, selectedStepX){
-    var salaryList = getFromDataBase();    
-    console.log("returnSalary");
-    for(i=0; i < salaryList.length; i++){
-        if(salaryList[i].classCode == selectedClass[1] && salaryList[i].step == selectedStep[1]){
-            return salaryList[i];
-            break;
-        }
-    }
 };
+
 var getFromDataBase = function(){
     var databaseReturn = [];
     var databaseLine = {};

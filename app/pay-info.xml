@@ -10,14 +10,16 @@
     </GridLayout>
     <StackLayout visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
       <Button text="Classification" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
-      <ListPicker id="classPicker" items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
-
+      <GridLayout columns="*,*" rows="auto" >
+      <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
+      <ListPicker  col="1" row="0" id="levelPicker" textField="levelCode" valueField="stepData" items="{{ levelItems }}" selectedIndex="{{ levelSelectionIndex }}" loaded="onLevelListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
+      </GridLayout>
       <Button text="Step" class="Home_Utility_Label" tap="navToggle" value="SubstantiveStep" />
-      <ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveStep ? 'visible' : 'collapsed' }}"/>
+      <ListPicker items="{{ stepItems }}" textField="step" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveStep ? 'visible' : 'collapsed' }}"/>
       <!--<TextField class="DayCalc_TextField" keyboardType="number" text="{{ stepNumber }}" />-->
       <Button class="Submit_Button_1" text="Get Salary Info" tap="getSalaryInfo"/>
-    </StackLayout>
     <!-- SALARY INFO SECTION-->
+    </StackLayout>
       <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="*,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
         <Button col="0" row="0" colSpan="3" class="Submit_Button_1" text="Reset Search" tap="resetSelections"/>
         <Label col="0" row="1" colSpan="2" text="Salary Info" class="Article_H2"/>
