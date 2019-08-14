@@ -43,6 +43,8 @@ exports.pageLoaded = function(args) {
         pageData.set("PointsOfContactTitle", "POINTS OF CONTACT");
         pagePrefix = "";
     }
+    pageData.set( "searchBarVisibility", "collapsed" );
+    pageData.set( "SearchCriteria", "" );
     displayPOCs( getFromDatabase());
 };
 
@@ -91,27 +93,42 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
 }
+
+// Toggle the search bar visibility
+exports.openSearch = function() {
+    if( pageData.get("searchBarVisibility") == "visible") {
+        pageData.set( "searchBarVisibility", "collapsed" );
+    } else {
+        pageData.set( "searchBarVisibility", "visible" );
+    }
+}
+
 exports.searchPOC = function() {
     var POCList     = pageObject.getViewById("POC_List");
     var pocCount    = POCList.getChildrenCount();
     var pocIndex    = 0;
     var checkText   = "";
 
-    if(pageData.get("SearchCriteria") != "") {
-        for( pocIndex = 0 ; pocIndex < pocCount ; pocIndex++ ) {
-            checkText   = POCList.getChildAt( pocIndex ).src;
-            if( checkText.toLowerCase().includes( pageData.get("SearchCriteria").toLowerCase()) == true ) {
+    if( pageData.get("SearchCriteria") != null ) {
+        if(pageData.get("SearchCriteria") != "") {
+            for( pocIndex = 0 ; pocIndex < pocCount ; pocIndex++ ) {
+                checkText   = POCList.getChildAt( pocIndex ).src;
+                if( checkText.toLowerCase().includes( pageData.get("SearchCriteria").toLowerCase()) == true ) {
+                    POCList.getChildAt( pocIndex ).visibility   = Visibility.visible;
+                } else {
+                    POCList.getChildAt( pocIndex ).visibility   = Visibility.collapse;
+                }
+            }
+        } else {
+            for( pocIndex = 0 ; pocIndex < pocCount ; pocIndex++ ) {
                 POCList.getChildAt( pocIndex ).visibility   = Visibility.visible;
-            } else {
-                POCList.getChildAt( pocIndex ).visibility   = Visibility.collapse;
             }
         }
-    } else {
-        for( pocIndex = 0 ; pocIndex < pocCount ; pocIndex++ ) {
-            POCList.getChildAt( pocIndex ).visibility   = Visibility.visible;
-        }
     }
+
+    pageData.set( "searchBarVisibility", "collapsed" );
 }
+
 var displayPOCs = function(POCs) {
     var POCList = pageObject.getViewById("POC_List");
     POCList.removeChildren();
@@ -158,7 +175,7 @@ var makeButton  = function( labelText, linkText, sectionFormat, transactionType)
 
     textSpan            = new Span();
     textSpan.text       = "  " + labelText;
-    textSpan.className  = sectionFormat;
+    textSpan.className  = "POC_Phone";
     buttonText.spans.push(textSpan);
 
     phoneButton.formattedText    = buttonText;
@@ -247,8 +264,6 @@ var createPOCWebView = function( codedString ) {
         //     ::contact::label||link::contact::  to create an image and anchor with the specified label and link
         var textWithExternal = pocSectionString.split("::contact::");
         for( anchorItem=0; anchorItem < textWithExternal.length; anchorItem++ ) {
-            var sectionLabel = new Label();
-            sectionLabel.className = sectionFormat;
 
             if( textWithExternal[anchorItem].includes("||http://") || textWithExternal[anchorItem].includes("||https://")) {
                 //E9C9
@@ -278,6 +293,8 @@ var createPOCWebView = function( codedString ) {
                 var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
                 gridLayout.addRow(sectionRow);
             } else {
+                var sectionLabel = new Label();
+                sectionLabel.className = sectionFormat;
                 sectionLabel.text   = textWithExternal[anchorItem];
                 layout.GridLayout.setRow(sectionLabel, gridItem);
                 gridLayout.addChild(sectionLabel);
@@ -292,56 +309,6 @@ var createPOCWebView = function( codedString ) {
     gridLayout.src = totalText;
     gridLayout.className = "POC_Grid";
     return gridLayout;
-};
-
-
-var createPOCGrid = function(POC_t, POC_p, POC_e, POC_d){
-    var gridLayout = new layout.GridLayout();
-    var POCTitle = new Label();
-    var POCPhone = new Button();
-    var POCEmail = new Button();
-    var POCDesc = new Label();
-
-    POCTitle.text = POC_t;
-    POCTitle.className = "POC_H1";
-    POCDesc.text = "Description: " + POC_d;
-    POCDesc.className = "POC_Body";
-    POCPhone.text = POC_p;
-    //POCPhone.className = "POC_Phone";
-    POCPhone.className = "Submit_Button_1";
-    POCPhone.phone = POC_p;
-    POCEmail.text = POC_e;
-    //POCEmail.className = "POC_Phone";
-    POCEmail.className = "Submit_Button_1";
-    POCEmail.email = POC_e;
-    
-
-    POCPhone.on(buttonModule.Button.tapEvent, callPOC, this);
-    POCEmail.on(buttonModule.Button.tapEvent, emailPOC, this);
-
-    layout.GridLayout.setRow(POCTitle, 0);
-    layout.GridLayout.setRow(POCDesc, 1);
-    if(POCPhone.phone !="N/A"){layout.GridLayout.setRow(POCPhone, 2);}
-    if(POCEmail.email != "N/A"){layout.GridLayout.setRow(POCEmail, 3);}
-    
-    gridLayout.addChild(POCTitle);
-    gridLayout.addChild(POCDesc);
-    if(POCPhone.phone !="N/A"){gridLayout.addChild(POCPhone);}
-    if(POCEmail.email != "N/A"){gridLayout.addChild(POCEmail);}
-    
-    var titleRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-    var phoneRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-    var emailRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-    var descRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-    gridLayout.addRow(titleRow);
-    gridLayout.addRow(descRow);
-    if(POCPhone.phone !="N/A"){gridLayout.addRow(phoneRow);}
-    if(POCEmail.email != "N/A"){gridLayout.addRow(emailRow);}
-    
-    gridLayout.className = "POC_Grid";
-
-    return gridLayout;
-
 };
 
 var getFromDatabase = function(){
@@ -384,7 +351,7 @@ var getFromDatabase = function(){
     databaseReturn.push(dbRow);
     dbRow = {Ref:18, TitleEN:`Canadian Human Rights Commission`, TitleFR:`Commission canadienne des droits `, ContentEN:`<*Article_H1*>Canadian Human Rights Commission<*Article_Body*>Human rights laws protect people in Canada from discrimination based on grounds such as race, sex, religion or disability.::contact::1-888-214-1090||tel:1-888-214-1090::contact::::contact::info.com@chrc-ccdp.gc.ca||mailto:info.com@chrc-ccdp.gc.ca::contact::`, ContentFR:`<*Article_H1*>Commission canadienne des droits <*Article_Body*>Au Canada, vous avez le droit de vivre libre de discrimination. Les lois vous protègent de la discrimination en raison des motifs tels que la race, le sexe, la religion ou une déficience.::contact::1-888-214-1090||tel:1-888-214-1090::contact::::contact::info.com@chrc-ccdp.gc.ca||mailto:info.com@chrc-ccdp.gc.ca::contact::`};
     databaseReturn.push(dbRow);
-    dbRow = {Ref:19, TitleEN:`Conflict and Complaint Management Services centre`, TitleFR:`Centre de services de gestion des conflits et des plaintes`, ContentEN:`<*Article_H1*>Conflict and Complaint Management Services centre<*Article_Body*>If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program.::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandes...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`, ContentFR:`<*Article_H1*>Centre de services de gestion des conflits et des plaintes<*Article_Body*>Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP).::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandes...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`};
+    dbRow = {Ref:19, TitleEN:`Conflict and Complaint Management Services centre`, TitleFR:`Centre de services de gestion des conflits et des plaintes`, ContentEN:`<*Article_H1*>Conflict and Complaint Management Services centre<*Article_Body*>If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program.::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`, ContentFR:`<*Article_H1*>Centre de services de gestion des conflits et des plaintes<*Article_Body*>Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP).::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`};
     databaseReturn.push(dbRow);
     dbRow = {Ref:20, 
         TitleEN:`Office of Disability Management`, 
@@ -403,24 +370,4 @@ var getFromDatabase = function(){
     databaseReturn.push(dbRow);
     
     return databaseReturn;
-};
-
-var callPOC = function(eventData){
-    console.log(eventData.object.phone);
-    phone.dial(eventData.object.phone,true);
-
-};
-var emailPOC = function(eventData){
-    console.log(eventData.object.email);
-    var toAddress = [];
-    toAddress.push(eventData.object.email);
-    if (email.available()){
-        email.compose({
-            subject: "",
-            body: "",
-            to: toAddress
-        });
-    } else {
-        console.log("Email Not Available");
-    }
 };
