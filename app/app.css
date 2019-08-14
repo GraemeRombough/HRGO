@@ -399,21 +399,11 @@ button{
     margin-right: 15px;
     margin-top: 5px;
     margin-bottom:5px;
-    white-space: normal;
-    color: #333;
-    text-align: left;
-}
-.POC_H1{
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 20px;
-    line-height: 1.1;
     font-weight: 700;
-    margin-bottom: 10px;
-    color: rgb(0,31,91);
-    margin-left: 5px;
-    margin-bottom:11.5px;
-    margin-top: 5px;
+    text-decoration: underline;
     white-space: normal;
+    color: rgb(13, 43, 99);
+    text-align: left;
 }
 .POC_Body{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -421,15 +411,81 @@ button{
     margin-left: 5px;
     margin-right: 25px;
     margin-top: 5px;
-    margin-bottom:14px;
+    margin-bottom:5px;
     white-space: normal;
     color: #333;
+}
+.POC_H1{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: rgb(0,31,91);
+    margin-left: 5px;
+    margin-bottom:5px;
+    margin-top: 5px;
+    white-space: normal;
+}
+.POC_H2{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 24px; 
+    line-height: 1.1; 
+    font-weight: 700; 
+    margin-bottom: 10px; 
+    color: #333; 
+    margin-left: 14px; 
+    margin-bottom:5px; 
+    margin-top: 5px; 
+    white-space: normal;
+}
+.POC_H3{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 20px; 
+    line-height: 1.1; 
+    font-weight: 700; 
+    margin-bottom: 10px; 
+    color: #333; 
+    margin-left: 25px; 
+    margin-bottom:11.5px; 
+    margin-top: 38px; 
+    white-space: normal;
+}
+.POC_Note{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 14px; 
+    font-style: italic; 
+    margin-left: 25px; 
+    margin-right: 25px; 
+    margin-top: 5px; 
+    margin-bottom:5px; 
+    white-space: normal; 
+    color: #333;
+}
+.POC_List{ 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 16px; 
+    margin-left: 50px; 
+    margin-right: 25px; 
+    margin-top: 18px; 
+    margin-bottom:5px; 
+    white-space: normal; 
+    color: #333;
+}
+.POC_Contact{ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 18px; 
+    line-height: 1.1; 
+    font-weight: 400; 
+    color: #333; 
+    margin-left: 25px; 
+    vertical-align: middle; 
+    white-space: normal;
 }
 .POC_Icon{
     font-family: "icomoon"; 
     font-size: 22px;
     color: rgb(0,31,91);
-    text-align: right;
+    text-align: left;
     margin-right: 15px;
 }
 .Walkthrough_NavButton{
