@@ -22,7 +22,7 @@ exports.goToWorkingDay = function(args){
 };
 exports.goToSalary = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_pay-info");
+    topmost.navigate("pay-info");
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();

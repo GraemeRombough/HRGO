@@ -5,13 +5,16 @@ var pageData = new observable.Observable();
 var classDD;
 var pageObject;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
+var applicationSettings = require("application-settings");
 var subNavTitle = "YourPayInformation";
 var payData;
+var pagePrefix  = "";
 
 exports.onNavigatingTo = function(args){
     classDD = getClassList();
     const page = args.object;
     pageObject = page;
+    pagePrefix = ((applicationSettings.getString("PreferredLanguage") == "French") ? "FR_" : "");
     pageData = fromObject({
         classItems: classDD,
         levelItems: classDD[0].levelData,
@@ -22,7 +25,20 @@ exports.onNavigatingTo = function(args){
         infoVisible: true,
         salaryVisible: false,
         SubstantiveClass: true,
-        SubstantiveStep: false
+        SubstantiveStep: false,
+        selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
+        lblFormTitle: ["GROSS PAY", "PAIE BRUTE"],
+        lblClassificationButton: ["Classification", "Classification"],
+        lblStepButton: ["Step", "Échelon"],
+        lblGetInfoButton: ["Get Salary Info", "Info sur la paie"],
+        lblResetButton: ["Reset Search", "Saisir de nouveau"],
+        lblSalaryInfoLbl: ["Salary Info", "Info sur la paie"],
+        lblAGSLbl: ["Annual Gross Salary", "Paie brute annuelle"],
+        lblBWPRLbl: ["BiWeekly Pay Rate", "Paie aux deux semaines"],
+        lblDPRLbl: ["Daily Pay Rate", "Paie journalière"],
+        lblHPRLbl: ["Hourly Pay Rate", "Paie horaire"],
+        lblOHPRLbl: ["Overtime Hourly Pay Rate (x1.5)", "Paie horaire - Heures supp (1,5)"],
+        lblCalculateBtn: ["Calculate Totals", "Calculer le total"]
     });
     payData = classDD[0].levelData[0].stepData[0];
     page.bindingContext = pageData;
@@ -126,11 +142,11 @@ exports.getCalculatedInfo = function(){
         totalValue += annuallyCalc * salaryData.annually;
     };
 
-    pageData.set("calculatedMoney", "Gross Salary Calculation: $" + Math.round(totalValue * 100 + Number.EPSILON ) / 100);
+    pageData.set("calculatedMoney", ((applicationSettings.getString("PreferredLanguage") == "French") ? "Paie brute: $" : "Gross Salary Calculation: $") + Math.round(totalValue * 100 + Number.EPSILON ) / 100);
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
+    topmost.navigate(pagePrefix + "main-page");
 };
 exports.goBack = function(args){
     const thisPage = args.object.page;
@@ -138,7 +154,7 @@ exports.goBack = function(args){
 }
 exports.footer3 = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
+    topmost.navigate(pagePrefix + "profile-page");
     
 }
 exports.navToggle = function(args){
@@ -160,7 +176,7 @@ exports.footer4 = function(){
     var pageDetails = String(topmost.currentPage).split("///");
     const TODAY = new Date();
     var navigationOptions={
-        moduleName:'feedback-page',
+        moduleName:pagePrefix + 'feedback-page',
         context:{Language: "ENG",
                 PageName: pageDetails[1].split("/")[1].split(".")[0],
                 DateTime: TODAY

@@ -36,8 +36,9 @@ exports.footer5 = function(){
     topmost.navigate("POC-page");
 }
 exports.goToUtility = function(args){
+    console.log("FR_calculators-landing-page.goToUtility: " + args.object.pageName);
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_" + args.object.pageName);
+    topmost.navigate(args.object.pageName);
 };
 exports.goToWorkingDay = function(args){
     var topmost = frameModule.topmost();
@@ -46,7 +47,7 @@ exports.goToWorkingDay = function(args){
 };
 exports.goToSalary = function(args){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_pay-info");
+    topmost.navigate("pay-info");
 };
 exports.goToHome = function(){
     var topmost = frameModule.topmost();

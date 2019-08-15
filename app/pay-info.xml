@@ -5,41 +5,41 @@
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="GROSS PAY" class="Header_Label"/>
+      <label col="1" row="0" text="{{ lblFormTitle selectedLanguage, lblFormTitle[selectedLanguage] }}" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
     <StackLayout visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
-      <Button text="Classification" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
+      <Button text="{{ lblClassificationButton selectedLanguage, lblClassificationButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
       <GridLayout columns="*,*" rows="auto" >
       <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
       <ListPicker  col="1" row="0" id="levelPicker" textField="levelCode" valueField="stepData" items="{{ levelItems }}" selectedIndex="{{ levelSelectionIndex }}" loaded="onLevelListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
       </GridLayout>
-      <Button text="Step" class="Home_Utility_Label" tap="navToggle" value="SubstantiveStep" />
+      <Button text="{{ lblStepButton selectedLanguage, lblStepButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveStep" />
       <ListPicker items="{{ stepItems }}" textField="step" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveStep ? 'visible' : 'collapsed' }}"/>
       <!--<TextField class="DayCalc_TextField" keyboardType="number" text="{{ stepNumber }}" />-->
-      <Button class="Submit_Button_1" text="Get Salary Info" tap="getSalaryInfo"/>
+      <Button class="Submit_Button_1" text="{{ lblGetInfoButton selectedLanguage, lblGetInfoButton[selectedLanguage] }}" tap="getSalaryInfo"/>
     <!-- SALARY INFO SECTION-->
     </StackLayout>
       <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="*,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
-        <Button col="0" row="0" colSpan="3" class="Submit_Button_1" text="Reset Search" tap="resetSelections"/>
-        <Label col="0" row="1" colSpan="2" text="Salary Info" class="Article_H2"/>
-        <Label col="0" row="2" colSpan="2" text="Annual Gross Salary" class="Sub_Nav_Line"/>
+        <Button col="0" row="0" colSpan="3" class="Submit_Button_1" text="{{ lblResetButton selectedLanguage, lblResetButton[selectedLanguage] }}" tap="resetSelections"/>
+        <Label col="0" row="1" colSpan="2" text="{{ lblSalaryInfoLbl selectedLanguage, lblSalaryInfoLbl[selectedLanguage] }}" class="Article_H2"/>
+        <Label col="0" row="2" colSpan="2" text="{{ lblAGSLbl selectedLanguage, lblAGSLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
         <Label col="0" row="3" class="Utility_TableText_1L" text="{{ annualRate }}"/>
         <TextField col="1" row="3" class="DayCalc_TextField" keyboardType="number" text="{{ annualNumber }}" />
-        <Label col="0" row="4" colSpan="2" text="BiWeekly Pay Rate" class="Sub_Nav_Line"/>
+        <Label col="0" row="4" colSpan="2" text="{{ lblBWPRLbl selectedLanguage, lblBWPRLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
         <Label col="0" row="5" class="Utility_TableText_1L" text="{{ biweeklyRate}}"/>
         <TextField col="1" row="5" class="DayCalc_TextField" keyboardType="number" text="{{ biweeklyNumber }}" />
-        <Label col="0" row="6" colSpan="2" text="Daily Pay Rate" class="Sub_Nav_Line"/>
+        <Label col="0" row="6" colSpan="2" text="{{ lblDPRLbl selectedLanguage, lblDPRLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
         <Label col="0" row="7" class="Utility_TableText_1L" text="{{ dailyRate }}"/>
         <TextField col="1" row="7" class="DayCalc_TextField" keyboardType="number" text="{{ dailyNumber }}" />
-        <Label col="0" row="8" colSpan="2" text="Hourly Pay Rate" class="Sub_Nav_Line"/>
+        <Label col="0" row="8" colSpan="2" text="{{ lblHPRLbl selectedLanguage, lblHPRLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
         <Label col="0" row="9" class="Utility_TableText_1L" text="{{ hourlyRate }}"/>
         <TextField col="1" row="9" class="DayCalc_TextField" keyboardType="number" text="{{ hourlyNumber }}" />
-        <Label col="0" row="10" colSpan="2" text="Overtime Hourly Pay Rate (x1.5)" class="Sub_Nav_Line"/>
+        <Label col="0" row="10" colSpan="2" text="{{ lblOHPRLbl selectedLanguage, lblOHPRLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
         <Label col="0" row="11" class="Utility_TableText_1L" text="{{ overtime1Rate }}"/>
         <TextField col="1" row="11" class="DayCalc_TextField" keyboardType="number" text="{{ overtime1Number }}" />
         <Label col="0" row="12" colSpan="3" class="Article_Body" text="{{ calculatedMoney }}"/>
-        <Button col="0" row="13" colSpan="3" class="Submit_Button_1" text="Calculate Totals" tap="getCalculatedInfo"/>
+        <Button col="0" row="13" colSpan="3" class="Submit_Button_1" text="{{ lblCalculateBtn selectedLanguage, lblCalculateBtn[selectedLanguage] }}" tap="getCalculatedInfo"/>
         
       </GridLayout>
       

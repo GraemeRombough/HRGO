@@ -84,8 +84,9 @@ exports.navToggle = function(args){
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
 exports.goToUtility = function(args){
+    console.log("FR_pay-landing-page.goToUtility: " + args.object.pageName);
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_" + args.object.pageName);
+    topmost.navigate(args.object.pageName);
 };
 var getNavList = function(){
     var navItem = {};
