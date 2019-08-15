@@ -3,12 +3,19 @@ const   pageData                = new observable.Observable();
 var     applicationSettings     = require("application-settings");
 const   webViewEvents           = require("~/utilities/WebViewExtender");
 var     HTMLBuilder             = require("~/utilities/HTMLBuilder");
-var     utils                   = require("utils/utils");
-const   platformModule          = require("tns-core-modules/platform");
-var     gestures                = require("tns-core-modules/ui/gestures");
+var frameModule = require("ui/frame");
+var     page;
+var     actionBarHiddenPage     = false;
+
+const   timerModule             = require("tns-core-modules/timer");
+var     scrollDetection         = false;
+var     lastValue               = 0;
+var     scrollStartValue        = 0;
+
+var     pagePrefix;
 
 exports.pageLoaded = function(args) {
-    const page = args.object;
+    page = args.object;
     page.bindingContext = pageData;
 
     var articleData = getFromDatabase()[0];
@@ -18,41 +25,160 @@ exports.pageLoaded = function(args) {
         
         var formattedText   = HTMLBuilder.buildHTML( articleData.ContentFR );
         pageData.set("ArticleHTML", formattedText);
+        pagePrefix = "FR_";
     } else {
         pageData.set("actionBarTitle", articleData.TitleEN);
         
         var formattedText   = HTMLBuilder.buildHTML( articleData.ContentEN );
         pageData.set("ArticleHTML", formattedText);
+        pagePrefix = "";
     }
+
+    scrollDetection         = false;
 };
 
 exports.goBack = function(args) {
     const thisPage = args.object.page;
+    thisPage.frame.goBack();
+};
+
+
+exports.goToHome = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate(pagePrefix + "main-page");
+    
+};
+
+exports.goBack = function(args){
+    const thisPage = args.object.page;
     thisPage.frame.goBack()
+};
+
+exports.footer3 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate(pagePrefix + "profile-page");
+    
+};
+
+exports.footer4 = function(){
+    console.log("Go To Feedback");
+    var topmost = frameModule.topmost();
+    //topmost.navigate("feedback-page");
+    var pageDetails = String(topmost.currentPage).split("///");
+    const TODAY = new Date();
+    var navigationOptions={
+        moduleName:pagePrefix + 'feedback-page',
+        context:{Language: "ENG",
+                PageName: pageDetails[1].split("/")[1].split(".")[0],
+                DateTime: TODAY
+                }
+            }
+    topmost.navigate(navigationOptions); 
+};
+
+exports.footer5 = function(){
+    var topmost = frameModule.topmost();
+    topmost.navigate("POC-page");
 };
 
 exports.showSideDrawer = function(args) {
     console.log("Show side drawer");
 };
 
-exports.onSwipe1 = function(args) {
-    console.log("onSwipe1");
-};
-
-exports.onSwipe2 = function(args) {
-    console.log("onSwipe2");
-};
-
-exports.onSwipe3 = function(args) {
-    console.log("onSwipe3");
-};
-
 exports.onWVSwipe = function(event) {
+    console.log("onWVSwipe: " + event.direction);
     if( event.direction == 1 ) {
         console.log("onWVSwipe: " + event.direction);
-        const thisPage = event.object.page;
-        thisPage.frame.goBack();
+        page.frame.goBack();
+    } else if ( event.direction == 4 && !actionBarHiddenPage ) {
+        actionBarHiddenPage = true;
+        page.actionBarHidden    = actionBarHiddenPage;
+    } else if( event.direction == 8 && actionBarHiddenPage ) {
+        actionBarHiddenPage = false;
+        page.actionBarHidden    = actionBarHiddenPage;
     }
+};
+
+exports.onWVScroll = function(event) {
+    const actionBar = page.actionBar;
+    console.log("Scroll value: " + event.scrollY + " Scroll delta: " + event.deltaY);
+
+    var articleWebView  = page.getViewById("myWebView");
+
+
+    if( actionBarHiddenPage && event.deltaY > 50 ) {
+        actionBarHiddenPage     = false;
+        page.actionBarHidden    = actionBarHiddenPage;
+    } else if( !page.actionBarHidden && event.deltaY > -50 ) {
+        console.log(`onWVScroll: delta: [` + event.deltaY + `] ` + articleWebView.scrollY);
+        actionBarHiddenPage     = true;
+        page.actionBarHidden    = actionBarHiddenPage;
+    }
+};
+
+// detecting quick swipe scrolling where the the scroll view keeps going after the user has released the screen
+exports.onSVScroll = function(event) {
+
+    if( !scrollDetection ) {
+        scrollDetection     = true;
+        lastValue           = event.scrollY;
+        scrollStartValue    = event.scrollY;
+        const scrollView    = page.getViewById("pageScrollView");
+        const gridLayout    = page.getViewById("pageGridLayout");
+        const titleHeight   = page.actionBar.getActualSize().height;
+
+        const   timerID = timerModule.setInterval(() => {
+            if( lastValue == scrollView.verticalOffset ) {
+                timerModule.clearInterval( timerID );
+                scrollDetection = false;
+                console.log( "scroll done" );
+            } else {
+                lastValue = scrollView.verticalOffset;
+                console.log("startValue = " + scrollStartValue + "; lastValue = " + lastValue);
+
+                if( lastValue > scrollStartValue ) {
+                    if( (lastValue - scrollStartValue) > titleHeight && !actionBarHiddenPage ) {    // hide
+                        actionBarHiddenPage = true;
+                        page.actionBarHidden    = actionBarHiddenPage;
+                        gridLayout.rows = "*,5";
+                        
+                        scrollStartValue = lastValue;
+                    } else if( actionBarHiddenPage ) {
+                        scrollStartValue = lastValue;
+                    }
+                } else {
+                    if( (scrollStartValue - lastValue) > titleHeight && actionBarHiddenPage ) {    // show
+                        actionBarHiddenPage = false;
+                        page.actionBarHidden    = actionBarHiddenPage;
+                        gridLayout.rows = "*,60";
+                        
+                        scrollStartValue = lastValue;
+                    } else if( !actionBarHiddenPage ) {
+                        scrollStartValue = lastValue;
+                    }
+                }
+            }
+        }, 100);
+    }
+};
+
+exports.onWVPan = function(event) {
+    /*
+    var pageScrollView  = page.getViewById("pageScrollView");
+    if( event.deltaY < (-1 * (page.actionBar.getActualSize().height)) && !actionBarHiddenPage ) {
+        actionBarHiddenPage = true;
+        page.actionBarHidden    = actionBarHiddenPage;
+        console.log( "toggle actionBarHiddenPage: " + actionBarHiddenPage + "  deltaY = " + event.deltaY + "  scrollY = " + pageScrollView.verticalOffset + "  actionBar height = ");
+    } else if( event.deltaY > page.actionBar.getActualSize().height && actionBarHiddenPage ) {
+        actionBarHiddenPage = false;
+        page.actionBarHidden    = actionBarHiddenPage;
+        console.log( "toggle actionBarHiddenPage: " + actionBarHiddenPage + "  deltaY = " + event.deltaY + "  scrollY = " + pageScrollView.verticalOffset);
+    } else if( pageScrollView.verticalOffset == 0 && actionBarHiddenPage ) {
+        actionBarHiddenPage = false;
+        page.actionBarHidden    = actionBarHiddenPage;
+        console.log( "toggle actionBarHiddenPage: " + actionBarHiddenPage + "  deltaY = " + event.deltaY + "  scrollY = " + pageScrollView.verticalOffset);
+    }
+    */
 };
 
 exports.onWebViewLoaded = function(webargs) {
