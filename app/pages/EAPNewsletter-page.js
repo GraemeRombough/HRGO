@@ -118,14 +118,27 @@ exports.onWVScroll = function(event) {
 
 // detecting quick swipe scrolling where the the scroll view keeps going after the user has released the screen
 exports.onSVScroll = function(event) {
-
+    // if we are already tracking the scrolling, don't start another tracking timer
     if( !scrollDetection ) {
         scrollDetection     = true;
         lastValue           = event.scrollY;
         scrollStartValue    = event.scrollY;
         const scrollView    = page.getViewById("pageScrollView");
         const gridLayout    = page.getViewById("pageGridLayout");
+        const navBar        = page.getViewById("NavigationBar");
+        const webView       = page.getViewById("myWebView");
         const titleHeight   = page.actionBar.getActualSize().height;
+        const navHeight     = navBar.getActualSize().height;
+        const webViewHeight = webView.getActualSize().height;
+        var allowNavHide;
+
+        if( (scrollView.scrollableHeight) < titleHeight + navHeight) {
+            allowNavHide  = false;
+        } else {
+            allowNavHide  = true;
+        }
+
+        console.log(`title height = ${titleHeight}, nav bar height = ${navHeight}, web view height = ${webViewHeight}`);
 
         const   timerID = timerModule.setInterval(() => {
             if( lastValue == scrollView.verticalOffset ) {
@@ -134,27 +147,37 @@ exports.onSVScroll = function(event) {
                 console.log( "scroll done" );
             } else {
                 lastValue = scrollView.verticalOffset;
-                console.log("startValue = " + scrollStartValue + "; lastValue = " + lastValue);
 
                 if( lastValue > scrollStartValue ) {
                     if( (lastValue - scrollStartValue) > titleHeight && !actionBarHiddenPage ) {    // hide
+                        scrollStartValue = lastValue - titleHeight;
                         actionBarHiddenPage = true;
                         page.actionBarHidden    = actionBarHiddenPage;
-                        gridLayout.rows = "*,5";
+
+                        if( allowNavHide ) {
+                            gridLayout.rows = "*,5";
+                        }
                         
-                        scrollStartValue = lastValue;
                     } else if( actionBarHiddenPage ) {
                         scrollStartValue = lastValue;
                     }
                 } else {
                     if( (scrollStartValue - lastValue) > titleHeight && actionBarHiddenPage ) {    // show
+                        console.log("startValue = " + scrollStartValue + "; lastValue = " + lastValue);
+                        scrollStartValue = lastValue;
                         actionBarHiddenPage = false;
                         page.actionBarHidden    = actionBarHiddenPage;
                         gridLayout.rows = "*,60";
                         
-                        scrollStartValue = lastValue;
                     } else if( !actionBarHiddenPage ) {
                         scrollStartValue = lastValue;
+                    } else if( lastValue == 0 && actionBarHiddenPage ) {
+                        console.log("startValue = " + scrollStartValue + "; lastValue = " + lastValue);
+                        scrollStartValue = lastValue;
+                        actionBarHiddenPage = false;
+                        page.actionBarHidden    = actionBarHiddenPage;
+                        gridLayout.rows = "*,60";
+                        
                     }
                 }
             }
@@ -191,7 +214,7 @@ exports.onLoadStarted = webViewEvents.onLoadStarted;
 var getFromDatabase = function() {
     var returnedItem;
     var contentData = [];
-
+    
     returnedItem = {Ref:"1", 
         TitleEN:`Volume 24.5`, 
         ContentEN:`<*Article_H1*>Demystifying mindfulness and practising it at work<*Article_Body*>A multi-year study of companies has demonstrated that training in mindfulness improves:<*Article_List*>level of attention by over 48%<*Article_List*>individual performance by over 40%<*Article_List*>ability to prioritize by over 34%<*Article_List*>employee satisfaction by over 31%<*Article_List*>ability to perform under pressure by over 34%.<*Article_H2*>What is mindfulness?<*Article_Body*>Mindfulness is a synonym for “self-awareness.” This means being conscious of the here and now. Mindfulness guides us in reacting differently in certain situations, so potentially improving our level of performance at work.<*Article_Body*>Mindfulness allows us to take an observer’s position on our thoughts and emotions, thus developing our emotional agility when faced with the events and changes that occur in all spheres of our daily life.<*Article_H2*>What is mindful leadership?<*Article_Body*>According to writer Geneviève Desautels, Master’s in Business Administration, mindful leaders are defined by their ability to develop their awareness and their attention. In daily life, they are fully aware of what they are doing, and they listen to themselves, others, and their environment. They seek out clarity by giving themselves the space to take an introspective and sympathetic look at themselves and their performance.<*Article_Note*>Mindful leadership is a state of being: before all else, those who exercise it are in charge of their own lives.<*Article_Body*>Here are some of the characteristics of mindful leadership:<*Article_List*>Listening to understand, instead of listening to answer.<*Article_List*>Being sympathetic toward yourself and toward others.<*Article_List*>Avoiding judging others, and putting yourself in their place.<*Article_List*>Being able to recognize your emotions, and being attentive to the impact on others of your words and actions.<*Article_List*>Developing self-knowledge: think about your own experience.<*Article_List*>Being curious to learn about the other person by asking more questions, instead of jumping in or proposing solutions.<*Article_List*>Learning to be quiet and giving the other person time to think before answering.<*Article_List*>Having enough self-confidence to allow yourself to make mistakes, and recognize them right away.<*Article_H2*>Mindfulness training at work in five steps<*Article_Body*>Mindfulness consists in living in the present moment.<*Article_Body*>To practise mindfulness, simply take a few minutes in the day to refocus and relax. Below we offer a five-step method to be mindful at work:<ol><li>Sit down at your desk. Set your feet flat on the floor, without crossing them. Straighten your back, moving it slightly away from the back of the chair. Rest your hands on your thighs. Posture should be upright.</li><li>Close your eyes.</li><li>Concentrate on your breathing: in and out.</li><li>Don’t try to stop thinking, but when you are no longer concentrating on your breathing, simply refocus on your chest.</li><li>Once the session is over (it is up to each individual to decide when), take a deep breath, stretch, then calmly begin a new activity.</li></ol><*Article_Body*>When practised continuously and integrated in your daily routine, mindfulness leads you to pay attention to every instant of what you are doing. Walking is a good example of this informal practice, where you can direct your attention to the smells outdoors, physical sensations, colours in the landscape, and your breathing in step with your pace.<*Article_Body*>There are also applications and podcasts that offer guided mindfulness exercises.<*Article_H2*>Good luck with your mindfulness training!<br><*Override*><p width="100%" style="text-align:center; color: white; background-color: rgb(102,141,197); padding: 15px 15px 10px 10px;"><b>To access confidential psychosocial support services, contact your Employee Assistance Program at</b><br>::external::1-800-268-7708||tel:1-800-268-7708::external::<br><b>or for the hearing impaired at</b><br>::external::1-800-567-5803||tel:1-800-567-5803::external::<br><br>::external::www.healthcanada.gc.ca/eas||http://www.healthcanada.gc.ca/eas::external::</p>`,
