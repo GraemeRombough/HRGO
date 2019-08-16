@@ -417,6 +417,8 @@ button{
 .POC_Body{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
+    padding-left: 55px;
+    padding-right: 5px;
     margin-left: 5px;
     margin-right: 25px;
     margin-top: 5px;
@@ -434,6 +436,8 @@ button{
     margin-left: 5px;
     margin-bottom:5px;
     margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     white-space: normal;
 }
 .POC_H2{
@@ -446,6 +450,8 @@ button{
     margin-left: 14px; 
     margin-bottom:5px; 
     margin-top: 5px; 
+    padding-left: 5px;
+    padding-right: 5px;
     white-space: normal;
 }
 .POC_H3{
@@ -458,6 +464,8 @@ button{
     margin-left: 25px; 
     margin-bottom:11.5px; 
     margin-top: 38px; 
+    padding-left: 5px;
+    padding-right: 5px;
     white-space: normal;
 }
 .POC_Note{
@@ -486,8 +494,8 @@ button{
     line-height: 1.1; 
     font-weight: 400; 
     color: #333; 
+    padding-left: 55px;
     margin-left: 25px; 
-    vertical-align: left; 
     white-space: nowrap;
 }
 .POC_Icon{

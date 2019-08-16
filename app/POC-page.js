@@ -178,6 +178,7 @@ var makeButton  = function( labelText, linkText, sectionFormat, transactionType)
     textSpan.className  = "POC_Phone";
     buttonText.spans.push(textSpan);
 
+    phoneButton.className       = "POC_Contact";
     phoneButton.formattedText    = buttonText;
     phoneButton.addEventListener( "longPress", doClipboard , this );
 
