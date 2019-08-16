@@ -29,7 +29,7 @@
         <Label col="0" row="1" colSpan="2" text="{{ lblSalaryInfoLbl selectedLanguage, lblSalaryInfoLbl[selectedLanguage] }}" class="Article_H2"/>
         <Label col="0" row="2" colSpan="2" text="{{ lblAGSLbl selectedLanguage, lblAGSLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
         <Label col="0" row="3" class="Utility_TableText_1L" text="{{ annualRate }}"/>
-        <TextField col="1" row="3" class="DayCalc_TextField" keyboardType="number" text="{{ annualNumber }}" />
+        <TextField col="1" row="3" class="DayCalc_TextField" keyboardType="number" text="{{ annuallyNumber }}" />
         <Label col="0" row="4" colSpan="2" text="{{ lblBWPRLbl selectedLanguage, lblBWPRLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
         <Label col="0" row="5" class="Utility_TableText_1L" text="{{ biweeklyRate}}"/>
         <TextField col="1" row="5" class="DayCalc_TextField" keyboardType="number" text="{{ biweeklyNumber }}" />
