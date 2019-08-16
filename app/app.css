@@ -170,6 +170,15 @@ button{
     background-color: #DDD;
     margin-top:10px;  
 }
+.Action_Bar{
+    background-color: rgb(0,31,91);
+    color: white;
+    font-weight: 700;
+    font-size: 20pt;
+    vertical-align: middle;
+    border-bottom-width: 6px;
+    border-bottom-color: rgb(220,170,0);
+}
 .HeaderLabel{
     border-bottom-width: 6px;
     border-bottom-color: rgb(220,170,0);
@@ -181,7 +190,7 @@ button{
     padding-left: 0;
     padding-top: 20px;
     padding-bottom: 30px;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     /*background-color: rgb(0,31,91);*/
     background-color: rgb(0,31,91);
     font-weight: 700;
@@ -401,7 +410,7 @@ button{
     margin-bottom:5px;
     font-weight: 700;
     text-decoration: underline;
-    white-space: normal;
+    white-space: nowrap;
     color: rgb(13, 43, 99);
     text-align: left;
 }
@@ -478,8 +487,8 @@ button{
     font-weight: 400; 
     color: #333; 
     margin-left: 25px; 
-    vertical-align: middle; 
-    white-space: normal;
+    vertical-align: left; 
+    white-space: nowrap;
 }
 .POC_Icon{
     font-family: "icomoon"; 

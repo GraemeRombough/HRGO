@@ -1,14 +1,17 @@
 <Page loaded="pageLoaded" navigatingTo="onNavigatingTo" actionBarHidden="true">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
-  <GridLayout rows="*,60">
-  <ScrollView>
-  <StackLayout row="0" orientation="vertical" width="100%">
+  <GridLayout rows="auto,*,auto">
+  <StackLayout row="0" orientation="vertical" width="100%" height="auto" >
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
       <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
       <label col="1" row="0" text="{{ lblFormTitle selectedLanguage, lblFormTitle[selectedLanguage] }}" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
-    <StackLayout visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
+    </StackLayout>
+  <StackLayout row="1" orientation="vertical" width="100%" height="100%" >
+  <ScrollView>
+    <GridLayout rows="auto,auto" orientation="vertical" width="100%" height="auto">
+    <StackLayout row="0" visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
       <Button text="{{ lblClassificationButton selectedLanguage, lblClassificationButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
       <GridLayout columns="*,*" rows="auto" >
       <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
@@ -20,7 +23,8 @@
       <Button class="Submit_Button_1" text="{{ lblGetInfoButton selectedLanguage, lblGetInfoButton[selectedLanguage] }}" tap="getSalaryInfo"/>
     <!-- SALARY INFO SECTION-->
     </StackLayout>
-      <GridLayout visibility="{{ salaryVisible ? 'visible' : 'collapsed'}}" orientation="vertical" columns="*,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
+    <StackLayout row="1" visibility="{{ infoVisible ? 'collapsed' : 'visible'}}">
+      <GridLayout orientation="vertical" columns="*,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
         <Button col="0" row="0" colSpan="3" class="Submit_Button_1" text="{{ lblResetButton selectedLanguage, lblResetButton[selectedLanguage] }}" tap="resetSelections"/>
         <Label col="0" row="1" colSpan="2" text="{{ lblSalaryInfoLbl selectedLanguage, lblSalaryInfoLbl[selectedLanguage] }}" class="Article_H2"/>
         <Label col="0" row="2" colSpan="2" text="{{ lblAGSLbl selectedLanguage, lblAGSLbl[selectedLanguage] }}" class="Sub_Nav_Line"/>
@@ -42,13 +46,14 @@
         <Button col="0" row="13" colSpan="3" class="Submit_Button_1" text="{{ lblCalculateBtn selectedLanguage, lblCalculateBtn[selectedLanguage] }}" tap="getCalculatedInfo"/>
         
       </GridLayout>
+      </StackLayout>
       
 
     
-
-  </StackLayout>
+    </GridLayout>
   </ScrollView>
-    <StackLayout row="1" class="FooterNav" orientation="horizontal">
+  </StackLayout>
+    <StackLayout row="2" class="FooterNav" orientation="horizontal">
         <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
         <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
         <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
