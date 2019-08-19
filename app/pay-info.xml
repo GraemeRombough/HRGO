@@ -10,8 +10,11 @@
     </StackLayout>
   <StackLayout row="1" orientation="vertical" width="100%" height="100%" >
   <ScrollView>
-    <GridLayout rows="auto,auto" orientation="vertical" width="100%" height="auto">
-    <StackLayout row="0" visibility="{{ infoVisible ? 'visible' : 'collapsed'}}">
+    <GridLayout rows="*,auto,auto" orientation="vertical" width="100%" height="auto">
+    <StackLayout row="0" visibility="{{ busyLoading ? 'visible' : 'collapsed' }}" orientation="vertical" width="100%" height="100%">
+      <ActivityIndicator busy="{{ busyLoading ? 'true' : 'false' }}"></ActivityIndicator>
+    </StackLayout>
+    <StackLayout row="1" visibility="{{ infoVisible busyLoading, infoVisible && !busyLoading ? 'visible' : 'collapsed'}}">
       <Button text="{{ lblClassificationButton selectedLanguage, lblClassificationButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
       <GridLayout columns="*,*" rows="auto" >
       <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
@@ -23,7 +26,7 @@
       <Button class="Submit_Button_1" text="{{ lblGetInfoButton selectedLanguage, lblGetInfoButton[selectedLanguage] }}" tap="getSalaryInfo"/>
     <!-- SALARY INFO SECTION-->
     </StackLayout>
-    <StackLayout row="1" visibility="{{ infoVisible ? 'collapsed' : 'visible'}}">
+    <StackLayout row="2" visibility="{{ infoVisible busyLoading, infoVisible || busyLoading ? 'collapsed' : 'visible'}}">
       <GridLayout orientation="vertical" columns="*,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
         <Button col="0" row="0" colSpan="3" class="Submit_Button_1" text="{{ lblResetButton selectedLanguage, lblResetButton[selectedLanguage] }}" tap="resetSelections"/>
         <Label col="0" row="1" colSpan="2" text="{{ lblSalaryInfoLbl selectedLanguage, lblSalaryInfoLbl[selectedLanguage] }}" class="Article_H2"/>

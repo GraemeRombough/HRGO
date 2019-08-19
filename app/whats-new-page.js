@@ -6,6 +6,8 @@ var subNavTitle = "YourPayInformation";
 var buttonModule = require("tns-core-modules/ui/button");
 const Button = require("tns-core-modules/ui/button/").Button;
 
+var firebase = require("nativescript-plugin-firebase/app");
+
 
 exports.pageLoaded = function(args) {
     //pageData.set(subNavTitle, true);
@@ -14,8 +16,14 @@ exports.pageLoaded = function(args) {
     pageObject = page;
     page.bindingContext = pageData;
     console.log(new Date());
-    displayNotifications();
+    //displayNotifications();
+    if( applicationSettings.getString("PreferredLanguage") == "French" ) {
+        pageData.set("HeaderTitle", "Nouvelles" );
+    } else {
+        pageData.set("HeaderTitle", "Announcements" );
+    }
 
+    buildListFromFirestore();
 };
 exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
@@ -108,6 +116,7 @@ exports.navToggle = function(args){
     //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
+/*
 var displayNotifications = function(){
     var notificationList = getNotificationList();
     var TODAY = new Date();
@@ -128,6 +137,7 @@ var displayNotifications = function(){
         }
     }
 }
+
 var getNotificationList = function(){
     var navItem = {};
     var navList = [];
@@ -138,4 +148,39 @@ var getNotificationList = function(){
     navItem = {title:"CAF-DND Sexual Misconduct Class Action", ref:"3", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
     return navList;
-}
+};
+*/
+
+// Build the list of available articles from the Firestore database.  Only retreve the ones where the PublishDate value is before now.
+//  Retrieve the articles from the network by default, or fall back onto cached data if necessary
+var buildListFromFirestore = function() {
+    console.log("***** buildListFromFirestore   - enter");
+    var notificationStack = pageObject.getViewById("NewsList");
+    notificationStack.removeChildren();
+
+    const notificationCollection = firebase.firestore().collection("Notifications");
+
+    const query = notificationCollection.where( "PublishDate", "<=", new Date() ).orderBy("PublishDate", "desc"); // firebase.firestore().FieldValue().serverTimestamp() );
+    notificationCollection.onSnapshot( docSnapshot => {
+        console.log("Document notification: " + JSON.stringify(docSnapshot));
+    }, error => {
+        console.log("listener error: ${error}");
+    });
+    console.log("      buildListFromFirestore   - fetch records");
+
+    query.get({ source: "cache" }).then( querySnapshot => {
+        querySnapshot.forEach( colDoc => {
+            console.log( "      buildListFromFirestore   - from cache = " + ((colDoc.metadata.fromCache)?("true"):("false")));
+            var newsButton = new Button();
+            newsButton.className = "Main_Nav_SubLine";
+            newsButton.text = colDoc.data().TitleEN;
+            newsButton.id = colDoc.data().Ref;
+            newsButton.on(buttonModule.Button.tapEvent, goToNotification, this);
+            notificationStack.addChild(newsButton);
+        });
+       //buildListFromCache();
+    },
+    (errorMesage) => {
+        console.log("Error getting query results: " + errorMessage)
+    });
+};

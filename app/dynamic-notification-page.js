@@ -5,6 +5,7 @@ var articleReference;
 
 const webViewEvents = require( "./utilities/WebViewExtender");
 const htmlBuilder = require( "./utilities/HTMLBuilder");
+var firebase = require("nativescript-plugin-firebase/app");
 
 exports.pageLoaded = function(args) {
     const page = args.object;
@@ -14,9 +15,12 @@ exports.pageLoaded = function(args) {
     page.bindingContext = pageData;
     
     // With Firebase, the data retrieval will be asynchronous, so that will need to be accounted for.
-    var articleData = getArticleText( articleReference.ArticleID );
-    pageData.set("ArticleHTML", htmlBuilder.buildHTML( articleData.Text ));
-    pageData.set("HeaderTitle", articleData.Title);
+    loadArticleFromFirestore( articleReference.ArticleID );
+
+
+    //var articleData = getArticleText( articleReference.ArticleID );
+    //pageData.set("ArticleHTML", htmlBuilder.buildHTML( articleData.Text ));
+    //pageData.set("HeaderTitle", articleData.Title);
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -86,6 +90,31 @@ var getArticleText = function(aID, aLang)
 exports.onWebViewLoaded = webViewEvents.onWebViewLoaded;
 
 exports.onLoadStarted = webViewEvents.onLoadStarted;
+
+
+
+// Load the specified article contents from Firestore, defaulting to the cache.  We should already have the articles cached from the article list generation.
+//  When the text is loaded, it will be sent to createArticle in order to populate the page.
+var loadArticleFromFirestore = function (articleID) {
+    const notificationCollection = firebase.firestore().collection("Notifications");
+
+    const query = notificationCollection.where( "Ref", "==", articleID );
+
+    query.get({ source: "cache" }).then( querySnapshot => {
+        querySnapshot.forEach( colDoc => {
+            if( applicationSettings.getString("PreferredLanguage") == "French" ) {
+                pageData.set("HeaderTitle", colDoc.data().TitleFR);
+                pageData.set("ArticleHTML", htmlBuilder.buildHTML( colDoc.data().ContentFR ));
+            } else {
+                pageData.set("HeaderTitle", colDoc.data().TitleEN);
+                pageData.set("ArticleHTML", htmlBuilder.buildHTML( colDoc.data().ContentEN ));
+            }
+        });
+    },
+    (errorMesage) => {
+        console.log("Error getting query results: " + errorMessage)
+    });
+};
 
 var getFromDatabase = function(){
     //returnedItem = {Ref:"", BusinessLine:"", Category:"", Title:"", Type:"", Content:""};

@@ -21,6 +21,8 @@ var Visibility = require("tns-core-modules/ui/enums").Visibility;
 var applicationSettings = require("application-settings");
 var pagePrefix  = "";
 
+var firebase = require("nativescript-plugin-firebase/app");
+
 const   webViewEvents           = require("~/utilities/WebViewExtender");
 var     HTMLBuilder             = require("~/utilities/HTMLBuilder");
 
@@ -45,7 +47,9 @@ exports.pageLoaded = function(args) {
     }
     pageData.set( "searchBarVisibility", "collapsed" );
     pageData.set( "SearchCriteria", "" );
-    displayPOCs( getFromDatabase());
+    //displayPOCs( getFromDatabase());
+
+    buildListFromFirestore();
 };
 
 exports.onPageSwipe = function(event) {
@@ -307,6 +311,31 @@ var createPOCWebView = function( codedString ) {
     return gridLayout;
 };
 
+var buildListFromFirestore = function() {
+    console.log("***** buildListFromFirestore   - enter");
+    var POCList = pageObject.getViewById("POC_List");
+    POCList.removeChildren();
+
+    const notificationCollection = firebase.firestore().collection("POC").get({ source: "cache" }).then( querySnapshot => {
+        console.log("POC values returned: " + querySnapshot.metadata.fromCache);
+        if( applicationSettings.getString("PreferredLanguage") == "French" ) {
+            querySnapshot.forEach( colDoc => {
+                POCList.addChild( createPOCWebView( colDoc.data().ContentFR ));
+            });
+        } else {
+            querySnapshot.forEach( colDoc => {
+                POCList.addChild( createPOCWebView( colDoc.data().ContentEN ));
+            });
+        }
+        console.log( "done building the list" );
+    },
+    (errorMesage) => {
+        console.log("Error getting query results: " + errorMessage);
+    });
+};
+
+
+/*
 var getFromDatabase = function(){
     var databaseReturn = [];
     var dbRow = {};
@@ -367,3 +396,4 @@ var getFromDatabase = function(){
     
     return databaseReturn;
 };
+*/

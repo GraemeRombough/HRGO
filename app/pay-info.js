@@ -2,7 +2,7 @@ var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
-var classDD;
+//var classDD;
 var pageObject;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 var applicationSettings = require("application-settings");
@@ -10,18 +10,21 @@ var subNavTitle = "YourPayInformation";
 var payData;
 var pagePrefix  = "";
 
-exports.onNavigatingTo = function(args){
-    classDD = getClassList();
+var firebase = require("nativescript-plugin-firebase/app");
+
+exports.onNavigatingTo = function(args) {
+    //var classDD = getClassList();
     const page = args.object;
     pageObject = page;
     pagePrefix = ((applicationSettings.getString("PreferredLanguage") == "French") ? "FR_" : "");
     pageData = fromObject({
-        classItems: classDD,
-        levelItems: classDD[0].levelData,
-        stepItems: classDD[0].levelData[0].stepData,
+        classItems: [],
+        levelItems: [],
+        stepItems: [],
         classSelectionIndex: 0,
         levelSelectionIndex: 0,
         stepIndex:0,
+        busyLoading: true,
         infoVisible: true,
         salaryVisible: false,
         SubstantiveClass: true,
@@ -40,8 +43,10 @@ exports.onNavigatingTo = function(args){
         lblOHPRLbl: ["Overtime Hourly Pay Rate (x1.5)", "Paie horaire - Heures supp (1,5)"],
         lblCalculateBtn: ["Calculate Totals", "Calculer le total"]
     });
-    payData = classDD[0].levelData[0].stepData[0];
+    payData = {classCode:"", step:"", hourly:0, daily:0, biweekly:0, annually:0 };
     page.bindingContext = pageData;
+
+    buildListFromFirestore();
 };
 
 exports.pageLoaded = function(args) {
@@ -189,6 +194,7 @@ exports.footer5 = function(){
     topmost.navigate("POC-page");
 }
 
+
 /*
     Turn the classifications list into a tree.
     This structure will be used to populate the appropriate lists and serve up the salary data.
@@ -205,6 +211,109 @@ exports.footer5 = function(){
 
     This will allow for classification selection to be much easier on the user.
 */
+var buildListFromFirestore = function() {
+    
+    pageData.set( "busyLoading", true );
+        const notificationCollection = firebase.firestore().collection("PayInfo").orderBy("__name__", "asc" ).get({ source: "snapshot" }).then( querySnapshot => {
+        var previousClass   = "";
+        var previousLevel   = "";
+
+        var classList       = [];
+        var recordIndex     = 0;
+        var splitChar       = " ";
+        var classAndLevel   = "";
+    
+        var classIndex      = -1;
+        var levelIndex      = -1;
+
+        querySnapshot.forEach( colDoc => {
+            if( colDoc.data().classCode.includes(" ")) {
+                splitChar       = " ";
+            } else if( colDoc.data().classCode.includes("-")) {
+                splitChar       = "-";
+            } else {
+                colDoc.data().classCode = colDoc.data().classCode + "- ";
+                splitChar       = splitChar + "-";
+            }
+    
+            classAndLevel   = colDoc.data().classCode.split(splitChar);
+            if( classAndLevel[ 0 ] != previousClass ) {
+                // add a new entry to class list, start a new level list, start a new step list
+                previousClass   = classAndLevel[ 0 ];
+                previousLevel   = classAndLevel[ 1 ];
+                var classObject = fromObject({
+                    classCode: previousClass,
+                    levelData: []
+                });
+                classList.push( classObject );
+                classIndex++;
+                levelIndex  = 0;
+                var levelObject = fromObject({
+                    levelCode: previousLevel,
+                    stepData: []
+                });
+                classList[classIndex].levelData.push( levelObject );
+            } else if( classAndLevel[ 1 ] != previousLevel ) {
+                // add a new entry to the current level list, start a new step list
+                previousLevel   = classAndLevel[ 1 ];
+                levelIndex++;
+                var levelObject = fromObject({
+                    levelCode: previousLevel,
+                    stepData: []
+                });
+                classList[classIndex].levelData.push( levelObject );
+            }
+            // push the step data onto the tree
+            var stepObject  = fromObject({
+                step: colDoc.data().step,
+                hourly: colDoc.data().hourly, 
+                daily: colDoc.data().daily, 
+                biweekly: colDoc.data().biweekly, 
+                annually: colDoc.data().annually
+            });
+            classList[classIndex].levelData[levelIndex].stepData.push( stepObject );
+        });
+        
+        pageData.set( "stepItems" , classList[0].levelData[0].stepData );
+        pageData.set( "levelItems" , classList[0].levelData );
+        pageData.set( "classItems" , classList );
+
+        payData = classList[0].levelData[0].stepData[0];
+
+        pageData.set( "busyLoading", false );
+    },
+    (errorMessage) => {
+        console.log( errorMessage );
+        pageData.set( "busyLoading", false );
+    });
+
+    /*
+    const query = notificationCollection.where( "PublishDate", "<=", new Date() ).orderBy("__name__"); // firebase.firestore().FieldValue().serverTimestamp() );
+    notificationCollection.onSnapshot( docSnapshot => {
+        console.log("Document notification: " + JSON.stringify(docSnapshot));
+    }, error => {
+        console.log("listener error: ${error}");
+    });
+    console.log("      buildListFromFirestore   - fetch records");
+
+    query.get({ source: "snapshot" }).then( querySnapshot => {
+        querySnapshot.forEach( colDoc => {
+            console.log( "      buildListFromFirestore   - from cache = " + ((colDoc.metadata.fromCache)?("true"):("false")));
+            var newsButton = new Button();
+            newsButton.className = "Main_Nav_SubLine";
+            newsButton.text = colDoc.data().TitleEN;
+            newsButton.id = colDoc.data().Ref;
+            newsButton.on(buttonModule.Button.tapEvent, goToNotification, this);
+            notificationStack.addChild(newsButton);
+        });
+       //buildListFromCache();
+    },
+    (errorMesage) => {
+        console.log("Error getting query results: " + errorMessage)
+    });
+    */
+}
+/*
 var getClassList = function() {
     var databasePull = getFromDataBase();
 
@@ -219,7 +328,26 @@ var getClassList = function() {
     var classIndex      = -1;
     var levelIndex      = -1;
 
+    
+    var collection  = firebase.firestore().collection("PayInfo");
+    var ordering    = "";
+    //collection.doc(databasePull[0].step).set(databasePull[0]);
+    //collection.doc(databasePull[recordIndex].classCode + " " + databasePull[recordIndex].step).set(databasePull[recordIndex]);
+
     for( recordIndex = 0 ; recordIndex < databasePull.length ; recordIndex++ ) {
+        if( databasePull[recordIndex].step.length < 2 ) {
+            ordering    = "0" + databasePull[recordIndex].step;
+        } else if( databasePull[recordIndex].step.length == 2 ) {
+            ordering    = databasePull[recordIndex].step;
+        } else if( databasePull[recordIndex].step == "min" ) {
+            ordering    = "01";
+        } else {
+            ordering    = "02";
+        }
+        console.log(databasePull[recordIndex].classCode + " " + ordering);
+        collection.doc(databasePull[recordIndex].classCode.replace("/", "-") + " " + ordering).set(databasePull[recordIndex]);
+
+
         if( databasePull[recordIndex].classCode.includes(" ")) {
             splitChar       = " ";
         } else if( databasePull[recordIndex].classCode.includes("-")) {
@@ -302,37 +430,37 @@ databaseLine = {classCode:"AC 01", step:"13", hourly:55.229990800368, daily:414.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"AC 01", step:"14", hourly:57.4793008279669, daily:431.094756209752, biweekly:4310.94756209752, annually:112464 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"1", hourly:53.8290912807932, daily:403.718184605949, biweekly:4037.18184605949, annually:105322 };
+databaseLine = {classCode:"AC 02", step:"1", hourly:53.8290912807932, daily:403.718184605949, biweekly:4037.18184605949, annually:105322 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"2", hourly:55.5816211795973, daily:416.862158846979, biweekly:4168.62158846979, annually:108751 };
+databaseLine = {classCode:"AC 02", step:"2", hourly:55.5816211795973, daily:416.862158846979, biweekly:4168.62158846979, annually:108751 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"3", hourly:57.3331288970663, daily:429.998466727997, biweekly:4299.98466727997, annually:112178 };
+databaseLine = {classCode:"AC 02", step:"3", hourly:57.3331288970663, daily:429.998466727997, biweekly:4299.98466727997, annually:112178 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"4", hourly:59.0871920678728, daily:443.153940509046, biweekly:4431.53940509046, annually:115610 };
+databaseLine = {classCode:"AC 02", step:"4", hourly:59.0871920678728, daily:443.153940509046, biweekly:4431.53940509046, annually:115610 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"5", hourly:61.2209956046203, daily:459.157467034652, biweekly:4591.57467034652, annually:119785 };
+databaseLine = {classCode:"AC 02", step:"5", hourly:61.2209956046203, daily:459.157467034652, biweekly:4591.57467034652, annually:119785 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"6", hourly:63.4319738321578, daily:475.739803741184, biweekly:4757.39803741184, annually:124111 };
+databaseLine = {classCode:"AC 02", step:"6", hourly:63.4319738321578, daily:475.739803741184, biweekly:4757.39803741184, annually:124111 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"7", hourly:65.6429520596954, daily:492.322140447715, biweekly:4923.22140447715, annually:128437 };
+databaseLine = {classCode:"AC 02", step:"7", hourly:65.6429520596954, daily:492.322140447715, biweekly:4923.22140447715, annually:128437 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 02 ", step:"8", hourly:67.8498415618931, daily:508.873811714198, biweekly:5088.73811714198, annually:132755 };
+databaseLine = {classCode:"AC 02", step:"8", hourly:67.8498415618931, daily:508.873811714198, biweekly:5088.73811714198, annually:132755 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"1", hourly:60.2698558724318, daily:452.023919043238, biweekly:4520.23919043238, annually:117924 };
+databaseLine = {classCode:"AC 03", step:"1", hourly:60.2698558724318, daily:452.023919043238, biweekly:4520.23919043238, annually:117924 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"2", hourly:62.1000715526934, daily:465.750536645201, biweekly:4657.50536645201, annually:121505 };
+databaseLine = {classCode:"AC 03", step:"2", hourly:62.1000715526934, daily:465.750536645201, biweekly:4657.50536645201, annually:121505 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"3", hourly:63.9379535929674, daily:479.534651947255, biweekly:4795.34651947255, annually:125101 };
+databaseLine = {classCode:"AC 03", step:"3", hourly:63.9379535929674, daily:479.534651947255, biweekly:4795.34651947255, annually:125101 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"4", hourly:66.0324031483185, daily:495.243023612389, biweekly:4952.43023612389, annually:129199 };
+databaseLine = {classCode:"AC 03", step:"4", hourly:66.0324031483185, daily:495.243023612389, biweekly:4952.43023612389, annually:129199 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"5", hourly:68.2996013492794, daily:512.247010119595, biweekly:5122.47010119595, annually:133635 };
+databaseLine = {classCode:"AC 03", step:"5", hourly:68.2996013492794, daily:512.247010119595, biweekly:5122.47010119595, annually:133635 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"6", hourly:70.6470407850353, daily:529.852805887764, biweekly:5298.52805887764, annually:138228 };
+databaseLine = {classCode:"AC 03", step:"6", hourly:70.6470407850353, daily:529.852805887764, biweekly:5298.52805887764, annually:138228 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"7", hourly:73.0736992742513, daily:548.052744556884, biweekly:5480.52744556884, annually:142976 };
+databaseLine = {classCode:"AC 03", step:"7", hourly:73.0736992742513, daily:548.052744556884, biweekly:5480.52744556884, annually:142976 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AC 03 ", step:"8", hourly:75.4993355821323, daily:566.245016865992, biweekly:5662.45016865992, annually:147722 };
+databaseLine = {classCode:"AC 03", step:"8", hourly:75.4993355821323, daily:566.245016865992, biweekly:5662.45016865992, annually:147722 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"AG 01", step:"0", hourly:16.5092507410815, daily:123.819380558111, biweekly:1238.19380558111, annually:32302 };
 databaseReturn.push(databaseLine);
@@ -396,17 +524,17 @@ databaseLine = {classCode:"AG 04", step:"5", hourly:55.375651640601, daily:415.3
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"AG 04", step:"6", hourly:57.4614126546049, daily:430.960594909537, biweekly:4309.60594909537, annually:112429 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AG 05 ", step:"1", hourly:53.5561688643565, daily:401.671266482674, biweekly:4016.71266482674, annually:104788 };
+databaseLine = {classCode:"AG 05", step:"1", hourly:53.5561688643565, daily:401.671266482674, biweekly:4016.71266482674, annually:104788 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AG 05 ", step:"2", hourly:55.6766840437494, daily:417.57513032812, biweekly:4175.7513032812, annually:108937 };
+databaseLine = {classCode:"AG 05", step:"2", hourly:55.6766840437494, daily:417.57513032812, biweekly:4175.7513032812, annually:108937 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AG 05 ", step:"3", hourly:57.7966881324747, daily:433.47516099356, biweekly:4334.7516099356, annually:113085 };
+databaseLine = {classCode:"AG 05", step:"3", hourly:57.7966881324747, daily:433.47516099356, biweekly:4334.7516099356, annually:113085 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AG 05 ", step:"4", hourly:59.9161811305326, daily:449.371358478994, biweekly:4493.71358478994, annually:117232 };
+databaseLine = {classCode:"AG 05", step:"4", hourly:59.9161811305326, daily:449.371358478994, biweekly:4493.71358478994, annually:117232 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AG 05 ", step:"5", hourly:61.0952673004191, daily:458.214504753143, biweekly:4582.14504753143, annually:119539 };
+databaseLine = {classCode:"AG 05", step:"5", hourly:61.0952673004191, daily:458.214504753143, biweekly:4582.14504753143, annually:119539 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"AG 05 ", step:"6", hourly:62.7123581723398, daily:470.342686292548, biweekly:4703.42686292548, annually:122703 };
+databaseLine = {classCode:"AG 05", step:"6", hourly:62.7123581723398, daily:470.342686292548, biweekly:4703.42686292548, annually:122703 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"AR 01", step:"min", hourly:20.4896248594501, daily:153.672186445875, biweekly:1536.72186445875, annually:40090 };
 databaseReturn.push(databaseLine);
@@ -532,21 +660,21 @@ databaseLine = {classCode:"AS 07", step:"4", hourly:53.3869978534192, daily:400.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"AS 07", step:"5", hourly:55.0030665440049, daily:412.522999080037, biweekly:4125.22999080037, annually:107619 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"0", hourly:16.5092507410815, daily:123.819380558111, biweekly:1238.19380558111, annually:32302 };
+databaseLine = {classCode:"BI 01", step:"0", hourly:16.5092507410815, daily:123.819380558111, biweekly:1238.19380558111, annually:32302 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"1", hourly:28.5295921496473, daily:213.971941122355, biweekly:2139.71941122355, annually:55821 };
+databaseLine = {classCode:"BI 01", step:"1", hourly:28.5295921496473, daily:213.971941122355, biweekly:2139.71941122355, annually:55821 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"2", hourly:30.2345906163753, daily:226.759429622815, biweekly:2267.59429622815, annually:59157 };
+databaseLine = {classCode:"BI 01", step:"2", hourly:30.2345906163753, daily:226.759429622815, biweekly:2267.59429622815, annually:59157 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"3", hourly:31.3630788101809, daily:235.223091076357, biweekly:2352.23091076357, annually:61365 };
+databaseLine = {classCode:"BI 01", step:"3", hourly:31.3630788101809, daily:235.223091076357, biweekly:2352.23091076357, annually:61365 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"4", hourly:32.4915670039865, daily:243.686752529899, biweekly:2436.86752529899, annually:63573 };
+databaseLine = {classCode:"BI 01", step:"4", hourly:32.4915670039865, daily:243.686752529899, biweekly:2436.86752529899, annually:63573 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"5", hourly:33.6200551977921, daily:252.150413983441, biweekly:2521.50413983441, annually:65781 };
+databaseLine = {classCode:"BI 01", step:"5", hourly:33.6200551977921, daily:252.150413983441, biweekly:2521.50413983441, annually:65781 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"6", hourly:34.7495655729326, daily:260.621741796995, biweekly:2606.21741796995, annually:67991 };
+databaseLine = {classCode:"BI 01", step:"6", hourly:34.7495655729326, daily:260.621741796995, biweekly:2606.21741796995, annually:67991 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 01 ", step:"7", hourly:35.6439742410304, daily:267.329806807728, biweekly:2673.29806807728, annually:69741 };
+databaseLine = {classCode:"BI 01", step:"7", hourly:35.6439742410304, daily:267.329806807728, biweekly:2673.29806807728, annually:69741 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"BI 02", step:"1", hourly:30.999182254932, daily:232.49386691199, biweekly:2324.9386691199, annually:60653 };
 databaseReturn.push(databaseLine);
@@ -564,37 +692,37 @@ databaseLine = {classCode:"BI 02", step:"7", hourly:40.1988142696514, daily:301.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"BI 02", step:"8", hourly:42.2109782275376, daily:316.582336706532, biweekly:3165.82336706532, annually:82590 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"1", hourly:38.9859961157109, daily:292.394970867832, biweekly:2923.94970867832, annually:76280 };
+databaseLine = {classCode:"BI 03", step:"1", hourly:38.9859961157109, daily:292.394970867832, biweekly:2923.94970867832, annually:76280 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"2", hourly:40.7349483798426, daily:305.512112848819, biweekly:3055.12112848819, annually:79702 };
+databaseLine = {classCode:"BI 03", step:"2", hourly:40.7349483798426, daily:305.512112848819, biweekly:3055.12112848819, annually:79702 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"3", hourly:42.4787897372994, daily:318.590923029745, biweekly:3185.90923029745, annually:83114 };
+databaseLine = {classCode:"BI 03", step:"3", hourly:42.4787897372994, daily:318.590923029745, biweekly:3185.90923029745, annually:83114 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"4", hourly:44.2267198200961, daily:331.700398650721, biweekly:3317.00398650721, annually:86534 };
+databaseLine = {classCode:"BI 03", step:"4", hourly:44.2267198200961, daily:331.700398650721, biweekly:3317.00398650721, annually:86534 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"5", hourly:45.9731166308903, daily:344.798374731677, biweekly:3447.98374731677, annually:89951 };
+databaseLine = {classCode:"BI 03", step:"5", hourly:45.9731166308903, daily:344.798374731677, biweekly:3447.98374731677, annually:89951 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"6", hourly:47.7190023510171, daily:357.892517632628, biweekly:3578.92517632628, annually:93367 };
+databaseLine = {classCode:"BI 03", step:"6", hourly:47.7190023510171, daily:357.892517632628, biweekly:3578.92517632628, annually:93367 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"7", hourly:49.4664213431463, daily:370.998160073597, biweekly:3709.98160073597, annually:96786 };
+databaseLine = {classCode:"BI 03", step:"7", hourly:49.4664213431463, daily:370.998160073597, biweekly:3709.98160073597, annually:96786 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 03 ", step:"8", hourly:50.1931922723091, daily:376.448942042318, biweekly:3764.48942042318, annually:98208 };
+databaseLine = {classCode:"BI 03", step:"8", hourly:50.1931922723091, daily:376.448942042318, biweekly:3764.48942042318, annually:98208 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 04 ", step:"1", hourly:48.3588878667076, daily:362.691659000307, biweekly:3626.91659000307, annually:94619 };
+databaseLine = {classCode:"BI 04", step:"1", hourly:48.3588878667076, daily:362.691659000307, biweekly:3626.91659000307, annually:94619 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 04 ", step:"2", hourly:50.0945517734846, daily:375.709138301135, biweekly:3757.09138301135, annually:98015 };
+databaseLine = {classCode:"BI 04", step:"2", hourly:50.0945517734846, daily:375.709138301135, biweekly:3757.09138301135, annually:98015 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 04 ", step:"3", hourly:51.8327711335991, daily:388.745783501993, biweekly:3887.45783501993, annually:101416 };
+databaseLine = {classCode:"BI 04", step:"3", hourly:51.8327711335991, daily:388.745783501993, biweekly:3887.45783501993, annually:101416 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 04 ", step:"4", hourly:53.5720126750486, daily:401.790095062864, biweekly:4017.90095062864, annually:104819 };
+databaseLine = {classCode:"BI 04", step:"4", hourly:53.5720126750486, daily:401.790095062864, biweekly:4017.90095062864, annually:104819 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 04 ", step:"5", hourly:55.375651640601, daily:415.317387304508, biweekly:4153.17387304508, annually:108348 };
+databaseLine = {classCode:"BI 04", step:"5", hourly:55.375651640601, daily:415.317387304508, biweekly:4153.17387304508, annually:108348 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 04 ", step:"6", hourly:57.4614126546049, daily:430.960594909537, biweekly:4309.60594909537, annually:112429 };
+databaseLine = {classCode:"BI 04", step:"6", hourly:57.4614126546049, daily:430.960594909537, biweekly:4309.60594909537, annually:112429 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 05 ", step:"2", hourly:55.6766840437494, daily:417.57513032812, biweekly:4175.7513032812, annually:108937 };
+databaseLine = {classCode:"BI 05", step:"2", hourly:55.6766840437494, daily:417.57513032812, biweekly:4175.7513032812, annually:108937 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"BI 05 ", step:"5", hourly:58.0287232955126, daily:435.215424716345, biweekly:4352.15424716345, annually:113539 };
+databaseLine = {classCode:"BI 05", step:"5", hourly:58.0287232955126, daily:435.215424716345, biweekly:4352.15424716345, annually:113539 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"BI 05", step:"1", hourly:53.5617908616989, daily:401.713431462741, biweekly:4017.13431462741, annually:104799 };
 databaseReturn.push(databaseLine);
@@ -604,45 +732,45 @@ databaseLine = {classCode:"BI 05", step:"4", hourly:59.9161811305326, daily:449.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"BI 05", step:"6", hourly:62.7123581723398, daily:470.342686292548, biweekly:4703.42686292548, annually:122703 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"0", hourly:16.5092507410815, daily:123.819380558111, biweekly:1238.19380558111, annually:32302 };
+databaseLine = {classCode:"CH 01", step:"0", hourly:16.5092507410815, daily:123.819380558111, biweekly:1238.19380558111, annually:32302 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"1", hourly:28.5295921496473, daily:213.971941122355, biweekly:2139.71941122355, annually:55821 };
+databaseLine = {classCode:"CH 01", step:"1", hourly:28.5295921496473, daily:213.971941122355, biweekly:2139.71941122355, annually:55821 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"2", hourly:30.2345906163753, daily:226.759429622815, biweekly:2267.59429622815, annually:59157 };
+databaseLine = {classCode:"CH 01", step:"2", hourly:30.2345906163753, daily:226.759429622815, biweekly:2267.59429622815, annually:59157 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"3", hourly:31.3630788101809, daily:235.223091076357, biweekly:2352.23091076357, annually:61365 };
+databaseLine = {classCode:"CH 01", step:"3", hourly:31.3630788101809, daily:235.223091076357, biweekly:2352.23091076357, annually:61365 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"4", hourly:32.4915670039865, daily:243.686752529899, biweekly:2436.86752529899, annually:63573 };
+databaseLine = {classCode:"CH 01", step:"4", hourly:32.4915670039865, daily:243.686752529899, biweekly:2436.86752529899, annually:63573 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"5", hourly:33.6200551977921, daily:252.150413983441, biweekly:2521.50413983441, annually:65781 };
+databaseLine = {classCode:"CH 01", step:"5", hourly:33.6200551977921, daily:252.150413983441, biweekly:2521.50413983441, annually:65781 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"6", hourly:34.7495655729326, daily:260.621741796995, biweekly:2606.21741796995, annually:67991 };
+databaseLine = {classCode:"CH 01", step:"6", hourly:34.7495655729326, daily:260.621741796995, biweekly:2606.21741796995, annually:67991 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 01 ", step:"7", hourly:35.6439742410304, daily:267.329806807728, biweekly:2673.29806807728, annually:69741 };
+databaseLine = {classCode:"CH 01", step:"7", hourly:35.6439742410304, daily:267.329806807728, biweekly:2673.29806807728, annually:69741 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"1", hourly:30.999182254932, daily:232.49386691199, biweekly:2324.9386691199, annually:60653 };
+databaseLine = {classCode:"CH 02", step:"1", hourly:30.999182254932, daily:232.49386691199, biweekly:2324.9386691199, annually:60653 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"2", hourly:32.4527241132577, daily:243.395430849433, biweekly:2433.95430849433, annually:63497 };
+databaseLine = {classCode:"CH 02", step:"2", hourly:32.4527241132577, daily:243.395430849433, biweekly:2433.95430849433, annually:63497 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"3", hourly:33.9047326995809, daily:254.285495246857, biweekly:2542.85495246857, annually:66338 };
+databaseLine = {classCode:"CH 02", step:"3", hourly:33.9047326995809, daily:254.285495246857, biweekly:2542.85495246857, annually:66338 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"4", hourly:35.3659409179188, daily:265.244556884391, biweekly:2652.44556884391, annually:69197 };
+databaseLine = {classCode:"CH 02", step:"4", hourly:35.3659409179188, daily:265.244556884391, biweekly:2652.44556884391, annually:69197 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"5", hourly:36.8102831442298, daily:276.077123581723, biweekly:2760.77123581723, annually:72023 };
+databaseLine = {classCode:"CH 02", step:"5", hourly:36.8102831442298, daily:276.077123581723, biweekly:2760.77123581723, annually:72023 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"6", hourly:38.1876724931003, daily:286.407543698252, biweekly:2864.07543698252, annually:74718 };
+databaseLine = {classCode:"CH 02", step:"6", hourly:38.1876724931003, daily:286.407543698252, biweekly:2864.07543698252, annually:74718 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"7", hourly:40.1988142696514, daily:301.491107022386, biweekly:3014.91107022386, annually:78653 };
+databaseLine = {classCode:"CH 02", step:"7", hourly:40.1988142696514, daily:301.491107022386, biweekly:3014.91107022386, annually:78653 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 02 ", step:"8", hourly:42.2109782275376, daily:316.582336706532, biweekly:3165.82336706532, annually:82590 };
+databaseLine = {classCode:"CH 02", step:"8", hourly:42.2109782275376, daily:316.582336706532, biweekly:3165.82336706532, annually:82590 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 03 ", step:"2", hourly:40.7349483798426, daily:305.512112848819, biweekly:3055.12112848819, annually:79702 };
+databaseLine = {classCode:"CH 03", step:"2", hourly:40.7349483798426, daily:305.512112848819, biweekly:3055.12112848819, annually:79702 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 03 ", step:"4", hourly:44.2267198200961, daily:331.700398650721, biweekly:3317.00398650721, annually:86534 };
+databaseLine = {classCode:"CH 03", step:"4", hourly:44.2267198200961, daily:331.700398650721, biweekly:3317.00398650721, annually:86534 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 03 ", step:"6", hourly:47.7190023510171, daily:357.892517632628, biweekly:3578.92517632628, annually:93367 };
+databaseLine = {classCode:"CH 03", step:"6", hourly:47.7190023510171, daily:357.892517632628, biweekly:3578.92517632628, annually:93367 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 03 ", step:"8", hourly:50.1931922723091, daily:376.448942042318, biweekly:3764.48942042318, annually:98208 };
+databaseLine = {classCode:"CH 03", step:"8", hourly:50.1931922723091, daily:376.448942042318, biweekly:3764.48942042318, annually:98208 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"CH 03", step:"1", hourly:38.9859961157109, daily:292.394970867832, biweekly:2923.94970867832, annually:76280 };
 databaseReturn.push(databaseLine);
@@ -652,17 +780,17 @@ databaseLine = {classCode:"CH 03", step:"5", hourly:45.9731166308903, daily:344.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"CH 03", step:"7", hourly:49.4664213431463, daily:370.998160073597, biweekly:3709.98160073597, annually:96786 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 04 ", step:"1", hourly:48.3588878667076, daily:362.691659000307, biweekly:3626.91659000307, annually:94619 };
+databaseLine = {classCode:"CH 04", step:"1", hourly:48.3588878667076, daily:362.691659000307, biweekly:3626.91659000307, annually:94619 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 04 ", step:"2", hourly:50.0945517734846, daily:375.709138301135, biweekly:3757.09138301135, annually:98015 };
+databaseLine = {classCode:"CH 04", step:"2", hourly:50.0945517734846, daily:375.709138301135, biweekly:3757.09138301135, annually:98015 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 04 ", step:"3", hourly:51.8327711335991, daily:388.745783501993, biweekly:3887.45783501993, annually:101416 };
+databaseLine = {classCode:"CH 04", step:"3", hourly:51.8327711335991, daily:388.745783501993, biweekly:3887.45783501993, annually:101416 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 04 ", step:"4", hourly:53.5720126750486, daily:401.790095062864, biweekly:4017.90095062864, annually:104819 };
+databaseLine = {classCode:"CH 04", step:"4", hourly:53.5720126750486, daily:401.790095062864, biweekly:4017.90095062864, annually:104819 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 04 ", step:"5", hourly:55.375651640601, daily:415.317387304508, biweekly:4153.17387304508, annually:108348 };
+databaseLine = {classCode:"CH 04", step:"5", hourly:55.375651640601, daily:415.317387304508, biweekly:4153.17387304508, annually:108348 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"CH 04 ", step:"6", hourly:57.4614126546049, daily:430.960594909537, biweekly:4309.60594909537, annually:112429 };
+databaseLine = {classCode:"CH 04", step:"6", hourly:57.4614126546049, daily:430.960594909537, biweekly:4309.60594909537, annually:112429 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"CH 05", step:"1", hourly:53.5561688643565, daily:401.671266482674, biweekly:4016.71266482674, annually:104788 };
 databaseReturn.push(databaseLine);
@@ -914,21 +1042,21 @@ databaseLine = {classCode:"DD 01", step:"7", hourly:19.2185423694163, daily:144.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"DD 01", step:"8", hourly:19.9882449146479, daily:149.911836859859, biweekly:1499.11836859859, annually:39109 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"1", hourly:19.573750383318, daily:146.803127874885, biweekly:1468.03127874885, annually:38298 };
+databaseLine = {classCode:"DD 02", step:"1", hourly:19.573750383318, daily:146.803127874885, biweekly:1468.03127874885, annually:38298 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"2", hourly:20.3005213124808, daily:152.253909843606, biweekly:1522.53909843606, annually:39720 };
+databaseLine = {classCode:"DD 02", step:"2", hourly:20.3005213124808, daily:152.253909843606, biweekly:1522.53909843606, annually:39720 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"3", hourly:21.0140038842891, daily:157.605029132168, biweekly:1576.05029132168, annually:41116 };
+databaseLine = {classCode:"DD 02", step:"3", hourly:21.0140038842891, daily:157.605029132168, biweekly:1576.05029132168, annually:41116 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"4", hourly:21.738730450782, daily:163.040478380865, biweekly:1630.40478380865, annually:42534 };
+databaseLine = {classCode:"DD 02", step:"4", hourly:21.738730450782, daily:163.040478380865, biweekly:1630.40478380865, annually:42534 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"5", hourly:22.4588572012675, daily:168.441429009506, biweekly:1684.41429009506, annually:43943 };
+databaseLine = {classCode:"DD 02", step:"5", hourly:22.4588572012675, daily:168.441429009506, biweekly:1684.41429009506, annually:43943 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"6", hourly:23.1759174077481, daily:173.819380558111, biweekly:1738.19380558111, annually:45346 };
+databaseLine = {classCode:"DD 02", step:"6", hourly:23.1759174077481, daily:173.819380558111, biweekly:1738.19380558111, annually:45346 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"7", hourly:23.8996217929061, daily:179.247163446795, biweekly:1792.47163446795, annually:46762 };
+databaseLine = {classCode:"DD 02", step:"7", hourly:23.8996217929061, daily:179.247163446795, biweekly:1792.47163446795, annually:46762 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 02 ", step:"8", hourly:24.8574057037718, daily:186.430542778289, biweekly:1864.30542778289, annually:48636 };
+databaseLine = {classCode:"DD 02", step:"8", hourly:24.8574057037718, daily:186.430542778289, biweekly:1864.30542778289, annually:48636 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"DD 03", step:"1", hourly:24.0861698865379, daily:180.646274149034, biweekly:1806.46274149034, annually:47127 };
 databaseReturn.push(databaseLine);
@@ -954,15 +1082,15 @@ databaseLine = {classCode:"DD 04", step:"6", hourly:29.1822549320249, daily:218.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"DD 04", step:"7", hourly:30.3516303792293, daily:227.63722784422, biweekly:2276.3722784422, annually:59386 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 05 ", step:"1", hourly:29.0294388224471, daily:217.720791168353, biweekly:2177.20791168353, annually:56799 };
+databaseLine = {classCode:"DD 05", step:"1", hourly:29.0294388224471, daily:217.720791168353, biweekly:2177.20791168353, annually:56799 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 05 ", step:"2", hourly:30.0373096187264, daily:225.279822140448, biweekly:2252.79822140448, annually:58771 };
+databaseLine = {classCode:"DD 05", step:"2", hourly:30.0373096187264, daily:225.279822140448, biweekly:2252.79822140448, annually:58771 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 05 ", step:"3", hourly:31.0431360523357, daily:232.823520392518, biweekly:2328.23520392518, annually:60739 };
+databaseLine = {classCode:"DD 05", step:"3", hourly:31.0431360523357, daily:232.823520392518, biweekly:2328.23520392518, annually:60739 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 05 ", step:"4", hourly:32.0510068486149, daily:240.382551364612, biweekly:2403.82551364612, annually:62711 };
+databaseLine = {classCode:"DD 05", step:"4", hourly:32.0510068486149, daily:240.382551364612, biweekly:2403.82551364612, annually:62711 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"DD 05 ", step:"5", hourly:33.3333333333333, daily:250, biweekly:2500, annually:65220 };
+databaseLine = {classCode:"DD 05", step:"5", hourly:33.3333333333333, daily:250, biweekly:2500, annually:65220 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"DD 06", step:"1", hourly:31.1530205458448, daily:233.647654093836, biweekly:2336.47654093836, annually:60954 };
 databaseReturn.push(databaseLine);
@@ -1444,19 +1572,19 @@ databaseLine = {classCode:"FB 08", step:"3", hourly:61.6513339466421, daily:462.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FB 08", step:"4", hourly:64.081058979863, daily:480.607942348973, biweekly:4806.07942348973, annually:125381 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FI 01 ", step:"1", hourly:27.9535929673924, daily:209.651947255443, biweekly:2096.51947255443, annually:54694 };
+databaseLine = {classCode:"FI 01", step:"1", hourly:27.9535929673924, daily:209.651947255443, biweekly:2096.51947255443, annually:54694 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FI 01 ", step:"2", hourly:29.8313400797301, daily:223.735050597976, biweekly:2237.35050597976, annually:58368 };
+databaseLine = {classCode:"FI 01", step:"2", hourly:29.8313400797301, daily:223.735050597976, biweekly:2237.35050597976, annually:58368 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FI 01 ", step:"3", hourly:31.7075539200654, daily:237.806654400491, biweekly:2378.06654400491, annually:62039 };
+databaseLine = {classCode:"FI 01", step:"3", hourly:31.7075539200654, daily:237.806654400491, biweekly:2378.06654400491, annually:62039 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FI 01 ", step:"4", hourly:33.5842788510682, daily:251.882091383011, biweekly:2518.82091383011, annually:65711 };
+databaseLine = {classCode:"FI 01", step:"4", hourly:33.5842788510682, daily:251.882091383011, biweekly:2518.82091383011, annually:65711 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FI 01 ", step:"5", hourly:35.4604926914035, daily:265.953695185526, biweekly:2659.53695185526, annually:69382 };
+databaseLine = {classCode:"FI 01", step:"5", hourly:35.4604926914035, daily:265.953695185526, biweekly:2659.53695185526, annually:69382 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FI 01 ", step:"6", hourly:37.3367065317387, daily:280.02529898804, biweekly:2800.2529898804, annually:73053 };
+databaseLine = {classCode:"FI 01", step:"6", hourly:37.3367065317387, daily:280.02529898804, biweekly:2800.2529898804, annually:73053 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FI 01 ", step:"7", hourly:39.2134314627415, daily:294.100735970561, biweekly:2941.00735970561, annually:76725 };
+databaseLine = {classCode:"FI 01", step:"7", hourly:39.2134314627415, daily:294.100735970561, biweekly:2941.00735970561, annually:76725 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FI 02", step:"1", hourly:34.0263722784422, daily:255.197792088316, biweekly:2551.97792088316, annually:66576 };
 databaseReturn.push(databaseLine);
@@ -1500,17 +1628,17 @@ databaseLine = {classCode:"FI 04", step:"6", hourly:59.6749463354799, daily:447.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FI 04", step:"7", hourly:63.3159562506389, daily:474.869671879791, biweekly:4748.69671879791, annually:123884 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FO 01 ", step:"1", hourly:28.0338342021875, daily:210.253756516406, biweekly:2102.53756516406, annually:54851 };
+databaseLine = {classCode:"FO 01", step:"1", hourly:28.0338342021875, daily:210.253756516406, biweekly:2102.53756516406, annually:54851 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FO 01 ", step:"11", hourly:40.3644076459164, daily:302.733057344373, biweekly:3027.33057344373, annually:78977 };
+databaseLine = {classCode:"FO 01", step:"11", hourly:40.3644076459164, daily:302.733057344373, biweekly:3027.33057344373, annually:78977 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FO 01 ", step:"3", hourly:30.2805887764489, daily:227.104415823367, biweekly:2271.04415823367, annually:59247 };
+databaseLine = {classCode:"FO 01", step:"3", hourly:30.2805887764489, daily:227.104415823367, biweekly:2271.04415823367, annually:59247 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FO 01 ", step:"5", hourly:32.3944597771645, daily:242.958448328733, biweekly:2429.58448328733, annually:63383 };
+databaseLine = {classCode:"FO 01", step:"5", hourly:32.3944597771645, daily:242.958448328733, biweekly:2429.58448328733, annually:63383 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FO 01 ", step:"7", hourly:35.3736072779311, daily:265.302054584483, biweekly:2653.02054584483, annually:69212 };
+databaseLine = {classCode:"FO 01", step:"7", hourly:35.3736072779311, daily:265.302054584483, biweekly:2653.02054584483, annually:69212 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FO 01 ", step:"9", hourly:37.8661964632526, daily:283.996473474394, biweekly:2839.96473474394, annually:74089 };
+databaseLine = {classCode:"FO 01", step:"9", hourly:37.8661964632526, daily:283.996473474394, biweekly:2839.96473474394, annually:74089 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FO 01", step:"0", hourly:16.5092507410815, daily:123.819380558111, biweekly:1238.19380558111, annually:32302 };
 databaseReturn.push(databaseLine);
@@ -1570,9 +1698,9 @@ databaseLine = {classCode:"FO 04", step:"6", hourly:57.9397935193703, daily:434.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FO 04", step:"7", hourly:59.4347337217622, daily:445.760502913217, biweekly:4457.60502913217, annually:116290 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FR 00 ", step:"2", hourly:29.5006644178677, daily:221.254983134008, biweekly:2212.54983134008, annually:57721 };
+databaseLine = {classCode:"FR 00", step:"2", hourly:29.5006644178677, daily:221.254983134008, biweekly:2212.54983134008, annually:57721 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FR 00 ", step:"3", hourly:31.3390575488092, daily:235.042931616069, biweekly:2350.42931616069, annually:61318 };
+databaseLine = {classCode:"FR 00", step:"3", hourly:31.3390575488092, daily:235.042931616069, biweekly:2350.42931616069, annually:61318 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FR 01", step:"1", hourly:33.7289175099663, daily:252.966881324747, biweekly:2529.66881324747, annually:65994 };
 databaseReturn.push(databaseLine);
@@ -1590,7 +1718,7 @@ databaseLine = {classCode:"FR 02", step:"2", hourly:40.4180721660022, daily:303.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FR 02", step:"3", hourly:41.7438413574568, daily:313.078810180926, biweekly:3130.78810180926, annually:81676 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FR 03 ", step:"1", hourly:44.3759582950015, daily:332.819687212511, biweekly:3328.19687212512, annually:86826 };
+databaseLine = {classCode:"FR 03", step:"1", hourly:44.3759582950015, daily:332.819687212511, biweekly:3328.19687212512, annually:86826 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FR 04", step:"1", hourly:47.1690687928038, daily:353.768015946029, biweekly:3537.68015946029, annually:92291 };
 databaseReturn.push(databaseLine);
@@ -1634,15 +1762,15 @@ databaseLine = {classCode:"FS 03", step:"6", hourly:56.5956250638863, daily:424.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"FS 03", step:"7", hourly:60.0373096187264, daily:450.279822140448, biweekly:4502.79822140448, annually:117469 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FS 04 ", step:"1", hourly:56.5956250638863, daily:424.467187979147, biweekly:4244.67187979147, annually:110735 };
+databaseLine = {classCode:"FS 04", step:"1", hourly:56.5956250638863, daily:424.467187979147, biweekly:4244.67187979147, annually:110735 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FS 04 ", step:"2", hourly:58.8602678115098, daily:441.452008586323, biweekly:4414.52008586323, annually:115166 };
+databaseLine = {classCode:"FS 04", step:"2", hourly:58.8602678115098, daily:441.452008586323, biweekly:4414.52008586323, annually:115166 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FS 04 ", step:"3", hourly:61.214351425943, daily:459.107635694572, biweekly:4591.07635694572, annually:119772 };
+databaseLine = {classCode:"FS 04", step:"3", hourly:61.214351425943, daily:459.107635694572, biweekly:4591.07635694572, annually:119772 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FS 04 ", step:"4", hourly:63.6619646325258, daily:477.464734743943, biweekly:4774.64734743944, annually:124561 };
+databaseLine = {classCode:"FS 04", step:"4", hourly:63.6619646325258, daily:477.464734743943, biweekly:4774.64734743944, annually:124561 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"FS 04 ", step:"5", hourly:67.8569968312379, daily:508.927476234284, biweekly:5089.27476234284, annually:132769 };
+databaseLine = {classCode:"FS 04", step:"5", hourly:67.8569968312379, daily:508.927476234284, biweekly:5089.27476234284, annually:132769 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"GT 01", step:"1", hourly:22.1261371767352, daily:165.946028825514, biweekly:1659.46028825514, annually:43292 };
 databaseReturn.push(databaseLine);
@@ -1780,9 +1908,9 @@ databaseLine = {classCode:"IM 00", step:"5", hourly:55.853521414699, daily:418.9
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"IM 00", step:"6", hourly:57.9060615353164, daily:434.295461514873, biweekly:4342.95461514873, annually:113299 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"IS 01 ", step:"2", hourly:27.3423285290811, daily:205.067463968108, biweekly:2050.67463968108, annually:53498 };
+databaseLine = {classCode:"IS 01", step:"2", hourly:27.3423285290811, daily:205.067463968108, biweekly:2050.67463968108, annually:53498 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"IS 01 ", step:"3", hourly:28.3808647654094, daily:212.85648574057, biweekly:2128.5648574057, annually:55530 };
+databaseLine = {classCode:"IS 01", step:"3", hourly:28.3808647654094, daily:212.85648574057, biweekly:2128.5648574057, annually:55530 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"IS 01", step:"1", hourly:26.3405908208116, daily:197.554431156087, biweekly:1975.54431156087, annually:51538 };
 databaseReturn.push(databaseLine);
@@ -1800,7 +1928,7 @@ databaseLine = {classCode:"IS 03", step:"2", hourly:35.672084227742, daily:267.5
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"IS 03", step:"3", hourly:37.1358478994174, daily:278.51885924563, biweekly:2785.1885924563, annually:72660 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"IS 04 ", step:"2", hourly:42.5866298681386, daily:319.39972401104, biweekly:3193.9972401104, annually:83325 };
+databaseLine = {classCode:"IS 04", step:"2", hourly:42.5866298681386, daily:319.39972401104, biweekly:3193.9972401104, annually:83325 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"IS 04", step:"1", hourly:41.0272922416437, daily:307.704691812327, biweekly:3077.04691812327, annually:80274 };
 databaseReturn.push(databaseLine);
@@ -2062,39 +2190,39 @@ databaseLine = {classCode:"MT 07", step:"6", hourly:59.7291219462333, daily:447.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"MT 07", step:"7", hourly:62.179801696821, daily:466.348512726158, biweekly:4663.48512726158, annually:121661 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"1", hourly:20.6858836757641, daily:155.144127568231, biweekly:1551.44127568231, annually:40474 };
+databaseLine = {classCode:"OM 01", step:"1", hourly:20.6858836757641, daily:155.144127568231, biweekly:1551.44127568231, annually:40474 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"2", hourly:21.8123275068997, daily:163.592456301748, biweekly:1635.92456301748, annually:42678 };
+databaseLine = {classCode:"OM 01", step:"2", hourly:21.8123275068997, daily:163.592456301748, biweekly:1635.92456301748, annually:42678 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"3", hourly:22.9377491567004, daily:172.033118675253, biweekly:1720.33118675253, annually:44880 };
+databaseLine = {classCode:"OM 01", step:"3", hourly:22.9377491567004, daily:172.033118675253, biweekly:1720.33118675253, annually:44880 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"4", hourly:24.065215169171, daily:180.489113768783, biweekly:1804.89113768783, annually:47086 };
+databaseLine = {classCode:"OM 01", step:"4", hourly:24.065215169171, daily:180.489113768783, biweekly:1804.89113768783, annually:47086 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"5", hourly:25.1891035469692, daily:188.918276602269, biweekly:1889.18276602269, annually:49285 };
+databaseLine = {classCode:"OM 01", step:"5", hourly:25.1891035469692, daily:188.918276602269, biweekly:1889.18276602269, annually:49285 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"6", hourly:26.3298579167944, daily:197.473934375958, biweekly:1974.73934375958, annually:51517 };
+databaseLine = {classCode:"OM 01", step:"6", hourly:26.3298579167944, daily:197.473934375958, biweekly:1974.73934375958, annually:51517 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"7", hourly:27.4557906572626, daily:205.918429929469, biweekly:2059.18429929469, annually:53720 };
+databaseLine = {classCode:"OM 01", step:"7", hourly:27.4557906572626, daily:205.918429929469, biweekly:2059.18429929469, annually:53720 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 01 ", step:"8", hourly:28.5832566697332, daily:214.374425022999, biweekly:2143.74425022999, annually:55926 };
+databaseLine = {classCode:"OM 01", step:"8", hourly:28.5832566697332, daily:214.374425022999, biweekly:2143.74425022999, annually:55926 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 02 ", step:"1", hourly:29.0253500971072, daily:217.690125728304, biweekly:2176.90125728304, annually:56791 };
+databaseLine = {classCode:"OM 02", step:"1", hourly:29.0253500971072, daily:217.690125728304, biweekly:2176.90125728304, annually:56791 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 02 ", step:"2", hourly:30.2667893284269, daily:227.000919963201, biweekly:2270.00919963201, annually:59220 };
+databaseLine = {classCode:"OM 02", step:"2", hourly:30.2667893284269, daily:227.000919963201, biweekly:2270.00919963201, annually:59220 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 02 ", step:"3", hourly:31.5072063784115, daily:236.304047838086, biweekly:2363.04047838086, annually:61647 };
+databaseLine = {classCode:"OM 02", step:"3", hourly:31.5072063784115, daily:236.304047838086, biweekly:2363.04047838086, annually:61647 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 02 ", step:"4", hourly:32.7460901563937, daily:245.595676172953, biweekly:2455.95676172953, annually:64071 };
+databaseLine = {classCode:"OM 02", step:"4", hourly:32.7460901563937, daily:245.595676172953, biweekly:2455.95676172953, annually:64071 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 03 ", step:"1", hourly:31.3232137381171, daily:234.924103035879, biweekly:2349.24103035879, annually:61287 };
+databaseLine = {classCode:"OM 03", step:"1", hourly:31.3232137381171, daily:234.924103035879, biweekly:2349.24103035879, annually:61287 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 03 ", step:"2", hourly:32.9740365940918, daily:247.305274455688, biweekly:2473.05274455688, annually:64517 };
+databaseLine = {classCode:"OM 03", step:"2", hourly:32.9740365940918, daily:247.305274455688, biweekly:2473.05274455688, annually:64517 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 03 ", step:"3", hourly:34.6125932740468, daily:259.594449555351, biweekly:2595.94449555351, annually:67723 };
+databaseLine = {classCode:"OM 03", step:"3", hourly:34.6125932740468, daily:259.594449555351, biweekly:2595.94449555351, annually:67723 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 03 ", step:"4", hourly:36.2511499540018, daily:271.883624655014, biweekly:2718.83624655014, annually:70929 };
+databaseLine = {classCode:"OM 03", step:"4", hourly:36.2511499540018, daily:271.883624655014, biweekly:2718.83624655014, annually:70929 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OM 03 ", step:"5", hourly:37.8794848206072, daily:284.096136154554, biweekly:2840.96136154554, annually:74115 };
+databaseLine = {classCode:"OM 03", step:"5", hourly:37.8794848206072, daily:284.096136154554, biweekly:2840.96136154554, annually:74115 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"OM 04", step:"1", hourly:38.5709904937136, daily:289.282428702852, biweekly:2892.82428702852, annually:75468 };
 databaseReturn.push(databaseLine);
@@ -2124,17 +2252,17 @@ databaseLine = {classCode:"OP 01", step:"5", hourly:42.2196667688848, daily:316.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"OP 01", step:"6", hourly:43.2909128079321, daily:324.681846059491, biweekly:3246.81846059491, annually:84703 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OP 02 ", step:"1", hourly:40.3143207605029, daily:302.357405703772, biweekly:3023.57405703772, annually:78879 };
+databaseLine = {classCode:"OP 02", step:"1", hourly:40.3143207605029, daily:302.357405703772, biweekly:3023.57405703772, annually:78879 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OP 02 ", step:"2", hourly:41.4407645916386, daily:310.805734437289, biweekly:3108.05734437289, annually:81083 };
+databaseLine = {classCode:"OP 02", step:"2", hourly:41.4407645916386, daily:310.805734437289, biweekly:3108.05734437289, annually:81083 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OP 02 ", step:"3", hourly:42.5641418787693, daily:319.23106409077, biweekly:3192.3106409077, annually:83281 };
+databaseLine = {classCode:"OP 02", step:"3", hourly:42.5641418787693, daily:319.23106409077, biweekly:3192.3106409077, annually:83281 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OP 02 ", step:"4", hourly:43.6926300725749, daily:327.694725544312, biweekly:3276.94725544312, annually:85489 };
+databaseLine = {classCode:"OP 02", step:"4", hourly:43.6926300725749, daily:327.694725544312, biweekly:3276.94725544312, annually:85489 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OP 02 ", step:"5", hourly:44.8604722477768, daily:336.453541858326, biweekly:3364.53541858326, annually:87774 };
+databaseLine = {classCode:"OP 02", step:"5", hourly:44.8604722477768, daily:336.453541858326, biweekly:3364.53541858326, annually:87774 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"OP 02 ", step:"6", hourly:46.0283144229786, daily:345.21235817234, biweekly:3452.1235817234, annually:90059 };
+databaseLine = {classCode:"OP 02", step:"6", hourly:46.0283144229786, daily:345.21235817234, biweekly:3452.1235817234, annually:90059 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"OP 03", step:"1", hourly:42.7624450577532, daily:320.718337933149, biweekly:3207.18337933149, annually:83669 };
 databaseReturn.push(databaseLine);
@@ -2148,19 +2276,19 @@ databaseLine = {classCode:"OP 03", step:"5", hourly:47.6924256363079, daily:357.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"OP 03", step:"6", hourly:48.9594194010017, daily:367.195645507513, biweekly:3671.95645507513, annually:95794 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 01 ", step:"0", hourly:18.0246345701727, daily:135.184759276296, biweekly:1351.84759276296, annually:35267 };
+databaseLine = {classCode:"PC 01", step:"0", hourly:18.0246345701727, daily:135.184759276296, biweekly:1351.84759276296, annually:35267 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 01 ", step:"1", hourly:29.5829500153327, daily:221.872125114995, biweekly:2218.72125114995, annually:57882 };
+databaseLine = {classCode:"PC 01", step:"1", hourly:29.5829500153327, daily:221.872125114995, biweekly:2218.72125114995, annually:57882 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 01 ", step:"2", hourly:30.836655422672, daily:231.27491567004, biweekly:2312.7491567004, annually:60335 };
+databaseLine = {classCode:"PC 01", step:"2", hourly:30.836655422672, daily:231.27491567004, biweekly:2312.7491567004, annually:60335 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 01 ", step:"3", hourly:32.1102933660431, daily:240.827200245323, biweekly:2408.27200245324, annually:62827 };
+databaseLine = {classCode:"PC 01", step:"3", hourly:32.1102933660431, daily:240.827200245323, biweekly:2408.27200245324, annually:62827 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 01 ", step:"4", hourly:33.3823980374118, daily:250.367985280589, biweekly:2503.67985280589, annually:65316 };
+databaseLine = {classCode:"PC 01", step:"4", hourly:33.3823980374118, daily:250.367985280589, biweekly:2503.67985280589, annually:65316 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 01 ", step:"5", hourly:34.6591025247879, daily:259.943268935909, biweekly:2599.43268935909, annually:67814 };
+databaseLine = {classCode:"PC 01", step:"5", hourly:34.6591025247879, daily:259.943268935909, biweekly:2599.43268935909, annually:67814 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 01 ", step:"6", hourly:35.9342737401615, daily:269.507053051211, biweekly:2695.07053051211, annually:70309 };
+databaseLine = {classCode:"PC 01", step:"6", hourly:35.9342737401615, daily:269.507053051211, biweekly:2695.07053051211, annually:70309 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PC 02", step:"1", hourly:35.2095471736686, daily:264.071603802515, biweekly:2640.71603802515, annually:68891 };
 databaseReturn.push(databaseLine);
@@ -2174,17 +2302,17 @@ databaseLine = {classCode:"PC 02", step:"5", hourly:40.7835019932536, daily:305.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PC 02", step:"6", hourly:42.2109782275376, daily:316.582336706532, biweekly:3165.82336706532, annually:82590 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 03 ", step:"1", hourly:42.4241030358786, daily:318.180772769089, biweekly:3181.80772769089, annually:83007 };
+databaseLine = {classCode:"PC 03", step:"1", hourly:42.4241030358786, daily:318.180772769089, biweekly:3181.80772769089, annually:83007 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 03 ", step:"2", hourly:44.0345497291219, daily:330.259122968415, biweekly:3302.59122968415, annually:86158 };
+databaseLine = {classCode:"PC 03", step:"2", hourly:44.0345497291219, daily:330.259122968415, biweekly:3302.59122968415, annually:86158 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 03 ", step:"3", hourly:45.6526627823776, daily:342.394970867832, biweekly:3423.94970867832, annually:89324 };
+databaseLine = {classCode:"PC 03", step:"3", hourly:45.6526627823776, daily:342.394970867832, biweekly:3423.94970867832, annually:89324 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 03 ", step:"4", hourly:47.261065112951, daily:354.457988347133, biweekly:3544.57988347133, annually:92471 };
+databaseLine = {classCode:"PC 03", step:"4", hourly:47.261065112951, daily:354.457988347133, biweekly:3544.57988347133, annually:92471 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 03 ", step:"5", hourly:48.8730450781969, daily:366.547838086477, biweekly:3665.47838086477, annually:95625 };
+databaseLine = {classCode:"PC 03", step:"5", hourly:48.8730450781969, daily:366.547838086477, biweekly:3665.47838086477, annually:95625 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PC 03 ", step:"6", hourly:50.4840028621077, daily:378.630021465808, biweekly:3786.30021465808, annually:98777 };
+databaseLine = {classCode:"PC 03", step:"6", hourly:50.4840028621077, daily:378.630021465808, biweekly:3786.30021465808, annually:98777 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PC 04", step:"1", hourly:49.1531227639783, daily:368.648420729837, biweekly:3686.48420729837, annually:96173 };
 databaseReturn.push(databaseLine);
@@ -2286,15 +2414,15 @@ databaseLine = {classCode:"PH 03", step:"4", hourly:57.2554431156087, daily:429.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PH 03", step:"5", hourly:59.3769804763365, daily:445.327353572524, biweekly:4453.27353572524, annually:116177 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PM 01 ", step:"2", hourly:27.3423285290811, daily:205.067463968108, biweekly:2050.67463968108, annually:53498 };
+databaseLine = {classCode:"PM 01", step:"2", hourly:27.3423285290811, daily:205.067463968108, biweekly:2050.67463968108, annually:53498 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PM 01 ", step:"4", hourly:29.4607993458039, daily:220.95599509353, biweekly:2209.5599509353, annually:57643 };
+databaseLine = {classCode:"PM 01", step:"4", hourly:29.4607993458039, daily:220.95599509353, biweekly:2209.5599509353, annually:57643 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PM 01", step:"1", hourly:26.3405908208116, daily:197.554431156087, biweekly:1975.54431156087, annually:51538 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PM 01", step:"3", hourly:28.3808647654094, daily:212.85648574057, biweekly:2128.5648574057, annually:55530 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PM 02 ", step:"3", hourly:31.6247572319329, daily:237.185679239497, biweekly:2371.85679239497, annually:61877 };
+databaseLine = {classCode:"PM 02", step:"3", hourly:31.6247572319329, daily:237.185679239497, biweekly:2371.85679239497, annually:61877 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PM 02", step:"1", hourly:29.3519370336298, daily:220.139527752223, biweekly:2201.39527752223, annually:57430 };
 databaseReturn.push(databaseLine);
@@ -2306,11 +2434,11 @@ databaseLine = {classCode:"PM 03", step:"2", hourly:32.6561381989165, daily:244.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PM 03", step:"3", hourly:33.8975774302361, daily:254.231830726771, biweekly:2542.31830726771, annually:66324 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PM 04 ", step:"1", hourly:34.3662475723193, daily:257.746856792395, biweekly:2577.46856792395, annually:67241 };
+databaseLine = {classCode:"PM 04", step:"1", hourly:34.3662475723193, daily:257.746856792395, biweekly:2577.46856792395, annually:67241 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PM 04 ", step:"2", hourly:35.672084227742, daily:267.540631708065, biweekly:2675.40631708065, annually:69796 };
+databaseLine = {classCode:"PM 04", step:"2", hourly:35.672084227742, daily:267.540631708065, biweekly:2675.40631708065, annually:69796 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PM 04 ", step:"3", hourly:37.1358478994174, daily:278.51885924563, biweekly:2785.1885924563, annually:72660 };
+databaseLine = {classCode:"PM 04", step:"3", hourly:37.1358478994174, daily:278.51885924563, biweekly:2785.1885924563, annually:72660 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PM 05", step:"1", hourly:41.0272922416437, daily:307.704691812327, biweekly:3077.04691812327, annually:80274 };
 databaseReturn.push(databaseLine);
@@ -2328,51 +2456,51 @@ databaseLine = {classCode:"PM 06", step:"4", hourly:53.3869978534192, daily:400.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PM 06", step:"5", hourly:55.0030665440049, daily:412.522999080037, biweekly:4125.22999080037, annually:107619 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 01 ", step:"1", hourly:25.5018910354697, daily:191.264182766023, biweekly:1912.64182766023, annually:49897 };
+databaseLine = {classCode:"PS 01", step:"1", hourly:25.5018910354697, daily:191.264182766023, biweekly:1912.64182766023, annually:49897 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 01 ", step:"2", hourly:26.6181130532556, daily:199.635847899417, biweekly:1996.35847899417, annually:52081 };
+databaseLine = {classCode:"PS 01", step:"2", hourly:26.6181130532556, daily:199.635847899417, biweekly:1996.35847899417, annually:52081 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 01 ", step:"3", hourly:27.7322907083717, daily:207.992180312787, biweekly:2079.92180312787, annually:54261 };
+databaseLine = {classCode:"PS 01", step:"3", hourly:27.7322907083717, daily:207.992180312787, biweekly:2079.92180312787, annually:54261 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 01 ", step:"4", hourly:28.8464683634877, daily:216.348512726158, biweekly:2163.48512726158, annually:56441 };
+databaseLine = {classCode:"PS 01", step:"4", hourly:28.8464683634877, daily:216.348512726158, biweekly:2163.48512726158, annually:56441 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 01 ", step:"5", hourly:29.9632014719411, daily:224.724011039558, biweekly:2247.24011039558, annually:58626 };
+databaseLine = {classCode:"PS 01", step:"5", hourly:29.9632014719411, daily:224.724011039558, biweekly:2247.24011039558, annually:58626 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 01 ", step:"6", hourly:31.0768680363897, daily:233.076510272922, biweekly:2330.76510272922, annually:60805 };
+databaseLine = {classCode:"PS 01", step:"6", hourly:31.0768680363897, daily:233.076510272922, biweekly:2330.76510272922, annually:60805 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 01 ", step:"7", hourly:32.1946233261781, daily:241.459674946335, biweekly:2414.59674946335, annually:62992 };
+databaseLine = {classCode:"PS 01", step:"7", hourly:32.1946233261781, daily:241.459674946335, biweekly:2414.59674946335, annually:62992 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 02 ", step:"1", hourly:32.8876622712869, daily:246.657467034652, biweekly:2466.57467034652, annually:64348 };
+databaseLine = {classCode:"PS 02", step:"1", hourly:32.8876622712869, daily:246.657467034652, biweekly:2466.57467034652, annually:64348 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 02 ", step:"2", hourly:34.279362158847, daily:257.095216191352, biweekly:2570.95216191352, annually:67071 };
+databaseLine = {classCode:"PS 02", step:"2", hourly:34.279362158847, daily:257.095216191352, biweekly:2570.95216191352, annually:67071 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 02 ", step:"3", hourly:35.6771951344168, daily:267.578963508126, biweekly:2675.78963508126, annually:69806 };
+databaseLine = {classCode:"PS 02", step:"3", hourly:35.6771951344168, daily:267.578963508126, biweekly:2675.78963508126, annually:69806 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 02 ", step:"4", hourly:37.0678728406419, daily:278.009046304814, biweekly:2780.09046304814, annually:72527 };
+databaseLine = {classCode:"PS 02", step:"4", hourly:37.0678728406419, daily:278.009046304814, biweekly:2780.09046304814, annually:72527 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 02 ", step:"5", hourly:38.4651947255443, daily:288.488960441582, biweekly:2884.88960441582, annually:75261 };
+databaseLine = {classCode:"PS 02", step:"5", hourly:38.4651947255443, daily:288.488960441582, biweekly:2884.88960441582, annually:75261 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 02 ", step:"6", hourly:39.8604722477768, daily:298.953541858326, biweekly:2989.53541858326, annually:77991 };
+databaseLine = {classCode:"PS 02", step:"6", hourly:39.8604722477768, daily:298.953541858326, biweekly:2989.53541858326, annually:77991 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 03 ", step:"1", hourly:40.16457119493, daily:301.234283961975, biweekly:3012.34283961975, annually:78586 };
+databaseLine = {classCode:"PS 03", step:"1", hourly:40.16457119493, daily:301.234283961975, biweekly:3012.34283961975, annually:78586 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 03 ", step:"2", hourly:41.8266380455893, daily:313.69978534192, biweekly:3136.9978534192, annually:81838 };
+databaseLine = {classCode:"PS 03", step:"2", hourly:41.8266380455893, daily:313.69978534192, biweekly:3136.9978534192, annually:81838 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 03 ", step:"3", hourly:43.4866605335787, daily:326.14995400184, biweekly:3261.4995400184, annually:85086 };
+databaseLine = {classCode:"PS 03", step:"3", hourly:43.4866605335787, daily:326.14995400184, biweekly:3261.4995400184, annually:85086 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 03 ", step:"4", hourly:45.1548604722478, daily:338.661453541858, biweekly:3386.61453541858, annually:88350 };
+databaseLine = {classCode:"PS 03", step:"4", hourly:45.1548604722478, daily:338.661453541858, biweekly:3386.61453541858, annually:88350 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 03 ", step:"5", hourly:46.8261269549218, daily:351.195952161914, biweekly:3511.95952161914, annually:91620 };
+databaseLine = {classCode:"PS 03", step:"5", hourly:46.8261269549218, daily:351.195952161914, biweekly:3511.95952161914, annually:91620 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 04 ", step:"1", hourly:45.1875702749668, daily:338.906777062251, biweekly:3389.06777062251, annually:88414 };
+databaseLine = {classCode:"PS 04", step:"1", hourly:45.1875702749668, daily:338.906777062251, biweekly:3389.06777062251, annually:88414 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 04 ", step:"2", hourly:47.0898497393438, daily:353.173873045078, biweekly:3531.73873045078, annually:92136 };
+databaseLine = {classCode:"PS 04", step:"2", hourly:47.0898497393438, daily:353.173873045078, biweekly:3531.73873045078, annually:92136 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 04 ", step:"3", hourly:48.9957068383931, daily:367.467801287948, biweekly:3674.67801287948, annually:95865 };
+databaseLine = {classCode:"PS 04", step:"3", hourly:48.9957068383931, daily:367.467801287948, biweekly:3674.67801287948, annually:95865 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 04 ", step:"4", hourly:50.9005417561075, daily:381.754063170806, biweekly:3817.54063170806, annually:99592 };
+databaseLine = {classCode:"PS 04", step:"4", hourly:50.9005417561075, daily:381.754063170806, biweekly:3817.54063170806, annually:99592 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"PS 04 ", step:"5", hourly:52.8053766738219, daily:396.040325053665, biweekly:3960.40325053664, annually:103319 };
+databaseLine = {classCode:"PS 04", step:"5", hourly:52.8053766738219, daily:396.040325053665, biweekly:3960.40325053664, annually:103319 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"PS 05", step:"1", hourly:50.6649289583972, daily:379.986967187979, biweekly:3799.86967187979, annually:99131 };
 databaseReturn.push(databaseLine);
@@ -2494,17 +2622,17 @@ databaseLine = {classCode:"RO 02", step:"5", hourly:29.5921496473474, daily:221.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"RO 02", step:"6", hourly:30.8228559746499, daily:231.171419809874, biweekly:2311.71419809874, annually:60308 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"RO 03 ", step:"1", hourly:27.5672084227742, daily:206.754063170807, biweekly:2067.54063170807, annually:53938 };
+databaseLine = {classCode:"RO 03", step:"1", hourly:27.5672084227742, daily:206.754063170807, biweekly:2067.54063170807, annually:53938 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"RO 03 ", step:"2", hourly:29.2389859961157, daily:219.292394970868, biweekly:2192.92394970868, annually:57209 };
+databaseLine = {classCode:"RO 03", step:"2", hourly:29.2389859961157, daily:219.292394970868, biweekly:2192.92394970868, annually:57209 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"RO 03 ", step:"3", hourly:30.9102524787897, daily:231.826893590923, biweekly:2318.26893590923, annually:60479 };
+databaseLine = {classCode:"RO 03", step:"3", hourly:30.9102524787897, daily:231.826893590923, biweekly:2318.26893590923, annually:60479 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"RO 03 ", step:"4", hourly:32.5794745987938, daily:244.346059490954, biweekly:2443.46059490954, annually:63745 };
+databaseLine = {classCode:"RO 03", step:"4", hourly:32.5794745987938, daily:244.346059490954, biweekly:2443.46059490954, annually:63745 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"RO 03 ", step:"5", hourly:34.2507410814679, daily:256.880558111009, biweekly:2568.80558111009, annually:67015 };
+databaseLine = {classCode:"RO 03", step:"5", hourly:34.2507410814679, daily:256.880558111009, biweekly:2568.80558111009, annually:67015 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"RO 03 ", step:"6", hourly:35.9214964734744, daily:269.411223551058, biweekly:2694.11223551058, annually:70284 };
+databaseLine = {classCode:"RO 03", step:"6", hourly:35.9214964734744, daily:269.411223551058, biweekly:2694.11223551058, annually:70284 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"RO 04", step:"1", hourly:29.7889195543289, daily:223.416896657467, biweekly:2234.16896657467, annually:58285 };
 databaseReturn.push(databaseLine);
@@ -2714,15 +2842,15 @@ databaseLine = {classCode:"TR 05", step:"4", hourly:56.0906674844117, daily:420.
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"TR 05", step:"5", hourly:57.5477869774098, daily:431.608402330573, biweekly:4316.08402330573, annually:112598 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 01 ", step:"1", hourly:35.7906572625984, daily:268.429929469488, biweekly:2684.29929469488, annually:70028 };
+databaseLine = {classCode:"VM 01", step:"1", hourly:35.7906572625984, daily:268.429929469488, biweekly:2684.29929469488, annually:70028 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 01 ", step:"2", hourly:37.2503322089339, daily:279.377491567004, biweekly:2793.77491567004, annually:72884 };
+databaseLine = {classCode:"VM 01", step:"2", hourly:37.2503322089339, daily:279.377491567004, biweekly:2793.77491567004, annually:72884 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 01 ", step:"3", hourly:38.6982520699172, daily:290.236890524379, biweekly:2902.36890524379, annually:75717 };
+databaseLine = {classCode:"VM 01", step:"3", hourly:38.6982520699172, daily:290.236890524379, biweekly:2902.36890524379, annually:75717 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 01 ", step:"4", hourly:40.1579270162527, daily:301.184452621895, biweekly:3011.84452621895, annually:78573 };
+databaseLine = {classCode:"VM 01", step:"4", hourly:40.1579270162527, daily:301.184452621895, biweekly:3011.84452621895, annually:78573 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 01 ", step:"5", hourly:41.7658182561586, daily:313.24363692119, biweekly:3132.4363692119, annually:81719 };
+databaseLine = {classCode:"VM 01", step:"5", hourly:41.7658182561586, daily:313.24363692119, biweekly:3132.4363692119, annually:81719 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"VM 02", step:"1", hourly:41.7601962588163, daily:313.201471941122, biweekly:3132.01471941122, annually:81708 };
 databaseReturn.push(databaseLine);
@@ -2734,15 +2862,15 @@ databaseLine = {classCode:"VM 02", step:"4", hourly:46.672288664009, daily:350.0
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"VM 02", step:"5", hourly:48.5377696003271, daily:364.033272002453, biweekly:3640.33272002453, annually:94969 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 03 ", step:"1", hourly:46.0380251456608, daily:345.285188592456, biweekly:3452.85188592456, annually:90078 };
+databaseLine = {classCode:"VM 03", step:"1", hourly:46.0380251456608, daily:345.285188592456, biweekly:3452.85188592456, annually:90078 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 03 ", step:"2", hourly:47.8549524685679, daily:358.912143514259, biweekly:3589.12143514259, annually:93633 };
+databaseLine = {classCode:"VM 03", step:"2", hourly:47.8549524685679, daily:358.912143514259, biweekly:3589.12143514259, annually:93633 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 03 ", step:"3", hourly:49.6815905141572, daily:372.611928856179, biweekly:3726.11928856179, annually:97207 };
+databaseLine = {classCode:"VM 03", step:"3", hourly:49.6815905141572, daily:372.611928856179, biweekly:3726.11928856179, annually:97207 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 03 ", step:"4", hourly:51.5046509250741, daily:386.284881938056, biweekly:3862.84881938056, annually:100774 };
+databaseLine = {classCode:"VM 03", step:"4", hourly:51.5046509250741, daily:386.284881938056, biweekly:3862.84881938056, annually:100774 };
 databaseReturn.push(databaseLine);
-databaseLine = {classCode:"VM 03 ", step:"5", hourly:53.5638352243688, daily:401.728764182766, biweekly:4017.28764182766, annually:104803 };
+databaseLine = {classCode:"VM 03", step:"5", hourly:53.5638352243688, daily:401.728764182766, biweekly:4017.28764182766, annually:104803 };
 databaseReturn.push(databaseLine);
 databaseLine = {classCode:"VM 04", step:"1", hourly:51.7397526321169, daily:388.048144740877, biweekly:3880.48144740877, annually:101234 };
 databaseReturn.push(databaseLine);
@@ -2864,3 +2992,4 @@ databaseReturn.push(databaseLine);
     return databaseReturn;
 }
 
+*/
