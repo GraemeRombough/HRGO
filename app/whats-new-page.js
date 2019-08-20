@@ -5,6 +5,7 @@ var pageData = new observable.Observable();
 var subNavTitle = "YourPayInformation";
 var buttonModule = require("tns-core-modules/ui/button");
 const Button = require("tns-core-modules/ui/button/").Button;
+var applicationSettings = require("application-settings");
 
 var firebase = require("nativescript-plugin-firebase/app");
 
