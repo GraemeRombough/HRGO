@@ -53,6 +53,22 @@
             <Button row="1" class="Home_Nav_Label" text="CONTACTS" tap="goToUtility" pageName="FR_contact-landing-page"/>
           </GridLayout>
         </StackLayout>  
+        
+
+        <StackLayout orientation="horizontal" class="Home_Nav_Row">
+          <GridLayout class="Home_Nav_Grid" columns="auto,auto">
+            <button column="0" width="100%" height="100" class="Home_Nav_Button" tap="goToUtility" pageName="pages/video-landing-page" >
+              <button.formattedText>
+                <formattedString>
+                  <formattedString.spans>
+                      <span class="Home_Nav_Icon" style="color: rgb(220,0,0);" text="&#xe912;&#x000a;" />
+                      <span text="Videos" />
+                  </formattedString.spans>
+                </formattedString>
+              </button.formattedText>
+            </button>
+          </GridLayout>
+        </StackLayout>
 
       </StackLayout>
 
