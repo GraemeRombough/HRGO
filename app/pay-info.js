@@ -10,21 +10,21 @@ var subNavTitle = "YourPayInformation";
 var payData;
 var pagePrefix  = "";
 
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
 
 exports.onNavigatingTo = function(args) {
-    //var classDD = getClassList();
+    var classDD = getClassList();
     const page = args.object;
     pageObject = page;
     pagePrefix = ((applicationSettings.getString("PreferredLanguage") == "French") ? "FR_" : "");
     pageData = fromObject({
-        classItems: [],
-        levelItems: [],
-        stepItems: [],
+        classItems: classDD,
+        levelItems: classDD[0].levelData,
+        stepItems: classDD[0].levelData[0].stepData,
         classSelectionIndex: 0,
         levelSelectionIndex: 0,
         stepIndex:0,
-        busyLoading: true,
+        busyLoading: false,
         infoVisible: true,
         salaryVisible: false,
         SubstantiveClass: true,
@@ -43,10 +43,10 @@ exports.onNavigatingTo = function(args) {
         lblOHPRLbl: ["Overtime Hourly Pay Rate (x1.5)", "Paie horaire - Heures supp (1,5)"],
         lblCalculateBtn: ["Calculate Totals", "Calculer le total"]
     });
-    payData = {classCode:"", step:"", hourly:0, daily:0, biweekly:0, annually:0 };
+    payData = classDD[0].levelData[0].stepData[0];//{classCode:"", step:"", hourly:0, daily:0, biweekly:0, annually:0 };
     page.bindingContext = pageData;
 
-    buildListFromFirestore();
+    //buildListFromFirestore();
 };
 
 exports.pageLoaded = function(args) {
@@ -211,6 +211,7 @@ exports.footer5 = function(){
 
     This will allow for classification selection to be much easier on the user.
 */
+/*
 var buildListFromFirestore = function() {
     
     pageData.set( "busyLoading", true );
@@ -286,34 +287,8 @@ var buildListFromFirestore = function() {
         console.log( errorMessage );
         pageData.set( "busyLoading", false );
     });
-
-    /*
-    const query = notificationCollection.where( "PublishDate", "<=", new Date() ).orderBy("__name__"); // firebase.firestore().FieldValue().serverTimestamp() );
-    notificationCollection.onSnapshot( docSnapshot => {
-        console.log("Document notification: " + JSON.stringify(docSnapshot));
-    }, error => {
-        console.log("listener error: ${error}");
-    });
-    console.log("      buildListFromFirestore   - fetch records");
-
-    query.get({ source: "snapshot" }).then( querySnapshot => {
-        querySnapshot.forEach( colDoc => {
-            console.log( "      buildListFromFirestore   - from cache = " + ((colDoc.metadata.fromCache)?("true"):("false")));
-            var newsButton = new Button();
-            newsButton.className = "Main_Nav_SubLine";
-            newsButton.text = colDoc.data().TitleEN;
-            newsButton.id = colDoc.data().Ref;
-            newsButton.on(buttonModule.Button.tapEvent, goToNotification, this);
-            notificationStack.addChild(newsButton);
-        });
-       //buildListFromCache();
-    },
-    (errorMesage) => {
-        console.log("Error getting query results: " + errorMessage)
-    });
-    */
 }
-/*
+*/
 var getClassList = function() {
     var databasePull = getFromDataBase();
 
@@ -329,12 +304,13 @@ var getClassList = function() {
     var levelIndex      = -1;
 
     
-    var collection  = firebase.firestore().collection("PayInfo");
-    var ordering    = "";
+    //var collection  = firebase.firestore().collection("PayInfo");
+    //var ordering    = "";
     //collection.doc(databasePull[0].step).set(databasePull[0]);
     //collection.doc(databasePull[recordIndex].classCode + " " + databasePull[recordIndex].step).set(databasePull[recordIndex]);
 
     for( recordIndex = 0 ; recordIndex < databasePull.length ; recordIndex++ ) {
+        /*
         if( databasePull[recordIndex].step.length < 2 ) {
             ordering    = "0" + databasePull[recordIndex].step;
         } else if( databasePull[recordIndex].step.length == 2 ) {
@@ -346,6 +322,7 @@ var getClassList = function() {
         }
         console.log(databasePull[recordIndex].classCode + " " + ordering);
         collection.doc(databasePull[recordIndex].classCode.replace("/", "-") + " " + ordering).set(databasePull[recordIndex]);
+        */
 
 
         if( databasePull[recordIndex].classCode.includes(" ")) {
@@ -2991,5 +2968,3 @@ databaseReturn.push(databaseLine);
 
     return databaseReturn;
 }
-
-*/

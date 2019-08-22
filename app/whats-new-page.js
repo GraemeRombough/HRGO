@@ -7,7 +7,7 @@ var buttonModule = require("tns-core-modules/ui/button");
 const Button = require("tns-core-modules/ui/button/").Button;
 var applicationSettings = require("application-settings");
 
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
 
 
 exports.pageLoaded = function(args) {
@@ -17,14 +17,14 @@ exports.pageLoaded = function(args) {
     pageObject = page;
     page.bindingContext = pageData;
     console.log(new Date());
-    //displayNotifications();
+    displayNotifications();
     if( applicationSettings.getString("PreferredLanguage") == "French" ) {
         pageData.set("HeaderTitle", "Nouvelles" );
     } else {
         pageData.set("HeaderTitle", "Announcements" );
     }
 
-    buildListFromFirestore();
+    //buildListFromFirestore();
 };
 exports.goToUtility = function(args){
     var topmost = frameModule.topmost();
@@ -117,7 +117,7 @@ exports.navToggle = function(args){
     //});
     pageData.set(subNavTitle, !pageData.get(subNavTitle));
 };
-/*
+
 var displayNotifications = function(){
     var notificationList = getNotificationList();
     var TODAY = new Date();
@@ -150,10 +150,11 @@ var getNotificationList = function(){
     navList.push(navItem);
     return navList;
 };
-*/
+
 
 // Build the list of available articles from the Firestore database.  Only retreve the ones where the PublishDate value is before now.
 //  Retrieve the articles from the network by default, or fall back onto cached data if necessary
+/*
 var buildListFromFirestore = function() {
     console.log("***** buildListFromFirestore   - enter");
     var notificationStack = pageObject.getViewById("NewsList");
@@ -185,3 +186,4 @@ var buildListFromFirestore = function() {
         console.log("Error getting query results: " + errorMessage)
     });
 };
+*/

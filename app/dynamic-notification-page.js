@@ -6,7 +6,7 @@ var articleReference;
 var applicationSettings = require("application-settings");
 const webViewEvents = require( "./utilities/WebViewExtender");
 const htmlBuilder = require( "./utilities/HTMLBuilder");
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
 
 exports.pageLoaded = function(args) {
     const page = args.object;
@@ -18,12 +18,12 @@ exports.pageLoaded = function(args) {
     console.log("article id = " + articleReference.ArticleID );
     
     // With Firebase, the data retrieval will be asynchronous, so that will need to be accounted for.
-    loadArticleFromFirestore( articleReference.ArticleID );
+    //loadArticleFromFirestore( articleReference.ArticleID );
 
 
-    //var articleData = getArticleText( articleReference.ArticleID );
-    //pageData.set("ArticleHTML", htmlBuilder.buildHTML( articleData.Text ));
-    //pageData.set("HeaderTitle", articleData.Title);
+    var articleData = getArticleText( articleReference.ArticleID );
+    pageData.set("ArticleHTML", htmlBuilder.buildHTML( articleData.Text ));
+    pageData.set("HeaderTitle", articleData.Title);
 };
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
@@ -98,6 +98,7 @@ exports.onLoadStarted = webViewEvents.onLoadStarted;
 
 // Load the specified article contents from Firestore, defaulting to the cache.  We should already have the articles cached from the article list generation.
 //  When the text is loaded, it will be sent to createArticle in order to populate the page.
+/*
 var loadArticleFromFirestore = function (articleID) {
     const notificationCollection = firebase.firestore().collection("Notifications");
 
@@ -123,7 +124,7 @@ var loadArticleFromFirestore = function (articleID) {
         console.log("Error getting query results: " + errorMessage)
     });
 };
-
+*/
 var getFromDatabase = function(){
     //returnedItem = {Ref:"", BusinessLine:"", Category:"", Title:"", Type:"", Content:""};
     var returnedItem;

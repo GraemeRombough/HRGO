@@ -3,7 +3,7 @@ var observable = require("data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "";
 var applicationSettings = require("application-settings");
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
 var page;
 var pageObject;
 exports.pageLoaded = function(args) {
@@ -12,7 +12,7 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
     pageObject = page;
 
-    checkFirebaseData();
+    //checkFirebaseData();
 
     if(applicationSettings.hasKey("PreferredLanguage")){
         if(applicationSettings.getString("PreferredLanguage") == "French") {
@@ -24,7 +24,7 @@ exports.pageLoaded = function(args) {
         langSection.visibility = "visible";
     }
 };
-
+/*
 var checkFirebaseData = function() {
     var TODAY                   = new Date();
     var lastSyncCheckDate    = new Date('January 1, 2018 01:00:00');
@@ -64,7 +64,7 @@ var checkFirebaseData = function() {
         applicationSettings.setNumber("LastFirebaseSyncCheck", TODAY.getTime());
     }
 };
-
+*/
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("landing-page");

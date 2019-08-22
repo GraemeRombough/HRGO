@@ -1,4 +1,6 @@
 var applicationModule = require("application");
+
+/*
 const firebase = require("nativescript-plugin-firebase/app");
 
 firebase.initializeApp({
@@ -11,5 +13,5 @@ firebase.initializeApp({
         console.log("initialization error: " + error);
     }
 );
-
+*/
 applicationModule.start({ moduleName: "main-page" });

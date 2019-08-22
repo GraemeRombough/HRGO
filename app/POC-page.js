@@ -21,7 +21,7 @@ var Visibility = require("tns-core-modules/ui/enums").Visibility;
 var applicationSettings = require("application-settings");
 var pagePrefix  = "";
 
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
 
 const   webViewEvents           = require("~/utilities/WebViewExtender");
 var     HTMLBuilder             = require("~/utilities/HTMLBuilder");
@@ -47,9 +47,9 @@ exports.pageLoaded = function(args) {
     }
     pageData.set( "searchBarVisibility", "collapsed" );
     pageData.set( "SearchCriteria", "" );
-    //displayPOCs( getFromDatabase());
+    displayPOCs( getFromDatabase());
 
-    buildListFromFirestore();
+    //buildListFromFirestore();
 };
 
 exports.onPageSwipe = function(event) {
@@ -310,7 +310,7 @@ var createPOCWebView = function( codedString ) {
     gridLayout.className = "POC_Grid";
     return gridLayout;
 };
-
+/*
 var buildListFromFirestore = function() {
     console.log("***** buildListFromFirestore   - enter");
     var POCList = pageObject.getViewById("POC_List");
@@ -333,9 +333,9 @@ var buildListFromFirestore = function() {
         console.log("Error getting query results: " + errorMessage);
     });
 };
+*/
 
 
-/*
 var getFromDatabase = function(){
     var databaseReturn = [];
     var dbRow = {};
@@ -396,4 +396,3 @@ var getFromDatabase = function(){
     
     return databaseReturn;
 };
-*/
