@@ -1,0 +1,42 @@
+<Page loaded="pageLoaded" actionBarHidden="true" >
+    <ActionBar title="HR GO" class="action-bar"></ActionBar>
+
+    <GridLayout columns="{{ landscapeMode showNav , landscapeMode ? (showNav ? '*,20,60' : '*,20,0') : '*,0,0' }}" >
+        <GridLayout col="0" rows="{{ landscapeMode , landscapeMode ? '0,*,0' : '60,*,60' }}">
+            <StackLayout row="0" orientation="vertical" width="100%" > 
+                <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+                    <label col="0" row="0" class="Header_Icon" text="&#xe912;"/>
+                    <label col="1" row="0" text="{{ HeaderTitle }}" class="Header_Label"/>
+                    <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+                </GridLayout>
+            </StackLayout>
+                
+            <StackLayout row="1" orientation="horizontal" height="100%" width="100%" >
+                <WebView loaded="onWebViewLoaded" height="auto" width="auto" src="{{ videoHTML }}" />
+            </StackLayout>
+
+            <StackLayout row="2" class="FooterNav" orientation="horizontal" >
+                <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+                <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+                <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+                <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+                <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+            </StackLayout>
+        </GridLayout>
+        
+        <StackLayout col="1" orientation="vertical" >
+            <Label height="30%" width="100%" />
+            <Button height="40%" class="FooterControl" tap="toggleNavBar" text="{{ showNav ? '>' : '<' }}" style="padding: 0;" />
+        </StackLayout>
+
+        <StackLayout col="2" class="FooterNavLandscape" orientation="vertical" >
+            <Button class="Footer_NavIcon" text="&#xe967;" tap="goBack" style="color: rgb(220,170,0);" />
+            <Button class="Footer_NavIcon" text="&#xe902;" height="20%" tap="goToHome"/>
+            <Button class="Footer_NavIcon" text="&#xe994;"  height="20%" tap="footer3"/>
+            <Button class="Footer_NavIcon" text="&#xe970;"  height="20%" tap="footer4"/>
+            <Button class="Footer_NavIcon" text="&#xe923;"  height="20%" tap ="footer5"/>
+        </StackLayout>
+    </GridLayout>
+
+
+</Page>
