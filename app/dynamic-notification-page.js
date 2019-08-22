@@ -3,6 +3,7 @@ const observable = require("data/observable");
 const pageData = new observable.Observable();
 var articleReference;
 
+var applicationSettings = require("application-settings");
 const webViewEvents = require( "./utilities/WebViewExtender");
 const htmlBuilder = require( "./utilities/HTMLBuilder");
 var firebase = require("nativescript-plugin-firebase/app");
@@ -13,6 +14,8 @@ exports.pageLoaded = function(args) {
     articleReference=page.navigationContext;
     pageObject = page;
     page.bindingContext = pageData;
+
+    console.log("article id = " + articleReference.ArticleID );
     
     // With Firebase, the data retrieval will be asynchronous, so that will need to be accounted for.
     loadArticleFromFirestore( articleReference.ArticleID );
@@ -102,7 +105,12 @@ var loadArticleFromFirestore = function (articleID) {
 
     query.get({ source: "cache" }).then( querySnapshot => {
         querySnapshot.forEach( colDoc => {
-            if( applicationSettings.getString("PreferredLanguage") == "French" ) {
+            console.log( "      buildListFromFirestore   - from cache = " + ((colDoc.metadata.fromCache)?("true"):("false")));
+            console.log( colDoc.data().ContentEN );
+
+            //pageData.set("HeaderTitle", colDoc.data().TitleEN);
+            //pageData.set("ArticleHTML", htmlBuilder.buildHTML( colDoc.data().ContentEN ));
+            if( applicationSettings.getString("PreferredLanguage", "English") == "French" ) {
                 pageData.set("HeaderTitle", colDoc.data().TitleFR);
                 pageData.set("ArticleHTML", htmlBuilder.buildHTML( colDoc.data().ContentFR ));
             } else {
