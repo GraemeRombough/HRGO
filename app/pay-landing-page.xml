@@ -9,17 +9,45 @@
     </GridLayout>
     <ScrollView>
     <StackLayout orientation="vertical">
-      <Button class="Sub_Nav_Line" text="Your Pay Information" tap="navToggle" value="YourPayInformation"/>
+    
+      <Label width="100%" class="Video_Category" tap="navToggle" value="YourPayInformation" >
+        <Label.FormattedString>
+          <FormattedString>
+            <FormattedString.spans>
+                <span style="font-family: 'icomoon';" text="{{ YourPayInformation ? '&#xEA43; ' : '&#xEA42; ' }} "/> <!--&#xEA42; " />-->
+                <span text="Your Pay Information" />
+            </FormattedString.spans>
+          </FormattedString>
+        </Label.FormattedString>
+      </Label>
         <Button class="Main_Nav_SubLine" id="1" text="Pay Basics" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="2" text="View and Understand Your Pay" tap="goToArticle" visibility="{{ YourPayInformation ? 'visible' : 'collapsed' }}"/>
         
       
-      <Button class="Sub_Nav_Line" text="Problems With Your Pay" tap="navToggle" value="ProblemsWithYourPay"/>
+      <Label width="100%" class="Video_Category" tap="navToggle" value="ProblemsWithYourPay" >
+        <Label.FormattedString>
+          <FormattedString>
+            <FormattedString.spans>
+                <span style="font-family: 'icomoon';" text="{{ ProblemsWithYourPay ? '&#xEA43; ' : '&#xEA42; ' }} "/> <!--&#xEA42; " />-->
+                <span text="Problems With Your Pay" />
+            </FormattedString.spans>
+          </FormattedString>
+        </Label.FormattedString>
+      </Label>
         <Button class="Main_Nav_SubLine" id="3" text="Reporting Your Pay Issue" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="4" text="Emergency Salary Advance" tap="goToArticle" visibility="{{ ProblemsWithYourPay ? 'visible' : 'collapsed' }}"/>
         
 
-      <Button class="Sub_Nav_Line" text="Pay Deadlines and Processes" tap="navToggle" value="DeadlinesAndProcesses"/>
+      <Label width="100%" class="Video_Category" tap="navToggle" value="DeadlinesAndProcesses" >
+        <Label.FormattedString>
+          <FormattedString>
+            <FormattedString.spans>
+                <span style="font-family: 'icomoon';" text="{{ DeadlinesAndProcesses ? '&#xEA43; ' : '&#xEA42; ' }} "/> <!--&#xEA42; " />-->
+                <span text="Pay Deadlines and Processes" />
+            </FormattedString.spans>
+          </FormattedString>
+        </Label.FormattedString>
+      </Label>
         <Button class="Main_Nav_SubLine" id="5" text="Employee Roles in Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="6" text="Section 34 Managers Roles in Pay" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="7" text="Section 34 Self-Service Pay Requests" tap="goToArticle" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>
@@ -27,17 +55,44 @@
         <!--<Button class="Main_Nav_SubLine" id="100" text="Changing your Section 34 Manager in Phoenix" tap="goToWalkthrough" visibility="{{ DeadlinesAndProcesses ? 'visible' : 'collapsed' }}"/>-->
 
 
-      <Button class="Sub_Nav_Line" text="Hours and Scheduling" tap="navToggle" value="Scheduling"/>
+      <Label width="100%" class="Video_Category" tap="navToggle" value="Scheduling" >
+        <Label.FormattedString>
+          <FormattedString>
+            <FormattedString.spans>
+                <span style="font-family: 'icomoon';" text="{{ Scheduling ? '&#xEA43; ' : '&#xEA42; ' }} "/> <!--&#xEA42; " />-->
+                <span text="Hours and Scheduling" />
+            </FormattedString.spans>
+          </FormattedString>
+        </Label.FormattedString>
+      </Label>
         <Button class="Main_Nav_SubLine" id="9" text="Overtime" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="10" text="Managing Employee Schedules" tap="goToArticle" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>
         <!--<Button class="Main_Nav_SubLine" id="100" text="Enter Overtime in Phoenix" tap="goToWalkthrough" visibility="{{ Scheduling ? 'visible' : 'collapsed' }}"/>-->
 
-      <Button class="Sub_Nav_Line" text="Leave" tap="navToggle" value="Leave"/>
+      <Label width="100%" class="Video_Category" tap="navToggle" value="Leave" >
+        <Label.FormattedString>
+          <FormattedString>
+            <FormattedString.spans>
+                <span style="font-family: 'icomoon';" text="{{ Leave ? '&#xEA43; ' : '&#xEA42; ' }} "/> <!--&#xEA42; " />-->
+                <span text="Leave" />
+            </FormattedString.spans>
+          </FormattedString>
+        </Label.FormattedString>
+      </Label>
         <Button class="Main_Nav_SubLine" id="19" text="Leave Basics" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="20" text="Leave with Income Averaging" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="21" text="Pre-retirement Transition Leave" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
 
-      <Button class="Sub_Nav_Line" text="HRSS Videos" tap="navToggle" value="Videos"/>
+      <Label width="100%" class="Video_Category" tap="navToggle" value="Videos" >
+        <Label.FormattedString>
+          <FormattedString>
+            <FormattedString.spans>
+                <span style="font-family: 'icomoon';" text="{{ Videos ? '&#xEA43; ' : '&#xEA42; ' }} "/> <!--&#xEA42; " />-->
+                <span text="HRSS Videos" />
+            </FormattedString.spans>
+          </FormattedString>
+        </Label.FormattedString>
+      </Label>
         <Button class="Main_Nav_SubLine" id="1" text="Sign in and registration process" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="2" text="Submitting a par via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="3" text="Submitting a bulk par via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
@@ -48,7 +103,16 @@
         <Button class="Main_Nav_SubLine" id="8" text="Submitting a pri creation verification request" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="9" text="Tracking the progress of a pay related case via hrss" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>  
       
-      <Button class="Sub_Nav_Line" text="Utilities" tap="navToggle" value="Utilities"/>
+      <Label width="100%" class="Video_Category" tap="navToggle" value="Utilities" >
+        <Label.FormattedString>
+          <FormattedString>
+            <FormattedString.spans>
+                <span style="font-family: 'icomoon';" text="{{ Utilities ? '&#xEA43; ' : '&#xEA42; ' }} "/> <!--&#xEA42; " />-->
+                <span text="Utilities" />
+            </FormattedString.spans>
+          </FormattedString>
+        </Label.FormattedString>
+      </Label>
         <Button class="Main_Nav_SubLine" text="Calculate Gross Pay" pageName="pay-info" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Calculate Promotion Step" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Calculate Timeliness Cutoffs" pageName="timeliness-utility-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
