@@ -130,7 +130,7 @@
 
         <StackLayout orientation="horizontal" class="Home_Nav_Row">
           <GridLayout class="Home_Nav_Grid" columns="auto,auto">
-            <button column="0" width="100%" height="100" class="Home_Nav_Button" tap="goToUtility" pageName="video-test-page" >
+            <button column="0" width="100%" height="100" class="Home_Nav_Button" tap="goToUtility" pageName="pages/video-landing-page" >
               <button.formattedText>
                 <formattedString>
                   <formattedString.spans>
