@@ -3,6 +3,7 @@ var observable = require("data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "";
 var applicationSettings = require("application-settings");
+var firebase = require("nativescript-plugin-firebase/app");
 var page;
 var pageObject;
 exports.pageLoaded = function(args) {
@@ -11,8 +12,10 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
     pageObject = page;
 
+    checkFirebaseData();
+
     if(applicationSettings.hasKey("PreferredLanguage")){
-        if(applicationSettings.getString("PreferredLanguage") == "French"){
+        if(applicationSettings.getString("PreferredLanguage") == "French") {
             var topmost = frameModule.topmost();
             topmost.navigate("FR_main-page");
         }
@@ -21,6 +24,47 @@ exports.pageLoaded = function(args) {
         langSection.visibility = "visible";
     }
 };
+
+var checkFirebaseData = function() {
+    var TODAY                   = new Date();
+    var lastSyncCheckDate    = new Date('January 1, 2018 01:00:00');
+    if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
+        lastSyncCheckDate    = new Date( applicationSettings.getNumber("LastFirebaseSyncCheck"));
+    }
+
+    if( ((TODAY - lastSyncCheckDate) / (1000 * 60 * 60 * 24)) > 1 ) {
+
+        var lastSyncDate    = new Date('January 1, 2018 01:00:00');
+        if( applicationSettings.hasKey("LastFirebaseSync") ) {
+            lastSyncDate    = new Date( applicationSettings.getNumber("LastFirebaseSync"));
+        }
+
+        console.log( "Last Sync Date = " + (lastSyncDate));
+
+        const notificationCollection = firebase.firestore().collection("TableUpdates");
+
+        const query = notificationCollection.where( "Updated", ">", lastSyncDate ).orderBy("Updated");
+
+        query.get({ source: "server" }).then( querySnapshot => {
+            querySnapshot.forEach( colDoc => {
+                firebase.firestore().collection(colDoc.data().TableName).get({ source: "server" }).then( refreshSnapshot => {
+                    if( colDoc.data().Updated.getTime() > applicationSettings.getNumber("LastFirebaseSync") ) {
+                        applicationSettings.setNumber("LastFirebaseSync", colDoc.data().Updated.getTime());
+                    }
+                },
+                (errorMessage) => {
+
+                });
+            });
+        },
+        (errorMesage) => {
+            console.log("Error getting query results: " + errorMessage)
+        });
+
+        applicationSettings.setNumber("LastFirebaseSyncCheck", TODAY.getTime());
+    }
+};
+
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("landing-page");
