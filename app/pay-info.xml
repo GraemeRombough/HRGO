@@ -15,13 +15,17 @@
       <ActivityIndicator busy="{{ busyLoading ? 'true' : 'false' }}"></ActivityIndicator>
     </StackLayout>
     <StackLayout row="1" visibility="{{ infoVisible busyLoading, infoVisible && !busyLoading ? 'visible' : 'collapsed'}}">
-      <Button text="{{ lblClassificationButton selectedLanguage, lblClassificationButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
-      <GridLayout columns="*,*" rows="auto" >
-      <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
-      <ListPicker  col="1" row="0" id="levelPicker" textField="levelCode" valueField="stepData" items="{{ levelItems }}" selectedIndex="{{ levelSelectionIndex }}" loaded="onLevelListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}"/>
+      <!--<Button text="{{ lblClassificationButton selectedLanguage, lblClassificationButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />-->
+      <FlexboxLayout width="100%">
+        <Label width="67%" text="{{ lblClassificationButton selectedLanguage, lblClassificationButton[selectedLanguage] }}" class="Home_Utility_Label" style="margin:0px;" />
+        <Label width="33%" text="{{ lblStepButton selectedLanguage, lblStepButton[selectedLanguage] }}" class="Home_Utility_Label" style="margin:0px;" />
+      </FlexboxLayout>
+      <GridLayout columns="*,*,*" rows="auto" >
+      <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 10; margin-right: 5;" />
+      <ListPicker  col="1" row="0" id="levelPicker" textField="levelCode" valueField="stepData" items="{{ levelItems }}" selectedIndex="{{ levelSelectionIndex }}" loaded="onLevelListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 5; margin-right: 5;"/>
+      <ListPicker col="2" row="0" items="{{ stepItems }}" textField="step" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 5; margin-right: 10;"/>
       </GridLayout>
-      <Button text="{{ lblStepButton selectedLanguage, lblStepButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveStep" />
-      <ListPicker items="{{ stepItems }}" textField="step" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" visibility="{{ SubstantiveStep ? 'visible' : 'collapsed' }}"/>
+      <!--<Button text="{{ lblStepButton selectedLanguage, lblStepButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveStep" />-->
       <!--<TextField class="DayCalc_TextField" keyboardType="number" text="{{ stepNumber }}" />-->
       <Button class="Submit_Button_1" text="{{ lblGetInfoButton selectedLanguage, lblGetInfoButton[selectedLanguage] }}" tap="getSalaryInfo"/>
     <!-- SALARY INFO SECTION-->
