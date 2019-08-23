@@ -3,10 +3,28 @@ var observable = require("data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "";
 var applicationSettings = require("application-settings");
+const fromObject = require("tns-core-modules/data/observable").fromObject;
 //var firebase = require("nativescript-plugin-firebase/app");
 var page;
 var pageObject;
 exports.pageLoaded = function(args) {
+
+    
+    pageData = fromObject({
+        selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
+        lblTitle: ["Home", "Accueil"],
+        lblVideos: ["Videos", "Videos"],
+        lblContact: ["Contact", "Contacts"],
+        lblLookup: ["Lookup", "Consultation"],
+        lblTracking: ["Tracking", "Suivis"],
+        lblStudents: ["Students", "Étudiants"],
+        lblCalculators: ["Calculators", "Calculateurs"],
+        lblPay: ["Pay", "Paie"],
+        lblAnnouncements: ["Announcements", "Annonces"],
+        lblWellness: ["Health and wellness", "Santé et bien-être"]
+    });
+
+
     
     page = args.object;
     args.object.bindingContext = pageData;
@@ -14,15 +32,12 @@ exports.pageLoaded = function(args) {
 
     //checkFirebaseData();
 
-    if(applicationSettings.hasKey("PreferredLanguage")){
-        if(applicationSettings.getString("PreferredLanguage") == "French") {
-            var topmost = frameModule.topmost();
-            topmost.navigate("FR_main-page");
-        }
-    }else{
+    if( !applicationSettings.hasKey("PreferredLanguage")) {
         var langSection = pageObject.getViewById("languageSelection");
         langSection.visibility = "visible";
     }
+
+
 };
 /*
 var checkFirebaseData = function() {
@@ -132,29 +147,6 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
 }
-exports.setToEng = function(args){
-    var freButton = pageObject.getViewById("FrenchButton");
-    args.object.style.backgroundColor = "rgb(0,31,91)";
-    args.object.style.color = "#FFF";
-    
-    freButton.style.backgroundColor = "#DDD";
-    freButton.style.color = "#222";
-    applicationSettings.setString("PreferredLanguage", "English");
-    var langSection = pageObject.getViewById("languageSelection");
-        langSection.visibility = "collapsed";
-}
-exports.setToFre = function(args){
-    var engButton = pageObject.getViewById("EnglishButton");
-    args.object.style.backgroundColor = "rgb(0,31,91)";
-    args.object.style.color = "#FFF";
-    engButton.style.backgroundColor = "#DDD";
-    engButton.style.color = "#222";
-    applicationSettings.setString("PreferredLanguage", "French");
-    var langSection = pageObject.getViewById("languageSelection");
-    langSection.visibility = "collapsed";
-    var topmost = frameModule.topmost();
-    topmost.navigate("FR_main-page");
-}
 
 exports.setLanguage = function(args) {
     console.log( "args = " + args.object.data );
@@ -166,10 +158,13 @@ exports.setLanguage = function(args) {
 
     var topmost = frameModule.topmost();
     if( args.object.data == "French" ) {
-        topmost.navigate("FR_main-page");
+        //topmost.navigate("FR_main-page");
+        page.setPageData( "selectedLanguage" , 1 );
     } else {
-        topmost.navigate("main-page");
+        //topmost.navigate("main-page");
+        page.setPageData( "selectedLanguage" , 0 );
     }
+    langSection.visibility = "collapsed";
 }
 
 exports.searchLanding = function(){

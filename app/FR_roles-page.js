@@ -118,7 +118,7 @@ function loadResponsibilities(eventData) {
 
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate("FR_main-page");
+    topmost.navigate("main-page");
 };
 exports.goBack = function(args){
     const thisPage = args.object.page;

@@ -66,7 +66,7 @@ exports.onTextChange = function(args) {
 
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate(pagePrefix + "main-page");
+    topmost.navigate("main-page");
     
 };
 exports.goBack = function(args){

@@ -63,7 +63,7 @@ exports.orientation = function(args) {
 
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
-    topmost.navigate(pagePrefix + "main-page");
+    topmost.navigate("main-page");
     
 };
 
