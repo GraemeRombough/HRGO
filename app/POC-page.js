@@ -189,6 +189,40 @@ var makeButton  = function( labelText, linkText, sectionFormat, transactionType)
     return phoneButton;
 }
 
+var makeLabelButton = function( labelText, linkText, sectionFormat, transactionType) {
+    
+    var categoryText    = new FormattedString();
+    var iconSpan        = new Span();
+
+    iconSpan.text       = String.fromCharCode(0xEA43) + "  ";
+    iconSpan.fontFamily = "icomoon";
+    iconSpan.width = "60px";
+    categoryText.spans.push(iconSpan);
+    
+    var labelSpan            = new Span();
+    labelSpan.text       = getCategoryLabel(video.Category);
+    categoryText.spans.push(labelSpan);
+
+    categoryText.width = "100%";
+
+    
+    var videoLabel = new Label();
+    videoLabel.width    = "100%";
+    videoLabel.className    = "Video_Category";
+    videoLabel.formattedText    = categoryText;
+
+    videoLabel.addEventListener( "tap" , function(event) {
+        if( this.categoryStack.visibility == Visibility.visible ) {
+            this.categoryStack.visibility = Visibility.collapse;
+            this.iconSpan.text            = String.fromCharCode(0xEA42) + "  ";
+        } else {
+            this.categoryStack.visibility = Visibility.visible;
+        }
+    } , { iconSpan: iconSpan });
+
+    videoStack.addChild( videoLabel );
+}
+
 var doPhoneCall = function(event) {
     console.log( "doPhoneCall " + event.object.linkText );
     phone.dial(event.object.linkText,true);
@@ -264,45 +298,46 @@ var createPOCWebView = function( codedString ) {
         //     ::contact::label||link::contact::  to create an image and anchor with the specified label and link
         var textWithExternal = pocSectionString.split("::contact::");
         for( anchorItem=0; anchorItem < textWithExternal.length; anchorItem++ ) {
+            if( anchorItem == 0 || textWithExternal[anchorItem] != "" ) {   // don't put a blank line after the closing ::contact:: when there are 2 in a row
+                if( textWithExternal[anchorItem].includes("||http://") || textWithExternal[anchorItem].includes("||https://")) {
+                    //E9C9
+                    var anchorText  = textWithExternal[anchorItem].split("||");
+                    var phoneButton  = makeButton( anchorText[0] , anchorText[1] , sectionFormat, "browse" );
+                
+                    layout.GridLayout.setRow(phoneButton, gridItem);
+                    gridLayout.addChild(phoneButton);
+                    var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
+                    gridLayout.addRow(sectionRow);
+                } else if( textWithExternal[anchorItem].includes("||mailto:")) {
+                    //E945
+                    var anchorText  = textWithExternal[anchorItem].split("||");
+                    var phoneButton  = makeButton( anchorText[0] , anchorText[1].substr(7) , sectionFormat, "email" );
+                
+                    layout.GridLayout.setRow(phoneButton, gridItem);
+                    gridLayout.addChild(phoneButton);
+                    var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
+                    gridLayout.addRow(sectionRow);
+                } else if( textWithExternal[anchorItem].includes("||tel:")) {
+                    //E942
+                    var anchorText  = textWithExternal[anchorItem].split("||");
+                    var phoneButton  = makeButton( anchorText[0] , anchorText[1].substr(4) , sectionFormat, "phone" );
+                
+                    layout.GridLayout.setRow(phoneButton, gridItem);
+                    gridLayout.addChild(phoneButton);
+                    var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
+                    gridLayout.addRow(sectionRow);
+                } else {
+                    var sectionLabel = new Label();
+                    sectionLabel.className = sectionFormat;
+                    sectionLabel.text   = textWithExternal[anchorItem];
+                    layout.GridLayout.setRow(sectionLabel, gridItem);
+                    gridLayout.addChild(sectionLabel);
+                    var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
+                    gridLayout.addRow(sectionRow);
+                }
 
-            if( textWithExternal[anchorItem].includes("||http://") || textWithExternal[anchorItem].includes("||https://")) {
-                //E9C9
-                var anchorText  = textWithExternal[anchorItem].split("||");
-                var phoneButton  = makeButton( anchorText[0] , anchorText[1] , sectionFormat, "browse" );
-               
-                layout.GridLayout.setRow(phoneButton, gridItem);
-                gridLayout.addChild(phoneButton);
-                var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-                gridLayout.addRow(sectionRow);
-            } else if( textWithExternal[anchorItem].includes("||mailto:")) {
-                //E945
-                var anchorText  = textWithExternal[anchorItem].split("||");
-                var phoneButton  = makeButton( anchorText[0] , anchorText[1].substr(7) , sectionFormat, "email" );
-               
-                layout.GridLayout.setRow(phoneButton, gridItem);
-                gridLayout.addChild(phoneButton);
-                var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-                gridLayout.addRow(sectionRow);
-            } else if( textWithExternal[anchorItem].includes("||tel:")) {
-                //E942
-                var anchorText  = textWithExternal[anchorItem].split("||");
-                var phoneButton  = makeButton( anchorText[0] , anchorText[1].substr(4) , sectionFormat, "phone" );
-               
-                layout.GridLayout.setRow(phoneButton, gridItem);
-                gridLayout.addChild(phoneButton);
-                var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-                gridLayout.addRow(sectionRow);
-            } else {
-                var sectionLabel = new Label();
-                sectionLabel.className = sectionFormat;
-                sectionLabel.text   = textWithExternal[anchorItem];
-                layout.GridLayout.setRow(sectionLabel, gridItem);
-                gridLayout.addChild(sectionLabel);
-                var sectionRow = new layout.ItemSpec(1, layout.GridUnitType.AUTO);
-                gridLayout.addRow(sectionRow);
+                gridItem++;
             }
-
-            gridItem++;
         }
     }
 
@@ -376,7 +411,20 @@ var getFromDatabase = function(){
     databaseReturn.push(dbRow);
     dbRow = {Ref:18, TitleEN:`Canadian Human Rights Commission`, TitleFR:`Commission canadienne des droits `, ContentEN:`<*Article_H1*>Canadian Human Rights Commission<*Article_Body*>Human rights laws protect people in Canada from discrimination based on grounds such as race, sex, religion or disability.::contact::1-888-214-1090||tel:1-888-214-1090::contact::::contact::info.com@chrc-ccdp.gc.ca||mailto:info.com@chrc-ccdp.gc.ca::contact::`, ContentFR:`<*Article_H1*>Commission canadienne des droits <*Article_Body*>Au Canada, vous avez le droit de vivre libre de discrimination. Les lois vous protègent de la discrimination en raison des motifs tels que la race, le sexe, la religion ou une déficience.::contact::1-888-214-1090||tel:1-888-214-1090::contact::::contact::info.com@chrc-ccdp.gc.ca||mailto:info.com@chrc-ccdp.gc.ca::contact::`};
     databaseReturn.push(dbRow);
-    dbRow = {Ref:19, TitleEN:`Conflict and Complaint Management Services centre`, TitleFR:`Centre de services de gestion des conflits et des plaintes`, ContentEN:`<*Article_H1*>Conflict and Complaint Management Services centre<*Article_Body*>If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program.::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`, ContentFR:`<*Article_H1*>Centre de services de gestion des conflits et des plaintes<*Article_Body*>Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP).::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`};
+    /*
+    dbRow = {Ref:19, 
+        TitleEN:`Conflict and Complaint Management Services centre`, 
+        TitleFR:`Centre de services de gestion des conflits et des plaintes`, 
+        ContentEN:`<*Article_H1*>Conflict and Complaint Management Services centre<*Article_Body*>If you feel harassed while at work you can report the incident or submit a formal complaint. The Canadian Armed Forces national harassment unit will assist you with if you choose to make a complaint. They can also help you implement workplace prevention strategies from the Integrated Conflict and Complaint Management (ICCM) program.::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`, 
+        ContentFR:`<*Article_H1*>Centre de services de gestion des conflits et des plaintes<*Article_Body*>Si vous croyez être victime de harcèlement au travail, vous pouvez remplir un rapport ou déposer une plainte dans le but de régler le problème. L'unité nationale de lutte contre le harcèlement des Forces armées canadiennes vous aidera à formuler une plainte, ainsi qu'a mettre en place des mesures de prévention du harcèlement au travail issues du Programme de gestion intégrée des conflits et des plaintes (GICP).::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::`
+    };
+    */
+    dbRow = {Ref:19, 
+        TitleEN:`Integrated Conflict and Complaint Management Program (ICCM)`, 
+        TitleFR:`Gestion intégrée des conflits et des plaints (GICP)`, 
+        ContentEN:`<*Article_H1*>Integrated Conflict and Complaint Management Program (ICCM)<*Article_Body*>The ICCM provides members with formal and informal conflict resolution information, programs and support through Conflict and Complaint Management Services (CCMS) centres, which can provide you with the options available if you would like to submit a formal complaint or are dealing with conflict. Below is a directory of all CCMS centres located across Canada and who you can contact for help.<*Article_Body*>National contact number and email.::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::<*Article_Body*>CCMS::contact::Esquimalt||tel:1-250-363-7578::contact::::contact::Edmonton x.6095||tel:1-780-973-4011::contact::::contact::Cold Lake x.8849||tel:1-780-840-8000::contact::::contact::Winnipeg x.6405||tel:1-204-833-2500::contact::::contact::Borden x.2214||tel:1-705-424-1200::contact::::contact::Trenton x.4770||tel:1-613-392-2811::contact::::contact::Toronto||tel:1-416-633-3756::contact::::contact::Kingston x.5641||tel:1-613-541-5010::contact::::contact::Petawawa||tel:1-613-588-4700::contact::::contact::Ottawa ||tel:1-613-995-8710::contact::::contact::Valcartier x.6427||tel:1-418-844-5000::contact::::contact::Montreal x.4116||tel:1-514-252-2777::contact::::contact::Bagotville x.6038||tel:1-418-677-4000::contact::::contact::Halifax||tel:1-902-721-7533::contact::::contact::Greenwood||tel:1-902-599-3742::contact::::contact::Gagetown x.2232||tel:1-506-422-2000::contact::`, 
+        ContentFR:`<*Article_H1*>Gestion intégrée des conflits et des plaints (GICP)<*Article_Body*>L'ICCM fournit aux membres des informations, programmes et un soutien officiels et informels de résolution des conflits, par le biais de centres de gestion des conflits et des plaintes (CCMS), qui peuvent vous fournir les options disponibles si vous souhaitez déposer une plainte formelle ou gérer un conflit. Vous trouverez ci-dessous un répertoire de tous les centres CCMS situés partout au Canada et des personnes que vous pouvez contacter pour obtenir de l'aide.<*Article_Body*>Numéro de contact national et email.::contact::1-833-328-3351||tel:1-833-328-3351::contact::::contact::ICCMInquiries.Demandesrequete...||mailto:ICCMInquiries.DemandesrequeteGICPDGGP@forces.gc.ca::contact::SGCP::contact::Esquimalt||tel:1-250-363-7578::contact::::contact::Edmonton x.6095||tel:1-780-973-4011::contact::::contact::Cold Lake x.8849||tel:1-780-840-8000::contact::::contact::Winnipeg x.6405||tel:1-204-833-2500::contact::::contact::Borden x.2214||tel:1-705-424-1200::contact::::contact::Trenton x.4770||tel:1-613-392-2811::contact::::contact::Toronto||tel:1-416-633-3756::contact::::contact::Kingston x.5641||tel:1-613-541-5010::contact::::contact::Petawawa||tel:1-613-588-4700::contact::::contact::Ottawa ||tel:1-613-995-8710::contact::::contact::Valcartier x.6427||tel:1-418-844-5000::contact::::contact::Montreal x.4116||tel:1-514-252-2777::contact::::contact::Bagotville x.6038||tel:1-418-677-4000::contact::::contact::Halifax||tel:1-902-721-7533::contact::::contact::Greenwood||tel:1-902-599-3742::contact::::contact::Gagetown x.2232||tel:1-506-422-2000::contact::`
+    };
     databaseReturn.push(dbRow);
     dbRow = {Ref:20, 
         TitleEN:`Office of Disability Management`, 
