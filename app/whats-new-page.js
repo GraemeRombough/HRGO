@@ -142,11 +142,13 @@ var displayNotifications = function(){
 var getNotificationList = function(){
     var navItem = {};
     var navList = [];
-    navItem = {title:"Phoenix Compensation Agreement", ref:"1", publishDate:"July 23, 2019 07:00:00"};
+    navItem = {title: "Phoenix Compensation Agreement - August 26, 2019", ref: "4", publishDate: "August 26, 2019 05:00:00"};
+    navList.push(navItem);
+    navItem = {title:"Phoenix Compensation Agreement - July 23, 2019", ref:"3", publishDate:"July 23, 2019 07:00:00"};
     navList.push(navItem);
     navItem = {title:"Statement from the Department of National Defence and the Canadian Armed Forces", ref:"2", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
-    navItem = {title:"CAF-DND Sexual Misconduct Class Action", ref:"3", publishDate:"July 18, 2019 05:00:00"};
+    navItem = {title:"CAF-DND Sexual Misconduct Class Action", ref:"1", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
     return navList;
 };

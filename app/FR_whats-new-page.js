@@ -132,12 +132,15 @@ var displayNotifications = function(){
 var getNotificationList = function(){
     var navItem = {};
     var navList = [];
-    navItem = {title:"Entente d’indemnisation liée à Phénix", ref:"1", publishDate:"July 23, 2019 07:00:00"};
+    navItem = {title:"Entente d’indemnisation liée à Phénix - Le 26 août, 2019", ref:"4", publishDate:"August 26, 2019 05:00:00"};
+    navList.push(navItem);
+    navItem = {title:"Entente d’indemnisation liée à Phénix - Le 23 juillet, 2019", ref:"3", publishDate:"July 23, 2019 07:00:00"};
     navList.push(navItem);
     navItem = {title:"Déclaration du ministère de la Défense nationale et des Forces armées canadiennes", ref:"2", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
-    navItem = {title:"CFAC-MDN Recours Collectif Inconduite Sexuelle", ref:"3", publishDate:"July 18, 2019 05:00:00"};
+    navItem = {title:"CFAC-MDN Recours Collectif Inconduite Sexuelle", ref:"1", publishDate:"July 18, 2019 05:00:00"};
     navList.push(navItem);
+    title:
     //console.log(navList[0].title);
     return navList;
 }
