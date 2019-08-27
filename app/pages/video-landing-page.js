@@ -73,8 +73,44 @@ exports.footer5 = function(){
 exports.openSearch = function() {
     if( pageData.get("searchBarVisibility") == "visible") {
         pageData.set( "searchBarVisibility", "collapsed" );
+        
+        page.getViewById("SearchBox").off("textChange");
     } else {
         pageData.set( "searchBarVisibility", "visible" );
+
+        page.getViewById("SearchBox").on("textChange" , (lpargs) => {
+            var categoryList    = pageObject.getViewById("videoStack");
+            var categoryCount   = categoryList.getChildrenCount() / 2;
+            var lowercaseSearch = lpargs.value.toLowerCase();
+            
+            if( lowercaseSearch != "") {
+                for( categoryIndex = 0 ; categoryIndex < categoryCount ; categoryIndex++ ) {
+                    var videoList   = categoryList.getChildAt( (categoryIndex * 2) + 1 );
+                    var videoCount  = videoList.getChildrenCount();
+                    var videoIndex  = 0;
+                    
+                    for( videoIndex = 0 ; videoIndex < videoCount ; videoIndex++ ) {
+                        checkText   = videoList.getChildAt( videoIndex ).searchText;
+                        if( checkText.toLowerCase().includes( lowercaseSearch ) == true ) {
+                            videoList.getChildAt( videoIndex ).visibility   = Visibility.visible;
+                        } else {
+                            videoList.getChildAt( videoIndex ).visibility   = Visibility.collapse;
+                        }
+                    }
+                }
+            } else {
+                for( categoryIndex = 0 ; categoryIndex < categoryCount ; categoryIndex++ ) {
+                    var videoList   = categoryList.getChildAt( (categoryIndex * 2) + 1 );
+                    var videoCount  = videoList.getChildrenCount();
+                    var videoIndex  = 0;
+                    
+                    for( videoIndex = 0 ; videoIndex < videoCount ; videoIndex++ ) {
+                        videoList.getChildAt( videoIndex ).visibility   = Visibility.visible;
+                    }
+                }
+            }
+        } );
+
     }
 };
 
@@ -169,6 +205,7 @@ function createListEntry(name, videoCode, tags, provider) {
     
     var videoLabel = new Label();
     videoLabel.text   = name;
+    videoLabel.className = "Main_Nav_SubLine";
     gridLayout.addChildAtCell(videoLabel,0,3);
 
     gridLayout.searchText   = name + " " + tags;
@@ -273,7 +310,7 @@ var getCategoryLabel = function(category) {
     if( applicationSettings.getString("PreferredLanguage") == "French" ) {
         switch( category ) {
             case "Health":
-                return "Santé";
+                return "Santé et bien-être";
                 break;
             case "Pay":
                 return "Paie";
@@ -282,7 +319,7 @@ var getCategoryLabel = function(category) {
     } else {
         switch( category ) {
             case "Health":
-                return "Health";
+                return "Health and wellness";
                 break;
             case "Pay":
                 return "Pay";

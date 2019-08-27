@@ -20,6 +20,7 @@ var dialogs             = require("ui/dialogs");
 var Visibility = require("tns-core-modules/ui/enums").Visibility;
 var applicationSettings = require("application-settings");
 var pagePrefix  = "";
+var page;
 
 //var firebase = require("nativescript-plugin-firebase/app");
 
@@ -28,13 +29,13 @@ var     HTMLBuilder             = require("~/utilities/HTMLBuilder");
 
 exports.pageNavTo = function(args) {
    
-    const page = args.object;
+    page = args.object;
     page.bindingContext = pageData;  
     pageObject = page;
 };
 
 exports.pageLoaded = function(args) {
-    const page = args.object;
+    page = args.object;
     page.bindingContext = pageData;  
     pageObject = page;
 
@@ -58,10 +59,6 @@ exports.onPageSwipe = function(event) {
         const thisPage = event.object.page;
         thisPage.frame.goBack();
     }
-};
-
-exports.onTextChange = function(args) {
-    console.log("Text change event");
 };
 
 exports.goToHome = function(){
@@ -102,8 +99,32 @@ exports.footer5 = function(){
 exports.openSearch = function() {
     if( pageData.get("searchBarVisibility") == "visible") {
         pageData.set( "searchBarVisibility", "collapsed" );
+
+        page.getViewById("SearchBox").off("textChange");
     } else {
         pageData.set( "searchBarVisibility", "visible" );
+
+        page.getViewById("SearchBox").on("textChange" , (lpargs) => {
+            var POCList     = pageObject.getViewById("POC_List");
+            var pocCount    = POCList.getChildrenCount();
+            var pocIndex    = 0;
+            var lowercaseSearch = lpargs.value.toLowerCase();
+
+            if(pageData.get("SearchCriteria") != "") {
+                for( pocIndex = 0 ; pocIndex < pocCount ; pocIndex++ ) {
+                    checkText   = POCList.getChildAt( pocIndex ).src;
+                    if( checkText.toLowerCase().includes( lowercaseSearch ) == true ) {
+                        POCList.getChildAt( pocIndex ).visibility   = Visibility.visible;
+                    } else {
+                        POCList.getChildAt( pocIndex ).visibility   = Visibility.collapse;
+                    }
+                }
+            } else {
+                for( pocIndex = 0 ; pocIndex < pocCount ; pocIndex++ ) {
+                    POCList.getChildAt( pocIndex ).visibility   = Visibility.visible;
+                }
+            }
+        } );
     }
 }
 

@@ -10,7 +10,7 @@
             </GridLayout>
             
             <StackLayout orientation="horizontal" class="SearchBar" visibility="{{ searchBarVisibility }}">
-                <Button col="0" class="SearchBar_Button" tap="searchVideos" width="60" >
+                <Button col="0" class="SearchBar_Button" tap="searchVideos" width="60" visibility='collapsed' >
                     <FormattedString>
                         <Span text="&#xe986;"/>
                     </FormattedString>

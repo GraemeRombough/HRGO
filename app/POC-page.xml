@@ -10,12 +10,12 @@
     </GridLayout>
 
     <StackLayout orientation="horizontal" class="SearchBar" visibility="{{ searchBarVisibility }}">
-      <Button col="0" class="SearchBar_Button" tap="searchPOC">
+      <Button col="0" class="SearchBar_Button" tap="searchPOC"  visibility='collapsed' >
           <FormattedString>
             <Span text="&#xe986;"/>
           </FormattedString>
       </Button>
-      <TextField col="1" class="SearchBar_Text" textChanged="onTextChange" text="{{ SearchCriteria }}" id="SearchBox" hint="Search" returnKeyType="search" returnPress="searchPOC"/>
+      <TextField col="1" class="SearchBar_Text" text="{{ SearchCriteria }}" id="SearchBox" hint="Search" returnKeyType="search" returnPress="searchPOC"/>
     </StackLayout>
     <ScrollView orientation="vertical"  height="100%">
     <StackLayout id="POC_List">
