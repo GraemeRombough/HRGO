@@ -38,13 +38,46 @@ var copyToClipboard = function(clipboardText){
 };
 
 var emailLink = function(emailText){
+    if( emailText.includes("%")) {
+        emailText   = decodeURI(emailText);
+    }
     console.log("send email to:" + emailText);
-    var toAddress = [];
-    toAddress.push(emailText);
+    
+    var recipients  = "";
+    var subject     = "";
+    var body        = "";
+    if( emailText.includes("::subject::")) {
+        var sections    = emailText.split("::subject::");
+        if( sections[0].includes("::body::")) {
+            subject         = sections[1];
+
+            var sections2   = sections[0].split("::body::");
+            recipients      = sections2[0];
+            body            = sections2[1];
+        } if(sections[1].includes("::body::")) {
+            recipients      = sections[0];
+
+            var sections2   = sections[1].split("::body::");
+            subject         = sections2[0];
+            body            = sections2[1];
+        } else {
+            recipients      = sections[0];
+            subject         = sections[1];
+        }
+    } else if( emailText.includes("::body::")) {
+        var sections    = emailText.split("::body::");
+        recipients      = sections[0];
+        body            = sections[1];
+    } else {
+        recipients   = emailText;
+    }
+
+    var toAddress = recipients.split(";");
+    //toAddress.push(recipients);
     if (email.available()){
         email.compose({
-            subject: "",
-            body: "",
+            subject: subject,
+            body: body,
             to: toAddress
         });
     } else {
