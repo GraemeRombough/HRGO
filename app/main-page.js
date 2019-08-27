@@ -159,11 +159,12 @@ exports.setLanguage = function(args) {
     var topmost = frameModule.topmost();
     if( args.object.data == "French" ) {
         //topmost.navigate("FR_main-page");
-        page.setPageData( "selectedLanguage" , 1 );
+        pageData.set( "selectedLanguage" , 1 );
     } else {
         //topmost.navigate("main-page");
-        page.setPageData( "selectedLanguage" , 0 );
+        pageData.set( "selectedLanguage" , 0 );
     }
+    var langSection = pageObject.getViewById("languageSelection");
     langSection.visibility = "collapsed";
 }
 

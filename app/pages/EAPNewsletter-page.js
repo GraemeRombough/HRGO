@@ -18,21 +18,35 @@ exports.pageLoaded = function(args) {
     page = args.object;
     page.bindingContext = pageData;
 
-    var articleData = getFromDatabase()[0];
-    var theme       = "high-contrast";//applicationSettings.getString("Theme");
+    //var articleData = getFromDatabase()[0];
+    //var theme       = "high-contrast";//applicationSettings.getString("Theme");
+    var formattedText   = page.navigationContext.contents;
+    var title           = page.navigationContext.title;
+
+    console.log( "nav context = " + formattedText);
+
     if( applicationSettings.getString("PreferredLanguage") == "French" ) {
-        pageData.set("actionBarTitle", articleData.TitleFR);
-        
-        var formattedText   = HTMLBuilder.buildHTML( articleData.ContentFR );
+        if( formattedText == null ) {
+            title           = articleData.TitleFR;
+            formattedText   = HTMLBuilder.buildHTML( articleData.ContentFR );
+        } else {
+            formattedText   = HTMLBuilder.buildHTML( formattedText );
+        }
         pageData.set("ArticleHTML", formattedText);
         pagePrefix = "FR_";
     } else {
-        pageData.set("actionBarTitle", articleData.TitleEN);
         
-        var formattedText   = HTMLBuilder.buildHTML( articleData.ContentEN );
-        pageData.set("ArticleHTML", formattedText);
+        if( formattedText == null ) {
+            title           = articleData.TitleEN;
+            formattedText   = HTMLBuilder.buildHTML( articleData.ContentEN );
+        } else {
+            formattedText   = HTMLBuilder.buildHTML( formattedText );
+        }
         pagePrefix = "";
     }
+    
+    pageData.set("actionBarTitle", title);
+    pageData.set("ArticleHTML", formattedText);
 
     scrollDetection         = false;
 };

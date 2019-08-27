@@ -1,0 +1,71 @@
+<Page loaded="pageLoaded" actionBarHidden="true"
+    xmlns:CustomControls="custom-controls">
+    
+    <GridLayout rows="auto,*,60" id="pageGridLayout">
+        <StackLayout row="0" >
+            <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+                <label col="0" row="0" class="Header_Icon" text="&#xe9da;"/>
+                <label col="1" row="0" text="{{ actionBarTitle }}" class="Header_Label"/>
+                <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+            </GridLayout>
+        </StackLayout>
+
+        <ScrollView row="1" orientation="vertical" id="pageScrollView" height="100%" width="100%" >
+            <StackLayout orientation="vertical" width="100%">
+                <Label width="100%" class="Video_Category" tap="navToggle" toggle="eapStackVisible" >
+                    <Label.FormattedString>
+                        <FormattedString>
+                            <FormattedString.spans>
+                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ eapStackVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
+                                <span id="textSpan" text="{{ lblEAPNewsletters }}" />
+                            </FormattedString.spans>
+                        </FormattedString>
+                    </Label.FormattedString>
+                </Label>
+                <StackLayout id="eapStackControl" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ eapStackVisible ? "visible" : "collapsed" }}'>
+                </StackLayout>
+
+                <Label width="100%" class="Video_Category" tap="navToggle" toggle="publicServicesVisible" >
+                    <Label.FormattedString>
+                        <FormattedString>
+                            <FormattedString.spans>
+                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ publicServicesVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
+                                <span id="textSpan" text="{{ lblPublicServices }}" />
+                            </FormattedString.spans>
+                        </FormattedString>
+                    </Label.FormattedString>
+                </Label>
+                <StackLayout id="publicServicesStack" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ publicServicesVisible ? "visible" : "collapsed" }}'>
+                </StackLayout>
+
+                <Label width="100%" class="Video_Category" tap="navToggle" toggle="internalServicesVisible" >
+                    <Label.FormattedString>
+                        <FormattedString>
+                            <FormattedString.spans>
+                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ internalServicesVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
+                                <span id="textSpan" text="{{ lblInternalServices }}" />
+                            </FormattedString.spans>
+                        </FormattedString>
+                    </Label.FormattedString>
+                </Label>
+                <StackLayout id="internalServicesStack" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ internalServicesVisible ? "visible" : "collapsed" }}'>
+                </StackLayout>
+
+                <Label width="100%" class="Video_Category" tap="navToggle" toggle="toolsVisible" >
+                    <Label.FormattedString>
+                        <FormattedString>
+                            <FormattedString.spans>
+                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ toolsVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
+                                <span id="textSpan" text="{{ lblTools }}" />
+                            </FormattedString.spans>
+                        </FormattedString>
+                    </Label.FormattedString>
+                </Label>
+                <StackLayout id="toolsStackControl" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ toolsVisible ? "visible" : "collapsed" }}'>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        
+        <CustomControls:NavFooter row="2" />
+    </GridLayout>
+</Page>
