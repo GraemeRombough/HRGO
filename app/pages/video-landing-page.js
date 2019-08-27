@@ -217,8 +217,8 @@ function createListEntry(name, videoCode, tags, provider) {
 }
 
 var buildVideoList  = function( category = "" ) {
-    var videoStack  = pageObject.getViewById("videoStack");
-    var videoList   = getFromDatabase( category );
+    var videoStack      = pageObject.getViewById("videoStack");
+    var videoList       = getFromDatabase( category );
 
     videoStack.removeChildren();
     videoList.sort(videoCompare);
@@ -310,7 +310,7 @@ var getCategoryLabel = function(category) {
     if( applicationSettings.getString("PreferredLanguage") == "French" ) {
         switch( category ) {
             case "Health":
-                return "Santé et bien-être";
+                return "Santé mentale et bien-être";
                 break;
             case "Pay":
                 return "Paie";
@@ -319,7 +319,7 @@ var getCategoryLabel = function(category) {
     } else {
         switch( category ) {
             case "Health":
-                return "Health and wellness";
+                return "Mental Health & Well-being";
                 break;
             case "Pay":
                 return "Pay";
@@ -328,59 +328,67 @@ var getCategoryLabel = function(category) {
     }
 };
 
-var getFromDatabase = function( category = "" ) {
+var getFromDatabase = function( category = "" , tags = "" ) {
     var returnedItem;
     var contentData = [];
     var TODAY       = new Date();
     
-    returnedItem = {Ref:"1", Category:"Health", DateAdded:TODAY+1, DescriptionEN:"Organizational culture", DescriptionFR:"Culture organisationnelle", NameEN:"Organizational culture", NameFR:"Culture organisationnelle", Provider:"YouTube", VideoCodeEN:"kxG2aoZAHuY", VideoCodeFR:"Q_qQ5a1QvOw" };
+    returnedItem = {Ref:"1", Category:"Health", Tags: "13Factors", DateAdded:TODAY+1, DescriptionEN:"Organizational culture", DescriptionFR:"Culture organisationnelle", NameEN:"Organizational culture", NameFR:"Culture organisationnelle", Provider:"YouTube", VideoCodeEN:"kxG2aoZAHuY", VideoCodeFR:"Q_qQ5a1QvOw" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"2", Category:"Health", DateAdded:TODAY+2, DescriptionEN:"Psychological and social support", DescriptionFR:"Soutien psychologique et social", NameEN:"Psychological and social support", NameFR:"Soutien psychologique et social", Provider:"YouTube", VideoCodeEN:"4BTPJv4oW2Y", VideoCodeFR:"wXjWejNGYyg" };
+    returnedItem = {Ref:"2", Category:"Health", Tags: "13Factors", DateAdded:TODAY+2, DescriptionEN:"Psychological and social support", DescriptionFR:"Soutien psychologique et social", NameEN:"Psychological and social support", NameFR:"Soutien psychologique et social", Provider:"YouTube", VideoCodeEN:"4BTPJv4oW2Y", VideoCodeFR:"wXjWejNGYyg" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"3", Category:"Health", DateAdded:TODAY+3, DescriptionEN:"Clear leadership and expectations", DescriptionFR:"Leadership et attentes clairs", NameEN:"Clear leadership and expectations", NameFR:"Leadership et attentes clairs", Provider:"YouTube", VideoCodeEN:"aaoncPmkO-Y", VideoCodeFR:"t0HEzmWLrIo" };
+    returnedItem = {Ref:"3", Category:"Health", Tags: "13Factors", DateAdded:TODAY+3, DescriptionEN:"Clear leadership and expectations", DescriptionFR:"Leadership et attentes clairs", NameEN:"Clear leadership and expectations", NameFR:"Leadership et attentes clairs", Provider:"YouTube", VideoCodeEN:"aaoncPmkO-Y", VideoCodeFR:"t0HEzmWLrIo" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"4", Category:"Health", DateAdded:TODAY+4, DescriptionEN:"Civility and respect", DescriptionFR:"Politesse et respect", NameEN:"Civility and respect", NameFR:"Politesse et respect", Provider:"YouTube", VideoCodeEN:"Jr8oy2w3Rss", VideoCodeFR:"lmCDQSbbi4g" };
+    returnedItem = {Ref:"4", Category:"Health", Tags: "13Factors", DateAdded:TODAY+4, DescriptionEN:"Civility and respect", DescriptionFR:"Politesse et respect", NameEN:"Civility and respect", NameFR:"Politesse et respect", Provider:"YouTube", VideoCodeEN:"Jr8oy2w3Rss", VideoCodeFR:"lmCDQSbbi4g" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"5", Category:"Health", DateAdded:TODAY+5, DescriptionEN:"Psychological demands", DescriptionFR:"Exigences psychologiques", NameEN:"Psychological demands", NameFR:"Exigences psychologiques", Provider:"YouTube", VideoCodeEN:"tHFDgzIoEhY", VideoCodeFR:"vC1MUt__c-A" };
+    returnedItem = {Ref:"5", Category:"Health", Tags: "13Factors", DateAdded:TODAY+5, DescriptionEN:"Psychological demands", DescriptionFR:"Exigences psychologiques", NameEN:"Psychological demands", NameFR:"Exigences psychologiques", Provider:"YouTube", VideoCodeEN:"tHFDgzIoEhY", VideoCodeFR:"vC1MUt__c-A" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"6", Category:"Health", DateAdded:TODAY+6, DescriptionEN:"Growth and development", DescriptionFR:"", NameEN:"Growth and development", NameFR:"", Provider:"YouTube", VideoCodeEN:"Wt_OxnqMRws", VideoCodeFR:"" };
+    returnedItem = {Ref:"6", Category:"Health", Tags: "13Factors", DateAdded:TODAY+6, DescriptionEN:"Growth and development", DescriptionFR:"", NameEN:"Growth and development", NameFR:"Croissance et perfectionnement", Provider:"YouTube", VideoCodeEN:"Wt_OxnqMRws", VideoCodeFR:"pjgTBWfnkfw" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"7", Category:"Health", DateAdded:TODAY+7, DescriptionEN:"Recognition and reward", DescriptionFR:"Reconnaissance et récompenses", NameEN:"Recognition and reward", NameFR:"Reconnaissance et récompenses", Provider:"YouTube", VideoCodeEN:"xkZ7EOgS7no", VideoCodeFR:"CofmjKc2I58" };
+    returnedItem = {Ref:"7", Category:"Health", Tags: "13Factors", DateAdded:TODAY+7, DescriptionEN:"Recognition and reward", DescriptionFR:"Reconnaissance et récompenses", NameEN:"Recognition and reward", NameFR:"Reconnaissance et récompenses", Provider:"YouTube", VideoCodeEN:"xkZ7EOgS7no", VideoCodeFR:"CofmjKc2I58" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"8", Category:"Health", DateAdded:TODAY+8, DescriptionEN:"Involvement and influence", DescriptionFR:"Participation et influence", NameEN:"Involvement and influence", NameFR:"Participation et influence", Provider:"YouTube", VideoCodeEN:"pUsKrYdsLPM", VideoCodeFR:"Z5MOraprfA8" };
+    returnedItem = {Ref:"8", Category:"Health", Tags: "13Factors", DateAdded:TODAY+8, DescriptionEN:"Involvement and influence", DescriptionFR:"Participation et influence", NameEN:"Involvement and influence", NameFR:"Participation et influence", Provider:"YouTube", VideoCodeEN:"pUsKrYdsLPM", VideoCodeFR:"Z5MOraprfA8" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"9", Category:"Health", DateAdded:TODAY+9, DescriptionEN:"Workload management", DescriptionFR:"Gestion de la charge de travail", NameEN:"Workload management", NameFR:"Gestion de la charge de travail", Provider:"YouTube", VideoCodeEN:"NGL6JoZrmWA", VideoCodeFR:"18NjtMrGuII" };
+    returnedItem = {Ref:"9", Category:"Health", Tags: "13Factors", DateAdded:TODAY+9, DescriptionEN:"Workload management", DescriptionFR:"Gestion de la charge de travail", NameEN:"Workload management", NameFR:"Gestion de la charge de travail", Provider:"YouTube", VideoCodeEN:"NGL6JoZrmWA", VideoCodeFR:"18NjtMrGuII" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"10", Category:"Health", DateAdded:TODAY+10, DescriptionEN:"Engagement", DescriptionFR:"Engagement", NameEN:"Engagement", NameFR:"Engagement", Provider:"YouTube", VideoCodeEN:"Nur5iErSmi0", VideoCodeFR:"KgUS6USTiXw" };
+    returnedItem = {Ref:"10", Category:"Health", Tags: "13Factors", DateAdded:TODAY+10, DescriptionEN:"Engagement", DescriptionFR:"Engagement", NameEN:"Engagement", NameFR:"Engagement", Provider:"YouTube", VideoCodeEN:"Nur5iErSmi0", VideoCodeFR:"KgUS6USTiXw" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"11", Category:"Health", DateAdded:TODAY+11, DescriptionEN:"Balance", DescriptionFR:"Équilibre", NameEN:"Balance", NameFR:"Équilibre", Provider:"YouTube", VideoCodeEN:"h48ElbN7Nfs", VideoCodeFR:"1O78FUwOyKw" };
+    returnedItem = {Ref:"11", Category:"Health", Tags: "13Factors", DateAdded:TODAY+11, DescriptionEN:"Balance", DescriptionFR:"Équilibre", NameEN:"Balance", NameFR:"Équilibre", Provider:"YouTube", VideoCodeEN:"h48ElbN7Nfs", VideoCodeFR:"1O78FUwOyKw" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"12", Category:"Health", DateAdded:TODAY+12, DescriptionEN:"Psychological protection", DescriptionFR:"Protection de la sécurité psychologique", NameEN:"Psychological protection", NameFR:"Protection de la sécurité psychologique", Provider:"YouTube", VideoCodeEN:"mk0dHEGBo0M", VideoCodeFR:"lYK2haexwdE" };
+    returnedItem = {Ref:"12", Category:"Health", Tags: "13Factors", DateAdded:TODAY+12, DescriptionEN:"Psychological protection", DescriptionFR:"Protection de la sécurité psychologique", NameEN:"Psychological protection", NameFR:"Protection de la sécurité psychologique", Provider:"YouTube", VideoCodeEN:"mk0dHEGBo0M", VideoCodeFR:"lYK2haexwdE" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"13", Category:"Health", DateAdded:TODAY+13, DescriptionEN:"Protection of physical safety", DescriptionFR:"Protection de l’intégrité physique", NameEN:"Protection of physical safety", NameFR:"Protection de l’intégrité physique", Provider:"YouTube", VideoCodeEN:"2M0LvGcSBes", VideoCodeFR:"6-ueoNe4NGI" };
+    returnedItem = {Ref:"13", Category:"Health", Tags: "13Factors", DateAdded:TODAY+13, DescriptionEN:"Protection of physical safety", DescriptionFR:"Protection de l’intégrité physique", NameEN:"Protection of physical safety", NameFR:"Protection de l’intégrité physique", Provider:"YouTube", VideoCodeEN:"2M0LvGcSBes", VideoCodeFR:"6-ueoNe4NGI" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"14", Category:"Pay", DateAdded:TODAY+14, DescriptionEN:"Sign in and registration process", DescriptionFR:"Processus d'ouverture de session d'inscription", NameEN:"Sign in and registration process", NameFR:"Processus d'ouverture de session d'inscription", Provider:"YouTube", VideoCodeEN:"plKSDSF7IAY", VideoCodeFR:"5HwXXdMDWbw" };
+    returnedItem = {Ref:"14", Category:"Pay", Tags: "", DateAdded:TODAY+14, DescriptionEN:"Sign in and registration process", DescriptionFR:"Processus d'ouverture de session d'inscription", NameEN:"Sign in and registration process", NameFR:"Processus d'ouverture de session d'inscription", Provider:"YouTube", VideoCodeEN:"plKSDSF7IAY", VideoCodeFR:"5HwXXdMDWbw" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"15", Category:"Pay", DateAdded:TODAY+15, DescriptionEN:"Submitting a par via hrss", DescriptionFR:"Soumettre une demande d'intervention de payé ssrh", NameEN:"Submitting a par via hrss", NameFR:"Soumettre une demande d'intervention de payé ssrh", Provider:"YouTube", VideoCodeEN:"sVzAyz52tKY", VideoCodeFR:"I-vajhmxhOo" };
+    returnedItem = {Ref:"15", Category:"Pay", Tags: "", DateAdded:TODAY+15, DescriptionEN:"Submitting a par via hrss", DescriptionFR:"Soumettre une demande d'intervention de payé ssrh", NameEN:"Submitting a par via hrss", NameFR:"Soumettre une demande d'intervention de payé ssrh", Provider:"YouTube", VideoCodeEN:"sVzAyz52tKY", VideoCodeFR:"I-vajhmxhOo" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"16", Category:"Pay", DateAdded:TODAY+16, DescriptionEN:"Submitting a bulk par via hrss", DescriptionFR:"Effectuer une soumission en bloc de demandes d'intervention de paye", NameEN:"Submitting a bulk par via hrss", NameFR:"Effectuer une soumission en bloc de demandes d'intervention de paye", Provider:"YouTube", VideoCodeEN:"xXN0yyYrwNk", VideoCodeFR:"ETnAaIqsq8E" };
+    returnedItem = {Ref:"16", Category:"Pay", Tags: "", DateAdded:TODAY+16, DescriptionEN:"Submitting a bulk par via hrss", DescriptionFR:"Effectuer une soumission en bloc de demandes d'intervention de paye", NameEN:"Submitting a bulk par via hrss", NameFR:"Effectuer une soumission en bloc de demandes d'intervention de paye", Provider:"YouTube", VideoCodeEN:"xXN0yyYrwNk", VideoCodeFR:"ETnAaIqsq8E" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"17", Category:"Pay", DateAdded:TODAY+17, DescriptionEN:"Submitting a phoneix feedback form via hrss", DescriptionFR:"Envoyer un formulaire de rétroaction phénix", NameEN:"Submitting a phoneix feedback form via hrss", NameFR:"Envoyer un formulaire de rétroaction phénix", Provider:"YouTube", VideoCodeEN:"4MZF4MFH52s", VideoCodeFR:"qAwl_yebOtU" };
+    returnedItem = {Ref:"17", Category:"Pay", Tags: "", DateAdded:TODAY+17, DescriptionEN:"Submitting a phoneix feedback form via hrss", DescriptionFR:"Envoyer un formulaire de rétroaction phénix", NameEN:"Submitting a phoneix feedback form via hrss", NameFR:"Envoyer un formulaire de rétroaction phénix", Provider:"YouTube", VideoCodeEN:"4MZF4MFH52s", VideoCodeFR:"qAwl_yebOtU" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"18", Category:"Pay", DateAdded:TODAY+18, DescriptionEN:"Escalating a pay issue via the hrss", DescriptionFR:"Acheminer une demande relative à la paye", NameEN:"Escalating a pay issue via the hrss", NameFR:"Acheminer une demande relative à la paye", Provider:"YouTube", VideoCodeEN:"aiZSVrLXDnc", VideoCodeFR:"ZmwCh0ss_LM" };
+    returnedItem = {Ref:"18", Category:"Pay", Tags: "", DateAdded:TODAY+18, DescriptionEN:"Escalating a pay issue via the hrss", DescriptionFR:"Acheminer une demande relative à la paye", NameEN:"Escalating a pay issue via the hrss", NameFR:"Acheminer une demande relative à la paye", Provider:"YouTube", VideoCodeEN:"aiZSVrLXDnc", VideoCodeFR:"ZmwCh0ss_LM" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"19", Category:"Pay", DateAdded:TODAY+19, DescriptionEN:"Submitting an access timekeeper via the hrss", DescriptionFR:"Soumettre une demande aux responsables de la comptabilisation du temps", NameEN:"Submitting an access timekeeper via the hrss", NameFR:"Soumettre une demande aux responsables de la comptabilisation du temps", Provider:"YouTube", VideoCodeEN:"ImBKlwPIoNs", VideoCodeFR:"zgaYsi-bEBk" };
+    returnedItem = {Ref:"19", Category:"Pay", Tags: "", DateAdded:TODAY+19, DescriptionEN:"Submitting an access timekeeper via the hrss", DescriptionFR:"Soumettre une demande aux responsables de la comptabilisation du temps", NameEN:"Submitting an access timekeeper via the hrss", NameFR:"Soumettre une demande aux responsables de la comptabilisation du temps", Provider:"YouTube", VideoCodeEN:"ImBKlwPIoNs", VideoCodeFR:"zgaYsi-bEBk" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"20", Category:"Pay", DateAdded:TODAY+20, DescriptionEN:"Submitting other requests via hrss", DescriptionFR:"Soumettre d'autres demandes liées aux ressources humaines", NameEN:"Submitting other requests via hrss", NameFR:"Soumettre d'autres demandes liées aux ressources humaines", Provider:"YouTube", VideoCodeEN:"Ew13rt-ID4I", VideoCodeFR:"c6ViMQhIiKw" };
+    returnedItem = {Ref:"20", Category:"Pay", Tags: "", DateAdded:TODAY+20, DescriptionEN:"Submitting other requests via hrss", DescriptionFR:"Soumettre d'autres demandes liées aux ressources humaines", NameEN:"Submitting other requests via hrss", NameFR:"Soumettre d'autres demandes liées aux ressources humaines", Provider:"YouTube", VideoCodeEN:"Ew13rt-ID4I", VideoCodeFR:"c6ViMQhIiKw" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"21", Category:"Pay", DateAdded:TODAY+21, DescriptionEN:"Submitting a pri creation verification request", DescriptionFR:"Soumettre une demande de création ou de vérification d'un cidp", NameEN:"Submitting a pri creation verification request", NameFR:"Soumettre une demande de création ou de vérification d'un cidp", Provider:"YouTube", VideoCodeEN:"sTeBuMb1kRQ", VideoCodeFR:"BazZqr7aqik" };
+    returnedItem = {Ref:"21", Category:"Pay", Tags: "", DateAdded:TODAY+21, DescriptionEN:"Submitting a pri creation verification request", DescriptionFR:"Soumettre une demande de création ou de vérification d'un cidp", NameEN:"Submitting a pri creation verification request", NameFR:"Soumettre une demande de création ou de vérification d'un cidp", Provider:"YouTube", VideoCodeEN:"sTeBuMb1kRQ", VideoCodeFR:"BazZqr7aqik" };
     contentData.push(returnedItem);
-    returnedItem = {Ref:"22", Category:"Pay", DateAdded:TODAY+22, DescriptionEN:"Tracking the progress of a pay related case via hrss", DescriptionFR:"Faire le suivi dune demande relative à la paye", NameEN:"Tracking the progress of a pay related case via hrss", NameFR:"Faire le suivi dune demande relative à la paye", Provider:"YouTube", VideoCodeEN:"5MdO8bawDY4", VideoCodeFR:"KC1nQNYo9qM" };
+    returnedItem = {Ref:"22", Category:"Pay", Tags: "", DateAdded:TODAY+22, DescriptionEN:"Tracking the progress of a pay related case via hrss", DescriptionFR:"Faire le suivi dune demande relative à la paye", NameEN:"Tracking the progress of a pay related case via hrss", NameFR:"Faire le suivi dune demande relative à la paye", Provider:"YouTube", VideoCodeEN:"5MdO8bawDY4", VideoCodeFR:"KC1nQNYo9qM" };
     contentData.push(returnedItem);
     
     if( category != "" ) {
+        var categoryList    = category.split(" ");
         contentData = contentData.filter( function(value, index, array) {
-            return value.Category == category;
+            return categoryList.includes( value.Category );
+            //return value.Category == category;
+        });
+    }
+    if( tags != "" ) {
+        var tagsList    = tags.split(" ");
+        contentData = contentData.filter( function(value, index, array) {
+            return tagsList.includes( value.Tags );
         });
     }
 
