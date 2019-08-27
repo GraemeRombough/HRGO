@@ -13,6 +13,12 @@ var callLink = function(phoneNumber){
 
 };
 
+var textLink = function(phoneNumber){
+    console.log("call number:" + phoneNumber);
+    phone.sms(phoneNumber,"");
+
+};
+
 var copyToClipboard = function(clipboardText){
     console.log("copied to clipboard" + clipboardText);
             clipboard.setText(clipboardText).then(function() {
@@ -67,6 +73,9 @@ exports.onWebViewLoaded = function(webargs) {
                     } else if( urlString.startsWith( "tel:")) {
                         callLink( urlString.substr( 4));
                         return true;
+                    } else if( urlString.startsWith( "sms:")) {
+                        textLink( urlString.substr( 4));
+                        return true;
                     } else if( urlString.startsWith( "copy:")) {
                         copyToClipboard( urlString.substr( 5));
                         return true;
@@ -110,16 +119,20 @@ exports.onLoadStarted = function(args){
     console.log("onLoadStarted ****************************************************************");
     checkURL = args.url.split(":");
     if(checkURL.length > 1){
-        if(checkURL[0] == "mailto"){
+        if(checkURL[0] == "mailto") {
             console.log(checkURL[1]);
             args.object.stopLoading();
             emailLink(checkURL[1]);
             
-        }else if(checkURL[0] == "tel"){
+        } else if(checkURL[0] == "tel") {
             console.log(checkURL[1]);
             args.object.stopLoading();
-            callLink(checkURL[1]);  
-        }else if(checkURL[0] == "copy"){
+            callLink(checkURL[1]);
+        } else if(checkURL[0] == "sms") {
+                console.log(checkURL[1]);
+                args.object.stopLoading();
+                textLink(checkURL[1]);  
+        } else if(checkURL[0] == "copy") {
             console.log(checkURL[1]);
             args.object.stopLoading();
             args.object.goBack();
