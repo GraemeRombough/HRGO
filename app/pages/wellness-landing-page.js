@@ -25,7 +25,7 @@ exports.pageLoaded = function(args) {
     pageObject = page;
 
     //don't reload all of the data if the user just went back without changing the language
-    if( currentLanguage != applicationSettings.getString("PreferredLanguage") ) {
+    if( currentLanguage != applicationSettings.getString("PreferredLanguage") || page.getViewById("categoriesStack").getChildrenCount() == 0 ) {
         pageData = fromObject({
             selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
             lblTitle: ["Health and wellness", "Santé et bien-être"],
@@ -188,7 +188,7 @@ function buildContentFromFirebase() {
     var selectedLanguage    = pageData.get("selectedLanguage");
     var categoriesStack     = page.getViewById("categoriesStack");
     categoriesStack.removeChildren();
-
+    
     firebase.firestore().collection("wellness-landing-page").get({ source: "cache" }).then( querySnapshot => {
         var contentRecords  = [];
 

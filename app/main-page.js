@@ -4,12 +4,18 @@ var pageData = new observable.Observable();
 var subNavTitle = "";
 var applicationSettings = require("application-settings");
 const fromObject = require("tns-core-modules/data/observable").fromObject;
-//var firebase = require("nativescript-plugin-firebase/app");
+var firebase = require("nativescript-plugin-firebase/app");
 var page;
 var pageObject;
 exports.pageLoaded = function(args) {
-
-    
+/*
+    firebase.keepInSync("wellness-landing-page", true).then(function() {
+        console.log("table updated");
+    },
+    function(error) {
+        console.log("error here");
+    });
+    */
     pageData = fromObject({
         selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
         lblTitle: ["Home", "Accueil"],
@@ -30,7 +36,7 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
     pageObject = page;
 
-    //checkFirebaseData();
+    checkFirebaseData();
 
     if( !applicationSettings.hasKey("PreferredLanguage")) {
         var langSection = pageObject.getViewById("languageSelection");
@@ -39,7 +45,7 @@ exports.pageLoaded = function(args) {
 
 
 };
-/*
+
 var checkFirebaseData = function() {
     var TODAY                   = new Date();
     var lastSyncCheckDate    = new Date('January 1, 2018 01:00:00');
@@ -79,7 +85,7 @@ var checkFirebaseData = function() {
         applicationSettings.setNumber("LastFirebaseSyncCheck", TODAY.getTime());
     }
 };
-*/
+
 exports.goToLanding = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("landing-page");
