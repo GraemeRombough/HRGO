@@ -3,70 +3,29 @@
     
     <GridLayout rows="auto,*,60" id="pageGridLayout">
         <StackLayout row="0" >
-            <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+            <GridLayout columns="60,*,60,60" rows="auto" class="HeaderLabel">
                 <label col="0" row="0" class="Header_Icon" text="&#xe9da;"/>
                 <label col="1" row="0" text="{{ lblTitle selectedLanguage, lblTitle[selectedLanguage] }}" class="Header_Label"/>
-                <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+                <Button col="2" row="0" text="&#xe986;" class="Back_Button" tap="openSearch"/>
+                <Button col="3" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
             </GridLayout>
         </StackLayout>
 
-        <ScrollView row="1" orientation="vertical" id="pageScrollView" height="100%" width="100%" >
-            <StackLayout orientation="vertical" width="100%" id="categoriesStack" >
-            <!--
-                <Label width="100%" class="Video_Category" tap="navToggle" toggle="publicServicesVisible" >
-                    <Label.FormattedString>
-                        <FormattedString>
-                            <FormattedString.spans>
-                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ publicServicesVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
-                                <span id="textSpan" text="{{ lblServices selectedLanguage, lblServices[selectedLanguage] }}" />
-                            </FormattedString.spans>
-                        </FormattedString>
-                    </Label.FormattedString>
-                </Label>
-                <StackLayout id="publicServicesStack" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ publicServicesVisible ? "visible" : "collapsed" }}'>
-                </StackLayout>
-
-                <Label width="100%" class="Video_Category" tap="navToggle" toggle="awardsVisible" >
-                    <Label.FormattedString>
-                        <FormattedString>
-                            <FormattedString.spans>
-                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ awardsVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
-                                <span id="textSpan" text="{{ lblAwards selectedLanguage, lblAwards[selectedLanguage] }}" />
-                            </FormattedString.spans>
-                        </FormattedString>
-                    </Label.FormattedString>
-                </Label>
-                <StackLayout id="awardsStackControl" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ awardsVisible ? "visible" : "collapsed" }}'>
-                </StackLayout>
-
-                <Label width="100%" class="Video_Category" tap="navToggle" toggle="eapStackVisible" >
-                    <Label.FormattedString>
-                        <FormattedString>
-                            <FormattedString.spans>
-                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ eapStackVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
-                                <span id="textSpan" text="{{ lblEAPNewsletters selectedLanguage, lblEAPNewsletters[selectedLanguage] }}" />
-                            </FormattedString.spans>
-                        </FormattedString>
-                    </Label.FormattedString>
-                </Label>
-                <StackLayout id="eapStackControl" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ eapStackVisible ? "visible" : "collapsed" }}'>
-                </StackLayout>
-
-                <Label width="100%" class="Video_Category" tap="navToggle" toggle="videosVisible" >
-                    <Label.FormattedString>
-                        <FormattedString>
-                            <FormattedString.spans>
-                                <span id="iconSpan" style="font-family: 'icomoon';" text="{{ videosVisible ? '&#xEA43; ' : '&#xEA42; ' }}"/>
-                                <span id="textSpan" text="{{ lblVideos selectedLanguage, lblVideos[selectedLanguage] }}" />
-                            </FormattedString.spans>
-                        </FormattedString>
-                    </Label.FormattedString>
-                </Label>
-                <StackLayout id="videosStackControl" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ videosVisible ? "visible" : "collapsed" }}'>
-                </StackLayout>
-                -->
+        <StackLayout row="1" width="100%" height="100%" orientation="vertical" >
+            <StackLayout orientation="horizontal" class="SearchBar" visibility="{{ searchBarVisibility }}">
+                <Button col="0" class="SearchBar_Button" tap="searchVideos" width="60" visibility='collapsed' >
+                    <FormattedString>
+                        <Span text="&#xe986;"/>
+                    </FormattedString>
+                </Button>
+                <TextField col="1" class="SearchBar_Text" textChanged="onTextChange" text="{{ SearchCriteria }}" id="SearchBox" hint="Search" returnKeyType="search" returnPress="searchPOC"/>
             </StackLayout>
-        </ScrollView>
+
+            <ScrollView orientation="vertical" id="pageScrollView" height="100%" width="100%" >
+                <StackLayout orientation="vertical" width="100%" id="categoriesStack" >
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
         
         <CustomControls:NavFooter row="2" />
     </GridLayout>

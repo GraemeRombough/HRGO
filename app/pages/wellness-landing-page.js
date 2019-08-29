@@ -10,6 +10,7 @@ const fromObject = require("tns-core-modules/data/observable").fromObject;
 const StackLayout    = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
 const FormattedString = require("tns-core-modules/text/formatted-string").FormattedString;
 const Span = require("tns-core-modules/text/span").Span;
+var Visibility = require("tns-core-modules/ui/enums").Visibility;
 var page;
 var pageObject;
 var pagePrefix  = "";
@@ -29,15 +30,8 @@ exports.pageLoaded = function(args) {
         pageData = fromObject({
             selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
             lblTitle: ["Health and wellness", "Santé et bien-être"],
-            lblServices: ["Health Services", "Services de santé"],
-            lblAwards: ["Awards and Recognition", "Prix et reconnaissance"],
-            lblEAPNewsletters: ["EAP Newsletters", "Bulletins du EAP"],
-            lblVideos: ["Videos", "Videos"],
-            lblVideosMentalHealth: ["13 factors for psychological health and safety in the workplace", "13 facteurs qui contribuent à la santé et à la sécurité psychologiques en milieu de travail"],
-            publicServicesVisible: false,
-            awardsVisible: false,
-            eapStackVisible: false,
-            videosVisible: false
+            searchBarVisibility: "collapsed",
+            SearchCriteria: ""
         });
         args.object.bindingContext = pageData;
 
@@ -50,6 +44,82 @@ exports.pageLoaded = function(args) {
 exports.goBack = function(args){
     const thisPage = args.object.page;
     thisPage.frame.goBack()
+};
+
+// Toggle the search bar visibility
+exports.openSearch = function() {
+    if( pageData.get("searchBarVisibility") == "visible") {
+        pageData.set( "searchBarVisibility", "collapsed" );
+        
+        page.getViewById("SearchBox").off("textChange");
+    } else {
+        pageData.set( "searchBarVisibility", "visible" );
+
+        page.getViewById("SearchBox").on("textChange" , (lpargs) => {
+            var categoryList    = pageObject.getViewById("categoriesStack");
+            var categoryCount   = categoryList.getChildrenCount() / 2;
+            var lowercaseSearch = lpargs.value.toLowerCase();
+            
+            if( lowercaseSearch != "") {
+
+                for( categoryIndex = 0 ; categoryIndex < categoryCount ; categoryIndex++ ) {
+                    var videoList   = categoryList.getChildAt( (categoryIndex * 2) + 1 );
+                    var videoCount  = videoList.getChildrenCount();
+                    var videoIndex  = 0;
+                    
+                    for( videoIndex = 0 ; videoIndex < videoCount ; videoIndex++ ) {
+                        checkText   = videoList.getChildAt( videoIndex ).data.contents;
+                        if( checkText.toLowerCase().includes( lowercaseSearch ) == true ) {
+                            videoList.getChildAt( videoIndex ).visibility   = Visibility.visible;
+                        } else {
+                            videoList.getChildAt( videoIndex ).visibility   = Visibility.collapse;
+                        }
+                    }
+                }
+                
+            } else {
+                for( categoryIndex = 0 ; categoryIndex < categoryCount ; categoryIndex++ ) {
+                    var videoList   = categoryList.getChildAt( (categoryIndex * 2) + 1 );
+                    var videoCount  = videoList.getChildrenCount();
+                    var videoIndex  = 0;
+                    
+                    for( videoIndex = 0 ; videoIndex < videoCount ; videoIndex++ ) {
+                        videoList.getChildAt( videoIndex ).visibility   = Visibility.visible;
+                    }
+                }
+            }
+            /*
+            
+            if( lowercaseSearch != "") {
+                for( categoryIndex = 0 ; categoryIndex < categoryCount ; categoryIndex++ ) {
+                    var videoList   = categoryList.getChildAt( (categoryIndex * 2) + 1 );
+                    var videoCount  = videoList.getChildrenCount();
+                    var videoIndex  = 0;
+                    
+                    for( videoIndex = 0 ; videoIndex < videoCount ; videoIndex++ ) {
+                        checkText   = videoList.getChildAt( videoIndex ).searchText;
+                        if( checkText.toLowerCase().includes( lowercaseSearch ) == true ) {
+                            videoList.getChildAt( videoIndex ).visibility   = Visibility.visible;
+                        } else {
+                            videoList.getChildAt( videoIndex ).visibility   = Visibility.collapse;
+                        }
+                    }
+                }
+            } else {
+                for( categoryIndex = 0 ; categoryIndex < categoryCount ; categoryIndex++ ) {
+                    var videoList   = categoryList.getChildAt( (categoryIndex * 2) + 1 );
+                    var videoCount  = videoList.getChildrenCount();
+                    var videoIndex  = 0;
+                    
+                    for( videoIndex = 0 ; videoIndex < videoCount ; videoIndex++ ) {
+                        videoList.getChildAt( videoIndex ).visibility   = Visibility.visible;
+                    }
+                }
+            }
+            */
+        } );
+
+    }
 };
 
 exports.goToUtility = function(args){
@@ -75,7 +145,7 @@ function loadNewsletter(event) {
             }
     topmost.navigate(navigationOptions);
 };
-
+/*
 function goToVideos(event) {
     console.log("Go To pages/video-landing-page: " + event.object + " : category = " + this.contents);
     var categories  = "";
@@ -102,6 +172,13 @@ function goToVideos(event) {
             }
     topmost.navigate(navigationOptions); 
 
+};
+*/
+function goToPage(event) {
+    var topmost = frameModule.topmost();
+    console.log( this.contents );
+    var navigationOptions= JSON.parse(this.contents);
+    topmost.navigate(navigationOptions);
 };
 
 function generateCategoryToggle(category, selectedLanguage, categoriesStack) {
@@ -161,7 +238,20 @@ function generateContentLine(content, selectedLanguage) {
     contentLabel.className  = "Main_Nav_SubLine";
     contentLabel.text       = (currentLanguage=="French" ? content.TitleFR : content.TitleEN);
     contentLabel.data       = { contents: (selectedLanguage==1 ? content.ContentFR : content.ContentEN), title: (selectedLanguage==1 ? content.TitleFR : content.TitleEN) };
-    contentLabel.addEventListener( "tap" , (content.Function == "LoadVideoCategory" ? goToVideos : loadNewsletter) , contentLabel.data );
+    var targetFunction;
+    switch(content.Function) {
+        /*
+        case "LoadVideoCategory":
+            targetFunction  = goToVideos;
+            break;*/
+        case "LoadArticle":
+            targetFunction  = loadNewsletter
+            break;
+        case "LoadPage":
+            targetFunction  = goToPage
+            break;
+    }
+    contentLabel.addEventListener( "tap" , targetFunction , contentLabel.data );
     
     return contentLabel;
 }
