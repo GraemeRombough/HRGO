@@ -70,6 +70,7 @@ button{
     border-width: 4px;
     border-radius: 15%;
     border-color: #999;
+    color: black;
 }
 .Home_Nav_Grid{
     padding-top:5%;
