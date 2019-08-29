@@ -11,7 +11,8 @@
         </StackLayout>
 
         <ScrollView row="1" orientation="vertical" id="pageScrollView" height="100%" width="100%" >
-            <StackLayout orientation="vertical" width="100%">
+            <StackLayout orientation="vertical" width="100%" id="categoriesStack" >
+            <!--
                 <Label width="100%" class="Video_Category" tap="navToggle" toggle="publicServicesVisible" >
                     <Label.FormattedString>
                         <FormattedString>
@@ -63,6 +64,7 @@
                 </Label>
                 <StackLayout id="videosStackControl" orientation="vertical" width="100%" height="auto" style="backgrount-color: black;" visibility='{{ videosVisible ? "visible" : "collapsed" }}'>
                 </StackLayout>
+                -->
             </StackLayout>
         </ScrollView>
         
