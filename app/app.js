@@ -1,8 +1,8 @@
 var applicationModule = require("application");
 
-/*
 const firebase = require("nativescript-plugin-firebase/app");
 
+firebase.database.enableLogging(false);
 firebase.initializeApp({
     persist: true
 }).then(
@@ -13,5 +13,5 @@ firebase.initializeApp({
         console.log("initialization error: " + error);
     }
 );
-*/
+
 applicationModule.start({ moduleName: "main-page" });
