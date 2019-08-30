@@ -287,7 +287,7 @@ function buildContentFromFirebase() {
             contentRecords.push( contentRec.data());
         });
 
-        firebase.firestore().collection("Categories").get({ source: "cache" }).then( categorySnapshot => {
+        firebase.firestore().collection("Categories").orderBy("Order").get({ source: "cache" }).then( categorySnapshot => {
             categorySnapshot.forEach( category => {
                 var categoryStack   = generateCategoryToggle(category.data(), selectedLanguage, categoriesStack);
                 var filteredList    = contentRecords.filter( function(value, index, array) {
