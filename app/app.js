@@ -14,4 +14,25 @@ firebase.initializeApp({
     }
 );
 
+applicationModule.screenOrientation = "portrait";
+
+if( applicationModule.android ) {
+    applicationModule.on(applicationModule.orientationChangedEvent, function(args) {
+        applicationModule.screenOrientation   = args.newValue;
+        if( applicationModule.android.startActivity ) {
+            const win = applicationModule.android.startActivity.getWindow();
+            if( args.newValue == "landscape" ) {
+                win.addFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } else {
+                win.clearFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
+        }
+    });
+} else {
+    applicationModule.on(applicationModule.orientationChangedEvent, function(args) {
+        applicationModule.screenOrientation   = args.newValue;
+        console.log(applicationModule.screenOrientation);
+    });
+}
+
 applicationModule.start({ moduleName: "main-page" });

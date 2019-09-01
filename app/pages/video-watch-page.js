@@ -25,8 +25,8 @@ exports.pageLoaded = function(args) {
 
     pageData.set( "HeaderTitle" , page.navigationContext.Title );
 
-    console.log( "app orientation = " + app );
-    pageData.set( "landscapeMode" , false );
+    console.log( "app orientation = " + app.screenOrientation );
+    pageData.set( "landscapeMode" , app.screenOrientation == "landscape" );
     pageData.set( "showNav", false );
 
     pageData.set( "videoHTML" , `<iframe 

@@ -13,7 +13,7 @@
             </StackLayout>
                 
             <StackLayout row="1" orientation="horizontal" height="100%" width="100%" >
-                <WebView loaded="onWebViewLoaded" height="auto" width="auto" src="{{ videoHTML }}" />
+                <WebView loaded="onWebViewLoaded" height="100%" width="100%" src="{{ videoHTML }}" />
             </StackLayout>
 
             <CustomControls:NavFooter row="2" />
