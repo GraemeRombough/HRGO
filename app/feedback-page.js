@@ -59,6 +59,35 @@ exports.clearKeyboard = function(args){
     var textInput = pageObject.getViewById("feedBackText");
     textInput.dismissSoftInput();
 }
+
+function emailFeedback(emailText) {
+    const TODAY = new Date();
+    var eSubject = "HRGO Feedback Submission";
+    var eBody = `Page: ${feedbackPage.PageName}, Date: ${TODAY} -- \n\n`;
+    eBody += pageData.get("feedbackBody");
+    var toAddress = [];
+    toAddress.push("HRGO-GORH@forces.gc.ca");
+    if (email.available()) {
+        email.compose({
+            subject: eSubject,
+            body: eBody,
+            to: toAddress
+        });
+    } else {
+        console.log("Email Not Available");
+        clipboard.setText(`Send To: HRGO-GORH@forces.gc.ca \nSubject: HRGO Feedback Submission \nBody: ${eBody}`).then(function() {
+            console.log("OK, copied to the clipboard");
+        })
+        dialogs.alert({
+            title: "Email Not Available",
+            message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.  Please send feedback to HRGO-GORH@forces.gc.ca (can be found in copied message)",
+            okButtonText: "Continue"});
+    }
+};
+
+exports.sendEmail   = emailFeedback;
+
+/*
 exports.sendEmail = function(args){
     const TODAY = new Date();
     email.available().then(function(avail){
@@ -91,4 +120,4 @@ exports.sendEmail = function(args){
     }
     //console.log(toAddress);
 };
-
+*/

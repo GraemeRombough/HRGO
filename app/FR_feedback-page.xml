@@ -1,35 +1,29 @@
 <Page loaded="pageLoaded" navigatingTo="onNavigatingTo" actionBarHidden="true">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
-  <GridLayout rows="*,60">
-  <ScrollView>
-    <StackLayout row="0" orientation="vertical" width="100%">
-      
-    <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
-      <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
-      <label col="1" row="0" text="COMMENTAIRES" class="Header_Label"/>
-      <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
-    </GridLayout>
-
-      <!-- COMPOSE EMAIL -->
-      <StackLayout tap="clearKeyboard">
-        <Label text="Vos commentaires" class="Article_H1"/>
-        <GridLayout columns="*,auto">
+  <GridLayout rows="60,*,60">
+    <StackLayout row="0" orientation="horizontal" >
+      <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+        <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
+        <label col="1" row="0" text="COMMENTAIRES" class="Header_Label"/>
+        <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+      </GridLayout>
+    </StackLayout>
+    <StackLayout row="1" orientation="vertical" width="100%" height="auto" >
+      <Label text="Vos commentaires" class="Article_H1"/>
+      <GridLayout columns="*,auto" height="40">
         <Label col="0" text="Commentaires" class="Article_H3"/>
         <Button col="1" text="Envoyer un courriel" class="Submit_Button_2" tap="sendEmail"/>
-        </GridLayout>
-        <TextView text="{{ feedbackBody }}" class="Utility_LongText" id="feedBackText"/>
-      </StackLayout>
-    </StackLayout>  
-  </ScrollView>
-  <StackLayout row="1" class="FooterNav" orientation="horizontal">
-        <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
-        <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
-        <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
-        <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
-        <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
+      </GridLayout>
+      <ScrollView class="Utility_LongText" minHeight="320px" height="100%" width="90%" orientation="vertical" >
+        <TextView text="{{ feedbackBody }}" id="feedBackText" height="100%" />
+      </ScrollView>
+    </StackLayout>
+    <StackLayout row="2" class="FooterNav" orientation="horizontal">
+      <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
+      <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
+      <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+      <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
+      <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
     </StackLayout>
   </GridLayout>
-
-  <!-- Your UI components go here -->
-
-</Page>
+  </Page>
