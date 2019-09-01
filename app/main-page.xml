@@ -35,7 +35,7 @@
             </button>
           </GridLayout>
           <GridLayout class="Home_Nav_Grid" columns="auto">
-            <button textWrap="true" column="1" width="100%" height="100" class="Home_Nav_Button" tap="goToUtility" pageName="{{ selectedLanguage==0 ? 'whats-new-page' : 'FR_whats-new-page' }}" >
+            <button textWrap="true" column="1" width="100%" height="100" class="Home_Nav_Button" tap="goToUtility" pageName="whats-new-page" >
               <button.formattedText>
                 <formattedString>
                   <formattedString.spans>
