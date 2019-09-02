@@ -61,19 +61,29 @@ exports.openSearch = function() {
             var lowercaseSearch = lpargs.value.toLowerCase();
             
             if( lowercaseSearch != "") {
-
+                var searchWords = lowercaseSearch.split(" ");
                 for( categoryIndex = 0 ; categoryIndex < categoryCount ; categoryIndex++ ) {
                     var videoList   = categoryList.getChildAt( (categoryIndex * 2) + 1 );
                     var videoCount  = videoList.getChildrenCount();
                     var videoIndex  = 0;
                     
                     for( videoIndex = 0 ; videoIndex < videoCount ; videoIndex++ ) {
-                        checkText   = videoList.getChildAt( videoIndex ).data.contents;
+                        var itemVisibility  = Visibility.visible;
+                        checkText   = videoList.getChildAt( videoIndex ).data.contents.toLowerCase();
+                        
+                        searchWords.forEach( word => {
+                            if( word != "" && !checkText.includes( word ) ) {
+                                itemVisibility  = Visibility.collapse;
+                            }
+                        });
+/*
                         if( checkText.toLowerCase().includes( lowercaseSearch ) == true ) {
                             videoList.getChildAt( videoIndex ).visibility   = Visibility.visible;
                         } else {
                             videoList.getChildAt( videoIndex ).visibility   = Visibility.collapse;
                         }
+*/
+                        videoList.getChildAt( videoIndex ).visibility   = itemVisibility;
                     }
                 }
                 
