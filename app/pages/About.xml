@@ -20,7 +20,7 @@
                     <label row="3" style="font-size: 18px; color: black; font-weight: 700; text-align: center;" text="{{ versionString }}" width="100%" />
                 </GridLayout>
             </StackLayout>
-            <Button col="0" row="1" width="100%" text="{{ lblTAC }}" tap="openTAC" style="border-width: 3px; border-color: #222;" />
+            <Button col="0" row="1" width="100%" height="100%" text="{{ lblTAC }}" tap="openTAC" style="border-width: 3px; border-color: #222;" />
         </GridLayout>
     </GridLayout>
 </Page>
