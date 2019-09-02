@@ -22,9 +22,9 @@
         <Label width="33%" text="{{ lblStepButton selectedLanguage, lblStepButton[selectedLanguage] }}" class="Home_Utility_Label" style="margin:0px;" />
       </FlexboxLayout>
       <GridLayout columns="*,*,*" rows="auto" >
-      <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" style="background-image: linear-gradient( white, rgb(240,240,255), white); margin-left: 10; margin-right: 5;" />
-      <ListPicker  col="1" row="0" id="levelPicker" textField="levelCode" valueField="stepData" items="{{ levelItems }}" selectedIndex="{{ levelSelectionIndex }}" loaded="onLevelListPickerLoaded" class="p-15 picker" style="background-image: linear-gradient( white, rgb(240,240,255), white); margin-left: 5; margin-right: 5;"/>
-      <ListPicker col="2" row="0" items="{{ stepItems }}" textField="step" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" style="background-image: linear-gradient( white, rgb(240,240,255), white); margin-left: 5; margin-right: 10;"/>
+      <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 10; margin-right: 5;" />
+      <ListPicker  col="1" row="0" id="levelPicker" textField="levelCode" valueField="stepData" items="{{ levelItems }}" selectedIndex="{{ levelSelectionIndex }}" loaded="onLevelListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 5; margin-right: 5;"/>
+      <ListPicker col="2" row="0" items="{{ stepItems }}" textField="step" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 5; margin-right: 10;"/>
       </GridLayout>
       <!--<Button text="{{ lblStepButton selectedLanguage, lblStepButton[selectedLanguage] }}" class="Home_Utility_Label" tap="navToggle" value="SubstantiveStep" />-->
       <!--<TextField class="DayCalc_TextField" keyboardType="number" text="{{ stepNumber }}" />-->
