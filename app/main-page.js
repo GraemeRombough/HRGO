@@ -50,7 +50,7 @@ var checkFirebaseData = function() {
     var TODAY                   = new Date();
     var lastSyncCheckDate    = new Date('January 1, 2018 01:00:00');
     if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
-        lastSyncCheckDate    = new Date( applicationSettings.getNumber("LastFirebaseSyncCheck"));
+        lastSyncCheckDate    = new Date( applicationSettings.getNumber("LastFirebaseSyncCheck"));// - (1000 * 60 * 60 * 24);
     }
 
     if( ((TODAY - lastSyncCheckDate) / (1000 * 60 * 60 * 24)) > 1 ) {
@@ -58,11 +58,15 @@ var checkFirebaseData = function() {
         var lastSyncDate    = new Date('January 1, 2018 01:00:00');
         if( applicationSettings.hasKey("LastFirebaseSync") ) {
             lastSyncDate    = new Date( applicationSettings.getNumber("LastFirebaseSync"));
+        } else {
+            applicationSettings.setNumber("LastFirebaseSync", lastSyncDate.getTime());
         }
 
         console.log( "Last Sync Date = " + (lastSyncDate));
 
         const notificationCollection = firebase.firestore().collection("TableUpdates");
+
+        console.log("last sync date = " + lastSyncDate);
 
         const query = notificationCollection.where( "Updated", ">", lastSyncDate ).orderBy("Updated");
 
