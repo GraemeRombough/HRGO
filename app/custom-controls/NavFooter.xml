@@ -1,7 +1,7 @@
 <StackLayout class="FooterNav" orientation="horizontal">
     <Button class="Footer_NavIcon" text="&#xe902;" width="20%" tap="goToHome"/>
     <Button class="Footer_NavIcon" text="&#xe994;"  width="20%" tap="footer3"/>
-    <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px"></Image>
+    <Image class="Footer_NavIcon_Image" src="~/images/hr-go-ui-icon_alpha.png" width="20%" height="80px" tap="loadAbout" ></Image>
     <Button class="Footer_NavIcon" text="&#xe970;"  width="20%" tap="footer4"/>
     <Button class="Footer_NavIcon" text="&#xe923;"  width="20%" tap ="footer5"/>
 </StackLayout>

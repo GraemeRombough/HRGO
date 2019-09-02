@@ -25,14 +25,6 @@
         </StackLayout>
 
         <CustomControls:NavFooterLandscape col="2" />
-<!--
-        <StackLayout col="2" class="FooterNavLandscape" orientation="vertical" >
-            <Button class="Footer_NavIcon" text="&#xe967;" tap="goBack" style="color: rgb(220,170,0);" />
-            <Button class="Footer_NavIcon" text="&#xe902;" height="20%" tap="goToHome"/>
-            <Button class="Footer_NavIcon" text="&#xe994;"  height="20%" tap="footer3"/>
-            <Button class="Footer_NavIcon" text="&#xe970;"  height="20%" tap="footer4"/>
-            <Button class="Footer_NavIcon" text="&#xe923;"  height="20%" tap ="footer5"/>
-        </StackLayout>-->
     </GridLayout>
 
 

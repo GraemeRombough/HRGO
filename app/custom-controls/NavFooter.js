@@ -5,6 +5,10 @@ exports.goToHome = function() {
     uiFrame.topmost().navigate( "main-page" );
 };
 
+exports.loadAbout = function(args) {
+    uiFrame.topmost().navigate( "./pages/About" );
+}
+
 exports.footer3 = function() {
     uiFrame.topmost().navigate( (applicationSettings.getString("PreferredLanguage") == "French" ? "FR_" : "") + "profile-page" );
 };
