@@ -1,4 +1,5 @@
 var applicationModule = require("application");
+var uiFrame = require('ui/frame');
 
 const firebase = require("nativescript-plugin-firebase/app");
 
@@ -14,6 +15,7 @@ firebase.initializeApp({
     }
 );
 
+// Detect screen rotation, and set the "landscapeMode" boolean value in the current page's binding context
 applicationModule.screenOrientation = "portrait";
 
 if( applicationModule.android ) {
@@ -26,12 +28,20 @@ if( applicationModule.android ) {
             } else {
                 win.clearFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
             }
+
+            if( uiFrame.topmost() != null && uiFrame.topmost().currentPage.bindingContext != null ) {
+                uiFrame.topmost().currentPage.bindingContext.set("landscapeMode" , args.newValue == "landscape");
+            }
         }
     });
 } else {
     applicationModule.on(applicationModule.orientationChangedEvent, function(args) {
         applicationModule.screenOrientation   = args.newValue;
         console.log(applicationModule.screenOrientation);
+        
+        if( uiFrame.topmost() != null && uiFrame.topmost().currentPage.bindingContext != null ) {
+            uiFrame.topmost().currentPage.bindingContext.set("landscapeMode" , args.newValue == "landscape");
+        }
     });
 }
 

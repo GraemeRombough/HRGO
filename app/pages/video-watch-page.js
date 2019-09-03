@@ -37,16 +37,6 @@ exports.pageLoaded = function(args) {
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" />` );
 
     console.log( "watch the video " + page.navigationContext.VideoID );
-
-    page.on("orientationChanged" , function(args) {
-        console.log("on Orientation Changed");
-    });
-
-    app.on(app.orientationChangedEvent, function(args) {
-        console.log("on app Orientation Changed " + args.newValue );
-        
-        pageData.set( "landscapeMode" , args.newValue == "landscape" );
-    });
 };
 
 exports.portrait = function() {

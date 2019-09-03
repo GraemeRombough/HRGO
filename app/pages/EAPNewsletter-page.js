@@ -3,6 +3,7 @@ const   pageData                = new observable.Observable();
 var     applicationSettings     = require("application-settings");
 const   webViewEvents           = require("~/utilities/WebViewExtender");
 var     HTMLBuilder             = require("~/utilities/HTMLBuilder");
+var     app                     = require("application");
 var frameModule = require("ui/frame");
 var     page;
 var     actionBarHiddenPage     = false;
@@ -48,7 +49,18 @@ exports.pageLoaded = function(args) {
     pageData.set("actionBarTitle", title);
     pageData.set("ArticleHTML", formattedText);
 
+    pageData.set( "landscapeMode" , app.screenOrientation == "landscape" );
+    pageData.set( "showNav", false );
+
     scrollDetection         = false;
+    
+/*
+    app.on(app.orientationChangedEvent, function(args) {
+        console.log("on app Orientation Changed " + args.newValue );
+        
+        pageData.set( "landscapeMode" , args.newValue == "landscape" );
+    });
+    */
 };
 
 exports.goBack  = function(args) {
@@ -59,6 +71,10 @@ exports.goBack  = function(args) {
 exports.showSideDrawer = function(args) {
     console.log("Show side drawer");
 };
+
+exports.toggleNavBar = function() {
+    pageData.set( "showNav", !pageData.get( "showNav" ));
+}
 
 exports.onWVSwipe = function(event) {
     console.log("onWVSwipe: " + event.direction);
