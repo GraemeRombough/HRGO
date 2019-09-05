@@ -7,15 +7,8 @@ const fromObject = require("tns-core-modules/data/observable").fromObject;
 var firebase = require("nativescript-plugin-firebase/app");
 var page;
 var pageObject;
+
 exports.pageLoaded = function(args) {
-/*
-    firebase.keepInSync("wellness-landing-page", true).then(function() {
-        console.log("table updated");
-    },
-    function(error) {
-        console.log("error here");
-    });
-    */
     pageData = fromObject({
         selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
         lblTitle: ["Home", "Accueil"],
@@ -27,11 +20,9 @@ exports.pageLoaded = function(args) {
         lblCalculators: ["Calculators", "Calculateurs"],
         lblPay: ["Pay", "Paie"],
         lblAnnouncements: ["Announcements", "Annonces"],
-        lblWellness: ["Health and wellness", "Santé et bien-être"]
+        lblWellness: ["Mental Health and Well-being", "Santé mentale et mieux-être"]
     });
 
-
-    
     page = args.object;
     args.object.bindingContext = pageData;
     pageObject = page;
