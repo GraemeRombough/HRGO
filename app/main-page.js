@@ -1,4 +1,5 @@
 var frameModule = require("ui/frame");
+var applicationModule = require("application");
 var observable = require("data/observable");
 var pageData = new observable.Observable();
 var subNavTitle = "";
@@ -27,8 +28,37 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
     pageObject = page;
 
-    checkFirebaseData();
+    //checkFirebaseData();
+    if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
+        try {
+            applicationSettings.getString( "LastFirebaseSyncCheck");
+        } catch(err) {
+            applicationSettings.remove("LastFirebaseSyncCheck");
+            applicationSettings.setString( "LastFirebaseSyncCheck" , "10" );
+        }
+    } else {
+        applicationSettings.setString( "LastFirebaseSyncCheck" , "10" );
+    }
+    
+    if( applicationSettings.hasKey("LastFirebaseSync") ) {
+        try {
+            applicationSettings.getString( "LastFirebaseSync");
+        } catch(err) {
+            applicationSettings.remove("LastFirebaseSync");
+            applicationSettings.setString( "LastFirebaseSync" , "10" );
+        }
+    } else {
+        applicationSettings.setString( "LastFirebaseSync" , "10" );
+    }
+    checkFirebase();
 
+    /*
+    if( !applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
+        console.log("init LastFirebaseSyncCheck");
+        var lastSyncCheckDate    = new Date('January 1, 2018 01:00:00');
+        applicationSettings.setString("LastFirebaseSyncCheck", "" + lastSyncCheckDate.getTime());
+    }
+*/
     if( !applicationSettings.hasKey("PreferredLanguage")) {
         var langSection = pageObject.getViewById("languageSelection");
         langSection.visibility = "visible";
@@ -37,20 +67,106 @@ exports.pageLoaded = function(args) {
 
 };
 
+function reloadTable(tableName, timeStampValue) {
+    console.log( "reload table " + tableName);
+    switch(tableName) {
+        case "Categories":
+            applicationModule.CategoriesCollection.get({ source: "server" }).then( refreshSnapshot => {
+                if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < timeStampValue.getTime() ) {
+                    applicationSettings.setString("LastFirebaseSync", "" + timeStampValue.getTime());
+                }
+            });
+            break;
+        case "Notifications":
+            applicationModule.NotificationsCollection.get({ source: "server" }).then( refreshSnapshot => {
+                if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < timeStampValue.getTime() ) {
+                    applicationSettings.setString("LastFirebaseSync", "" + timeStampValue.getTime());
+                }
+            });
+            break;
+        case "POC":
+            applicationModule.POCCollection.get({ source: "server" }).then( refreshSnapshot => {
+                if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < timeStampValue.getTime() ) {
+                    applicationSettings.setString("LastFirebaseSync", "" + timeStampValue.getTime());
+                }
+            });
+            break;
+        case "PayInfo":
+            applicationModule.PayInfoCollection.get({ source: "server" }).then( refreshSnapshot => {
+                if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < timeStampValue.getTime() ) {
+                    applicationSettings.setString("LastFirebaseSync", "" + timeStampValue.getTime());
+                }
+            });
+            break;
+        case "Videos":
+            applicationModule.VideosCollection.get({ source: "server" }).then( refreshSnapshot => {
+                if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < timeStampValue.getTime() ) {
+                    applicationSettings.setString("LastFirebaseSync", "" + timeStampValue.getTime());
+                }
+            });
+            break;
+        case "wellness-landing-page":
+            applicationModule.WellnessLPCollection.get({ source: "server" }).then( refreshSnapshot => {
+                refreshSnapshot.forEach( record => {
+
+                });
+                console.log("in wellness-landing-page app time = " + applicationSettings.getString("LastFirebaseSync") + " , table time = " + timeStampValue.getTime());
+                if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < timeStampValue.getTime() ) {
+                    applicationSettings.setString("LastFirebaseSync", "" + timeStampValue.getTime());
+                }
+            });
+            break;
+    }
+
+}
+
+async function refreshTable(tableName, stampDate) {
+    var refreshCollection   = firebase.firestore().collection(tableName);
+    console.log( "app and table : " + applicationSettings.getString("LastFirebaseSync") + "  :  " + stampDate.getTime());
+    try {
+        var refreshSnapshot = await refreshCollection.get();
+        if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < stampDate.getTime()) {
+            console.log("change last sync time to " + stampDate.getTime());
+            applicationSettings.setString("LastFirebaseSync", "" + stampDate.getTime());
+            console.log( applicationSettings.getString("LastFirebaseSync") );
+        }
+        refreshSnapshot.forEach( record => {
+            console.log( record.data().TitleEN);
+        });
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+async function checkFirebase() {
+    var updatesCollection   = firebase.firestore().collection("TableUpdates");
+    try {
+        var lastSyncDate    = new Date( parseInt( applicationSettings.getString("LastFirebaseSync"), 10));
+        var dataSnapshot    = await updatesCollection.where( "Updated", ">", lastSyncDate ).orderBy("Updated").get();
+        dataSnapshot.forEach( record => {
+            console.log( "checkFirebase for " + record.data().TableName );
+            refreshTable( record.data().TableName , record.data().Updated);
+        });
+    }
+    catch(err) {
+        console.log("Retrieval error: " + err);
+    }
+}
+
 var checkFirebaseData = function() {
     var TODAY                   = new Date();
     var lastSyncCheckDate    = new Date('January 1, 2018 01:00:00');
     if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
-        lastSyncCheckDate    = new Date( applicationSettings.getNumber("LastFirebaseSyncCheck"));// - (1000 * 60 * 60 * 24);
+        lastSyncCheckDate    = new Date( parseInt( applicationSettings.getString("LastFirebaseSyncCheck"), 10));
     }
 
     if( ((TODAY - lastSyncCheckDate) / (1000 * 60 * 60 * 24)) > 1 ) {
 
         var lastSyncDate    = new Date('January 1, 2018 01:00:00');
         if( applicationSettings.hasKey("LastFirebaseSync") ) {
-            lastSyncDate    = new Date( applicationSettings.getNumber("LastFirebaseSync"));
+            lastSyncDate    = new Date( parseInt( applicationSettings.getString("LastFirebaseSync"), 10));
         } else {
-            applicationSettings.setNumber("LastFirebaseSync", lastSyncDate.getTime());
+            applicationSettings.setString("LastFirebaseSync", "" + lastSyncDate.getTime());
         }
 
         console.log( "Last Sync Date = " + (lastSyncDate));
@@ -63,21 +179,25 @@ var checkFirebaseData = function() {
 
         query.get({ source: "server" }).then( querySnapshot => {
             querySnapshot.forEach( colDoc => {
+                console.log("refresh data for " + colDoc.data().TableName);
+                reloadTable(colDoc.data().TableName, colDoc.data().Updated);
+                /*
                 firebase.firestore().collection(colDoc.data().TableName).get({ source: "server" }).then( refreshSnapshot => {
-                    if( colDoc.data().Updated.getTime() > applicationSettings.getNumber("LastFirebaseSync") ) {
-                        applicationSettings.setNumber("LastFirebaseSync", colDoc.data().Updated.getTime());
+                    if( colDoc.data().Updated.getTime() > applicationSettings.getString("LastFirebaseSync") ) {
+                        applicationSettings.setString("LastFirebaseSync", colDoc.data().Updated.getTime());
                     }
                 },
                 (errorMessage) => {
 
                 });
+                */
             });
         },
         (errorMesage) => {
             console.log("Error getting query results: " + errorMessage)
         });
 
-        applicationSettings.setNumber("LastFirebaseSyncCheck", TODAY.getTime());
+        applicationSettings.setString("LastFirebaseSyncCheck", "" + TODAY.getTime());
     }
 };
 
