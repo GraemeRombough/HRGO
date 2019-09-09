@@ -39,8 +39,12 @@ if( applicationModule.android ) {
         applicationModule.screenOrientation   = args.newValue;
         console.log(applicationModule.screenOrientation);
         
-        if( uiFrame.topmost() != null && uiFrame.topmost().currentPage.bindingContext != null ) {
-            uiFrame.topmost().currentPage.bindingContext.set("landscapeMode" , args.newValue == "landscape");
+        if( uiFrame.topmost() != null ) {
+            if( uiFrame.topmost().currentPage  != null ) {
+                if( uiFrame.topmost().currentPage.bindingContext != null ) {
+                    uiFrame.topmost().currentPage.bindingContext.set("landscapeMode" , args.newValue == "landscape");
+                }
+            }
         }
     });
 }
