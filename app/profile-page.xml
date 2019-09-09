@@ -2,32 +2,32 @@
 <Page loaded="pageLoaded" actionBarHidden="true"
     xmlns:CustomControls="custom-controls">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
-  <GridLayout rows="*,60">
+  <GridLayout rows="60,*,60">
   <StackLayout row="0" orientation="vertical" width="100%">
     <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
-      <label col="0" row="0" class="Header_Icon" text="&#xe923;"/>
-      <label col="1" row="0" text="SETTINGS" class="Header_Label"/>
+      <label col="0" row="0" class="Header_Icon" text="&#xe994;"/>
+      <label col="1" row="0" text="{{ lblFormTitle selectedLanguage, lblFormTitle[selectedLanguage] }}" class="Header_Label"/>
       <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
     </GridLayout>
-<ScrollView>
-    <StackLayout orientation="vertical">
-      <label class="DayCalc_SectionTitle" text="Preferred Language"/>
-      <GridLayout columns="*,*">
-        <Button class="Submit_Button_1" col="0" text="English" tap="setToEng" id="EnglishButton"/>
-        <Button class="Submit_Button_1" col="1" text="French" tap="setToFre" id="FrenchButton"/>
-      </GridLayout>
-      
-        <label class="DayCalc_SectionTitle" text="Work Email"/>
-      
-        <TextField class="Utility_TextBox" text="{{ workEmail }}" />
-        <Button class="Submit_Button_1" text="Save Profile" tap="saveProfile"/>
-        <Button class="Submit_Button_1" text="Terms and Conditions" tap="viewTerms"/>
-    </StackLayout>
-</ScrollView>
   </StackLayout>
+
+  <ScrollView row="1">
+      <StackLayout orientation="vertical">
+        <label class="DayCalc_SectionTitle" text="{{ lblLanguageLabel selectedLanguage, lblLanguageLabel[selectedLanguage] }}"/>
+        <GridLayout columns="*,*">
+          <Button class="Submit_Button_1" col="0" text="English" tap="setToEng" id="EnglishButton"/>
+          <Button class="Submit_Button_1" col="1" text="Français" tap="setToFre" id="FrenchButton"/>
+        </GridLayout>
+        
+          <label class="DayCalc_SectionTitle" text="{{ lblWorkEmail selectedLanguage, lblWorkEmail[selectedLanguage] }}"/>
+        
+          <TextField class="Utility_TextBox" text="{{ workEmail }}" />
+          <Button class="Submit_Button_1" text="{{ lblSave selectedLanguage, lblSave[selectedLanguage] }}" tap="saveProfile"/>
+      </StackLayout>
+  </ScrollView>
       
     
-    <CustomControls:NavFooter row="1" />
+    <CustomControls:NavFooter row="2" />
 
     </GridLayout>
 

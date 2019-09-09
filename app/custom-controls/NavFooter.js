@@ -10,7 +10,7 @@ exports.loadAbout = function(args) {
 }
 
 exports.footer3 = function() {
-    uiFrame.topmost().navigate( (applicationSettings.getString("PreferredLanguage") == "French" ? "FR_" : "") + "profile-page" );
+    uiFrame.topmost().navigate( "profile-page" );
 };
 
 exports.footer4 = function(){

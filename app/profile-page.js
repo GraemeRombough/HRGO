@@ -2,18 +2,28 @@ var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var dialogs = require("ui/dialogs");
 var observable = require("data/observable");
-var pageData = new observable.Observable();
+var pageData;// = new observable.Observable();
 var applicationSettings = require("application-settings");
+const fromObject = require("tns-core-modules/data/observable").fromObject;
 var subNavTitle = "YourPayInformation";
 var navList = [];
 var pageObject
 
 
 exports.pageLoaded = function(args) {
+    pageData = fromObject({
+        selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
+        lblFormTitle: ["SETTINGS", "PARAMÈTRES"],
+        lblLanguageLabel: ["Preferred Language", "Langue"],
+        lblWorkEmail: ["Work Email", "Courriel de travail"],
+        lblSave: ["Save Profile", "Enregistrer le profil"]
+    });
+
     const page = args.object;
     //vm = new Observable();
     pageObject = page;
     page.bindingContext = pageData;
+
     checkLanguage();
 };
 exports.goToHome = function(){
@@ -60,6 +70,8 @@ exports.setToEng = function(args){
     freButton.style.backgroundColor = "#DDD";
     freButton.style.color = "#222";
     applicationSettings.setString("PreferredLanguage", "English");
+
+    pageData.set( "selectedLanguage" , 0 );
 }
 exports.setToFre = function(args){
     var engButton = pageObject.getViewById("EnglishButton");
@@ -69,9 +81,11 @@ exports.setToFre = function(args){
     engButton.style.backgroundColor = "#DDD";
     engButton.style.color = "#222";
     applicationSettings.setString("PreferredLanguage", "French");
+
+    pageData.set( "selectedLanguage" , 1 );
     //exports.saveProfile();
-    var topmost = frameModule.topmost();
-    topmost.navigate("FR_profile-page");
+    //var topmost = frameModule.topmost();
+    //topmost.navigate("FR_profile-page");
 }
 exports.saveProfile = function(){
     console.log(pageData.get("workEmail"));
