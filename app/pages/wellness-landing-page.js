@@ -18,7 +18,8 @@ var currentLanguage = "";
 
 var eapStackVisible=false;
 
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
+var firebaseBuffer  = require("~/utilities/FirebaseBuffer");
 
 
 exports.pageLoaded = function(args) {
@@ -284,6 +285,43 @@ function contentCompare( a , b ) {
     return compareResult;
 };
 
+function categoryCompare( a , b ) {
+    if( a.Order > b.Order ) {
+        return 1;
+    } else if( a.Order < b.Order ) {
+        return -1;
+    }
+    if( a.Ref > b.Ref ) {
+        return 1;
+    } else if( a.Ref < b.Ref ) {
+        return -1;
+    }
+    return 0;
+};
+
+function buildContentFromFirebase() {
+    var selectedLanguage    = pageData.get("selectedLanguage");
+    var categoriesStack     = page.getViewById("categoriesStack");
+    categoriesStack.removeChildren();
+
+    var contentRecords  = firebaseBuffer.readContents("wellness-landing-page");
+    var categories      = firebaseBuffer.readContents("Categories");
+    categories.sort(categoryCompare);
+
+    categories.forEach( category => {
+        var categoryStack   = generateCategoryToggle(category, selectedLanguage, categoriesStack);
+        var filteredList    = contentRecords.filter( function(value, index, array) {
+            return category.Category == value.Category;
+        });
+
+        filteredList.sort(contentCompare);
+        filteredList.forEach( function(content) {
+            categoryStack.addChild( generateContentLine(content, selectedLanguage));
+        });
+
+    });
+}
+/*
 function buildContentFromFirebase() {
     var selectedLanguage    = pageData.get("selectedLanguage");
     var categoriesStack     = page.getViewById("categoriesStack");
@@ -312,7 +350,7 @@ function buildContentFromFirebase() {
         });
     });
 };
-
+*/
 /*
 var getCategoriesFromDatabase = function() {
     var returnedItem;

@@ -6,6 +6,7 @@ var subNavTitle = "";
 var applicationSettings = require("application-settings");
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 var firebase = require("nativescript-plugin-firebase/app");
+var firebaseBuffer = require("~/utilities/FirebaseBuffer");
 var page;
 var pageObject;
 
@@ -13,7 +14,7 @@ exports.pageLoaded = function(args) {
     pageData = fromObject({
         selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
         lblTitle: ["Home", "Accueil"],
-        lblVideos: ["Videos", "Videos"],
+        lblVideos: ["Videos", "Vidéos"],
         lblContact: ["Contact", "Contacts"],
         lblLookup: ["Lookup", "Consultation"],
         lblTracking: ["Tracking", "Suivis"],
@@ -28,28 +29,26 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
     pageObject = page;
 
-    //checkFirebaseData();
-    if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
-        try {
-            applicationSettings.getString( "LastFirebaseSyncCheck");
-        } catch(err) {
+    if( !applicationSettings.hasKey("datesHaveBeenReset")) {
+        var resetToDate    = new Date('January 1, 2018 01:00:00');
+        if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
             applicationSettings.remove("LastFirebaseSyncCheck");
-            applicationSettings.setString( "LastFirebaseSyncCheck" , "10" );
         }
-    } else {
-        applicationSettings.setString( "LastFirebaseSyncCheck" , "10" );
-    }
-    
-    if( applicationSettings.hasKey("LastFirebaseSync") ) {
-        try {
-            applicationSettings.getString( "LastFirebaseSync");
-        } catch(err) {
+        applicationSettings.setString( "LastFirebaseSyncCheck" , "" + resetToDate.getTime());
+        
+        if( applicationSettings.hasKey("LastFirebaseSync") ) {
             applicationSettings.remove("LastFirebaseSync");
-            applicationSettings.setString( "LastFirebaseSync" , "10" );
         }
-    } else {
-        applicationSettings.setString( "LastFirebaseSync" , "10" );
+        applicationSettings.setString( "LastFirebaseSync" , "" + resetToDate.getTime());
+
+
+        applicationSettings.setString("datesHaveBeenReset", "1.3.0");
     }
+
+    //applicationSettings.remove("LastFirebaseSyncCheck");
+    //applicationSettings.remove("LastFirebaseSync");
+    //checkFirebaseData();
+    
     checkFirebase();
 
     /*
@@ -125,31 +124,55 @@ async function refreshTable(tableName, stampDate) {
     console.log( "app and table : " + applicationSettings.getString("LastFirebaseSync") + "  :  " + stampDate.getTime());
     try {
         var refreshSnapshot = await refreshCollection.get();
+        var array   = [];
+        refreshSnapshot.forEach( record => {
+            array.push(record.data());
+            //console.log( record.data().TitleEN);
+        });
+
+        firebaseBuffer.writeContents( tableName, array);
+
         if( parseInt( applicationSettings.getString("LastFirebaseSync"), 10) < stampDate.getTime()) {
             console.log("change last sync time to " + stampDate.getTime());
             applicationSettings.setString("LastFirebaseSync", "" + stampDate.getTime());
             console.log( applicationSettings.getString("LastFirebaseSync") );
         }
-        refreshSnapshot.forEach( record => {
-            console.log( record.data().TitleEN);
-        });
     } catch(err) {
         console.log(err);
     }
 }
 
 async function checkFirebase() {
-    var updatesCollection   = firebase.firestore().collection("TableUpdates");
-    try {
-        var lastSyncDate    = new Date( parseInt( applicationSettings.getString("LastFirebaseSync"), 10));
-        var dataSnapshot    = await updatesCollection.where( "Updated", ">", lastSyncDate ).orderBy("Updated").get();
-        dataSnapshot.forEach( record => {
-            console.log( "checkFirebase for " + record.data().TableName );
-            refreshTable( record.data().TableName , record.data().Updated);
-        });
+    var TODAY                   = new Date();
+    var lastSyncCheckDate    = new Date('January 1, 2018 01:00:00');
+    if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
+        lastSyncCheckDate    = new Date( parseInt( applicationSettings.getString("LastFirebaseSyncCheck"), 10));
     }
-    catch(err) {
-        console.log("Retrieval error: " + err);
+
+    console.log("last sync check date = " + lastSyncCheckDate);
+
+    if( (TODAY - lastSyncCheckDate) >= (1000 * 60 * 60 * 24) ) {
+
+        try {
+        var login   = await firebase.auth().signInAnonymously();
+        console.log(" login success");
+        } catch(err) {
+            console.log("login error " + err);
+        }
+
+        var updatesCollection   = firebase.firestore().collection("TableUpdates");
+        try {
+            var lastSyncDate    = new Date( parseInt( applicationSettings.getString("LastFirebaseSync"), 10));
+            var dataSnapshot    = await updatesCollection.where( "Updated", ">", lastSyncDate ).orderBy("Updated").get();
+            dataSnapshot.forEach( record => {
+                console.log( "checkFirebase for " + record.data().TableName );
+                refreshTable( record.data().TableName , record.data().Updated);
+            });
+            applicationSettings.setString("LastFirebaseSyncCheck", "" + TODAY.getTime());
+        }
+        catch(err) {
+            console.log("Retrieval error: " + err);
+        }
     }
 }
 

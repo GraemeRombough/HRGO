@@ -20,7 +20,7 @@ exports.pageLoaded = function(args) {
     pageObject = page;
 
     if( applicationSettings.getString("PreferredLanguage") == "French" ) {
-        pageData.set("HeaderTitle", "Videos");
+        pageData.set("HeaderTitle", "Vidéos");
         pagePrefix = "FR_";
     } else {
         pageData.set("HeaderTitle", "Videos");

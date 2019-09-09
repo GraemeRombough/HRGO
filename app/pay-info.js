@@ -11,6 +11,7 @@ var payData;
 var pagePrefix  = "";
 
 //var firebase = require("nativescript-plugin-firebase/app");
+var firebaseBuffer  = require("~/utilities/FirebaseBuffer");
 
 exports.onNavigatingTo = function(args) {
     var classDD = getClassList();
@@ -290,7 +291,7 @@ var buildListFromFirestore = function() {
 }
 */
 var getClassList = function() {
-    var databasePull = getFromDataBase();
+    var databasePull = getFromFirebase();
 
     var previousClass   = "";
     var previousLevel   = "";
@@ -374,6 +375,33 @@ var getClassList = function() {
 
     return classList;
 };
+
+function classCompare( a , b ) {
+    if( a.classCode > b.classCode ) {
+        return 1;
+    } else if( a.classCode < b.classCode ) {
+        return -1;
+    }
+    if( a.step == "min" || b.step == "max") {
+        return -1;
+    }
+    if( a.step == "max" || b.step == "min" ) {
+        return 1;
+    }
+    if( a.step > b.step ) {
+        return 1;
+    } else if( a.step < b.step ) {
+        return -1;
+    }
+    return 0;
+};
+
+function getFromFirebase() {
+    var contentRecords  = firebaseBuffer.readContents("PayInfo");
+    contentRecords.sort(classCompare);
+
+    return contentRecords;
+}
 
 var getFromDataBase = function(){
     var databaseReturn = [];

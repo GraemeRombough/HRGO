@@ -22,7 +22,8 @@ var applicationSettings = require("application-settings");
 var pagePrefix  = "";
 var page;
 
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
+var firebaseBuffer  = require("~/utilities/FirebaseBuffer");
 
 //const   webViewEvents           = require("~/utilities/WebViewExtender");
 //var     HTMLBuilder             = require("~/utilities/HTMLBuilder");
@@ -390,6 +391,18 @@ var buildListFromFirestore = function(showTags) {
     var POCList = pageObject.getViewById("POC_List");
     POCList.removeChildren();
 
+    var queryResults    = firebaseBuffer.readContents("POC");
+
+    if( showTags != "" ) {
+        queryResults    = queryResults.filter( function(value, index, array) {
+            return value.Tags.includes(showTags);
+        });
+    }
+
+    queryResults.sort( applicationSettings.getString("PreferredLanguage") == "French" ? compareFrench : compareEnglish );
+    displayPOCs( queryResults );
+
+    /*
     const notificationCollection = firebase.firestore().collection("POC").get({ source: "cache" }).then( querySnapshot => {
         var queryResults = [];
         querySnapshot.forEach( colDoc => {
@@ -403,6 +416,7 @@ var buildListFromFirestore = function(showTags) {
     (errorMesage) => {
         console.log("Error getting query results: " + errorMessage);
     });
+    */
 };
 
 function compareFrench( a , b ) {

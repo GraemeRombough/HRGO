@@ -38,7 +38,7 @@
         <Button class="Main_Nav_SubLine" id="20" text="Congé avec étalement du revenu" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="21" text="Congé de transition à la retraite" tap="goToArticle" visibility="{{ Leave ? 'visible' : 'collapsed' }}"/>
 
-      <Button class="Sub_Nav_Line" text="Videos de SSRH" tap="navToggle" value="Videos"/>
+      <Button class="Sub_Nav_Line" text="Vidéos de SSRH" tap="navToggle" value="Videos"/>
         <Button class="Main_Nav_SubLine" id="1" text="Processus d'ouverture de session d'inscription" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="2" text="Soumettre une demande d'intervention de payé ssrh" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" id="3" text="Effectuer une soumission en bloc de demandes d'intervention de paye" tap="goToVideo" visibility="{{ Videos ? 'visible' : 'collapsed' }}"/>

@@ -7,7 +7,8 @@ var buttonModule = require("tns-core-modules/ui/button");
 const Button = require("tns-core-modules/ui/button/").Button;
 var applicationSettings = require("application-settings");
 
-var firebase = require("nativescript-plugin-firebase/app");
+//var firebase = require("nativescript-plugin-firebase/app");
+var firebaseBuffer  = require("~/utilities/FirebaseBuffer");
 
 
 exports.pageLoaded = function(args) {
@@ -169,12 +170,56 @@ var getNotificationList = function(){
 };
 */
 
+
+function compareDates( a , b ) {
+    var compareResult = 0;
+    if( a.PublishDate < b.PublishDate ) {
+        compareResult = 1;
+    } else if( a.PublishDate > b.PublishDate ) {
+        compareResult = -1;
+    } else {
+        if( a.Ref < b.Ref ) {
+            compareResult = -1;
+        } else {
+            compareResult = 1;
+        }
+    }
+    return compareResult;
+};
+
 // Build the list of available articles from the Firestore database.  Only retreve the ones where the PublishDate value is before now.
 //  Retrieve the articles from the network by default, or fall back onto cached data if necessary
 var buildListFromFirestore = function() {
     console.log("***** buildListFromFirestore   - enter");
     var notificationStack = pageObject.getViewById("NewsList");
+    var TODAY  = new Date();
     notificationStack.removeChildren();
+
+    var queryResults    = firebaseBuffer.readContents("Notifications");
+
+    //queryResults    = queryResults.filter( function(value, index, array) {
+    //    return value.PublishDate <= TODAY;
+    //});
+
+
+    queryResults.sort( compareDates );
+
+    queryResults.forEach( colDoc => {
+        var newsButton = new Button();
+        newsButton.className = "Main_Nav_SubLine";
+        if( applicationSettings.getString("PreferredLanguage") == "French" ) {
+            newsButton.text     = colDoc.TitleFR;
+            newsButton.contents = colDoc.ContentFR;
+        } else {
+            newsButton.text     = colDoc.TitleEN;
+            newsButton.contents = colDoc.ContentEN;
+        }
+        newsButton.id       = colDoc.Ref;
+        newsButton.on(buttonModule.Button.tapEvent, loadNewsletter, this);
+        notificationStack.addChild(newsButton);
+    });
+
+    /*
 
     const notificationCollection = firebase.firestore().collection("Notifications");
 
@@ -207,4 +252,5 @@ var buildListFromFirestore = function() {
     (errorMesage) => {
         console.log("Error getting query results: " + errorMessage)
     });
+    */
 };
