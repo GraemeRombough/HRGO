@@ -59,9 +59,9 @@ exports.getPromotionStep = function(args){
         if(curDif > maxDif || maxDif == null){
             maxDif = curDif;
         }
-        if(classSubStepInfo[i-1].step = selectedSubStep){
+        if(classSubStepInfo[i-1].step == selectedSubStep){
             currentSalary = classSubStepInfo[i-1].annually;
-        }else if(classSubStepInfo[i].step = selectedSubStep){
+        }else if(classSubStepInfo[i].step == selectedSubStep){
             currentSalary = classSubStepInfo[i].annually;
         }
     }
