@@ -3,7 +3,7 @@
     <ActionBar title="HR GO" class="action-bar"></ActionBar>
 
     <GridLayout columns="{{ landscapeMode showNav , landscapeMode ? (showNav ? '*,20,60' : '*,20,0') : '*,0,0' }}" >
-        <GridLayout col="0" rows="{{ landscapeMode , landscapeMode ? '0,*,0' : '60,*,60' }}">
+        <GridLayout col="0" rows="{{ landscapeMode , landscapeMode ? '0,*,0' : '60,*,auto' }}">
             <StackLayout row="0" orientation="vertical" width="100%" > 
                 <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
                     <label col="0" row="0" class="Header_Icon" text="&#xe912;"/>

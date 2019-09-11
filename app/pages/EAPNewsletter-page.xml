@@ -2,7 +2,7 @@
     xmlns:CustomControls="custom-controls">
     
     <GridLayout columns="{{ landscapeMode showNav , landscapeMode ? (showNav ? '*,20,60' : '*,20,0') : '*,0,0' }}" >
-        <GridLayout col="0" id="pageGridLayout" rows="{{ landscapeMode , landscapeMode ? '0,*,0' : '60,*,60' }}">
+        <GridLayout col="0" id="pageGridLayout" rows="{{ landscapeMode , landscapeMode ? '0,*,0' : '60,*,auto' }}">
             <StackLayout row="0" >
                 <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
                     <label col="0" row="0" class="Header_Icon" text="&#xe9da;"/>

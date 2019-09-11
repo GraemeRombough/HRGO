@@ -1,7 +1,7 @@
 <Page loaded="pageLoaded" actionBarHidden="true"
     xmlns:CustomControls="custom-controls">
     
-    <GridLayout rows="auto,*,60" id="pageGridLayout">
+    <GridLayout rows="auto,*,auto" id="pageGridLayout">
         <StackLayout row="0" >
             <GridLayout columns="60,*,60,60" rows="auto" class="HeaderLabel">
                 <label col="0" row="0" class="Header_Icon" text="&#xe9da;"/>
