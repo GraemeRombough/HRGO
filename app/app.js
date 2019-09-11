@@ -29,8 +29,12 @@ if( applicationModule.android ) {
                 win.clearFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
             }
 
-            if( uiFrame.topmost() != null && uiFrame.topmost().currentPage.bindingContext != null ) {
-                uiFrame.topmost().currentPage.bindingContext.set("landscapeMode" , args.newValue == "landscape");
+            if( uiFrame.topmost() != null ) {
+                if( uiFrame.topmost().currentPage ) {
+                    if( uiFrame.topmost().currentPage.bindingContext != null ) {
+                        uiFrame.topmost().currentPage.bindingContext.set("landscapeMode" , args.newValue == "landscape");
+                    }
+                }
             }
         }
     });
