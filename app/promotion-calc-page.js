@@ -1,7 +1,9 @@
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var observable = require("data/observable");
-var pageData = new observable.Observable();
+var applicationSettings = require("application-settings");
+var app = require("application");
+var pageData;// = new observable.Observable();
 var selectedSubClass, selectedSubStep;
 var selectedTargClass, selectedTargStep;
 var classDD;
@@ -13,27 +15,276 @@ var pageVM;
 var subNavTitle = "YourPayInformation";
 var resultLabel = "___ > ___ = ___";
 
+var payData;
+
+var firebaseBuffer  = require("~/utilities/FirebaseBuffer");
+
 exports.onNavigatingTo = function(args){
     selectedSubClass = null;
     selectedSubStep = null;
     classDD = getClassList();
-    classSteps = getStepCount();
+    //classSteps = getStepCount();
     //const classifications = getClassList();
     var steps = [1];
     const page = args.object;
     pageObject = page;
+    //pageData.set("classItems", classDD);
+    //pageData.set("classIndex", 1);
+    //pageData.set("stepItems", steps);
+    //pageData.set("stepIndex", 1);
+    
+    //pageData.set("targClassItems", classDD);
+    //pageData.set("targClassIndex", 1);
+    //pageData.set("ResultLabel", resultLabel);
+
+    pageData = fromObject({
+        classItems: classDD,
+        levelItems: classDD[0].levelData,
+        stepItems: classDD[0].levelData[0].stepData,
+        classSelectionIndex: 0,
+        levelSelectionIndex: 0,
+        stepIndex:0,
+
+        targetClassSelectionIndex: 0,
+        targetLevelSelectionIndex: 0,
+
+        targClassItems: classDD,
+        targetLevelItems: classDD[0].levelData,
+        targClassIndex: 1,
+        ResultLabel: resultLabel,
+
+
+        busyLoading: false,
+        infoVisible: true,
+        salaryVisible: false,
+        SubstantiveClass: true,
+        TargetClass: false,
+        SubstantiveStep: false,
+        selectedLanguage: ((applicationSettings.getString("PreferredLanguage") == "French") ? 1 : 0),
+        lblFormTitle: ["PROMOTION PAY", "CALCUL - PROMOTION"],
+        lblSubstantiveButton: ["Substantive Classification", "Classification du poste d'attache"],
+        lblTargetButton: ["Target Classification", "Classification cible"],
+
+        lblClassificationButton: ["Classification", "Classification"],
+        lblStepButton: ["Step", "Échelon"],
+
+        lblPromotion: ["Promotion", "Promotion"],
+        lblDemotion: ["Demotion", "Rétrogradation"],
+        lblDeployment: ["Deployment", "Mutation"],
+
+        ChangeType: "...",
+        StartLabel: "...",
+        TargetLabel: "...",
+
+        landscapeMode: app.screenOrientation == "landscape",
+        showNav: false
+    });
+
     page.bindingContext = pageData;
-    pageData.set("classItems", classDD);
-    pageData.set("classIndex", 1);
-    pageData.set("stepItems", steps);
-    pageData.set("stepIndex", 1);
-    pageData.set("targClassItems", classDD);
-    pageData.set("targClassIndex", 1);
-    pageData.set("ResultLabel", resultLabel);  
+
+    calculatePromotion( );
 }
+
 exports.pageLoaded = function(args) {
     
 };
+
+
+exports.toggleNavBar = function() {
+    pageData.set( "showNav", !pageData.get( "showNav" ));
+}
+
+exports.onClassListPickerLoaded = function(args){
+    const listPicker = args.object;
+    const vm = listPicker.page.bindingContext;
+    listPicker.on("selectedIndexChange", (lpargs) => {
+        console.log("asdf");
+        vm.set("classSelectionIndex", listPicker.selectedIndex);
+
+        loadLevels(listPicker.selectedValue,args);
+    });
+};
+
+exports.onLevelListPickerLoaded = function(args){
+    const listPicker = args.object;
+    const vm = listPicker.page.bindingContext;
+    listPicker.on("selectedIndexChange", (lpargs) => {
+        vm.set("levelSelectionIndex", listPicker.selectedIndex);
+
+        loadSteps(listPicker.selectedValue,args);
+    });
+};
+
+exports.onStepListPickerLoaded = function(args) {
+    const listPicker = args.object;
+    const vm = listPicker.page.bindingContext;
+
+    listPicker.on("selectedIndexChange", (lpargs) => {
+        vm.set("stepIndex", listPicker.selectedIndex);
+
+        payData = listPicker.selectedValue;
+
+        calculatePromotion( );
+    });
+};
+
+exports.onTargetClassListPickerLoaded = function(args){
+    const listPicker = args.object;
+    const vm = listPicker.page.bindingContext;
+    listPicker.on("selectedIndexChange", (lpargs) => {
+        vm.set("targetClassSelectionIndex", listPicker.selectedIndex);
+
+        loadTargetLevels(listPicker.selectedValue,args);
+
+        calculatePromotion( );
+    });
+};
+
+exports.onTargetLevelListPickerLoaded = function(args){
+    const listPicker = args.object;
+    const vm = listPicker.page.bindingContext;
+    listPicker.on("selectedIndexChange", (lpargs) => {
+        vm.set("targetLevelSelectionIndex", listPicker.selectedIndex);
+
+        calculatePromotion( );
+    });
+};
+
+// When a list is loaded, load the next list down as well and select the first item.
+var loadLevels = function(selection,inputArg) {
+    console.log("loadLevels");
+    pageData.set("levelItems" , selection);
+    pageData.set("levelSelectionIndex", 0);
+
+    loadSteps(selection[0].stepData,inputArg);
+};
+
+var loadSteps = function(selection,inputArg) {
+    pageData.set("stepItems", selection);
+    pageData.set("stepIndex", 0);
+
+    payData = selection[0];
+    
+    calculatePromotion( );
+};
+
+var loadTargetLevels = function(selection,inputArg) {
+    console.log("loadLevels");
+    pageData.set("targetLevelItems" , selection);
+    pageData.set("targetLevelSelectionIndex", 0);
+};
+
+function calculatePromotion( ) {
+    var selectedClass   = classDD[ pageData.get("classSelectionIndex")];
+    var selectedLevel   = selectedClass.levelData[ pageData.get("levelSelectionIndex")];
+    var selectedStep    = selectedLevel.stepData[ pageData.get("stepIndex")];
+
+    var selectedTargetClass   = classDD[ pageData.get("targetClassSelectionIndex")];
+    var selectedTargetLevel   = selectedTargetClass.levelData[ pageData.get("targetLevelSelectionIndex")];
+
+    var stepLabel   = pageData.get("lblStepButton")[ pageData.get("selectedLanguage") ];
+
+    var targetPayRate   = 0;
+
+    pageData.set( "StartLabel" , selectedClass.classCode + " " + selectedLevel.levelCode + " " + stepLabel + " " + selectedStep.step + " : $" + selectedStep.annually);
+
+    var isPromotion = false;
+    var isTransfer  = false;
+    var isDemotion  = false;
+
+    var searchIndex = 0;
+
+    // if the maximum rate for the new appointment is less than the maximum rate for the current appointment, it is a demotion
+    if( selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually > selectedTargetLevel.stepData[ selectedTargetLevel.stepData.length - 1 ].annually ) {
+        isDemotion  = true;
+        pageData.set( "ChangeType" , pageData.get("lblDemotion")[ pageData.get("selectedLanguage")] );
+
+        while( searchIndex < selectedTargetLevel.stepData.length && selectedStep.annually >= selectedTargetLevel.stepData[searchIndex].annually ) {
+            searchIndex++;
+        }
+        if( searchIndex != 0 ) {
+            searchIndex--;
+        }
+
+        targetPayRate   = selectedTargetLevel.stepData[ searchIndex ].annually;
+    } else {
+        var minStepDiff;
+        // if there is more than min/max for the target position, then calculate using the steps
+        if( selectedTargetLevel.stepData.length > 2 ) {
+            minStepDiff = selectedTargetLevel.stepData[1].annually - selectedTargetLevel.stepData[0].annually;
+
+            for( diffSearch = 2 ; diffSearch < selectedTargetLevel.stepData.length ; diffSearch++ ) {
+                if( selectedTargetLevel.stepData[diffSearch].annually - selectedTargetLevel.stepData[diffSearch-1].annually < minStepDiff ) {
+                    minStepDiff = selectedTargetLevel.stepData[diffSearch].annually - selectedTargetLevel.stepData[diffSearch-1].annually;
+                }
+            }
+        } else {
+            minStepDiff = selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually * 0.04;
+        }
+
+        if( selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually + minStepDiff < selectedTargetLevel.stepData[ selectedTargetLevel.stepData.length - 1 ].annually ) {
+            // lowest rate equal to or greater than current rate plus minimum step difference
+            isPromotion = true;
+            pageData.set( "ChangeType" , pageData.get("lblPromotion")[ pageData.get("selectedLanguage")] );
+        } else {
+            // lowest rate equal to or greater than current rate
+            isTransfer= true;
+            pageData.set( "ChangeType" , pageData.get("lblDeployment")[ pageData.get("selectedLanguage")] );
+
+            minStepDiff = 0;
+        }
+
+
+        // if there is more than min/max for the target position, then calculate using the steps
+        if( selectedTargetLevel.stepData.length > 2 ) {
+            console.log("calc from steps");
+            /*
+            // find the lowest pay difference between all of the steps in the target classification
+            var minStepDiff = selectedTargetLevel.stepData[1].annually - selectedTargetLevel.stepData[0].annually;
+
+            for( diffSearch = 2 ; diffSearch < selectedTargetLevel.stepData.length ; diffSearch++ ) {
+                if( selectedTargetLevel.stepData[diffSearch].annually - selectedTargetLevel.stepData[diffSearch-1].annually < minStepDiff ) {
+                    minStepDiff = selectedTargetLevel.stepData[diffSearch].annually - selectedTargetLevel.stepData[diffSearch-1].annually;
+                }
+            }
+*/
+            while( searchIndex < selectedTargetLevel.stepData.length && selectedStep.annually + minStepDiff > selectedTargetLevel.stepData[searchIndex].annually ) {
+                searchIndex++;
+            }
+            if( searchIndex == selectedTargetLevel.stepData.length ) {
+                searchIndex--;
+            }
+
+            targetPayRate   = selectedTargetLevel.stepData[ searchIndex ].annually;
+        } else {
+            console.log("calc from 4%");
+            // 4% of the maximum rate of pay for the previous position if the new position has only one rate of pay
+            var fourPercent = selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually * 0.04;
+            console.log(fourPercent);
+            searchIndex = 0;
+            if( selectedTargetLevel.stepData.length > 1 ) {
+                var minimum = selectedTargetLevel.stepData[ 0 ].annually;
+                var maximum = selectedTargetLevel.stepData[ 1 ].annually;
+
+                if( selectedStep.annually + fourPercent >= minimum ) {
+                    targetPayRate   = selectedStep.annually + fourPercent;
+                } else {
+                    targetPayRate   = minimum;
+                }
+                if( targetPayRate >= maximum ) {
+                    targetPayRate = maximum;
+                    searchIndex = 1;
+                }
+            } else {
+                targetPayRate   = selectedTargetLevel.stepData[ 0 ].annually + fourPercent;
+            }
+            targetPayRate   = Math.ceil(targetPayRate);
+        }
+        
+    }
+    pageData.set( "TargetLabel" , selectedTargetClass.classCode + " " + selectedTargetLevel.levelCode + " " + stepLabel + " " + selectedTargetLevel.stepData[ searchIndex ].step + " : $" + targetPayRate);
+};
+
 exports.getPromotionStep = function(args){
     console.log(selectedSubClass[1]);
     console.log(selectedTargClass[1]);
@@ -99,17 +350,7 @@ exports.navToggle = function(args){
         pageData.set("SubstantiveClass", false);
     }
 };
-exports.onClassListPickerLoaded = function(args){
-    const listPicker = args.object;
-    const vm = listPicker.page.bindingContext;
-    listPicker.on("selectedIndexChange", (lpargs) => {
-        vm.set("classIndex", listPicker.selectedIndex);
-        
-        selectedSubClass = [listPicker.selectedIndex, listPicker.selectedValue];
-        selectedSubStep = null;
-        loadSteps(listPicker.selectedValue,args);
-    });
-}
+
 exports.onTargClassListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
@@ -120,19 +361,7 @@ exports.onTargClassListPickerLoaded = function(args){
         
     });
 }
-exports.onStepListPickerLoaded = function(args){
-    const listPicker = args.object;
-    const vm = listPicker.page.bindingContext;
-    listPicker.on("selectedIndexChange", (lpargs) => {
-        vm.set("stepIndex", listPicker.selectedIndex);
-        //console.log(`ListPicker selected value: ${listPicker.selectedValue}`);
-        //console.log(`ListPicker selected index: ${listPicker.selectedIndex}`);
-        selectedSubStep = [listPicker.selectedIndex, listPicker.selectedValue];
-        
-        
-        //loadSteps(listPicker.selectedValue,args);
-    });
-}
+
 exports.getSalaryInfo = function(args){
     //pageData.set("showInfo", true);
     //args.object.bindingContext = pageData;
@@ -149,26 +378,7 @@ exports.getSalaryInfo = function(args){
         pageData.set("salaryVisible", true);
     }
 };
-var loadSteps = function(selection,inputArg){
-    //console.log(`loadSteps selectedSubClass = ${selectedSubClass}`);
-    var numOfSteps;
-    var steps = [];
-    //console.log(classSteps.length);
-    for(x=0; x < classSteps.length; x++){
-        if(classSteps[x].class == selectedSubClass[1]){
-            numOfSteps = classSteps[x].steps;   
-        }
-    }
 
-    for(i = 0; i < numOfSteps; i++){
-        steps.push(i+1);
-    }
-    //console.log(`steps: ${steps.length}`);
-    //console.log(`steps: ${numOfSteps}`);
-    pageData.set("stepItems", steps);
-    pageData.set("stepIndex", 1);
-
-};
 exports.resetSelections = function(args){
     selectedSubClass = null;
     selectedSubStep = null;
@@ -180,6 +390,7 @@ exports.resetSelections = function(args){
     pageData.set("infoVisible", true);
     pageData.set("salaryVisible", false);
 }
+
 exports.getCalculatedInfo = function(){
     var overtimeCalc, hourlyCalc, dailyCalc, biweeklyCalc, annuallyCalc;
     var totalValue = 0;
@@ -207,38 +418,12 @@ exports.getCalculatedInfo = function(){
 
     pageData.set("calculatedMoney", "Gross Salary Calculation: $" + Math.round(totalValue * 100 + Number.EPSILON ) / 100);
 };
-exports.goToHome = function(){
-    var topmost = frameModule.topmost();
-    topmost.navigate("main-page");
-};
+
 exports.goBack = function(args){
     const thisPage = args.object.page;
     thisPage.frame.goBack()
 }
-exports.footer3 = function(){
-    var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
-    
-}
-exports.footer4 = function(){
-    console.log("Go To Feedback");
-    var topmost = frameModule.topmost();
-    //topmost.navigate("feedback-page");
-    var pageDetails = String(topmost.currentPage).split("///");
-    const TODAY = new Date();
-    var navigationOptions={
-        moduleName:'feedback-page',
-        context:{Language: "ENG",
-                PageName: pageDetails[1].split("/")[1].split(".")[0],
-                DateTime: TODAY
-                }
-            }
-    topmost.navigate(navigationOptions); 
-}
-exports.footer5 = function(){
-    var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
-}
+/*
 var getClassList = function(){
     var databasePull = getFromDataBase();
     var classList = [];
@@ -257,6 +442,7 @@ var getClassList = function(){
     }
     return classList;
 }
+*/
 var getStepCount = function(){
     var databaseReturn = getFromDataBase();
     var numOfSteps = 0;
@@ -286,6 +472,120 @@ var returnSalary = function(selectedClassX, selectedStepX){
         }
     }
 };
+
+var getClassList = function() {
+    var databasePull = getFromFirebase();
+
+    var previousClass   = "";
+    var previousLevel   = "";
+
+    var classList       = [];
+    var recordIndex     = 0;
+    var splitChar       = " ";
+    var classAndLevel   = "";
+
+    var classIndex      = -1;
+    var levelIndex      = -1;
+
+    
+    //var collection  = firebase.firestore().collection("PayInfo");
+    //var ordering    = "";
+    //collection.doc(databasePull[0].step).set(databasePull[0]);
+    //collection.doc(databasePull[recordIndex].classCode + " " + databasePull[recordIndex].step).set(databasePull[recordIndex]);
+
+    for( recordIndex = 0 ; recordIndex < databasePull.length ; recordIndex++ ) {
+        /*
+        if( databasePull[recordIndex].step.length < 2 ) {
+            ordering    = "0" + databasePull[recordIndex].step;
+        } else if( databasePull[recordIndex].step.length == 2 ) {
+            ordering    = databasePull[recordIndex].step;
+        } else if( databasePull[recordIndex].step == "min" ) {
+            ordering    = "01";
+        } else {
+            ordering    = "02";
+        }
+        console.log(databasePull[recordIndex].classCode + " " + ordering);
+        collection.doc(databasePull[recordIndex].classCode.replace("/", "-") + " " + ordering).set(databasePull[recordIndex]);
+        */
+
+
+        if( databasePull[recordIndex].classCode.includes(" ")) {
+            splitChar       = " ";
+        } else if( databasePull[recordIndex].classCode.includes("-")) {
+            splitChar       = "-";
+        } else {
+            databasePull[recordIndex].classCode = databasePull[recordIndex].classCode + "- ";
+            splitChar       = splitChar + "-";
+        }
+
+        classAndLevel   = databasePull[recordIndex].classCode.split(splitChar);
+        if( classAndLevel[ 0 ] != previousClass ) {
+            // add a new entry to class list, start a new level list, start a new step list
+            previousClass   = classAndLevel[ 0 ];
+            previousLevel   = classAndLevel[ 1 ];
+            var classObject = fromObject({
+                classCode: previousClass,
+                levelData: []
+            });
+            classList.push( classObject );
+            classIndex++;
+            levelIndex  = 0;
+            var levelObject = fromObject({
+                levelCode: previousLevel,
+                stepData: []
+            });
+            classList[classIndex].levelData.push( levelObject );
+        } else if( classAndLevel[ 1 ] != previousLevel ) {
+            // add a new entry to the current level list, start a new step list
+            previousLevel   = classAndLevel[ 1 ];
+            levelIndex++;
+            var levelObject = fromObject({
+                levelCode: previousLevel,
+                stepData: []
+            });
+            classList[classIndex].levelData.push( levelObject );
+        }
+        // push the step data onto the tree
+        var stepObject  = fromObject({
+            step: databasePull[recordIndex].step,
+            hourly: databasePull[recordIndex].hourly, 
+            daily: databasePull[recordIndex].daily, 
+            biweekly: databasePull[recordIndex].biweekly, 
+            annually: databasePull[recordIndex].annually
+        });
+        classList[classIndex].levelData[levelIndex].stepData.push( stepObject );
+    }
+
+    return classList;
+};
+
+function classCompare( a , b ) {
+    if( a.classCode > b.classCode ) {
+        return 1;
+    } else if( a.classCode < b.classCode ) {
+        return -1;
+    }
+    if( a.step == "min" || b.step == "max") {
+        return -1;
+    }
+    if( a.step == "max" || b.step == "min" ) {
+        return 1;
+    }
+    if( parseInt(a.step) > parseInt(b.step) ) {
+        return 1;
+    } else if( parseInt(a.step) < parseInt(b.step) ) {
+        return -1;
+    }
+    return 0;
+};
+
+function getFromFirebase() {
+    var contentRecords  = firebaseBuffer.readContents("PayInfo");
+    contentRecords.sort(classCompare);
+
+    return contentRecords;
+}
+
 var getFromDataBase = function(){
     var databaseReturn = [];
     var databaseLine = {};

@@ -60,7 +60,7 @@
       
       <Button class="Sub_Nav_Line" text="Outils" tap="navToggle" value="Utilities"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Paie brute" pageName="pay-info" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Calcul - Promotion" pageName="FR_promotion-calc-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Promotion" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Échéances de soumission" pageName="FR_timeliness-utility-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Suivi - Heures supp" pageName="FR_overtime-tracking-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Rôles et responsabilités" pageName="FR_roles-page" tap="goToUtility" visibility="{{ Utilities ? 'visible' : 'collapsed' }}"/>

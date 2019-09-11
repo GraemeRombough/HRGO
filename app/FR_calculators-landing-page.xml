@@ -12,7 +12,7 @@
     <StackLayout orientation="vertical">
       <Button class="Sub_Nav_Line" text="Calcul - Paie" tap="navToggle" value="PayCalculation"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Paie brute" pageName="pay-info" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
-        <Button class="Main_Nav_SubLine" text="Calcul - Promotion" pageName="FR_promotion-calc-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
+        <Button class="Main_Nav_SubLine" text="Calcul - Promotion" pageName="promotion-calc-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Échéances de soumission" pageName="FR_timeliness-utility-page" tap="goToUtility" visibility="{{ PayCalculation ? 'visible' : 'collapsed' }}"/>
       <Button class="Sub_Nav_Line" text="Calcul - Dotation" tap="navToggle" value="StaffingCalculation"/>
         <Button class="Main_Nav_SubLine" text="Calcul - Date de fin - Occasionnel" pageName="FR_workdays-utility-page" tap="goToUtility" visibility="{{ StaffingCalculation ? 'visible' : 'collapsed' }}"/>

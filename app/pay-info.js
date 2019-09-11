@@ -60,6 +60,7 @@ exports.onClassListPickerLoaded = function(args){
     const listPicker = args.object;
     const vm = listPicker.page.bindingContext;
     listPicker.on("selectedIndexChange", (lpargs) => {
+        console.log("asdf");
         vm.set("classSelectionIndex", listPicker.selectedIndex);
 
         loadLevels(listPicker.selectedValue,args);
@@ -100,6 +101,7 @@ exports.getSalaryInfo = function(args) {
 
 // When a list is loaded, load the next list down as well and select the first item.
 var loadLevels = function(selection,inputArg) {
+    console.log("loadLevels");
     pageData.set("levelItems" , selection);
     pageData.set("levelSelectionIndex", 0);
 
@@ -388,9 +390,9 @@ function classCompare( a , b ) {
     if( a.step == "max" || b.step == "min" ) {
         return 1;
     }
-    if( a.step > b.step ) {
+    if( parseInt(a.step) > parseInt(b.step) ) {
         return 1;
-    } else if( a.step < b.step ) {
+    } else if( parseInt(a.step) < parseInt(b.step) ) {
         return -1;
     }
     return 0;

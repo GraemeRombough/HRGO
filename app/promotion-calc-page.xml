@@ -1,38 +1,77 @@
 <Page loaded="pageLoaded" navigatingTo="onNavigatingTo" actionBarHidden="true"
     xmlns:CustomControls="custom-controls">
   <ActionBar title="HR GO" class="action-bar"></ActionBar>
-  <GridLayout rows="*,60">
-  <ScrollView>
-  <StackLayout row="0" orientation="vertical" width="100%">
-    <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
-      <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
-      <label col="1" row="0" text="PROMOTION PAY" class="Header_Label"/>
-      <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+
+  <GridLayout columns="{{ landscapeMode showNav , landscapeMode ? (showNav ? '*,20,60' : '*,20,0') : '*,0,0' }}" >
+    <GridLayout col="0" rows="{{ landscapeMode , landscapeMode ? '0,*,0' : 'auto,*,auto' }}">
+      <StackLayout row="0" orientation="vertical" width="100%" > 
+        <GridLayout columns="60,*,60" rows="auto" class="HeaderLabel">
+          <label col="0" row="0" class="Header_Icon" text="&#xe991;"/>
+          <label col="1" row="0" text="{{ lblFormTitle selectedLanguage, lblFormTitle[selectedLanguage] }}" class="Header_Label"/>
+          <Button col="2" row="0" text="&#xe967;" class="Back_Button" tap="goBack"/>
+        </GridLayout>
+      </StackLayout>
+      <StackLayout row="1" orientation="vertical" width="100%">
+        <GridLayout row="1" rows="*,auto">
+          <ScrollView row="0">
+            <StackLayout orientation="vertical" width="100%">
+              <!-- SUBSTANTIVE CLASS  tap="navToggle" value="FAQ" -->
+              <Button class="Home_Utility_Toggle" tap="navToggle" value="SubstantiveClass" >
+                <FormattedString>
+                  <FormattedString.spans>
+                      <span style="font-family: 'icomoon';" text="{{ SubstantiveClass ? '&#xEA43; ' : '&#xEA42; ' }} "/>
+                      <Span text="{{ lblSubstantiveButton selectedLanguage, lblSubstantiveButton[selectedLanguage] }}" />
+                  </FormattedString.spans>
+                </FormattedString>
+              </Button>
+              <StackLayout visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}">
+              <FlexboxLayout width="100%">
+                  <Label width="67%" text="{{ lblClassificationButton selectedLanguage, lblClassificationButton[selectedLanguage] }}" class="Home_Utility_Label" style="margin:0px;" />
+                  <Label width="33%" text="{{ lblStepButton selectedLanguage, lblStepButton[selectedLanguage] }}" class="Home_Utility_Label" style="margin:0px;" />
+                </FlexboxLayout>
+                <GridLayout columns="*,*,*" rows="auto" >
+                <ListPicker  col="0" row="0" id="classPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ classSelectionIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 10; margin-right: 5;" />
+                <ListPicker  col="1" row="0" id="levelPicker" textField="levelCode" valueField="stepData" items="{{ levelItems }}" selectedIndex="{{ levelSelectionIndex }}" loaded="onLevelListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 5; margin-right: 5;"/>
+                <ListPicker col="2" row="0" items="{{ stepItems }}" textField="step" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 5; margin-right: 10;"/>
+                </GridLayout>
+              </StackLayout>
+
+          <!-- TARGET CLASS -->
+              <Button class="Home_Utility_Toggle" tap="navToggle" value="SubstantiveClass" >
+                <FormattedString>
+                  <FormattedString.spans>
+                      <span style="font-family: 'icomoon';" text="{{ SubstantiveClass ? '&#xEA42; ' : '&#xEA43; ' }} "/>
+                      <Span text="{{ lblTargetButton selectedLanguage, lblTargetButton[selectedLanguage] }}" />
+                  </FormattedString.spans>
+                </FormattedString>
+              </Button>
+              <StackLayout visibility="{{ SubstantiveClass ? 'collapsed' : 'visible' }}">
+                <GridLayout columns="*,*,*" rows="auto" >
+                <ListPicker  col="0" row="0" id="targetClassPicker" textField="classCode" valueField="levelData" items="{{ classItems }}" selectedIndex="{{ targetClassSelectionIndex }}" loaded="onTargetClassListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 10; margin-right: 5;" />
+                <ListPicker  col="1" row="0" id="targetLevelPicker" textField="levelCode" valueField="stepData" items="{{ targetLevelItems }}" selectedIndex="{{ targetLevelSelectionIndex }}" loaded="onTargetLevelListPickerLoaded" class="p-15 picker" style="background-color: rgb(240,240,255); margin-left: 5; margin-right: 5;"/>
+                </GridLayout>
+              </StackLayout>
+            </StackLayout>
+          </ScrollView>
+        
+          <StackLayout row="1" orientation="vertical" width="100%" style="border-top-width: 3px; border-top-color: black; margin-top:15px;" >
+            <label text="{{ ChangeType }}" class="DayCalc_StartDate" style="margin-bottom: 0px; margin-top: 10px;" />
+            <label text="{{ StartLabel }}" class="DayCalc_StartDate" style="margin-bottom: 0px; margin-top: 10px;" />
+            <label text="{{ TargetLabel }}" class="DayCalc_StartDate" style="margin-bottom: 10px; margin-top: 10px;" />
+          </StackLayout>
+        </GridLayout>
+      </StackLayout>
+
+      <CustomControls:NavFooter row="2" />
+
     </GridLayout>
-    
-    <!-- SUBSTANTIVE CLASS  tap="navToggle" value="FAQ" -->
-    <Button text="Substantive Classification" class="Home_Utility_Label" tap="navToggle" value="SubstantiveClass" />
-    <StackLayout visibility="{{ SubstantiveClass ? 'visible' : 'collapsed' }}">
-      <Label text="Classification" class="Article_H2"/>
-      <ListPicker id="classPicker" items="{{ classItems }}" selectedIndex="{{ classIndex }}" loaded="onClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
-      <Label text="Step" class="Article_H2"/>
-      <ListPicker items="{{ stepItems }}" selectedIndex="{{ stepIndex }}" loaded="onStepListPickerLoaded" class="p-15 picker"/>
+
+    <StackLayout col="1" orientation="vertical" >
+        <Label height="30%" width="100%" />
+        <Button height="40%" class="FooterControl" tap="toggleNavBar" text="{{ showNav ? '>' : '<' }}" style="padding: 0;" />
     </StackLayout>
-
-<!-- TARGET CLASS -->
-    <Button text="Target Classification" class="Home_Utility_Label" tap="navToggle" value="TargetClass" />
-    <StackLayout visibility="{{ TargetClass ? 'visible' : 'collapsed' }}" >
-      <Label text="Classification" class="Article_H2"/>
-      <ListPicker id="classPicker" items="{{ targClassItems }}" selectedIndex="{{ targClassIndex }}" loaded="onTargClassListPickerLoaded" class="p-15 picker" visibility="visible"/>
-    </StackLayout>
-    <label text="{{ ResultLabel }}" class="DayCalc_StartDate"/>
-    <Button class="Submit_Button_1" text="Get Promotion Step" tap="getPromotionStep"/>
-
-  </StackLayout>
-  </ScrollView>
-    <CustomControls:NavFooter row="1" />
-
-    </GridLayout>
+    <CustomControls:NavFooterLandscape col="2" />
+  </GridLayout>
 
   <!-- Your UI components go here -->
 
