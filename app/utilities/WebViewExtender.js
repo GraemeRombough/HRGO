@@ -1,4 +1,3 @@
-
 var email               = require("nativescript-email");
 var phone               = require("nativescript-phone");
 var clipboard           = require("nativescript-clipboard");
@@ -73,15 +72,43 @@ var emailLink = function(emailText){
     }
 
     var toAddress = recipients.split(";");
-    //toAddress.push(recipients);
-    if (email.available()){
-        email.compose({
-            subject: subject,
-            body: body,
-            to: toAddress
-        });
+    if( recipients.includes("@intern.mil.ca")) {
+        if( applicationSettings.getBoolean("EnableMilEmails", false) == true ) {
+            if (email.available()){
+                email.compose({
+                    subject: subject,
+                    body: body,
+                    to: toAddress
+                });
+            } else {
+                console.log("Email Not Available");
+            }
+        } else {
+            if( applicationSettings.getBoolean("EnableMilWarnings", true) == true ) {
+                if(applicationSettings.getString("PreferredLanguage") == "French") {
+                    dialogs.alert({
+                        title: "",
+                        message: "Les courriels pour @intern.mil.ca ont été désactivés.\r\nVous pouvez activer les liens ou désactiver cet avertissement à partir du formulaire Paramètres.",
+                    okButtonText: "OK"});
+                } else {
+                    dialogs.alert({
+                        title: "",
+                        message: "Emails for @intern.mil.ca have been disabled.\r\nYou can enable the links or turn off this warning from the Settings form.",
+                        okButtonText: "OK"});
+                }
+            }
+        }
     } else {
-        console.log("Email Not Available");
+        //toAddress.push(recipients);
+        if (email.available()){
+            email.compose({
+                subject: subject,
+                body: body,
+                to: toAddress
+            });
+        } else {
+            console.log("Email Not Available");
+        }
     }
 };
 
@@ -98,7 +125,27 @@ exports.onWebViewLoaded = function(webargs) {
                     var urlString   = String( webResourceRequest.getUrl());
                     console.log( urlString );
                     if( urlString.startsWith("http://") || urlString.startsWith("https://") ) {
-                        utils.openUrl( urlString );
+                        if( urlString.includes(".mil.ca/")) {
+                            if( applicationSettings.getBoolean("EnableMilHyperlinks", false) == true ) {
+                                utils.openUrl( urlString );
+                            } else {
+                                if( applicationSettings.getBoolean("EnableMilWarnings", true) == true ) {
+                                    if(applicationSettings.getString("PreferredLanguage") == "French") {
+                                        dialogs.alert({
+                                            title: "",
+                                            message: "Les liens pour .mil.ca/ ont été désactivés.\r\nVous pouvez activer les liens ou désactiver cet avertissement à partir du formulaire Paramètres.",
+                                        okButtonText: "OK"});
+                                    } else {
+                                        dialogs.alert({
+                                            title: "",
+                                            message: "Links for .mil.ca/ have been disabled.\r\nYou can enable the links or turn off this warning from the Settings form.",
+                                            okButtonText: "OK"});
+                                    }
+                                }
+                            }
+                        } else {
+                            utils.openUrl( urlString );
+                        }
                         return true;
                     } else if( urlString.startsWith( "mailto:")) {
                         emailLink( urlString.substr( 7));
@@ -162,9 +209,9 @@ exports.onLoadStarted = function(args){
             args.object.stopLoading();
             callLink(checkURL[1]);
         } else if(checkURL[0] == "sms") {
-                console.log(checkURL[1]);
-                args.object.stopLoading();
-                textLink(checkURL[1]);  
+            console.log(checkURL[1]);
+            args.object.stopLoading();
+            textLink(checkURL[1]);  
         } else if(checkURL[0] == "copy") {
             console.log(checkURL[1]);
             args.object.stopLoading();
@@ -172,7 +219,28 @@ exports.onLoadStarted = function(args){
             copyToClipboard(args.url.substring(5));
         } else if( checkURL[0].startsWith("http") || checkURL[0] == "https") {
             args.object.stopLoading();
-            utils.openUrl(checkURL[0] + ":" + checkURL[1]);
+            var urlString   = checkURL[0] + ":" + checkURL[1];
+            if( urlString.includes(".mil.ca/")) {
+                if( applicationSettings.getBoolean("EnableMilHyperlinks", false) == true ) {
+                    utils.openUrl( urlString );
+                } else {
+                    if( applicationSettings.getBoolean("EnableMilWarnings", true) == true ) {
+                        if(applicationSettings.getString("PreferredLanguage") == "French") {
+                            dialogs.alert({
+                                title: "",
+                                message: "Les liens pour .mil.ca/ ont été désactivés.\r\nVous pouvez activer les liens ou désactiver cet avertissement à partir du formulaire Paramètres.",
+                            okButtonText: "OK"});
+                        } else {
+                            dialogs.alert({
+                                title: "",
+                                message: "Links for .mil.ca/ have been disabled.\r\nYou can enable the links or turn off this warning from the Settings form.",
+                                okButtonText: "OK"});
+                        }
+                    }
+                }
+            } else {
+                utils.openUrl( urlString );
+            }
             args.object.goBack();
         }
         console.log(args.url);

@@ -16,7 +16,13 @@ exports.pageLoaded = function(args) {
         lblFormTitle: ["SETTINGS", "PARAMÈTRES"],
         lblLanguageLabel: ["Preferred Language", "Langue"],
         lblWorkEmail: ["Work Email", "Courriel de travail"],
-        lblSave: ["Save Profile", "Enregistrer le profil"]
+        lblSave: ["Save Profile", "Enregistrer le profil"],
+        lblEnableEmail: ["Allow email to intern.mil.ca","Autoriser le courrier électronique à intern.mil.ca"],
+        lblEnableHyperlinks: ["Allow web links to mil.ca","Autoriser les liens Web vers mil.ca"],
+        lblEnableWarnings: ["Show mil.ca link warnings","Afficher les avertissements relatifs au lien mil.ca"],
+        enableMilEmail: applicationSettings.getBoolean("EnableMilEmails", false),
+        enableMilHyperlinks: applicationSettings.getBoolean("EnableMilHyperlinks", false),
+        enableMilWarnings: applicationSettings.getBoolean("EnableMilWarnings", true)
     });
 
     const page = args.object;
@@ -25,7 +31,23 @@ exports.pageLoaded = function(args) {
     page.bindingContext = pageData;
 
     checkLanguage();
+
+    page.getViewById("toggleAllowEmail").on( "checkedChange" , (args) => {
+        console.log(args.object.checked);
+        applicationSettings.setBoolean( "EnableMilEmails" , args.object.checked );
+    });
+
+    page.getViewById("toggleAllowWeb").on( "checkedChange" , (args) => {
+        console.log(args.object.checked);
+        applicationSettings.setBoolean( "EnableMilHyperlinks" , args.object.checked );
+    });
+
+    page.getViewById("toggleWarnings").on( "checkedChange" , (args) => {
+        console.log(args.object.checked);
+        applicationSettings.setBoolean( "EnableMilWarnings" , args.object.checked );
+    });
 };
+
 exports.goToHome = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("main-page"); 
@@ -34,30 +56,7 @@ exports.goBack = function(args){
     const thisPage = args.object.page;
     thisPage.frame.goBack()
 }
-exports.footer3 = function(){
-    var topmost = frameModule.topmost();
-    topmost.navigate("profile-page");
-    
-}
-exports.footer4 = function(){
-    console.log("Go To Feedback");
-    var topmost = frameModule.topmost();
-    //topmost.navigate("feedback-page");
-    var pageDetails = String(topmost.currentPage).split("///");
-    const TODAY = new Date();
-    var navigationOptions={
-        moduleName:'feedback-page',
-        context:{Language: "ENG",
-                PageName: pageDetails[1].split("/")[1].split(".")[0],
-                DateTime: TODAY
-                }
-            }
-    topmost.navigate(navigationOptions); 
-}
-exports.footer5 = function(){
-    var topmost = frameModule.topmost();
-    topmost.navigate("POC-page");
-}
+
 exports.viewTerms = function(args){
     var topmost = frameModule.topmost();
     topmost.navigate("TOS-page");
@@ -73,6 +72,7 @@ exports.setToEng = function(args){
 
     pageData.set( "selectedLanguage" , 0 );
 }
+
 exports.setToFre = function(args){
     var engButton = pageObject.getViewById("EnglishButton");
     args.object.style.backgroundColor = "rgb(0,31,91)";
@@ -87,6 +87,7 @@ exports.setToFre = function(args){
     //var topmost = frameModule.topmost();
     //topmost.navigate("FR_profile-page");
 }
+
 exports.saveProfile = function(){
     console.log(pageData.get("workEmail"));
     if(pageData.get("workEmail") != ""){  
@@ -107,6 +108,7 @@ exports.saveProfile = function(){
         //alert("Your settings have been saved.");
     //}
 };
+
 var checkLanguage = function(){   
     if(applicationSettings.hasKey("PreferredLanguage")){
         console.log(applicationSettings.getString("PreferredLanguage"));
@@ -128,4 +130,3 @@ var checkLanguage = function(){
         pageData.set("workEmail", applicationSettings.getString("WorkEmail"));
     }
 };
-
