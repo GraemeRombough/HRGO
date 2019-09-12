@@ -188,25 +188,25 @@ function calculatePromotion( ) {
 
     pageData.set( "StartLabel" , selectedClass.classCode + " " + selectedLevel.levelCode + " " + stepLabel + " " + selectedStep.step + " : $" + selectedStep.annually);
 
-    var isPromotion = false;
-    var isTransfer  = false;
-    var isDemotion  = false;
-
     var searchIndex = 0;
 
     // if the maximum rate for the new appointment is less than the maximum rate for the current appointment, it is a demotion
     if( selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually > selectedTargetLevel.stepData[ selectedTargetLevel.stepData.length - 1 ].annually ) {
-        isDemotion  = true;
         pageData.set( "ChangeType" , pageData.get("lblDemotion")[ pageData.get("selectedLanguage")] );
 
-        while( searchIndex < selectedTargetLevel.stepData.length && selectedStep.annually >= selectedTargetLevel.stepData[searchIndex].annually ) {
-            searchIndex++;
-        }
-        if( searchIndex != 0 ) {
-            searchIndex--;
+        if( selectedTargetLevel.stepData.length > 2 ) {
+            while( searchIndex < selectedTargetLevel.stepData.length && selectedStep.annually >= selectedTargetLevel.stepData[searchIndex].annually ) {
+                searchIndex++;
+            }
+            if( searchIndex != 0 ) {
+                searchIndex--;
+            }
+            targetPayRate   = selectedTargetLevel.stepData[ searchIndex ].annually;
+        } else {
+            targetPayRate   = Math.max( selectedStep.annually , selectedTargetLevel.stepData[ 0 ].annually );
+            targetPayRate   = Math.min( targetPayRate , selectedTargetLevel.stepData[ selectedTargetLevel.stepData.length - 1 ].annually );
         }
 
-        targetPayRate   = selectedTargetLevel.stepData[ searchIndex ].annually;
     } else {
         var minStepDiff;
         // if there is more than min/max for the target position, then calculate using the steps
@@ -219,16 +219,21 @@ function calculatePromotion( ) {
                 }
             }
         } else {
-            minStepDiff = selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually * 0.04;
+            minStepDiff = selectedTargetLevel.stepData[ selectedTargetLevel.stepData.length - 1 ].annually * 0.04;
         }
 
         if( selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually + minStepDiff < selectedTargetLevel.stepData[ selectedTargetLevel.stepData.length - 1 ].annually ) {
             // lowest rate equal to or greater than current rate plus minimum step difference
-            isPromotion = true;
             pageData.set( "ChangeType" , pageData.get("lblPromotion")[ pageData.get("selectedLanguage")] );
+
+            // Handle EX promotion step at 5% instead of 4%
+            if( selectedTargetLevel.stepData.length <= 2 ) {
+                if( selectedTargetClass.classCode == "EX" ) {
+                    minStepDiff = selectedTargetLevel.stepData[ selectedTargetLevel.stepData.length - 1 ].annually * 0.05;
+                }
+            }
         } else {
             // lowest rate equal to or greater than current rate
-            isTransfer= true;
             pageData.set( "ChangeType" , pageData.get("lblDeployment")[ pageData.get("selectedLanguage")] );
 
             minStepDiff = 0;
@@ -238,16 +243,6 @@ function calculatePromotion( ) {
         // if there is more than min/max for the target position, then calculate using the steps
         if( selectedTargetLevel.stepData.length > 2 ) {
             console.log("calc from steps");
-            /*
-            // find the lowest pay difference between all of the steps in the target classification
-            var minStepDiff = selectedTargetLevel.stepData[1].annually - selectedTargetLevel.stepData[0].annually;
-
-            for( diffSearch = 2 ; diffSearch < selectedTargetLevel.stepData.length ; diffSearch++ ) {
-                if( selectedTargetLevel.stepData[diffSearch].annually - selectedTargetLevel.stepData[diffSearch-1].annually < minStepDiff ) {
-                    minStepDiff = selectedTargetLevel.stepData[diffSearch].annually - selectedTargetLevel.stepData[diffSearch-1].annually;
-                }
-            }
-*/
             while( searchIndex < selectedTargetLevel.stepData.length && selectedStep.annually + minStepDiff > selectedTargetLevel.stepData[searchIndex].annually ) {
                 searchIndex++;
             }
@@ -257,17 +252,14 @@ function calculatePromotion( ) {
 
             targetPayRate   = selectedTargetLevel.stepData[ searchIndex ].annually;
         } else {
-            console.log("calc from 4%");
-            // 4% of the maximum rate of pay for the previous position if the new position has only one rate of pay
-            var fourPercent = selectedLevel.stepData[ selectedLevel.stepData.length - 1 ].annually * 0.04;
-            console.log(fourPercent);
+            // 4% of the maximum rate of pay for the new position if the new position has only one rate of pay
             searchIndex = 0;
             if( selectedTargetLevel.stepData.length > 1 ) {
                 var minimum = selectedTargetLevel.stepData[ 0 ].annually;
                 var maximum = selectedTargetLevel.stepData[ 1 ].annually;
 
-                if( selectedStep.annually + fourPercent >= minimum ) {
-                    targetPayRate   = selectedStep.annually + fourPercent;
+                if( selectedStep.annually + minStepDiff >= minimum ) {
+                    targetPayRate   = selectedStep.annually + minStepDiff;
                 } else {
                     targetPayRate   = minimum;
                 }
@@ -276,9 +268,9 @@ function calculatePromotion( ) {
                     searchIndex = 1;
                 }
             } else {
-                targetPayRate   = selectedTargetLevel.stepData[ 0 ].annually + fourPercent;
+                targetPayRate   = selectedTargetLevel.stepData[ 0 ].annually + minStepDiff;
             }
-            targetPayRate   = Math.ceil(targetPayRate);
+            targetPayRate   = Math.round(targetPayRate);
         }
         
     }
