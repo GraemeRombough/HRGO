@@ -29,7 +29,14 @@ exports.pageLoaded = function(args) {
     args.object.bindingContext = pageData;
     pageObject = page;
 
+    var resetDates  = false;
     if( !applicationSettings.hasKey("datesHaveBeenReset")) {
+        resetDates  = true;
+    } else if( "1.3.0" == applicationSettings.getString("datesHaveBeenReset") ) {
+        resetDates  = true;
+    }
+
+    if( resetDates == true ) {
         var resetToDate    = new Date('January 1, 2018 01:00:00');
         if( applicationSettings.hasKey("LastFirebaseSyncCheck") ) {
             applicationSettings.remove("LastFirebaseSyncCheck");
@@ -42,7 +49,7 @@ exports.pageLoaded = function(args) {
         applicationSettings.setString( "LastFirebaseSync" , "" + resetToDate.getTime());
 
 
-        applicationSettings.setString("datesHaveBeenReset", "1.3.0");
+        applicationSettings.setString("datesHaveBeenReset", "1.3.0.4");
     }
 
     //applicationSettings.remove("LastFirebaseSyncCheck");

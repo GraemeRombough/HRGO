@@ -3,7 +3,7 @@ var fileSystem  = require("tns-core-modules/file-system");
 var TextModule = require("tns-core-modules/text");
 
 function writeContents( tableName , contents ) {
-    var appFolder   = fileSystem.knownFolders.currentApp().getFolder("firebaseBuffer");
+    var appFolder   = fileSystem.knownFolders.documents().getFolder("firebaseBuffer");
     var bufferFile  = appFolder.getFile(tableName);
 
     bufferFile.writeTextSync(JSON.stringify(contents), fwerr=>{ 
@@ -12,7 +12,7 @@ function writeContents( tableName , contents ) {
 }
 
 function readContents( tableName ) {
-    var appFolder   = fileSystem.knownFolders.currentApp().getFolder("firebaseBuffer");
+    var appFolder   = fileSystem.knownFolders.documents().getFolder("firebaseBuffer");
     var bufferFile  = appFolder.getFile(tableName);
 
     var decodedArray    = JSON.parse( bufferFile.readTextSync( frerr => {
