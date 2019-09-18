@@ -51,7 +51,7 @@ exports.onNavigatingTo = function(args) {
 };
 
 exports.pageLoaded = function(args) {
-    
+    console.log("Page loaded");
     console.log(pageData.get("infoVisible"));
     
 };
@@ -294,6 +294,10 @@ var buildListFromFirestore = function() {
 */
 var getClassList = function() {
     var databasePull = getFromFirebase();
+
+    if( databasePull.length == 0 ) {
+        databasePull= [{classCode:"AC 01", step:"1", hourly:35.212102627006, daily:264.090769702545, biweekly:2640.90769702545, annually:68896 }];
+    }
 
     var previousClass   = "";
     var previousLevel   = "";

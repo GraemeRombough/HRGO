@@ -8,12 +8,14 @@ const Label = require("tns-core-modules/ui/label/").Label;
 const Button = require("tns-core-modules/ui/button/").Button;
 const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
 var applicationSettings = require("application-settings");
+var dialogs             = require("ui/dialogs");
 var pageData = new observable.Observable();
 const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
 var classDD;
 var selectedClass;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 const email = require("nativescript-email");
+var clipboard           = require("nativescript-clipboard");
 var pageObject;
 
 exports.pageLoaded = function(args) {
@@ -174,6 +176,22 @@ var createSJDGrid = function(SJD_t, SJD_s, SJD_c, SJD_d, SJD_l){
 var sendSJDLink = function(eventData){
     var workEmail = "";
     var sjdLink = "https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/" + eventData.object.link;
+
+    clipboard.setText(sjdLink).then(function() {
+        console.log("OK, copied to the clipboard");
+    })
+    if(applicationSettings.getString("PreferredLanguage") == "French"){
+        dialogs.alert({
+            title: "Courriel n'est pas disponible",
+            message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.",
+            okButtonText: "OK"});
+    } else {
+        dialogs.alert({
+            title: "Email Not Available",
+            message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.",
+            okButtonText: "Continue"});
+    }
+    /*
     if(applicationSettings.hasKey("WorkEmail")){
         workEmail = applicationSettings.getString("WorkEmail");
     }
@@ -186,6 +204,7 @@ var sendSJDLink = function(eventData){
     } else {
         console.log("Email Not Available");
     }
+    */
 }
 
 

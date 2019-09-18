@@ -82,6 +82,22 @@ var callLink = function(phoneNumber){
 };
 var emailLink = function(emailText){
     console.log("send email to:" + emailText);
+
+    clipboard.setText(emailText).then(function() {
+        console.log("OK, copied to the clipboard");
+    })
+    if(applicationSettings.getString("PreferredLanguage") == "French"){
+        dialogs.alert({
+            title: "Courriel n'est pas disponible",
+            message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.",
+            okButtonText: "OK"});
+    } else {
+        dialogs.alert({
+            title: "Email Not Available",
+            message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.",
+            okButtonText: "Continue"});
+    }
+    /*
     var toAddress = [];
     toAddress.push(emailText);
     if (email.available()){
@@ -93,6 +109,7 @@ var emailLink = function(emailText){
     } else {
         console.log("Email Not Available");
     }
+    */
 };
 var createArticle = function()
 {   

@@ -7,21 +7,21 @@ var platformModule      = require("tns-core-modules/platform");
 var applicationSettings = require("application-settings");
 
 var callLink = function(phoneNumber){
-    console.log("call number:" + phoneNumber);
+    //console.log("call number:" + phoneNumber);
     phone.dial(phoneNumber,true);
 
 };
 
 var textLink = function(phoneNumber){
-    console.log("call number:" + phoneNumber);
+    //console.log("call number:" + phoneNumber);
     phone.sms(phoneNumber,"");
 
 };
 
 var copyToClipboard = function(clipboardText){
-    console.log("copied to clipboard" + clipboardText);
+    //console.log("copied to clipboard" + clipboardText);
             clipboard.setText(clipboardText).then(function() {
-                console.log("OK, copied to the clipboard");
+                //console.log("OK, copied to the clipboard");
             });
             if(applicationSettings.getString("PreferredLanguage") == "French"){
                 dialogs.alert({
@@ -38,9 +38,9 @@ var copyToClipboard = function(clipboardText){
 
 var emailLink = function(emailText){
     if( emailText.includes("%")) {
+        console.log("decode uri");
         emailText   = decodeURI(emailText);
     }
-    console.log("send email to:" + emailText);
     
     var recipients  = "";
     var subject     = "";
@@ -71,6 +71,28 @@ var emailLink = function(emailText){
         recipients   = emailText;
     }
 
+    console.log("To: " + recipients);
+    console.log("Subject: " + subject);
+    console.log("Body: " + body);
+
+    //copyToClipboard( recipients );
+
+    clipboard.setText(recipients).then(function() {
+        console.log("OK, copied to the clipboard");
+    })
+    if(applicationSettings.getString("PreferredLanguage") == "French"){
+        dialogs.alert({
+            title: "Courriel n'est pas disponible",
+            message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.",
+            okButtonText: "OK"});
+    } else {
+        dialogs.alert({
+            title: "Email Not Available",
+            message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.",
+            okButtonText: "Continue"});
+    }
+
+    /*
     var toAddress = recipients.split(";");
     if( recipients.includes("@intern.mil.ca")) {
         if( applicationSettings.getBoolean("EnableMilEmails", false) == true ) {
@@ -110,10 +132,11 @@ var emailLink = function(emailText){
             console.log("Email Not Available");
         }
     }
+    */
 };
 
 exports.onWebViewLoaded = function(webargs) {
-    console.log( "onWebViewLoaded ************************************************************" );
+    //console.log( "onWebViewLoaded ************************************************************" );
 
     const webview = webargs.object;
 
@@ -123,7 +146,7 @@ exports.onWebViewLoaded = function(webargs) {
             shouldOverrideUrlLoading: function(view, webResourceRequest) {
                 if (webResourceRequest != null) {
                     var urlString   = String( webResourceRequest.getUrl());
-                    console.log( urlString );
+                    //console.log( urlString );
                     if( urlString.startsWith("http://") || urlString.startsWith("https://") ) {
                         if( urlString.includes(".mil.ca/")) {
                             if( applicationSettings.getBoolean("EnableMilHyperlinks", false) == true ) {
@@ -196,14 +219,13 @@ exports.onWebViewLoaded = function(webargs) {
 };
 
 exports.onLoadStarted = function(args){
-    console.log("onLoadStarted ****************************************************************");
+    //console.log("onLoadStarted ****************************************************************");
     checkURL = args.url.split(":");
     if(checkURL.length > 1){
         if(checkURL[0] == "mailto") {
-            console.log(checkURL[1]);
+            //console.log(checkURL[1]);
             args.object.stopLoading();
-            emailLink(checkURL[1]);
-            
+            emailLink( args.url.substr( 7) );//checkURL[1]);
         } else if(checkURL[0] == "tel") {
             console.log(checkURL[1]);
             args.object.stopLoading();
