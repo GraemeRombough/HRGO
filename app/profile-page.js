@@ -22,7 +22,8 @@ exports.pageLoaded = function(args) {
         lblEnableWarnings: ["Show mil.ca link warnings","Afficher les avertissements relatifs au lien mil.ca"],
         enableMilEmail: applicationSettings.getBoolean("EnableMilEmails", false),
         enableMilHyperlinks: applicationSettings.getBoolean("EnableMilHyperlinks", false),
-        enableMilWarnings: applicationSettings.getBoolean("EnableMilWarnings", true)
+        enableMilWarnings: applicationSettings.getBoolean("EnableMilWarnings", true),
+        workEmail: ""
     });
 
     const page = args.object;
