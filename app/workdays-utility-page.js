@@ -29,7 +29,6 @@ exports.pageLoaded = function(args) {
 
 };
 exports.setNotification = function(){
-    pageData.set("endDateLabel", "Processing");
     addScheduleDays(pageData.get("date"),getDaysOfWork(),pageData.get("numberOfDays"));
 };
 exports.goToHome = function(){
@@ -79,12 +78,18 @@ exports.footer5 = function(){
     var topmost = frameModule.topmost();
     topmost.navigate("POC-page");
 }
-var addScheduleDays = function(startDate, schedule, totalDays){  
+var addScheduleDays = function(startDate, schedule, totalDays) {
+    if(schedule.length == 0 ) {
+        console.log("no days selected");
+        return;
+    }
+    pageData.set("endDateLabel", "Processing");
+
     var i = 0;
     var checkDate = new Date(startDate.toString());
     console.log("Start Date: " + checkDate.toString());
 
-    while(i < totalDays){
+    while(i < totalDays) {
         for(z = 0; z < schedule.length; z++){
             if (checkDate.getDay() == schedule[z]){
                     i++; 

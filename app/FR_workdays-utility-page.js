@@ -80,6 +80,10 @@ exports.footer5 = function(){
     topmost.navigate("POC-page");
 }
 var addScheduleDays = function(startDate, schedule, totalDays){  
+    if(schedule.length == 0 ) {
+        console.log("no days selected");
+        return;
+    }
     var i = 0;
     var checkDate = new Date(startDate.toString());
     console.log("Start Date: " + checkDate.toString());
@@ -152,43 +156,43 @@ var formatDate = function(inputDate){
     var month;
     switch (dateInput.getMonth()){
     case 0 :
-        month = "January";
+        month = "janvier";
         break;
     case 1 :
-        month = "February";
+        month = "février";
         break;
     case 2 :
-        month = "March";
+        month = "mars";
         break;
     case 3 :
-        month = "April";
+        month = "avril";
         break;
     case 4 :
-        month = "May";
+        month = "mai";
         break;
     case 5 :
-        month = "June";
+        month = "juin";
         break;
     case 6 :
-        month = "July";
+        month = "juillet";
         break;
     case 7 :
-        month = "August";
+        month = "août";
         break;
     case 8 :
-        month = "September";
+        month = "septembre";
         break;
     case 9 :
-        month = "October";
+        month = "octobre";
         break;
     case 10 :
-        month = "November";
+        month = "novembre";
         break;
     case 11 :
-        month = "December";
+        month = "décembre";
         break;
     }
-    formattedDate = month + " " + dateInput.getDate() + ", " + dateInput.getFullYear();
+    formattedDate = dateInput.getDate() + " " + month + " " + dateInput.getFullYear();
     return formattedDate;
 }
 var getHolidays = function(){

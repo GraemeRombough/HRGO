@@ -17,6 +17,8 @@ exports.pageLoaded = function(args) {
         lblLanguageLabel: ["Preferred Language", "Langue"],
         lblWorkEmail: ["Work Email", "Courriel de travail"],
         lblSave: ["Save Profile", "Enregistrer le profil"],
+        saveMessage: ["Your settings have been saved.", "Vos paramètres ont été sauvegardés"],
+        okButtonText: ["Continue", "Continuez"],
         lblEnableEmail: ["Allow email to intern.mil.ca","Autoriser le courrier électronique à intern.mil.ca"],
         lblEnableHyperlinks: ["Allow web links to mil.ca","Autoriser les liens Web vers mil.ca"],
         lblEnableWarnings: ["Show mil.ca link warnings","Afficher les avertissements relatifs au lien mil.ca"],
@@ -99,10 +101,11 @@ exports.saveProfile = function(){
         applicationSettings.remove("WorkEmail");
         }
     }
+    var lang = pageData.get( "selectedLanguage" );
         dialogs.alert({
-            title: "Settings",
-            message: "Your settings have been saved.",
-            okButtonText: "Continue"
+            title: pageData.get("lblFormTitle")[lang],
+            message: pageData.get("saveMessage")[lang],
+            okButtonText: pageData.get("okButtonText")[lang]
         }).then(function () {
             console.log("Dialog closed!");
         });
