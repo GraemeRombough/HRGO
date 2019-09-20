@@ -20,15 +20,15 @@
         </GridLayout>
 
         
-        <GridLayout columns="*,60" rows="auto" orientation="horizontal">
+        <GridLayout columns="*,60" rows="auto" orientation="horizontal" visibility="collapsed" >
           <Label col="0" row="0" text="{{ lblEnableEmail selectedLanguage, lblEnableEmail[selectedLanguage] }}" class="Article_H3"/>
           <Switch col="1" row="0" id="toggleAllowEmail" checked="{{ enableMilEmail }}" class="Applicable_Switch"/>
         </GridLayout>
-        <GridLayout columns="*,60" rows="auto" orientation="horizontal">
+        <GridLayout columns="*,60" rows="auto" orientation="horizontal" visibility="collapsed" >
           <Label col="0" row="0" text="{{ lblEnableHyperlinks selectedLanguage, lblEnableHyperlinks[selectedLanguage] }}" class="Article_H3"/>
           <Switch col="1" row="0" id="toggleAllowWeb" checked="{{ enableMilHyperlinks }}" class="Applicable_Switch"/>
         </GridLayout>
-        <GridLayout columns="*,60" rows="auto" orientation="horizontal">
+        <GridLayout columns="*,60" rows="auto" orientation="horizontal" visibility="collapsed" >
           <Label col="0" row="0" text="{{ lblEnableWarnings selectedLanguage, lblEnableWarnings[selectedLanguage] }}" class="Article_H3"/>
           <Switch col="1" row="0" id="toggleWarnings" checked="{{ enableMilWarnings }}" class="Applicable_Switch"/>
         </GridLayout>

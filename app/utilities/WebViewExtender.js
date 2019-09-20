@@ -156,12 +156,14 @@ exports.onWebViewLoaded = function(webargs) {
                                     if(applicationSettings.getString("PreferredLanguage") == "French") {
                                         dialogs.alert({
                                             title: "",
-                                            message: "Les liens pour .mil.ca/ ont été désactivés.\r\nVous pouvez activer les liens ou désactiver cet avertissement à partir du formulaire Paramètres.",
+                                            message: "Les liens pour .mil.ca/ ont été désactivés.",
+                                            //message: "Les liens pour .mil.ca/ ont été désactivés.\r\nVous pouvez activer les liens ou désactiver cet avertissement à partir du formulaire Paramètres.",
                                         okButtonText: "OK"});
                                     } else {
                                         dialogs.alert({
                                             title: "",
-                                            message: "Links for .mil.ca/ have been disabled.\r\nYou can enable the links or turn off this warning from the Settings form.",
+                                            message: "Links for .mil.ca/ have been disabled.",
+                                            //message: "Links for .mil.ca/ have been disabled.\r\nYou can enable the links or turn off this warning from the Settings form.",
                                             okButtonText: "OK"});
                                     }
                                 }
@@ -250,12 +252,14 @@ exports.onLoadStarted = function(args){
                         if(applicationSettings.getString("PreferredLanguage") == "French") {
                             dialogs.alert({
                                 title: "",
-                                message: "Les liens pour .mil.ca/ ont été désactivés.\r\nVous pouvez activer les liens ou désactiver cet avertissement à partir du formulaire Paramètres.",
-                            okButtonText: "OK"});
+                                message: "Les liens pour .mil.ca/ ont été désactivés.",
+                                //message: "Les liens pour .mil.ca/ ont été désactivés.\r\nVous pouvez activer les liens ou désactiver cet avertissement à partir du formulaire Paramètres.",
+                                okButtonText: "OK"});
                         } else {
                             dialogs.alert({
                                 title: "",
-                                message: "Links for .mil.ca/ have been disabled.\r\nYou can enable the links or turn off this warning from the Settings form.",
+                                message: "Links for .mil.ca/ have been disabled.",
+                                //message: "Links for .mil.ca/ have been disabled.\r\nYou can enable the links or turn off this warning from the Settings form.",
                                 okButtonText: "OK"});
                         }
                     }
