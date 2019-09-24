@@ -270,34 +270,40 @@ var doPhoneCall = function(event) {
 
 var doEmail = function(event) {
     console.log( "doEmail " + event.object.linkText );
-
-    clipboard.setText(event.object.linkText).then(function() {
-        console.log("OK, copied to the clipboard");
-    })
-    if(applicationSettings.getString("PreferredLanguage") == "French"){
-        dialogs.alert({
-            title: "Courriel n'est pas disponible",
-            message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.",
-            okButtonText: "OK"});
-    } else {
-        dialogs.alert({
-            title: "Email Not Available",
-            message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.",
-            okButtonText: "Continue"});
-    }
-    /*
+    
     var toAddress = event.object.linkText.split(";");//[];
-    //toAddress.push(event.object.toAddress);
-    if (email.available()){
-        email.compose({
-            subject: "",
-            body: "",
-            to: toAddress
-        });
-    } else {
-        console.log("Email Not Available");
-    }
-    */
+    var eBody = "";
+    var eSubject = "";
+    email.available().then((success) => {
+        if(success) {
+            email.compose({
+                subject: eSubject,
+                body: eBody,
+                to: toAddress
+            });
+        } else {
+            console.log("try url email");
+            if( utils.openUrl("mailto:" + event.object.linkText + "?subject=" + eSubject + "&body=" + eBody)) {
+                console.log("email success");
+            } else {
+                console.log("Email Not Available");
+                clipboard.setText(event.object.linkText).then(function() {
+                    console.log("OK, copied to the clipboard");
+                })
+                if(applicationSettings.getString("PreferredLanguage") == "French"){
+                    dialogs.alert({
+                        title: "Courriel n'est pas disponible",
+                        message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.",
+                        okButtonText: "OK"});
+                } else {
+                    dialogs.alert({
+                        title: "Email Not Available",
+                        message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.",
+                        okButtonText: "Continue"});
+                }
+            }
+        }
+    });
 };
 
 var doBrowse = function(event) {

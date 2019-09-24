@@ -7,6 +7,7 @@ var dialogs = require("ui/dialogs");
 const Label = require("tns-core-modules/ui/label/").Label;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 const email = require("nativescript-email");
+var utils = require("utils/utils");
 var clipboard = require("nativescript-clipboard");
 var feedbackPage;
 
@@ -68,6 +69,7 @@ function emailFeedback(emailText) {
     var toAddress = [];
     toAddress.push("HRGO-GORH@forces.gc.ca");
     
+        /*
     console.log("Email Not Available");
     clipboard.setText(`Send To: HRGO-GORH@forces.gc.ca \nSubject: HRGO Feedback Submission \nBody: ${eBody}`).then(function() {
         console.log("OK, copied to the clipboard");
@@ -77,8 +79,8 @@ function emailFeedback(emailText) {
         message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.  Please send feedback to HRGO-GORH@forces.gc.ca (can be found in copied message)",
         okButtonText: "Continue"});
 
-        
-        /*
+    */
+    
     email.available().then((success) => {
         if(success) {
             email.compose({
@@ -89,17 +91,26 @@ function emailFeedback(emailText) {
 
             pageData.set("feedbackBody", "");
         } else {
-            console.log("Email Not Available");
-            clipboard.setText(`Send To: HRGO-GORH@forces.gc.ca \nSubject: HRGO Feedback Submission \nBody: ${eBody}`).then(function() {
-                console.log("OK, copied to the clipboard");
-            })
-            dialogs.alert({
-                title: "Email Not Available",
-                message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.  Please send feedback to HRGO-GORH@forces.gc.ca (can be found in copied message)",
-                okButtonText: "Continue"});
+            console.log("try url email");
+            var recipients = encodeURI("HRGO-GORH@forces.gc.ca");
+
+            var subject = encodeURI(eSubject);
+            var body = encodeURI(eBody);
+            if( utils.openUrl("mailto:" + recipients + "?subject=" + subject + "&body=" + body)) {
+                console.log("email success");
+                pageData.set("feedbackBody", "");
+            } else {
+                console.log("Email Not Available");
+                clipboard.setText(`Send To: HRGO-GORH@forces.gc.ca \nSubject: HRGO Feedback Submission \nBody: ${eBody}`).then(function() {
+                    console.log("OK, copied to the clipboard");
+                })
+                dialogs.alert({
+                    title: "Email Not Available",
+                    message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.  Please send feedback to HRGO-GORH@forces.gc.ca (can be found in copied message)",
+                    okButtonText: "Continue"});
+            }
         }
     });
-    */
 };
 
 exports.sendEmail   = emailFeedback;

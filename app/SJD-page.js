@@ -16,6 +16,7 @@ var selectedClass;
 const fromObject = require("tns-core-modules/data/observable").fromObject;
 const email = require("nativescript-email");
 var clipboard           = require("nativescript-clipboard");
+var utils               = require("utils/utils");
 var pageObject;
 
 exports.pageLoaded = function(args) {
@@ -175,36 +176,48 @@ var createSJDGrid = function(SJD_t, SJD_s, SJD_c, SJD_d, SJD_l){
 };
 var sendSJDLink = function(eventData){
     var workEmail = "";
-    var sjdLink = "https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/" + eventData.object.link;
+    var subj = "A link to " + eventData.object.title;
+    const sjdLink = "https://collaboration-hr-civ.forces.mil.ca/sites/CJL-BEC/Jobs%20%20Emplois/" + eventData.object.link;
 
-    clipboard.setText(sjdLink).then(function() {
-        console.log("OK, copied to the clipboard");
-    })
-    if(applicationSettings.getString("PreferredLanguage") == "French"){
-        dialogs.alert({
-            title: "Courriel n'est pas disponible",
-            message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.",
-            okButtonText: "OK"});
-    } else {
-        dialogs.alert({
-            title: "Email Not Available",
-            message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.",
-            okButtonText: "Continue"});
-    }
-    /*
     if(applicationSettings.hasKey("WorkEmail")){
         workEmail = applicationSettings.getString("WorkEmail");
     }
-    if (email.available()){
-        email.compose({
-            subject: "A link to " + eventData.object.title,
-            body: sjdLink,
-            to: workEmail
-        });
-    } else {
-        console.log("Email Not Available");
-    }
-    */
+
+    const emailAddress  = workEmail;
+    const emailSubject  = subj;
+    email.available().then((success) => {
+        if(success && emailAddress != "") {
+            var addresses   = emailAddress.split(";");
+            email.compose({
+                subject: emailSubject,
+                body: sjdLink,
+                to: addresses
+            });
+        } else {
+            console.log("try url email");
+            var subject = encodeURI(emailSubject);
+            var body = encodeURI(sjdLink);
+            if( utils.openUrl("mailto:" + emailAddress + "?subject=" + subject + "&body=" + body)) {
+                console.log("email success");
+            } else {
+                console.log("Email Not Available");
+                clipboard.setText(sjdLink).then(function() {
+                    console.log("OK, copied to the clipboard");
+                })
+                if(applicationSettings.getString("PreferredLanguage") == "French"){
+                    dialogs.alert({
+                        title: "Courriel n'est pas disponible",
+                        message: "GO RH ne peux pas ouvrir votre client de courriel.  Votre message a mis dans le presse papier pour mettre dans votre client de courriel.",
+                        okButtonText: "OK"});
+                } else {
+                    dialogs.alert({
+                        title: "Email Not Available",
+                        message: "HR GO cannot open your email client.  Your message has been copied to the clipboard to be pasted in your email client of choice.",
+                        okButtonText: "Continue"});
+                }
+            }
+        }
+    });
 }
 
 
